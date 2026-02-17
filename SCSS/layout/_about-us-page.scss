@@ -11,6 +11,10 @@ body {
   background: #FFFFFF;
   color: #193548;
   overflow-x: hidden;
+  // width: 1500px;
+  max-width: 1650px;
+  // width: 100%;
+  margin: 0;   /* centers layout */
 }
 
 .container {
@@ -41,6 +45,7 @@ body {
   // -o-object-fit: cover;
   object-fit: cover;
   z-index: 1;
+  margin: 0 auto;
 }
 
 
@@ -128,6 +133,7 @@ body {
 /* About Section */
 .about-image-container{
   max-width: 500px;
+  
 }
 .about-section {
   padding: 130px 144px;
@@ -135,6 +141,7 @@ body {
   grid-template-columns: 426px 1fr;
   gap: 120px;
   align-items: start;
+  margin: 0 auto; 
 }
 
 .about-image {
@@ -146,6 +153,7 @@ body {
 
 .about-content{
   max-width: 700px;
+  align-self: center;
 }
 
 .about-content h2 {
@@ -262,9 +270,14 @@ body {
 .section-image {
   width: 426px;
   height: 426px;
-  border-radius: 50%;
+  // border-radius: 50%;
   object-fit: cover;
 }
+
+
+
+
+
 
 .section-icon-box {
   position: absolute;
@@ -738,7 +751,7 @@ body {
 @media (max-width: 1150px) {
   .hero-bg-image {
     position: relative;
-    top: 80px;
+    top: 70px;
     left: 0;
     width: 100%;
     min-height: 100%;
@@ -750,7 +763,7 @@ body {
   .hero-content {
     position: relative;
     top: -10%;
-    
+      
     h1 {
       padding-bottom: 2rem;
     }
@@ -845,6 +858,10 @@ body {
 @media (max-width: 768px) {
   .header {
     height: 250px;
+  }
+
+  .about-image-container {
+    margin: 0;
   }
 
   // .nav {
@@ -1022,7 +1039,6 @@ body {
       font-size: 1.2rem;
 
     }
-  
 
     .hero-bg-image {
       top: 60px;

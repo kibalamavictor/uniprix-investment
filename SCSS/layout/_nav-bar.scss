@@ -12,194 +12,208 @@
 
 
 .navbar {
-            background-color: white;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            position: absolute;
-            top: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 1440px;
-            border-radius: 21px;
-            z-index: 100;
-        }
+    background-color: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    top: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1340px;
+    border-radius: 16px;
+    z-index: 100;
+}
 
-        .nav-container {
-            width: 100%;
-            padding: 2rem .9rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            height: 80px;
-        }
+.nav-container {
+    width: 100%;
+    padding: .8rem;
+    // display: flex;
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: .35fr 2fr .3fr;
+    gap: 30px;
+    align-items: center;
+    justify-content: center;
+    // height: 80px;
+}
 
-        .nav-center {
-            display: flex;
-            align-items: center;
-            gap: 2rem;
-        }
-
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-            align-items: center;
-        }
-
-        /* Hide mobile donate item in desktop view */
-        .mobile-donate-item {
-            display: none;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--navlinks-color);
-            font-size: 18px;
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .nav-links a:hover {
-            color: var(--button-hover-color);
-            background-color: #f3f4f6;
-        }
-
-        .nav-donate-btn {
-            background: var(--button-color);
-            color: white !important;
-            padding: 13px 15px;
-            border-radius: 8px;
-            font-weight: 300;
-            font-size: 20px;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-        }
-
-        .nav-donate-btn:hover {
-            background: var(--button-hover-color);
-            transform: translateY(-1px);
-        }
-
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 24px;
-            color: #374151;
-            cursor: pointer;
-            padding: 0.5rem;
-        }
+.nav-center {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
 
 
+.nav-links {
+    display: flex;
+    list-style: none;
+    align-items: center;
+}
 
-         @media (max-width: 1500px) {
-            .navbar {
-                width: 90%;
-                max-width: 1352px;
-            }
-        }
+/* Hide mobile donate item in desktop view */
+.mobile-donate-item {
+    display: none;
+}
 
-        @media (max-width: 1200px) {
-            .navbar {
-                width: 90%;
-                max-width: 1152px;
-            }
-        }
+.navlinks-container {
+    display: flex;
+    justify-content: flex-end;
 
-        @media (max-width: 1150px) {
-            // .navbar {
-            //     width: 95%;
-            //     top: 50px;
-            //     padding: 0 1rem;
-            // }
+}
 
-            // .nav-container {
-            //     height: 70px;
-            // }
+.nav-links a {
+    text-decoration: none;
+    color: var(--navlinks-color);
+    font-size: 1.1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    transition: all 0.1s ease;
+    position: relative;
+    white-space: nowrap;
+}
 
+.nav-links a:hover {
+    color: var(--button-hover-color);
+    font-weight: 700;
+}
 
-            .navbar {
-            // background-color: white;
-            // box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            position: absolute;
-            top: 0;
-            // left: 50%;
-            // transform: translateX(-50%);
-            width: 100%;
-            border-radius: 0;
-            // z-index: 100;
-        }
+.nav-donate-btn {
+    display: flex;
+    justify-content: center;
+    white-space: nowrap;
+    background: var(--button-color);
+    color: var(--button-hover-color) !important;
+    padding: 13px 15px;
+    border-radius: 8px;
+    font-weight: 300;
+    font-size: 20px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
 
-            .logo img {
-                
-                height: 40px;
-            }
+.nav-donate-btn:hover {
+    background: var(--button-hover-color);
+    transform: translateY(-1px);
+    color: #ffffff !important;
+}
 
-           
-
-            /* Hide the donate button in mobile view */
-            .nav-donate-btn {
-                display: none;
-            }
-
-            .nav-links {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background: white;
-                flex-direction: column;
-                padding: 1rem;
-                // box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-                gap: 0;
-                // border-radius: 8px;
-                text-align: center;
-            }
-
-            .nav-links.active {
-                display: flex;
-            }
-
-            .nav-links li {
-                width: 100%;
-            }
-
-            /* Show mobile donate item only in mobile view */
-            .mobile-donate-item {
-                display: block;
-            }
-
-            .nav-links a {
-                display: block;
-                padding: 1rem;
-                border-bottom: 1px solid #f3f4f6;
-            }
-
-            .nav-links a:last-child {
-                border-bottom: none;
-            }
-
-            .mobile-menu-btn {
-                display: block;
-            }
-        }
+.mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 34px;
+    color: #374151;
+    cursor: pointer;
+}
 
 
-         @media (max-width: 480px) {
-            .nav-container {
-                
-            // width: 100%;
-            // padding: 1rem .9rem;
-            // display: flex;
-            // align-items: center;
-            // justify-content: space-between;
-            height: 50px;
-            }
-        }
+
+@media (max-width: 1500px) {
+    .navbar {
+        width: 90%;
+        max-width: 1352px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .navbar {
+        width: 90%;
+        max-width: 1152px;
+    }
+}
+
+@media (max-width: 1150px) {
+    // .navbar {
+    //     width: 95%;
+    //     top: 50px;
+    //     padding: 0 1rem;
+    // }
+
+    // .nav-container {
+    //     height: 70px;
+    // }
+
+
+    .navbar {
+    // background-color: white;
+    // box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    top: 0;
+    // left: 50%;
+    // transform: translateX(-50%);
+    width: 100%;
+    border-radius: 0;
+    // z-index: 100;
+    }
+
+    .logo img {
+        
+        height: 40px;
+    }
+
+    
+
+    /* Hide the donate button in mobile view */
+    .nav-donate-btn {
+        display: none;
+    }
+
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: white;
+        flex-direction: column;
+        padding: 1rem;
+        // box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        gap: 0;
+        // border-radius: 8px;
+        text-align: center;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-links li {
+        width: 100%;
+    }
+
+    /* Show mobile donate item only in mobile view */
+    .mobile-donate-item {
+        display: block;
+    }
+
+    .nav-links a {
+        display: block;
+        padding: 1rem;
+        border-bottom: 1px solid #f3f4f6;
+    }
+
+    .nav-links a:last-child {
+        border-bottom: none;
+    }
+
+    .mobile-menu-btn {
+        display: block;
+        margin-left: auto;
+    }
+}
+
+
+//     @media (max-width: 480px) {
+//     .nav-container {
+        
+//     // width: 100%;
+//     // padding: 1rem .9rem;
+//     // display: flex;
+//     // align-items: center;
+//     // justify-content: space-between;
+//     height: 50px;
+//     }
+// }
 
         
