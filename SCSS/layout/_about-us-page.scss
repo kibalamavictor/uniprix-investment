@@ -280,15 +280,26 @@ body {
 
 
 .section-icon-box {
-  position: absolute;
+  // position: absolute;
+  // width: 192px;
+  // height: 192px;
+  // background: #FAA21B;
+  // border: 8px solid #FFFFFF;
+  // border-radius: 20px 50px 20px 20px;
+  // display: flex;
+  // align-items: center;
+  // justify-content: center;
+  position: relative;
   width: 192px;
   height: 192px;
-  background: #FAA21B;
-  border: 8px solid #FFFFFF;
+  background: #faa21b;
+  border: 8px solid #fff;
   border-radius: 20px 50px 20px 20px;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: -165px;
+  // margin-left: 75%;
 }
 
 .mission-icon-box {
@@ -296,10 +307,10 @@ body {
   right: -30px;
 }
 
-.vision-icon-box {
-  top: 30px;
-  left: -30px;
-}
+// .vision-icon-box {
+//   top: 30px;
+//   left: -30px;
+// }
 
 .values-icon-box {
   bottom: -30px;
@@ -795,7 +806,7 @@ body {
   
   .about-image {
     width: 100%;
-    max-width: 426px;
+    max-width: 320px;
     height: auto;
     aspect-ratio: 1;
     margin: 0 auto;
@@ -810,21 +821,40 @@ body {
   .vision-grid,
   .values-grid {
     grid-template-columns: 1fr;
-    gap: 60px;
+    gap: 60px; 
+  }
+
+
+  .vision-grid > .section-content {
+    order: 1; 
+    
+  }
+
+  .vision-grid > .section-image-wrapper {
+    order: 2;
   }
 
   .section-image {
     width: 100%;
-    max-width: 426px;
+    max-width: 300px;
     height: auto;
     aspect-ratio: 1;
-    margin: 0 auto;
+    margin: 0  0 auto 0; 
   }
 
-  .section-image-wrapper {
-    max-width: 426px;
-    margin: 0 auto;
+  // .section-image-wrapper {
+  //   max-width: 426px;
+  //   // margin: 0 auto 0 0;
+  // }
+
+  .image-wrapper-left {
+    margin: 0 0 auto 0;
+    display: flex;
+    align-items: end;
+    flex-direction: column;
   }
+
+
 
   .cta-card {
     grid-template-columns: 1fr;
@@ -905,13 +935,13 @@ body {
     margin: 0 20px;
     padding: 30px 20px;
     flex-direction: column;
-    gap: 30px;
+    gap: 60px;
     border-radius: 26px;
   }
 
-  .stat-item {
-    width: 100%;
-  }
+  // .stat-item {
+  //   width: 100%;
+  // }
 
   .about-content h2,
   .section-content h2,
@@ -939,13 +969,18 @@ body {
 
   .mission-icon-box,
   .values-icon-box {
-    bottom: -20px;
-    right: -20px;
+    bottom: -40px;
+    right: 59%;
   }
 
   .vision-icon-box {
-    top: 20px;
-    left: -20px;
+    // top: 20px;
+    // left: -20px;
+    width: 150px;
+    height: 150px;
+    margin-right: -10px;
+    margin-top: -130px;
+    margin-left: auto;
   }
 
   .testimonials h2 {
@@ -1047,7 +1082,7 @@ body {
 
    .about-image {
     width: 100%;
-    max-width: 320px;
+    max-width: 300px;
     height: auto;
     aspect-ratio: 1;
     margin: 0 auto;
