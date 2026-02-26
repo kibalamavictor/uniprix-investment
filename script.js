@@ -183,11 +183,11 @@ const mobileMenuBtn = document.getElementById('mobileMenuBtn');
   track.addEventListener('touchend',   e => onEnd(e.changedTouches[0].clientX), { passive: true });
   track.addEventListener('click', e => { if (didMove) e.stopPropagation(); }, true);
 
-  /* ── Keyboard ── */
-  document.addEventListener('keydown', e => {
-    if (e.key === 'ArrowLeft')  goTo(realActive - 1, true);
-    if (e.key === 'ArrowRight') goTo(realActive + 1, true);
-  });
+//   /* ── Keyboard ── */
+//   document.addEventListener('keydown', e => {
+//     if (e.key === 'ArrowLeft')  goTo(realActive - 1, true);
+//     if (e.key === 'ArrowRight') goTo(realActive + 1, true);
+//   });
 
   /* ── Set carousel width = exact 5-slot window ── */
   const carousel = track.parentElement;

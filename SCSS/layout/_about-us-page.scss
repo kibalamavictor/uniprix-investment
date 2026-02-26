@@ -481,11 +481,9 @@ body {
     text-transform: uppercase;
     color: var(--t-accent);
     margin-bottom: 14px;
-    font-family: 'DM Sans', sans-serif;
   }
 
   .t-title {
-    font-family: 'Playfair Display', serif;
     font-size: clamp(26px, 5vw, 44px);
     color: var(--t-navy);
     line-height: 1.15;
@@ -500,7 +498,6 @@ body {
     max-width: 520px;
     margin: 0 auto 52px;
     padding: 0 24px;
-    font-family: 'DM Sans', sans-serif;
   }
 
   /* ── Carousel shell ── */
@@ -549,8 +546,7 @@ body {
       width   0.46s cubic-bezier(0.35,0,0.15,1),
       height  0.46s cubic-bezier(0.35,0,0.15,1),
       opacity  .36s ease,
-      filter   .36s ease,
-      box-shadow .36s ease;
+      filter   .36s ease;
     pointer-events: none;
     user-select: none;
     -webkit-user-drag: none;
@@ -566,10 +562,6 @@ body {
     height: var(--sz-active);
     opacity: 1;
     filter: grayscale(0);
-    box-shadow:
-      0 0 0 3px var(--t-white),
-      0 0 0 6px var(--t-navy),
-      0 14px 36px rgba(15,37,53,.25);
   }
 
   .av-slot:not(.active):hover img {
