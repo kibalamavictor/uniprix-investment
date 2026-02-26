@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,30 +8,10 @@
     <link rel="stylesheet" href="../dist/style.css" />
     <script defer src="../script.js"></script>
   </head>
+
   <body>
-    <!-- Header -->
-    <!-- <header class="header">
-      <nav class="nav">
-        <div class="logo">
-          <img src="https://cdn.codia.ai/figma/JGrbVETRuqt2yPG3MfW142/img-654b7a7f601073e8.svg" alt="Unidrix Logo Icon" class="logo-icon">
-          <img src="https://cdn.codia.ai/figma/JGrbVETRuqt2yPG3MfW142/img-ea1bdda0a0e49f3b.svg" alt="Unidrix Investment">
-        </div>
-        <ul class="nav-links">
-          <li><a href="#home">Home</a></li>
-          <li><a href="#about" class="active">About Us</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#projects">Our Projects</a></li>
-          <li><a href="#gallery">Gallery</a></li>
-        </ul>
-        <button class="contact-btn">Contact Us</button>
-      </nav>
-      <h1 class="hero-title">About Us</h1>
-    </header> -->
-
-    <img src="./assets/images/hero-background-image.png" alt="Hero background" class="hero-bg-image">
   
-
-
+    <img src="./assets/images/hero-background-image.png" alt="Hero background" class="hero-bg-image"> 
 
     <header class="nav">
       <nav class="navbar">
@@ -66,6 +47,7 @@
     </div>
 
     <!-- About Section -->
+
     <section class="about-section">
       <div class="about-image-container">
         <img src="https://cdn.codia.ai/figma/JGrbVETRuqt2yPG3MfW142/img-d6e47b25d6224451.png" alt="Construction team meeting" class="about-image">
@@ -81,6 +63,7 @@
     </section>
 
     <!-- Stats Bar -->
+
     <div class="stats-bar">
       <div class="stat-item">
         <img src="https://cdn.codia.ai/figma/JGrbVETRuqt2yPG3MfW142/img-def7046fda1bd567.png" alt="Projects Done Icon" class="stat-icon">
@@ -120,8 +103,11 @@
     </div>
 
     <!-- Mission/Vision/Values Section -->
+
     <section class="content-section">
+
       <!-- Mission -->
+
       <div class="mission-grid">
         <div class="section-content">
           <h2>Our Mission</h2>
@@ -137,10 +123,11 @@
       </div>
 
       <!-- Vision -->
+
       <div class="vision-grid">
         <div class="section-image-wrapper">
           <img src="https://cdn.codia.ai/figma/JGrbVETRuqt2yPG3MfW142/img-79938c8dad9a7506.png" alt="Vision" class="section-image">
-          <div class="section-icon-box vision-icon-box">
+          <div class="section-icon-box vision-icon-box vision-icon-box-1">
             <img src="./assets/icons/vision-icon.svg" alt="Vision Icon">
           </div>
         </div>
@@ -151,6 +138,7 @@
       </div>
 
       <!-- Values -->
+
       <div class="values-grid">
         <div class="section-content">
           <h2>Our Core Values</h2>
@@ -187,7 +175,8 @@
     </section>
 
     <!-- Testimonials -->
-    <section class="testimonials">
+    
+    <!-- <section class="testimonials">
       <h2>What Our Clients Say</h2>
       <p class="subtitle">We take pride in delivering projects that meet expectations and earn trust. Here's what our clients say about working with Uniprix Investment.</p>
 
@@ -204,9 +193,76 @@
         <p class="testimonial-text">Uniprix Investment handled our project professionally from planning to execution. The site supervision and attention to detail gave us confidence throughout the process.</p>
         <button class="review-btn">Leave Your Review</button>
       </div>
-    </section>
+    </section> -->
+
+
+
+
+<!-- ── HTML ───────────────────────────────── -->
+<section class="testimonials">
+  <p class="t-label">Client Stories</p>
+  <h2 class="t-title">What Our Clients Say</h2>
+  <p class="t-sub">We take pride in delivering projects that meet expectations and earn trust. Here's what our clients say about working with Uniprix Investment.</p>
+
+  <!-- Carousel (track built by JS) -->
+  <div class="avatar-carousel">
+    <div class="avatar-track" id="avatarTrack"></div>
+  </div>
+
+  <!-- Testimonial content -->
+  <div class="testimonial-wrapper">
+
+    <div class="testimonial" data-index="0">
+      <div class="t-quote">"</div>
+      <p class="t-name">James M., Nairobi</p>
+      <p class="t-text">From the first consultation, Uniprix Investment showed they understood exactly what we needed. The build quality exceeded our expectations and the team was always available.</p>
+    </div>
+
+    <div class="testimonial" data-index="1">
+      <div class="t-quote">"</div>
+      <p class="t-name">David O., Kampala</p>
+      <p class="t-text">Working with Uniprix Investment was seamless from start to finish. They kept us informed at every stage and delivered on time. We couldn't be more satisfied with the result.</p>
+    </div>
+
+    <div class="testimonial active" data-index="2">
+      <div class="t-quote">"</div>
+      <p class="t-name">Sarah K., Kyanja</p>
+      <p class="t-text">Uniprix Investment handled our project professionally from planning to execution. The site supervision and attention to detail gave us confidence throughout the process.</p>
+    </div>
+
+    <div class="testimonial" data-index="3">
+      <div class="t-quote">"</div>
+      <p class="t-name">Marcus T., Entebbe</p>
+      <p class="t-text">Their team brought creative ideas while respecting our vision and budget. The finished property reflects everything we dreamed of. I would recommend them without hesitation.</p>
+    </div>
+
+    <div class="testimonial" data-index="4">
+      <div class="t-quote">"</div>
+      <p class="t-name">Amara N., Jinja</p>
+      <p class="t-text">I was impressed by the transparency and honesty at every step. Uniprix Investment truly cares about client satisfaction — not just completing a job but building a lasting relationship.</p>
+    </div>
+
+  </div>
+
+  <!-- Dots -->
+  <div class="t-dots" aria-hidden="true">
+    <button class="t-dot" data-index="0"></button>
+    <button class="t-dot" data-index="1"></button>
+    <button class="t-dot active" data-index="2"></button>
+    <button class="t-dot" data-index="3"></button>
+    <button class="t-dot" data-index="4"></button>
+  </div>
+
+  <div class="t-cta-wrap">
+    <a href="#" class="t-cta-btn">Leave Your Review</a>
+  </div>
+</section>
+
+
+
 
     <!-- CTA Section -->
+
     <section class="cta-section">
       <div class="cta-card">
         <img src="https://cdn.codia.ai/figma/JGrbVETRuqt2yPG3MfW142/img-84494308e5d0ccc8.png" alt="Modern house" class="cta-image">
@@ -220,6 +276,7 @@
       </div>
 
       <!-- Contact Form -->
+
       <div class="contact-section">
         <form>
           <h2>Talk to Us</h2>
@@ -262,12 +319,13 @@
     </section>
 
     <!-- Footer -->
+
     <footer class="footer">
       <div class="footer-top">
         <div class="footer-logo-section">
           <div>
-            <img src="https://cdn.codia.ai/figma/JGrbVETRuqt2yPG3MfW142/img-63794ff4063b38b4.svg" alt="Unidrix Logo Icon" style="height: 76.65px; width: auto;">
-            <img src="https://cdn.codia.ai/figma/JGrbVETRuqt2yPG3MfW142/img-58d73c1486453317.png" alt="Unidrix Investment" style="height: 37.43px; width: auto; margin-left: 15px;">
+            <img src="../footer-logo.svg" alt="Unidrix Logo Icon" style="height: 76.65px; width: auto;">
+            <!-- <img src="https://cdn.codia.ai/figma/JGrbVETRuqt2yPG3MfW142/img-58d73c1486453317.png" alt="Unidrix Investment" style="height: 37.43px; width: auto; margin-left: 15px;"> -->
           </div>
           <div class="footer-contact">
             <div class="contact-item">
