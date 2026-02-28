@@ -1,0 +1,423 @@
+:root {
+        --upx-navy: #1e2d3d;
+        --upx-amber: #f5a623;
+        --upx-text: #4a5a6a;
+        --upx-light: #f7f8fa;
+        --upx-white: #ffffff;
+        --upx-border-navy: rgba(30,45,61,0.2);
+        --upx-border-amber: rgba(245,166,35,0.5);
+    }
+
+
+    // .our-project-content {
+    //     max-width: ;
+    // }
+
+    .upx-rp {
+        background: var(--upx-white);
+        padding: 60px 6vw 0;
+        display: flex;
+        flex-direction: column;
+        gap: 56px;
+    }
+
+    .upx-rp-min-size {
+        max-width: 900px;
+        line-height: 1.3;
+
+        h2 {
+            max-width: 700px;
+            font-size: 1.3rem;
+            line-height: 1.5;
+            padding-bottom: 20px;
+        }
+    }
+
+    .upx-rp__inner {
+        max-width: 1200px;
+        margin: 0 auto;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 56px;
+    }
+
+    /* ── PAGE HEADING ── */
+    .upx-rp__page-label {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: var(--upx-navy);
+        letter-spacing: 0.5px;
+    }
+
+    /* ── PROJECT NUMBER ── */
+    .upx-rp__num {
+        font-size: clamp(2.8rem, 6vw, 4rem);
+        font-weight: 800;
+        color: var(--upx-navy);
+        line-height: 1;
+        display: flex;
+        align-items: flex-end;
+        gap: 2px;
+    }
+
+    .upx-rp__num--amber {
+        color: var(--upx-amber);
+    }
+
+    .upx-rp__num-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--upx-navy);
+        margin-bottom: 10px;
+        flex-shrink: 0;
+    }
+
+    .upx-rp__num-dot--amber {
+        background: var(--upx-amber);
+    }
+
+    /* ── PROJECT BLOCK ── */
+    .upx-rpblock {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .upx-rpblock__num-row {
+        display: flex;
+        justify-content: flex-start;
+    }
+
+    .upx-rpblock--right .upx-rpblock__num-row {
+        justify-content: flex-end;
+    }
+
+    /* ── CARD ── */
+    .upx-rpcard {
+        border: 1.5px solid var(--upx-border-navy);
+        border-radius: 18px 168px 18px 18px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        overflow: hidden;
+        background: var(--upx-white);
+    }
+
+    .upx-rpcard-left-tile {
+        border-radius: 168px 18px 18px 18px;
+    }
+
+    .upx-rpcard--amber {
+        border-color: var(--upx-border-amber);
+    }
+
+    /* text left, image right */
+    .upx-rpcard__text {
+        padding: 32px 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+    }
+
+    /* image left, text right */
+    .upx-rpcard--img-left .upx-rpcard__img {
+        order: -1;
+    }
+
+    /* ── IMAGE PANEL ── */
+    .upx-rpcard__img {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .upx-rpcard__img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        display: block;
+        border-radius: 0 14px 14px 0;
+        transition: transform 0.4s ease;
+    }
+
+    .upx-rpcard--img-left .upx-rpcard__img img {
+        border-radius: 14px 0 0 14px;
+    }
+
+
+    /* dots overlay */
+    .upx-rpcard__dots {
+        position: absolute;
+        bottom: 14px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 6px;
+    }
+
+    .upx-rdot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.5);
+    }
+    .upx-rdot--active { background: rgba(255,255,255,0.95); }
+
+    /* ── TEXT CONTENT ── */
+    .upx-rpcard__title {
+        font-size: clamp(1rem, 1.6vw, 1.15rem);
+        font-weight: 800;
+        color: var(--upx-navy);
+        line-height: 1.25;
+    }
+
+    .upx-rpcard--amber .upx-rpcard__title {
+        color: var(--upx-amber);
+    }
+
+    .upx-rpcard__meta {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .upx-rpcard__meta-row {
+        display: grid;
+        grid-template-columns: 110px 1fr;
+        gap: 6px;
+        font-size: 0.85rem;
+        line-height: 1.5;
+    }
+
+    .upx-rpcard__meta-key {
+        font-weight: 700;
+        color: var(--upx-navy);
+    }
+
+    .upx-rpcard__meta-val {
+        color: var(--upx-text);
+        font-weight: 400;
+    }
+
+    .upx-rpsection {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .upx-rpsection__title {
+        font-size: 0.92rem;
+        font-weight: 700;
+        color: var(--upx-navy);
+        padding-bottom: 4px;
+        display: inline-block;
+    }
+
+    .dash-line {
+        height: 4px;
+        width: 55px;
+        background-color: #1e2d3d;
+        border-radius: 3px;
+    }
+
+    .orange-line {
+        background-color: #f5a623;
+    }
+
+    .upx-rpcard--amber .upx-rpsection__title {
+        color: var(--upx-amber);
+        border-bottom-color: var(--upx-amber);
+    }
+
+    .upx-rpsection__text {
+        font-size: 0.84rem;
+        color: var(--upx-text);
+        line-height: 1.72;
+    }
+
+    /* Key details – 2 column bullet list */
+    .upx-rpdetails {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4px 12px;
+    }
+
+    .upx-rpdetail-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 7px;
+        font-size: 0.82rem;
+        color: var(--upx-text);
+        line-height: 1.5;
+    }
+
+    .upx-rpdetail-item::before {
+        content: '';
+        width: 14px;
+        height: 14px;
+        border-radius: 3px 8px 3px 3px;
+        background: var(--upx-navy);
+        flex-shrink: 0;
+        margin-top: 4px;
+    }
+
+    .upx-rpcard--amber .upx-rpdetail-item::before {
+        background: var(--upx-amber);
+    }
+
+    /* ── CSS-ONLY AUTO SLIDESHOW ── */
+    /*
+    * Each .upx-slide is stacked absolutely inside .upx-rpcard__img.
+    * The @keyframes cycles: visible for 3.5s, then fades out.
+    * Each slide is delayed by (index × 3.5s) so they take turns.
+    * Total cycle = n × 3.5s.
+    */
+
+    .upx-rpcard__img {
+        position: relative;
+    }
+
+    /* 4-image slideshow: total = 14s */
+    .upx-slideshow-4 .upx-slide {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        animation: upx-slide-fade 14s infinite;
+    }
+    .upx-slideshow-4 .upx-slide:nth-child(1) { animation-delay: 0s;    z-index: 4; }
+    .upx-slideshow-4 .upx-slide:nth-child(2) { animation-delay: 3.5s;  z-index: 3; }
+    .upx-slideshow-4 .upx-slide:nth-child(3) { animation-delay: 7s;    z-index: 2; }
+    .upx-slideshow-4 .upx-slide:nth-child(4) { animation-delay: 10.5s; z-index: 1; }
+
+    /* 5-image slideshow: total = 17.5s */
+    .upx-slideshow-5 .upx-slide {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        animation: upx-slide-fade 17.5s infinite;
+    }
+    .upx-slideshow-5 .upx-slide:nth-child(1) { animation-delay: 0s;   z-index: 5; }
+    .upx-slideshow-5 .upx-slide:nth-child(2) { animation-delay: 3.5s; z-index: 4; }
+    .upx-slideshow-5 .upx-slide:nth-child(3) { animation-delay: 7s;   z-index: 3; }
+    .upx-slideshow-5 .upx-slide:nth-child(4) { animation-delay: 10.5s;z-index: 2; }
+    .upx-slideshow-5 .upx-slide:nth-child(5) { animation-delay: 14s;  z-index: 1; }
+
+    /*
+    * Visible for 3s out of each 3.5s slot (0→100% of the slot).
+    * Fade in: 0–4%, hold: 4–85%, fade out: 85–100%.
+    * Percentages are calculated relative to TOTAL duration.
+    *
+    * For 14s total, each slot = 3.5s = 25% of 14s
+    *   show at:  0% → 25% (one full slot)
+    *   fade out: ~22% → 25%
+    *
+    * Since all slides share the same keyframe but different delays,
+    * we use a simple on/off: visible for 3.2s, hidden for the rest.
+    */
+
+    /* 4-slide version: each slide visible 3.2s out of 14s = ~22.8% on */
+    @keyframes upx-slide-fade {
+        0%        { opacity: 1; }
+        21%       { opacity: 1; }
+        25%       { opacity: 0; }
+        100%      { opacity: 0; }
+    }
+
+    .upx-slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        display: block;
+        padding: 20px;
+    }
+
+    /* Inherit border-radius from parent context */
+    .upx-rpcard .upx-rpcard__img:not(.upx-rpcard--img-left .upx-rpcard__img) .upx-slide img {
+        border-radius: 0 14px 14px 0;
+        padding: 20px;
+    }
+    .upx-rpcard--img-left .upx-rpcard__img .upx-slide img {
+        border-radius: 14px 0 0 14px;
+    }
+
+    /* dots animate in sync with slides */
+    .upx-slideshow-4 ~ .upx-rpcard__dots .upx-rdot,
+    .upx-slideshow-5 ~ .upx-rpcard__dots .upx-rdot {
+        background: rgba(255,255,255,0.45);
+        transition: background 0.4s;
+    }
+
+    /* Active dot per slide — CSS counters trick via sibling + nth */
+    .upx-slideshow-4 .upx-slide:nth-child(1) { --dot-i: 1; }
+    .upx-slideshow-4 .upx-slide:nth-child(2) { --dot-i: 2; }
+    .upx-slideshow-4 .upx-slide:nth-child(3) { --dot-i: 3; }
+    .upx-slideshow-4 .upx-slide:nth-child(4) { --dot-i: 4; }
+
+    /* Slideshow container must have explicit height so absolute slides fill it */
+    .upx-slideshow-4,
+    .upx-slideshow-5 {
+        position: absolute;
+        inset: 0;
+    }
+
+    /* Dot active animation — brightens in sync with its slide */
+    @keyframes upx-dot-fade {
+        0%   { background: rgba(255,255,255,0.95); }
+        21%  { background: rgba(255,255,255,0.95); }
+        25%  { background: rgba(255,255,255,0.4); }
+        100% { background: rgba(255,255,255,0.4); }
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes upx-rp-rise {
+        from { opacity: 0; transform: translateY(22px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .upx-rpblock:nth-child(1) { animation: upx-rp-rise 0.6s ease both 0.1s; }
+    .upx-rpblock:nth-child(2) { animation: upx-rp-rise 0.6s ease both 0.25s; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 800px) {
+        .upx-rpcard {
+        grid-template-columns: 1fr;
+        border-radius: 18px 88px 18px 18px;
+        }
+
+        .upx-rpcard-left-tile {
+            border-radius: 88px 18px 18px 18px;
+        }
+
+
+        .upx-rpcard__img {
+        aspect-ratio: 2/3;
+        order: -1 !important;
+        height: 340px;
+        width: 100%;
+        }
+
+        .upx-rpcard__img img {
+        border-radius: 40px 85px 40px 40px !important;
+        }
+
+        .upx-left-image img {
+            border-radius: 85px 40px 40px 40px !important;
+            padding: 20px;
+        }
+
+        .upx-rpdetails {
+        grid-template-columns: 1fr;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .upx-rp {
+        padding: 48px 5vw 0;
+        }
+
+        .upx-rpcard__meta-row {
+        grid-template-columns: 90px 1fr;
+        }
+    }
