@@ -891,14 +891,15 @@ body {
 .contact-text p:first-child {
   font-size: 12px;
   font-weight: 400;
-  color: rgba(255, 255, 255, 0.8);
+  color: #FFFFFF !important;
   line-height: 14.63px;
+
 }
 
 .contact-text p:last-child {
   font-size: 16px;
   font-weight: 600;
-  color: #FFFFFF;
+  color: #FFFFFF !important;
   line-height: 19.5px;
   margin-top: 2px;
   white-space: nowrap;
@@ -1164,10 +1165,11 @@ body {
 
   .stats-bar {
     margin: 0 20px;
-    padding: 30px 20px;
+    // padding: 30px 20px;
     flex-direction: column;
     gap: 60px;
     border-radius: 26px;
+    align-items: flex-start;
   }
 
   // .stat-item {
@@ -1212,6 +1214,10 @@ body {
     margin-right: -10px;
     margin-top: -130px;
     margin-left: auto;
+  }
+
+  .vision-icon-box-1 {
+    left: 0;
   }
 
   .testimonials h2 {
