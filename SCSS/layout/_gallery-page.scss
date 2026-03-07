@@ -10,7 +10,7 @@
     .upx-gallery {
         font-family: 'Barlow', sans-serif;
         background: var(--upx-white);
-        padding: 60px 6vw 80px;
+        padding: 0px 6vw 0px;
     }
 
     .upx-gallery__inner {
@@ -25,8 +25,9 @@
     .upx-gallery__header {
         display: flex;
         flex-direction: column;
-        gap: 14px;
+        gap: 3rem;
         max-width: 680px;
+        padding: 60px 0 80px;
     }
 
     .upx-gallery__heading {
@@ -247,5 +248,9 @@
         .upx-gitem:nth-child(14) {
         grid-column: span 2 !important;
         grid-row: span 2 !important;
+        }
+
+        .upx-gallery__header {
+         padding: 0;
         }
     }

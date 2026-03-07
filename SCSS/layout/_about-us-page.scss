@@ -685,7 +685,7 @@ body {
 .cta-card {
   background: #FAA21B;
   border-radius: 35px;
-  padding: 60px;
+  padding: 40px;
   display: grid;
   grid-template-columns: 547px 1fr;
   gap: 50px;
@@ -720,10 +720,15 @@ body {
   height: 44px;
   border-radius: 14px;
   font-size: 15px;
-  font-family: 'Poppins', sans-serif;
-  border: none;
   cursor: pointer;
   white-space: nowrap;
+  transition: background .2s,color .2s,border-color .2s;
+  border: 2px solid #193548;
+}
+
+.cta-btn-dark:hover {
+  background: transparent;
+  color: #193548;
 }
 
 .cta-btn-light {
@@ -734,9 +739,15 @@ body {
   border-radius: 14px;
   font-size: 15px;
   font-family: 'Poppins', sans-serif;
-  border: none;
   cursor: pointer;
   white-space: nowrap;
+  transition: background .2s,color .2s,border-color .2s;
+  border: 2px solid white;
+}
+
+.cta-btn-light:hover {
+  background: transparent;
+  color: white;
 }
 
 /* Contact Form */
@@ -805,6 +816,18 @@ body {
 .phone-input input {
   border-radius: 0 15px 7px 0;
   
+}
+
+.country-code-select {
+  padding: 1rem;
+  border-radius: 7px 0 0 7px;
+  background: #FFF6E8;
+  color: #000000;
+  font-size: 1rem;
+  cursor: pointer;
+  outline: none;
+  border: 1px solid #193548;
+  border-right: none;
 }
 
 .phone-input .border-none {
@@ -888,15 +911,27 @@ body {
   height: 36px;
 }
 
-.contact-text p:first-child {
+
+
+.contact-text {
   font-size: 12px;
   font-weight: 400;
   color: #FFFFFF !important;
   line-height: 14.63px;
+  white-space: nowrap;
+
+  .contact-number {
+    font-size: 16px;
+    font-weight: 600;
+    color: #FFFFFF !important;
+    line-height: 19.5px;
+    margin-top: 2px;
+    white-space: nowrap;
+  }
 
 }
 
-.contact-text p:last-child {
+.contact-text > p > a {
   font-size: 16px;
   font-weight: 600;
   color: #FFFFFF !important;
