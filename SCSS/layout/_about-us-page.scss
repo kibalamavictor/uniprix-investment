@@ -994,6 +994,12 @@ body {
   width: 34.53px;
   height: 34.53px;
   object-fit: cover;
+  cursor: pointer;
+  transition: transform .1s ease-in-out;
+}
+
+.social-icon:hover{
+  transform: translateY(-3px);
 }
 
 .footer-bottom {
