@@ -46,7 +46,7 @@
 
 
 
-<!-- HERO SECTION -->
+<!-- HERO -->
 
 
 
@@ -55,19 +55,19 @@
 
     <!-- LEFT: Text content -->
     <div class="upx-hero__content">
-      <h1 class="upx-hero__headline">
+      <h1 class="upx-hero__headline" id="hero-headline">
         Planning. Building.<br>
         Managing. <span class="upx-hl-amber">Done Right.</span>
       </h1>
 
-      <p class="upx-hero__sub">
+      <p class="upx-hero__sub" id="hero-subtitle">
         Professional project planning, construction management,
         and interior design services you can trust.
       </p>
 
       <div class="upx-hero__ctas">
-        <a href="mailto:info@uniprixinvestment.com" class="upx-btn upx-btn--dark">Book a Site Visit</a>
-        <a href="./contact-us/" class="upx-btn upx-btn--amber">Talk to Us</a>
+        <a href="mailto:info@uniprixinvestment.com" class="upx-btn upx-btn--dark" id="hero-cta-book">Book a Site Visit</a>
+        <a href="./contact-us/" class="upx-btn upx-btn--amber" id="hero-cta-talk">Talk to Us</a>
       </div>
 
       <div class="upx-hero__stats">
@@ -128,7 +128,7 @@
 
 
 
-<!-- SECOND SECTION -->
+<!-- ABOUT -->
 
 
 
@@ -148,15 +148,15 @@
 
     <!-- RIGHT: Text -->
     <div class="upx-about__content">
-      <h2 class="upx-about__label">About us</h2>
+      <h2 class="upx-about__label" id="about-label">About us</h2>
 
-      <p class="upx-about__text">
+      <p class="upx-about__text" id="about-text1">
         Uniprix Investment is a Construction and Project management
         company specializing in project Planning, Construction, Interior
         designs, and Renovation and Property management services.
       </p>
 
-      <p class="upx-about__text">
+      <p class="upx-about__text" id="about-text2">
         We believe every successful Construction project starts with proper
         planning from Site Visits, Project designs to construction, focusing on
         Accuracy, Quality control, Efficient and Execution at every stage.
@@ -173,7 +173,7 @@
 
 
 
-<!-- THIRD SECTION (CAROUSEL) -->
+<!-- SERVICES -->
 
 
 
@@ -182,7 +182,7 @@
 <section class="upx-services">
   <div class="upx-services__inner">
 
-    <h2 class="upx-services__heading">Our Services</h2>
+    <h2 class="upx-services__heading" id="services-heading">Our Services</h2>
 
     <div class="upx-services__carousel">
     <div class="upx-services__grid" id="upxSvcGrid">
@@ -287,7 +287,7 @@
 
 
 
-<!-- FOURTH SECTION (WHY CHOOSE US) -->
+<!-- WHY CHOOSE US -->
 
 
 
@@ -303,15 +303,15 @@
 
       <!-- Intro -->
       <div class="upx-why__intro">
-        <h2 class="upx-why__label">Why Choose Us</h2>
-        <p class="upx-why__sub">
+        <h2 class="upx-why__label" id="why-label">Why Choose Us</h2>
+        <p class="upx-why__sub" id="why-subtitle">
           Choosing the right partner makes all the difference. We combine proper planning, hands-on
           supervision, and clear communication to deliver projects with confidence and quality.
         </p>
       </div>
 
       <!-- 2×2 feature grid -->
-      <div class="upx-why__features">
+      <div class="upx-why__features" id="why-features">
 
         <!-- Feature 1 -->
         <div class="upx-feature">
@@ -411,7 +411,7 @@
 
 
 
-<!-- FIFTH SECTION -->
+<!-- PROJECTS -->
 
 
 
@@ -424,7 +424,7 @@
 
     <!-- Header -->
     <div class="upx-proj__header">
-      <h2 class="upx-proj__heading">Our Projects</h2>
+      <h2 class="upx-proj__heading" id="projects-heading">Our Projects</h2>
       <div class="upx-proj__nav">
         <button class="upx-proj__nav-btn" id="upxProjPrev" aria-label="Previous">
           <svg viewBox="0 0 16 16"><polyline points="10,2 4,8 10,14"/></svg>
@@ -530,7 +530,7 @@
       <div class="cta-card">
         <img src="https://cdn.codia.ai/figma/JGrbVETRuqt2yPG3MfW142/img-84494308e5d0ccc8.png" alt="Modern house" class="cta-image">
         <div class="cta-content">
-          <h2>Planning to build or invest? Let's get it right from the start.</h2>
+          <h2 id="cta-heading">Planning to build or invest? Let's get it right from the start.</h2>
           <div class="cta-buttons">
             <a href="./contact-us/"><button class="cta-btn-dark">Contact Uniprix</button></a>
             <a href="mailto:info@uniprixinvestment.com"><button class="cta-btn-light">Book A site visit</button></a>
@@ -602,14 +602,14 @@
               <img src="https://cdn.codia.ai/figma/JGrbVETRuqt2yPG3MfW142/img-88ec4fb18fc5b8b7.svg" alt="Phone Icon" class="contact-icon">
               <div class="contact-text">
                 <p>Have a question?</p>
-                <p class="contact-number">+256 700 847399</p>
+                <p class="contact-number" id="footer-phone">+256 700 847399</p>
               </div>
             </div>
             <div class="contact-item">
               <img src="https://cdn.codia.ai/figma/JGrbVETRuqt2yPG3MfW142/img-74cee43d8c71007a.svg" alt="Email Icon" class="contact-icon">
               <div class="contact-text">
                 <p>Contact us at</p>
-                <p> <a href="mailto:info@uniprixinvestment.com">info@uniprixinvestment.com</a></p>
+                <p> <a href="mailto:info@uniprixinvestment.com" id="footer-email">info@uniprixinvestment.com</a></p>
               </div>
             </div>
           </div>
@@ -639,5 +639,119 @@
         <p class="footer-copyright">© 2026, All Rights Reserved</p>
       </div>
     </footer>
+
+
+
+
+
+
+
+
+
+
+
+    <script>
+    // Load content from JSON
+    fetch('./data/site-content.json')
+      .then(response => response.json())
+      .then(data => {
+        
+        // HERO
+        document.getElementById('hero-headline').innerHTML = data.hero.headline;
+        document.getElementById('hero-subtitle').textContent = data.hero.subtitle;
+        document.getElementById('hero-cta-book').textContent = data.hero.ctaBook;
+        document.getElementById('hero-cta-talk').textContent = data.hero.ctaTalk;
+
+        // Stats (dynamic)
+        const statsContainer = document.querySelector('.upx-hero__stats');
+        statsContainer.innerHTML = '';
+        data.hero.stats.forEach(stat => {
+          const div = document.createElement('div');
+          div.className = 'upx-stat';
+          div.innerHTML = `
+            <div class="upx-stat__icon"><img src="${stat.icon}" alt=""></div>
+            <div class="upx-stat__info">
+              <span class="upx-stat__number">${stat.number}</span>
+              <span class="upx-stat__label">${stat.label}</span>
+            </div>
+          `;
+          statsContainer.appendChild(div);
+        });
+
+        // ABOUT
+        document.getElementById('about-label').textContent = data.about.label;
+        document.getElementById('about-text1').textContent = data.about.text1;
+        document.getElementById('about-text2').textContent = data.about.text2;
+
+        // SERVICES (fully dynamic)
+        const svcGrid = document.getElementById('upxSvcGrid');
+        svcGrid.innerHTML = '';
+        data.services.items.forEach((item, index) => {
+          const card = document.createElement('div');
+          card.className = `upx-svc-card ${index % 2 === 1 ? 'reverse-card' : ''}`;
+          card.innerHTML = `
+            <div class="upx-svc-card__img"><img src="${item.image}" alt="${item.title}"></div>
+            <div class="upx-svc-card__body">
+              <h3 class="upx-svc-card__title">${item.title}</h3>
+              <p class="upx-svc-card__desc">${item.desc}</p>
+            </div>
+          `;
+          svcGrid.appendChild(card);
+        });
+        document.getElementById('services-heading').textContent = data.services.heading;
+
+        // WHY CHOOSE US (dynamic features)
+        const whyFeatures = document.getElementById('why-features');
+        whyFeatures.innerHTML = '';
+        data.whyChooseUs.features.forEach(feature => {
+          const div = document.createElement('div');
+          div.className = 'upx-feature';
+          div.innerHTML = `
+            <div class="upx-feature__icon"><img src="${feature.icon}" alt=""></div>
+            <h3 class="upx-feature__title">${feature.title}</h3>
+            <p class="upx-feature__desc">${feature.desc}</p>
+          `;
+          whyFeatures.appendChild(div);
+        });
+        document.getElementById('why-label').textContent = data.whyChooseUs.label;
+        document.getElementById('why-subtitle').textContent = data.whyChooseUs.subtitle;
+
+        // PROJECTS (dynamic)
+        const projTrack = document.getElementById('upxProjTrack');
+        projTrack.innerHTML = '';
+        data.projects.items.forEach(item => {
+          const card = document.createElement('div');
+          card.className = 'upx-pcard';
+          card.innerHTML = `
+            <div class="upx-pcard__img-wrap">
+              <img src="${item.image}" alt="${item.title}">
+            </div>
+            <span class="upx-pcard__title">${item.title}</span>
+            <a href="#" class="upx-pcard__btn">View Projects</a>
+          `;
+          projTrack.appendChild(card);
+        });
+        document.getElementById('projects-heading').textContent = data.projects.heading;
+
+        // CTA SECTION
+        document.getElementById('cta-heading').textContent = data.ctaSection.heading;
+
+        // FOOTER
+        document.getElementById('footer-phone').textContent = data.footer.phone;
+        document.getElementById('footer-email').textContent = data.footer.email;
+        document.getElementById('footer-email').href = `mailto:${data.footer.email}`;
+
+      })
+      .catch(err => console.error('Content load error:', err));
+    </script>
+
+
+
+
+
+
+
+
+
   </body>
 </html>
