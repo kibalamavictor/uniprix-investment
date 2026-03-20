@@ -5,9 +5,21 @@
     "ctaBook": "Book a Site Visit",
     "ctaTalk": "Talk to Us",
     "stats": [
-      { "number": "90+", "label": "Projects Done", "icon": "./hero-icon-3.svg" },
-      { "number": "100+", "label": "Projects Managed", "icon": "./hero-icon-2.svg" },
-      { "number": "200+", "label": "Sites Visited", "icon": "./hero-icon.svg" }
+      {
+        "number": "90+",
+        "label": "Projects Done",
+        "icon": "./hero-icon-3.svg"
+      },
+      {
+        "number": "100+",
+        "label": "Projects Managed",
+        "icon": "./hero-icon-2.svg"
+      },
+      {
+        "number": "200+",
+        "label": "Sites Visited",
+        "icon": "./hero-icon.svg"
+      }
     ]
   },
   "about": {
@@ -21,7 +33,7 @@
       {
         "title": "Project Planning & Management",
         "desc": "We handle the planning, coordination, and control of your project from start to finish. Our structured approach ensures clear timelines, controlled costs, and smooth execution at every stage.",
-        "image": "./media/our-services-img-1.png"
+        "image": "/our-services-img-1.png"
       },
       {
         "title": "Construction & Site Supervision",
@@ -44,22 +56,60 @@
     "label": "Why Choose Us",
     "subtitle": "Choosing the right partner makes all the difference. We combine proper planning, hands-on supervision, and clear communication to deliver projects with confidence and quality.",
     "features": [
-      { "title": "Structured Project Planning", "desc": "We design every project carefully to avoid delays, reduce risks, and ensure smooth execution.", "icon": "./why-us-icon-1.svg" },
-      { "title": "Hands-On Site Supervision", "desc": "Our technical team is actively involved on site, ensuring proper standards, and timelines are followed.", "icon": "./why-us-icon-4.svg" },
-      { "title": "Quality-Focused Execution", "desc": "We prioritize durability, functionality, and attention to detail at every stage of construction and design.", "icon": "./why-us-icon-2.svg" },
-      { "title": "Transparent Process", "desc": "Clear communication, defined scopes, and professional coordination to keep clients informed and confident.", "icon": "./why-us-icon-5.svg" },
-      { "title": "Client-Centred Approach", "desc": "We listen, advise honestly, and tailor solutions to match your goals, budget, and long-term vision.", "icon": "./why-us-icon-4.svg" }
+      {
+        "title": "Structured Project Planning",
+        "desc": "We design every project carefully to avoid delays, reduce risks, and ensure smooth execution.",
+        "icon": "./why-us-icon-1.svg"
+      },
+      {
+        "title": "Hands-On Site Supervision",
+        "desc": "Our technical team is actively involved on site, ensuring proper standards, and timelines are followed.",
+        "icon": "./why-us-icon-4.svg"
+      },
+      {
+        "title": "Quality-Focused Execution",
+        "desc": "We prioritize durability, functionality, and attention to detail at every stage of construction and design.",
+        "icon": "./why-us-icon-2.svg"
+      },
+      {
+        "title": "Transparent Process",
+        "desc": "Clear communication, defined scopes, and professional coordination to keep clients informed and confident.",
+        "icon": "./why-us-icon-5.svg"
+      },
+      {
+        "title": "Client-Centred Approach",
+        "desc": "We listen, advise honestly, and tailor solutions to match your goals, budget, and long-term vision.",
+        "icon": "./why-us-icon-4.svg"
+      }
     ]
   },
   "projects": {
     "heading": "Our Projects",
     "items": [
-      { "title": "Residential Projects", "image": "./media/our-projects-home-1.png" },
-      { "title": "Commercial Projects", "image": "./media/our-projects-home-2.png" },
-      { "title": "Interior Design", "image": "./media/our-projects-home-3.png" },
-      { "title": "Ongoing Projects", "image": "./media/our-projects-home-4.png" },
-      { "title": "Property Management", "image": "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&auto=format&fit=crop&q=80" },
-      { "title": "Renovation & Remodeling", "image": "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=600&auto=format&fit=crop&q=80" }
+      {
+        "title": "Residential Projects",
+        "image": "./media/our-projects-home-1.png"
+      },
+      {
+        "title": "Commercial Projects",
+        "image": "./media/our-projects-home-2.png"
+      },
+      {
+        "title": "Interior Design",
+        "image": "./media/our-projects-home-3.png"
+      },
+      {
+        "title": "Ongoing Projects",
+        "image": "./media/our-projects-home-4.png"
+      },
+      {
+        "title": "Property Management",
+        "image": "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&auto=format&fit=crop&q=80"
+      },
+      {
+        "title": "Renovation & Remodeling",
+        "image": "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=600&auto=format&fit=crop&q=80"
+      }
     ]
   },
   "ctaSection": {
