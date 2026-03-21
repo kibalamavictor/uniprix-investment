@@ -540,7 +540,7 @@
 
       <!-- Contact Form -->
 
-      <div class="contact-section">
+      <!-- <div class="contact-section">
         <form>
           <h2>Talk to Us</h2>
           <div class="form-row">
@@ -564,7 +564,6 @@
           <div class="form-group">
             <label for="phone">Phone Number</label>
             <div class="phone-input">
-              <!-- <input type="text" value="UG +256" readonly> -->
               <select class="country-code-select">
                 <option value="+256">+256</option>
                 <option value="+254">+254</option>
@@ -585,7 +584,133 @@
           <img src="https://cdn.codia.ai/figma/JGrbVETRuqt2yPG3MfW142/img-6762376e27edf594.png" alt="Modern house exterior" class="contact-image-main">
           <img src="https://cdn.codia.ai/figma/JGrbVETRuqt2yPG3MfW142/img-a76f9bfa7419b576.png" alt="Modern house interior" class="contact-image-small">
         </div>
+      </div> -->
+
+      <div class="contact-section">
+        <!-- <form action="https://formspree.io/f/xnjgrenn" method="POST">
+    <h2>Talk to Us</h2>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="firstName">First Name</label>
+        <input type="text" id="firstName" name="firstName" required>
       </div>
+      <div class="form-group">
+        <label for="lastName">Last Name</label>
+        <input type="text" id="lastName" name="lastName" required>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="company">Company</label>
+      <input type="text" id="company" name="company">
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required>
+    </div>
+
+    <div class="form-group">
+      <label for="phone">Phone Number</label>
+      <div class="phone-input">
+        <select class="country-code-select" name="countryCode">
+          <option value="+256">+256</option>
+          <option value="+254">+254</option>
+          <option value="+255">+255</option>
+          <option value="+1">+1</option>
+          <option value="+44">+44</option>
+        </select>
+        <input type="tel" id="phone" name="phone" class="border-none">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="message">Message</label>
+      <textarea id="message" name="message" required></textarea>
+    </div>
+
+
+    <input type="hidden" name="_next" value="https://yoursite.com/thank-you.html">
+
+
+    <input type="text" name="_gotcha" style="display:none">
+
+    
+    <input type="hidden" name="_subject" value="New Contact Form Submission">
+
+    <button type="submit" class="submit-btn">Let's Talk</button>
+  </form> -->
+
+
+
+        <form id="contact-form" action="https://formspree.io/f/xnjgrenn" method="POST">
+          <h2>Talk to Us</h2>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="firstName">First Name</label>
+              <input type="text" id="firstName" name="firstName" required>
+            </div>
+            <div class="form-group">
+              <label for="lastName">Last Name</label>
+              <input type="text" id="lastName" name="lastName" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="company">Company</label>
+            <input type="text" id="company" name="company">
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <div class="phone-input">
+              <select class="country-code-select" name="countryCode">
+                <option value="+256">+256</option>
+                <option value="+254">+254</option>
+                <option value="+255">+255</option>
+                <option value="+1">+1</option>
+                <option value="+44">+44</option>
+              </select>
+              <input type="tel" id="phone" name="phone" class="border-none">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" required></textarea>
+          </div>
+
+          <!-- Keep spam protection -->
+          <input type="text" name="_gotcha" style="display:none">
+
+          <!-- Keep custom subject if you want -->
+          <input type="hidden" name="_subject" value="New Contact Form Submission">
+
+          <!-- Comment out or remove _next when using AJAX -->
+          <!-- <input type="hidden" name="_next" value="https://yoursite.com/thank-you.html"> -->
+
+          <button type="submit" class="submit-btn">Let's Talk</button>
+
+          <!-- Success message (hidden by default) -->
+          <div id="form-success" style="display: none; margin-top: 1.5rem; padding: 1rem; background: #e6ffe6; border: 1px solid #b3ffb3; border-radius: 6px; color: #006600; text-align: center;">
+            Thank you! Your message has been sent successfully. We'll get back to you soon.
+          </div>
+        </form>
+
+
+        <div class="contact-images">
+          <img src="https://cdn.codia.ai/figma/JGrbVETRuqt2yPG3MfW142/img-6762376e27edf594.png" alt="Modern house exterior" class="contact-image-main">
+          <img src="https://cdn.codia.ai/figma/JGrbVETRuqt2yPG3MfW142/img-a76f9bfa7419b576.png" alt="Modern house interior" class="contact-image-small">
+        </div>
+      </div>
+
     </section>
 
     <!-- Footer -->
@@ -621,10 +746,10 @@
             <button class="newsletter-btn">Submit</button>
           </div>
           <div class="social-icons">
-            <a href="wa.me/+256700847399"><img src="https://cdn.codia.ai/figma/JGrbVETRuqt2yPG3MfW142/img-fd1c7d631c0be7c9.png" alt="Whatsapp" class="social-icon"></a>
+            <a href="https://wa.me/+256700847399" target="_blank" rel="noopener noreferrer"><img src="https://cdn.codia.ai/figma/JGrbVETRuqt2yPG3MfW142/img-fd1c7d631c0be7c9.png" alt="Whatsapp" class="social-icon"></a>
             <a href=""><img src="https://cdn.codia.ai/figma/JGrbVETRuqt2yPG3MfW142/img-6c33266badbbf944.png" alt="TikTok" class="social-icon"></a>
-            <a href="https://x.com/kizzafaisal27?s=20"><img src="https://cdn.codia.ai/figma/JGrbVETRuqt2yPG3MfW142/img-5600ef39b099981a.png" alt="Twitter" class="social-icon"></a>
-            <a href="https://www.instagram.com/uniprixinvestment"><img src="https://cdn.codia.ai/figma/JGrbVETRuqt2yPG3MfW142/img-4df026f771016870.png" alt="Instagram" class="social-icon"></a>
+            <a href="https://x.com/kizzafaisal27?s=20" target="_blank" rel="noopener noreferrer"><img src="https://cdn.codia.ai/figma/JGrbVETRuqt2yPG3MfW142/img-5600ef39b099981a.png" alt="Twitter" class="social-icon"></a>
+            <a href="https://www.instagram.com/uniprixinvestment" target="_blank" rel="noopener noreferrer"><img src="https://cdn.codia.ai/figma/JGrbVETRuqt2yPG3MfW142/img-4df026f771016870.png" alt="Instagram" class="social-icon"></a>
           </div>
         </div>
       </div>
@@ -744,9 +869,6 @@
       })
       .catch(err => console.error('Content load error:', err));
     </script>
-
-
-
 
 
 

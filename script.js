@@ -971,3 +971,65 @@ function upxLbOpen(el) {
         document.body.style.overflow = '';
     }
     document.addEventListener('keydown', e => { if (e.key === 'Escape') upxLbClose(); });
+
+
+
+
+
+
+
+
+    // FORMSPREE EMAILING
+
+
+  const form = document.getElementById('contact-form');
+  const successDiv = document.getElementById('form-success');
+
+  if (form) {
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault(); // stop normal submission + redirect
+
+      // Optional: disable button & change text while sending
+      const submitBtn = form.querySelector('.submit-btn');
+      const originalText = submitBtn.textContent;
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending...';
+
+      const formData = new FormData(form);
+
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
+
+        if (response.ok) {
+          // Success → clear fields + show message
+          form.reset();
+          successDiv.style.display = 'block';
+
+          // Optional: auto-hide success message after 8 seconds
+          setTimeout(() => {
+            successDiv.style.display = 'none';
+          }, 8000);
+
+          // Reset button
+          submitBtn.textContent = originalText;
+          submitBtn.disabled = false;
+        } else {
+          // Server error (e.g. spam, rate limit)
+          alert('Something went wrong. Please try again.');
+          submitBtn.textContent = originalText;
+          submitBtn.disabled = false;
+        }
+      } catch (error) {
+        // Network error
+        alert('Network error — please check your connection.');
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+      }
+    });
+  }
