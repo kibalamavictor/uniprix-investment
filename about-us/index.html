@@ -46,7 +46,7 @@
 
 
     <div class="hero-content">
-      <h1>About Us</h1>
+      <h1 id="about-hero-title">About Us</h1>
     </div>
 
     <!-- About Section -->
@@ -59,15 +59,15 @@
         </div>
       </div>
       <div class="about-content">
-        <h2>We help clients plan better, build smarter, and manage projects with confidence.</h2>
-        <p>Uniprix Investment is a Construction and Project management company specializing in project Planning, Construction, Interior designs, and Renovation and Property management services.</p>
-        <p>We believe every successful Construction project starts with proper planning from Site Visits, Project designs to construction, focusing on Accuracy, Quality control, Efficient and Execution at every stage.</p>
+        <h2 id="about-main-heading">We help clients plan better, build smarter, and manage projects with confidence.</h2>
+        <p id="about-main-text1">Uniprix Investment is a Construction and Project management company specializing in project Planning, Construction, Interior designs, and Renovation and Property management services.</p>
+        <p id="about-main-text2">We believe every successful Construction project starts with proper planning from Site Visits, Project designs to construction, focusing on Accuracy, Quality control, Efficient and Execution at every stage.</p>
       </div>
     </section>
 
     <!-- Stats Bar -->
 
-    <div class="stats-bar">
+    <div class="stats-bar" id="about-stats-bar">
       <div class="stat-item">
         <img src="https://cdn.codia.ai/figma/JGrbVETRuqt2yPG3MfW142/img-def7046fda1bd567.png" alt="Projects Done Icon" class="stat-icon">
         <div class="stat-text">
@@ -113,9 +113,9 @@
 
       <div class="mission-grid">
         <div class="section-content">
-          <h2>Our Mission</h2>
-          <p>To provide professional project planning, construction, interior design and Property Management services that deliver quality, and efficiency.</p>
-          <p>We are committed to managing every project with accuracy, transparency, and attention to detail, ensuring our clients' ideas are transformed into well-executed and lasting developments.</p>
+          <h2 id="about-mission-heading">Our Mission</h2>
+          <p id="about-mission-text1">To provide professional project planning, construction, interior design and Property Management services that deliver quality, and efficiency.</p>
+          <p id="about-mission-text2">We are committed to managing every project with accuracy, transparency, and attention to detail, ensuring our clients' ideas are transformed into well-executed and lasting developments.</p>
         </div>
         <div class="section-image-wrapper image-wrapper-left">
           <img src="https://cdn.codia.ai/figma/JGrbVETRuqt2yPG3MfW142/img-598d40426d788956.png" alt="Mission" class="section-image">
@@ -127,7 +127,7 @@
 
       <!-- Vision -->
 
-      <div class="vision-grid">
+      <div class="vision-grid" >
         <div class="section-image-wrapper">
           <img src="https://cdn.codia.ai/figma/JGrbVETRuqt2yPG3MfW142/img-79938c8dad9a7506.png" alt="Vision" class="section-image">
           <div class="section-icon-box vision-icon-box vision-icon-box-1">
@@ -135,8 +135,8 @@
           </div>
         </div>
         <div class="section-content">
-          <h2>Our Vision</h2>
-          <p>To be a trusted and respectable construction property Management partner, known for reliable project management, quality execution, and a client-focused approach that adds long-term value to every investment.</p>
+          <h2 id="about-vision-heading">Our Vision</h2>
+          <p id="about-vision-text">To be a trusted and respectable construction property Management partner, known for reliable project management, quality execution, and a client-focused approach that adds long-term value to every investment.</p>
         </div>
       </div>
 
@@ -144,8 +144,8 @@
 
       <div class="values-grid">
         <div class="section-content">
-          <h2>Our Core Values</h2>
-          <ul class="values-list">
+          <h2 id="about-values-heading">Our Core Values</h2>
+          <ul class="values-list" id="about-values-list">
             <li class="value-item">
               <h3><span class="value-bullet"></span>Professionalism</h3>
               <p>We uphold high standards in Plan Designs, Construction and Property Management ensuring execution at every stage of a project.</p>
@@ -181,60 +181,58 @@
 
 
 
+    <section class="testimonials">
+      <p class="t-title" id="about-test-title">Wh>What Our Clients Say</p>
+      <p class="t-sub" id="about-test-subtitle">We take pride in delivering projects that meet expectations and earn trust. Here's what our clients say about working with Uniprix Investment.</p>
 
-<!-- ── HTML ───────────────────────────────── -->
-<section class="testimonials">
-  <p class="t-title">What Our Clients Say</p>
-  <p class="t-sub">We take pride in delivering projects that meet expectations and earn trust. Here's what our clients say about working with Uniprix Investment.</p>
+      <!-- Carousel (track built by JS) -->
+      <div class="avatar-carousel">
+        <div class="avatar-track" id="avatarTrack"></div>
+      </div>
 
-  <!-- Carousel (track built by JS) -->
-  <div class="avatar-carousel">
-    <div class="avatar-track" id="avatarTrack"></div>
-  </div>
+      <!-- Testimonial content -->
+      <div class="testimonial-wrapper" id="about-testimonial-wrapper">
 
-  <!-- Testimonial content -->
-  <div class="testimonial-wrapper">
+        <div class="testimonial" data-index="0">
+          <p class="t-name">James M., Nairobi</p>
+          <p class="t-text">From the first consultation, Uniprix Investment showed they understood exactly what we needed. The build quality exceeded our expectations and the team was always available.</p>
+        </div>
 
-    <div class="testimonial" data-index="0">
-      <p class="t-name">James M., Nairobi</p>
-      <p class="t-text">From the first consultation, Uniprix Investment showed they understood exactly what we needed. The build quality exceeded our expectations and the team was always available.</p>
-    </div>
+        <div class="testimonial" data-index="1">
+          <p class="t-name">David O., Kampala</p>
+          <p class="t-text">Working with Uniprix Investment was seamless from start to finish. They kept us informed at every stage and delivered on time. We couldn't be more satisfied with the result.</p>
+        </div>
 
-    <div class="testimonial" data-index="1">
-      <p class="t-name">David O., Kampala</p>
-      <p class="t-text">Working with Uniprix Investment was seamless from start to finish. They kept us informed at every stage and delivered on time. We couldn't be more satisfied with the result.</p>
-    </div>
+        <div class="testimonial active" data-index="2">
+          <p class="t-name">Sarah K., Kyanja</p>
+          <p class="t-text">Uniprix Investment handled our project professionally from planning to execution. The site supervision and attention to detail gave us confidence throughout the process.</p>
+        </div>
 
-    <div class="testimonial active" data-index="2">
-      <p class="t-name">Sarah K., Kyanja</p>
-      <p class="t-text">Uniprix Investment handled our project professionally from planning to execution. The site supervision and attention to detail gave us confidence throughout the process.</p>
-    </div>
+        <div class="testimonial" data-index="3">
+          <p class="t-name">Marcus T., Entebbe</p>
+          <p class="t-text">Their team brought creative ideas while respecting our vision and budget. The finished property reflects everything we dreamed of. I would recommend them without hesitation.</p>
+        </div>
 
-    <div class="testimonial" data-index="3">
-      <p class="t-name">Marcus T., Entebbe</p>
-      <p class="t-text">Their team brought creative ideas while respecting our vision and budget. The finished property reflects everything we dreamed of. I would recommend them without hesitation.</p>
-    </div>
+        <div class="testimonial" data-index="4">
+          <p class="t-name">Amara N., Jinja</p>
+          <p class="t-text">I was impressed by the transparency and honesty at every step. Uniprix Investment truly cares about client satisfaction — not just completing a job but building a lasting relationship.</p>
+        </div>
 
-    <div class="testimonial" data-index="4">
-      <p class="t-name">Amara N., Jinja</p>
-      <p class="t-text">I was impressed by the transparency and honesty at every step. Uniprix Investment truly cares about client satisfaction — not just completing a job but building a lasting relationship.</p>
-    </div>
+      </div>
 
-  </div>
+      <!-- Dots -->
+      <div class="t-dots" aria-hidden="true">
+        <button class="t-dot" data-index="0"></button>
+        <button class="t-dot" data-index="1"></button>
+        <button class="t-dot active" data-index="2"></button>
+        <button class="t-dot" data-index="3"></button>
+        <button class="t-dot" data-index="4"></button>
+      </div>
 
-  <!-- Dots -->
-  <div class="t-dots" aria-hidden="true">
-    <button class="t-dot" data-index="0"></button>
-    <button class="t-dot" data-index="1"></button>
-    <button class="t-dot active" data-index="2"></button>
-    <button class="t-dot" data-index="3"></button>
-    <button class="t-dot" data-index="4"></button>
-  </div>
-
-  <div class="t-cta-wrap">
-    <a href="#" class="t-cta-btn">Leave Your Review</a>
-  </div>
-</section>
+      <div class="t-cta-wrap">
+        <a href="#" class="t-cta-btn">Leave Your Review</a>
+      </div>
+    </section>
 
 
 
@@ -245,7 +243,7 @@
       <div class="cta-card">
         <img src="https://cdn.codia.ai/figma/JGrbVETRuqt2yPG3MfW142/img-84494308e5d0ccc8.png" alt="Modern house" class="cta-image">
         <div class="cta-content">
-          <h2>Planning to build or invest? Let's get it right from the start.</h2>
+          <h2 id="about-cta-heading">Planning to build or invest? Let's get it right from the start.</h2>
           <div class="cta-buttons">
             <button class="cta-btn-dark">Contact Uniprix</button>
             <button class="cta-btn-light">Book A site visit</button>
@@ -373,5 +371,104 @@
         <p class="footer-copyright">© 2026, All Rights Reserved</p>
       </div>
     </footer>
+
+
+
+
+
+
+
+
+
+
+
+    <script>
+      // Reuse the same fetch — it will run on every page
+      fetch('../data/site-content.json')  // note: ../ because you're in /about-us/
+        .then(response => response.json())
+        .then(data => {
+          const about = data.aboutPage;
+
+          if (!about) return; // safety if JSON not updated yet
+
+          // Hero
+          document.getElementById('about-hero-title').textContent = about.hero.title;
+
+          // Main section
+          document.getElementById('about-main-heading').textContent = about.mainSection.heading;
+          document.getElementById('about-main-text1').textContent = about.mainSection.text1;
+          document.getElementById('about-main-text2').textContent = about.mainSection.text2;
+
+          // Stats (dynamic replace)
+          const statsBar = document.getElementById('about-stats-bar');
+          if (statsBar) {
+            statsBar.innerHTML = '';
+            about.stats.forEach(stat => {
+              const item = document.createElement('div');
+              item.className = 'stat-item';
+              item.innerHTML = `
+                <img src="${stat.icon}" alt="${stat.label} Icon" class="stat-icon">
+                <div class="stat-text">
+                  <h3>${stat.number}</h3>
+                  <p>${stat.label}</p>
+                </div>
+              `;
+              statsBar.appendChild(item);
+            });
+          }
+
+          // Mission
+          document.getElementById('about-mission-heading').textContent = about.mission.heading;
+          document.getElementById('about-mission-text1').textContent = about.mission.text1;
+          document.getElementById('about-mission-text2').textContent = about.mission.text2;
+
+          // Vision
+          document.getElementById('about-vision-heading').textContent = about.vision.heading;
+          document.getElementById('about-vision-text').textContent = about.vision.text;
+
+          // Values (dynamic list)
+          const valuesList = document.getElementById('about-values-list');
+          if (valuesList) {
+            valuesList.innerHTML = '';
+            about.values.items.forEach(value => {
+              const li = document.createElement('li');
+              li.className = 'value-item';
+              li.innerHTML = `
+                <h3><span class="value-bullet"></span>${value.title}</h3>
+                <p>${value.desc}</p>
+              `;
+              valuesList.appendChild(li);
+            });
+          }
+          document.getElementById('about-values-heading').textContent = about.values.heading;
+
+          // Testimonials (dynamic)
+          const testWrapper = document.getElementById('about-testimonial-wrapper');
+          if (testWrapper) {
+            testWrapper.innerHTML = '';
+            about.testimonials.items.forEach((item, index) => {
+              const div = document.createElement('div');
+              div.className = `testimonial ${index === 2 ? 'active' : ''}`;
+              div.dataset.index = index;
+              div.innerHTML = `
+                <p class="t-name">${item.name}</p>
+                <p class="t-text">${item.text}</p>
+              `;
+              testWrapper.appendChild(div);
+            });
+          }
+          document.getElementById('about-test-title').textContent = about.testimonials.title;
+          document.getElementById('about-test-subtitle').textContent = about.testimonials.subtitle;
+
+          // CTA
+          document.getElementById('about-cta-heading').textContent = about.cta.heading;
+
+        })
+        .catch(err => console.error('About page content error:', err));
+    </script>
+
+
+
+
   </body>
 </html>

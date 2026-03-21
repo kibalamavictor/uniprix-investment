@@ -119,4 +119,60 @@
     "phone": "+256 700 847399",
     "email": "info@uniprixinvestment.com"
   }
+
+
+
+  ,
+  "aboutPage": {
+    "hero": {
+      "title": "About Us"
+    },
+    "mainSection": {
+      "heading": "We help clients plan better, build smarter, and manage projects with confidence.",
+      "text1": "Uniprix Investment is a Construction and Project management company specializing in project Planning, Construction, Interior designs, and Renovation and Property management services.",
+      "text2": "We believe every successful Construction project starts with proper planning from Site Visits, Project designs to construction, focusing on Accuracy, Quality control, Efficient and Execution at every stage."
+    },
+    "stats": [
+      { "number": "90+", "label": "Projects Done", "icon": "https://cdn.codia.ai/figma/JGrbVETRuqt2yPG3MfW142/img-def7046fda1bd567.png" },
+      { "number": "100+", "label": "Projects Managed", "icon": "https://cdn.codia.ai/figma/JGrbVETRuqt2yPG3MfW142/img-9fed578381a06122.png" },
+      { "number": "200+", "label": "Sites Visited", "icon": "https://cdn.codia.ai/figma/JGrbVETRuqt2yPG3MfW142/img-36f752a2741d8b98.png" },
+      { "number": "150+", "label": "Interior Spaces Designed", "icon": "https://cdn.codia.ai/figma/JGrbVETRuqt2yPG3MfW142/img-701d219a086db189.png" },
+      { "number": "50+", "label": "Ongoing Projects", "icon": "https://cdn.codia.ai/figma/JGrbVETRuqt2yPG3MfW142/img-193e81c044209c17.png" }
+    ],
+    "mission": {
+      "heading": "Our Mission",
+      "text1": "To provide professional project planning, construction, interior design and Property Management services that deliver quality, and efficiency.",
+      "text2": "We are committed to managing every project with accuracy, transparency, and attention to detail, ensuring our clients' ideas are transformed into well-executed and lasting developments."
+    },
+    "vision": {
+      "heading": "Our Vision",
+      "text": "To be a trusted and respectable construction property Management partner, known for reliable project management, quality execution, and a client-focused approach that adds long-term value to every investment."
+    },
+    "values": {
+      "heading": "Our Core Values",
+      "items": [
+        { "title": "Professionalism", "desc": "We uphold high standards in Plan Designs, Construction and Property Management ensuring execution at every stage of a project." },
+        { "title": "Quality & Attention to Detail", "desc": "We prioritize durability, functionality, and finishing, ensuring every detail meets approval standards." },
+        { "title": "Transparency & Accountability", "desc": "We maintain clear communication, honest advice, and responsible project coordination." },
+        { "title": "Client-Centered Approach", "desc": "We listen, understand our clients' goals, to tailor make solutions that align with their vision and budget." },
+        { "title": "Integrity & Reliability", "desc": "We deliver on our commitments, manage projects with consistency and trust." }
+      ]
+    },
+    "testimonials": {
+      "title": "What Our Clients Say",
+      "subtitle": "We take pride in delivering projects that meet expectations and earn trust. Here's what our clients say about working with Uniprix Investment.",
+      "items": [
+        { "name": "James M., Nairobi", "text": "From the first consultation, Uniprix Investment showed they understood exactly what we needed. The build quality exceeded our expectations and the team was always available." },
+        { "name": "David O., Kampala", "text": "Working with Uniprix Investment was seamless from start to finish. They kept us informed at every stage and delivered on time. We couldn't be more satisfied with the result." },
+        { "name": "Sarah K., Kyanja", "text": "Uniprix Investment handled our project professionally from planning to execution. The site supervision and attention to detail gave us confidence throughout the process." },
+        { "name": "Marcus T., Entebbe", "text": "Their team brought creative ideas while respecting our vision and budget. The finished property reflects everything we dreamed of. I would recommend them without hesitation." },
+        { "name": "Amara N., Jinja", "text": "I was impressed by the transparency and honesty at every step. Uniprix Investment truly cares about client satisfaction — not just completing a job but building a lasting relationship." }
+      ]
+    },
+    "cta": {
+      "heading": "Planning to build or invest? Let's get it right from the start."
+    }
+  }
+
+  
 }
