@@ -274,6 +274,35 @@
           "media/project-apartments-4.png",
           "media/project-apartments-5.png"
         ]
+      },
+      {
+        "number": "03",
+        "title": "Residential Rental Apartments",
+        "location": "Nansana – Wakiso District",
+        "projectType": "Rental Housing Development",
+        "status": "Completed",
+        "overview": "A purpose-built rental apartment block developed to maximize rental income while maintaining structural durability and low maintenance costs. The project serves middle-income tenants within an urban setting.",
+        "keyDetails": [
+          "8 apartment units ",
+          "Mix of 1-bedroom and 2-bedroom units",
+          " Two-storey building ",
+          "Shared parking space"
+        ],
+        "scope": "Site planning, construction supervision, contractor coordination, and project scheduling.",
+        "images": [
+          "/values-image.png",
+          ""
+        ]
+      },
+      {
+        "number": "",
+        "title": "",
+        "location": "",
+        "projectType": "",
+        "status": "",
+        "overview": "",
+        "keyDetails": [],
+        "scope": ""
       }
     ]
   },
