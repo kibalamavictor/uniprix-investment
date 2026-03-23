@@ -435,6 +435,16 @@
           "Progress monitoring and reporting",
           "Risk identification and mitigation"
         ]
+      },
+      {
+        "image": "/our-mission-image.png",
+        "title": "Landscaping Service",
+        "desc": "We do level compounds and plant flowers in your lawns",
+        "includes": [
+          "Site visits and assessments",
+          "Risk identification and mitigation",
+          "designs, quality standards, and safety requirements."
+        ]
       }
     ]
   }
