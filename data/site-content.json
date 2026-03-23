@@ -237,24 +237,77 @@
   }
 
   ,
-"gallery": {
-  "heading": "Snapshots from Our Projects",
-  "subtitle": "This gallery brings together highlights from our construction sites, interior design works, 3D visualizations, and completed projects captured across different locations and stages of execution.",
-  "items": [
-    { "src": "media/gallery-1.jpg", "alt": "Construction site at sunset", "isVideo": false },
-    { "src": "media/gallery-2.jpg", "alt": "Construction ground work", "isVideo": false },
-    { "src": "media/gallery-3.jpg", "alt": "Excavator at construction site", "isVideo": false },
-    { "src": "media/gallery-4.jpg", "alt": "Excavator digging", "isVideo": true },
-    { "src": "media/gallery-5.jpg", "alt": "House under construction", "isVideo": true },
-    { "src": "media/gallery-6.jpg", "alt": "Construction site plot", "isVideo": false },
-    { "src": "media/gallery-7.jpg", "alt": "Construction workers", "isVideo": false },
-    { "src": "media/gallery-8.jpg", "alt": "3D architectural render", "isVideo": false },
-    { "src": "media/gallery-9.jpg", "alt": "Steel framework", "isVideo": false },
-    { "src": "media/gallery-10.jpg", "alt": "Interior design", "isVideo": false },
-    { "src": "media/gallery-11.jpg", "alt": "Completed modern villa at night", "isVideo": false },
-    { "src": "media/gallery-12.jpg", "alt": "Hard hat on site", "isVideo": false },
-    { "src": "media/gallery-13.jpg", "alt": "Construction machinery", "isVideo": false },
-    { "src": "media/gallery-14.jpg", "alt": "Luxury interior living room", "isVideo": false }
-  ]
-}
+  "gallery": {
+    "heading": "Snapshots from Our Projects",
+    "subtitle": "This gallery brings together highlights from our construction sites, interior design works, 3D visualizations, and completed projects captured across different locations and stages of execution.",
+    "items": [
+      { "src": "media/gallery-1.jpg", "alt": "Construction site at sunset", "isVideo": false },
+      { "src": "media/gallery-2.jpg", "alt": "Construction ground work", "isVideo": false },
+      { "src": "media/gallery-3.jpg", "alt": "Excavator at construction site", "isVideo": false },
+      { "src": "media/gallery-4.jpg", "alt": "Excavator digging", "isVideo": true },
+      { "src": "media/gallery-5.jpg", "alt": "House under construction", "isVideo": true },
+      { "src": "media/gallery-6.jpg", "alt": "Construction site plot", "isVideo": false },
+      { "src": "media/gallery-7.jpg", "alt": "Construction workers", "isVideo": false },
+      { "src": "media/gallery-8.jpg", "alt": "3D architectural render", "isVideo": false },
+      { "src": "media/gallery-9.jpg", "alt": "Steel framework", "isVideo": false },
+      { "src": "media/gallery-10.jpg", "alt": "Interior design", "isVideo": false },
+      { "src": "media/gallery-11.jpg", "alt": "Completed modern villa at night", "isVideo": false },
+      { "src": "media/gallery-12.jpg", "alt": "Hard hat on site", "isVideo": false },
+      { "src": "media/gallery-13.jpg", "alt": "Construction machinery", "isVideo": false },
+      { "src": "media/gallery-14.jpg", "alt": "Luxury interior living room", "isVideo": false }
+    ]
+  }
+
+
+
+    ,
+  "servicesCarousel": {
+    "items": [
+      {
+        "image": "media/our-services-img-1.png",
+        "title": "Project Planning & Management",
+        "desc": "We handle the planning, coordination, and control of your project from start to finish. Our structured approach ensures clear timelines, controlled costs, and smooth execution at every stage.",
+        "includes": [
+          "Site visits and assessments",
+          "Project planning and scheduling",
+          "Budget planning and coordination",
+          "Progress monitoring and reporting",
+          "Risk identification and mitigation"
+        ]
+      },
+      {
+        "image": "media/our-services-img-2.png",
+        "title": "Construction & Site Supervision",
+        "desc": "We provide hands-on site supervision to ensure construction is carried out according to approved designs, quality standards, and safety requirements.",
+        "includes": [
+          "Site visits and assessments",
+          "Project planning and scheduling",
+          "Budget planning and coordination"
+        ]
+      },
+      {
+        "image": "media/our-services-img-3.png",
+        "title": "Interior Design",
+        "desc": "We design functional, comfortable, and modern interior spaces that reflect your lifestyle and purpose. Every detail is planned to balance aesthetics and practicality.",
+        "includes": [
+          "Site visits and assessments",
+          "Project planning and scheduling",
+          "Budget planning and coordination",
+          "Progress monitoring and reporting"
+        ]
+      },
+      {
+        "image": "media/our-services-img-4.png",
+        "title": "Renovation & Remodeling",
+        "desc": "We help upgrade, redesign, or improve existing spaces while maintaining structural integrity and enhancing value.",
+        "includes": [
+          "Site visits and assessments",
+          "Project planning and scheduling",
+          "Budget planning and coordination",
+          "Progress monitoring and reporting",
+          "Risk identification and mitigation"
+        ]
+      }
+    ]
+  }
 }
