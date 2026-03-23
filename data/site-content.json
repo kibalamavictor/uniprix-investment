@@ -1,12 +1,12 @@
 {
   "hero": {
     "headline": "Planning. Building.<br>Managing. <span class=\"upx-hl-amber\">Done Right.</span>",
-    "subtitle": "Professional project planning",
+    "subtitle": "Professional project planning, construction management, and interior design services you can trust.",
     "ctaBook": "Book a Site Visit",
     "ctaTalk": "Talk to Us",
     "stats": [
       {
-        "number": "120+",
+        "number": "90+",
         "label": "Projects Done",
         "icon": "./hero-icon-3.svg"
       },
@@ -38,7 +38,7 @@
       {
         "title": "Construction & Site Supervision",
         "desc": "We provide hands-on site supervision to ensure construction is carried out according to approved designs, quality standards, and safety requirements.",
-        "image": "./media/our-services-img-2.png"
+        "image": "/our-services-img-2.png"
       },
       {
         "title": "Interior Design",
