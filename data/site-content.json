@@ -6,17 +6,17 @@
     "ctaTalk": "Talk to Us",
     "stats": [
       {
-        "number": "90+",
+        "number": "120+",
         "label": "Projects Done",
         "icon": "./hero-icon-3.svg"
       },
       {
-        "number": "100+",
+        "number": "300+",
         "label": "Projects Managed",
         "icon": "./hero-icon-2.svg"
       },
       {
-        "number": "200+",
+        "number": "500+",
         "label": "Sites Visited",
         "icon": "./hero-icon.svg"
       }
