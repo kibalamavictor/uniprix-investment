@@ -293,6 +293,23 @@
           "/values-image.png",
           ""
         ]
+      },
+      {
+        "number": "04",
+        "title": "Luxury Family Residence",
+        "location": "Muyenga – Kampala",
+        "projectType": "High-End Private Residence",
+        "status": "High-End Private Residence",
+        "overview": "A luxury family home designed to offer privacy, generous living spaces, and premium finishes. The project blends modern architectural design with functional family living.",
+        "keyDetails": [
+          "Balconies and outdoor relaxation spaces ",
+          "High-quality interior finishes"
+        ],
+        "scope": "Construction supervision, finishing coordination, and quality assurance.",
+        "images": [
+          "/our-mission-image.png",
+          "/our-services-img-1.png"
+        ]
       }
     ]
   },
