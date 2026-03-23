@@ -61,88 +61,16 @@
 
             <!-- Header -->
             <div class="upx-gallery__header">
-            <h2 class="upx-gallery__heading">Snapshots from Our Projects</h2>
-            <p class="upx-gallery__sub">
+            <h2 class="upx-gallery__heading" id="gallery-heading">Snapshots from Our Projects</h2>
+            <p class="upx-gallery__sub" id="gallery-subtitle">
                 This gallery brings together highlights from our construction sites, interior design works,
                 3D visualizations, and completed projects captured across different locations and stages of execution.
             </p>
             </div>
 
             <!-- Grid -->
-            <div class="upx-gallery__grid">
-
-            <!-- Row 1: 3 wide images -->
-            <div class="upx-gitem" onclick="upxLbOpen(this)">
-                <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=700&auto=format&fit=crop&q=80" alt="Construction site at sunset"/>
-            </div>
-            <div class="upx-gitem" onclick="upxLbOpen(this)">
-                <img src="https://images.unsplash.com/photo-1581094288338-2314dddb7ece?w=700&auto=format&fit=crop&q=80" alt="Construction ground work"/>
-            </div>
-            <div class="upx-gitem" onclick="upxLbOpen(this)">
-                <img src="https://images.unsplash.com/photo-1587582345426-bf07f534f9a6?w=700&auto=format&fit=crop&q=80" alt="Excavator at construction site"/>
-            </div>
-
-            <!-- Row 2+: tall excavator left -->
-            <div class="upx-gitem" onclick="upxLbOpen(this)">
-                <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&auto=format&fit=crop&q=80" alt="Excavator digging"/>
-                <div class="upx-gitem__play">
-                <div class="upx-gitem__play-icon">
-                    <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                </div>
-                </div>
-            </div>
-
-            <!-- Mid top: house under construction (video indicator) -->
-            <div class="upx-gitem" onclick="upxLbOpen(this)">
-                <img src="https://images.unsplash.com/photo-1572120360610-d971b9d7767c?w=700&auto=format&fit=crop&q=80" alt="House under construction"/>
-                <div class="upx-gitem__play">
-                <div class="upx-gitem__play-icon">
-                    <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                </div>
-                </div>
-            </div>
-
-            <!-- Small right: site plot -->
-            <div class="upx-gitem" onclick="upxLbOpen(this)">
-                <img src="https://images.unsplash.com/photo-1515263487990-61b07816b324?w=400&auto=format&fit=crop&q=80" alt="Construction site plot"/>
-            </div>
-
-            <!-- Small right: workers -->
-            <div class="upx-gitem" onclick="upxLbOpen(this)">
-                <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=400&auto=format&fit=crop&q=80" alt="Construction workers"/>
-            </div>
-
-            <!-- Mid bottom: 3D render -->
-            <div class="upx-gitem" onclick="upxLbOpen(this)">
-                <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=700&auto=format&fit=crop&q=80" alt="3D architectural render"/>
-            </div>
-
-            <!-- Small right bottom: steel works -->
-            <div class="upx-gitem" onclick="upxLbOpen(this)">
-                <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=400&auto=format&fit=crop&q=80" alt="Steel framework"/>
-            </div>
-
-            <!-- Small right bottom: interior -->
-            <div class="upx-gitem" onclick="upxLbOpen(this)">
-                <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&auto=format&fit=crop&q=80" alt="Interior design"/>
-            </div>
-
-            <!-- Bottom mid continuation -->
-            <div class="upx-gitem" onclick="upxLbOpen(this)">
-                <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=700&auto=format&fit=crop&q=80" alt="Completed modern villa at night"/>
-            </div>
-
-            <!-- Row 4: 2 small + 1 wide -->
-            <div class="upx-gitem" onclick="upxLbOpen(this)">
-                <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=400&auto=format&fit=crop&q=80" alt="Hard hat on site"/>
-            </div>
-            <div class="upx-gitem" onclick="upxLbOpen(this)">
-                <img src="https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=400&auto=format&fit=crop&q=80" alt="Construction machinery"/>
-            </div>
-            <div class="upx-gitem" onclick="upxLbOpen(this)">
-                <img src="https://images.unsplash.com/photo-1600210492493-0946911123ea?w=900&auto=format&fit=crop&q=80" alt="Luxury interior living room"/>
-            </div>
-
+            <div class="upx-gallery__grid" id="gallery-grid">
+              <!-- All images will be generated here by JavaScript -->
             </div>
         </div>
     </section>
@@ -294,5 +222,43 @@
         <p class="footer-copyright">© 2026, All Rights Reserved</p>
       </div>
     </footer>
+
+
+
+
+
+    <script>
+    // Load Gallery from Sitepins JSON
+    fetch('../data/site-content.json')
+      .then(response => response.json())
+      .then(data => {
+        const g = data.gallery;
+
+        // Update header
+        document.getElementById('gallery-heading').textContent = g.heading;
+        document.getElementById('gallery-subtitle').textContent = g.subtitle;
+
+        // Generate dynamic gallery grid
+        const grid = document.getElementById('gallery-grid');
+        grid.innerHTML = '';
+
+        g.items.forEach(item => {
+          const itemHTML = `
+            <div class="upx-gitem" onclick="upxLbOpen(this)">
+              <img src="../${item.src}" alt="${item.alt}" />
+              ${item.isVideo ? `
+                <div class="upx-gitem__play">
+                  <div class="upx-gitem__play-icon">
+                    <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                  </div>
+                </div>
+              ` : ''}
+            </div>
+          `;
+          grid.innerHTML += itemHTML;
+        });
+      })
+      .catch(err => console.error('Gallery load error:', err));
+    </script>
   </body>
 </html>

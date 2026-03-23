@@ -236,5 +236,25 @@
     ]
   }
 
-  
+  ,
+"gallery": {
+  "heading": "Snapshots from Our Projects",
+  "subtitle": "This gallery brings together highlights from our construction sites, interior design works, 3D visualizations, and completed projects captured across different locations and stages of execution.",
+  "items": [
+    { "src": "media/gallery-1.jpg", "alt": "Construction site at sunset", "isVideo": false },
+    { "src": "media/gallery-2.jpg", "alt": "Construction ground work", "isVideo": false },
+    { "src": "media/gallery-3.jpg", "alt": "Excavator at construction site", "isVideo": false },
+    { "src": "media/gallery-4.jpg", "alt": "Excavator digging", "isVideo": true },
+    { "src": "media/gallery-5.jpg", "alt": "House under construction", "isVideo": true },
+    { "src": "media/gallery-6.jpg", "alt": "Construction site plot", "isVideo": false },
+    { "src": "media/gallery-7.jpg", "alt": "Construction workers", "isVideo": false },
+    { "src": "media/gallery-8.jpg", "alt": "3D architectural render", "isVideo": false },
+    { "src": "media/gallery-9.jpg", "alt": "Steel framework", "isVideo": false },
+    { "src": "media/gallery-10.jpg", "alt": "Interior design", "isVideo": false },
+    { "src": "media/gallery-11.jpg", "alt": "Completed modern villa at night", "isVideo": false },
+    { "src": "media/gallery-12.jpg", "alt": "Hard hat on site", "isVideo": false },
+    { "src": "media/gallery-13.jpg", "alt": "Construction machinery", "isVideo": false },
+    { "src": "media/gallery-14.jpg", "alt": "Luxury interior living room", "isVideo": false }
+  ]
+}
 }
