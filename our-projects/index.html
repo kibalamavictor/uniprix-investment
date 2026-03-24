@@ -13,7 +13,7 @@
   </head>
 
   <body>
-
+    
     <img src="./assets/images/our-projects-header-image.png" alt="Hero background" class="hero-bg-image"> 
 
     <header class="nav" >
@@ -45,238 +45,33 @@
     </header>
 
 
-
     <div class="hero-content">
       <h1>Our Projects</h1>
     </div>
 
 
-    
-
-
-
-
     <!-- HERO SECTION -->
 
 
-
-
-
-
-
-
-
-
-
-
-
-  
-
     <section class="upx-rp">
-        
-      <div class="upx-rp__inner" >
-          
+      <div class="upx-rp__inner">
+
+        <!-- Intro (already has the IDs you added) -->
         <div class="our-project-content upx-rp-min-size">
-          <h2 id="proj-intro-heading">We offer a range of services that help clients plan better, manage efficiently, and build with confidence.</h2>
-          <p id="proj-intro-text">At Uniprix Investment, we offer end-to-end solutions that support clients from the earliest planning stages through construction, interior design, and project completion. Our services are designed to ensure clarity, quality, and confidence at every stage.</p>
+          <h2 id="proj-intro-heading"></h2>
+          <p id="proj-intro-text"></p>
         </div>
         <div>
-          <p class="upx-rp__page-label" id="proj-page-label">Residential Projects</p>
+          <p class="upx-rp__page-label" id="proj-page-label"></p>
         </div>
 
-        <!-- ── PROJECT 01 ── -->
-        <div class="upx-rpblock">
-          <div class="upx-rpblock__num-row">
-            <div class="upx-rp__num">
-            01<span class="upx-rp__num-dot"></span>
-            </div>
-          </div>
-
-          <div class="upx-rpcard">
-            <!-- Text left -->
-            <div class="upx-rpcard__text">
-            <h2 class="upx-rpcard__title">Two-Storey Family Residence</h2>
-
-            <div class="upx-rpcard__meta">
-              <div class="upx-rpcard__meta-row">
-              <span class="upx-rpcard__meta-key">Location:</span>
-              <span class="upx-rpcard__meta-val">Kira – Wakiso District</span>
-              </div>
-              <div class="upx-rpcard__meta-row">
-              <span class="upx-rpcard__meta-key">Project Type:</span>
-              <span class="upx-rpcard__meta-val">Private Residential Home</span>
-              </div>
-              <div class="upx-rpcard__meta-row">
-              <span class="upx-rpcard__meta-key">Status:</span>
-              <span class="upx-rpcard__meta-val">Ongoing (Finishing Phase)</span>
-              </div>
-            </div>
-
-            <div class="upx-rpsection">
-              <span class="upx-rpsection__title">Project Overview</span>
-              <div class="dash-line"></div>
-              <p class="upx-rpsection__text">
-              This is a modern two-storey residential home designed to provide comfortable family living
-              while maintaining strong structural integrity. The project is currently in its advanced
-              construction stage, with major structural works completed and roofing installed.
-              </p>
-            </div>
-
-            <div class="upx-rpsection">
-              <span class="upx-rpsection__title">Key Details</span>
-              <div class="dash-line"></div>
-              <div class="upx-rpdetails">
-              <div class="upx-rpdetail-item">Two floors (Ground + First Floor)</div>
-              <div class="upx-rpdetail-item">Family lounge on the upper floor</div>
-              <div class="upx-rpdetail-item">4 bedrooms (2 ensuite)</div>
-              <div class="upx-rpdetail-item">Balcony spaces for ventilation and natural light</div>
-              <div class="upx-rpdetail-item">Spacious living and dining areas</div>
-              <div class="upx-rpdetail-item">Reinforced concrete structure</div>
-              <div class="upx-rpdetail-item">Modern kitchen layout</div>
-              <div class="upx-rpdetail-item">Clay tile roofing system</div>
-              </div>
-            </div>
-
-            <div class="upx-rpsection">
-              <span class="upx-rpsection__title">Scope of Work</span>
-              <div class="dash-line"></div>
-              <p class="upx-rpsection__text">
-              Architectural planning, structural supervision, construction management, and finishing coordination.
-              </p>
-            </div>
-            </div>
-
-            <!-- Image right – CSS auto-slideshow (4 images, 3.5s each) -->
-            <div class="upx-rpcard__img">
-            <div class="upx-slideshow-4">
-              <div class="upx-slide">
-              <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=700&auto=format&fit=crop&q=80" alt="Residence view 1" style="border-radius:30px 170px 30px 30px"/>
-              </div>
-              <div class="upx-slide">
-              <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=700&auto=format&fit=crop&q=80" alt="Residence view 2" style="border-radius:30px 170px 30px 30px"/>
-              </div>
-              <div class="upx-slide">
-              <img src="https://images.unsplash.com/photo-1572120360610-d971b9d7767c?w=700&auto=format&fit=crop&q=80" alt="Residence view 3" style="border-radius:30px 170px 30px 30px"/>
-              </div>
-              <div class="upx-slide">
-              <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=700&auto=format&fit=crop&q=80" alt="Residence view 4" style="border-radius:30px 170px 30px 30px"/>
-              </div>
-            </div>
-            <!-- Animated dots – each dot lights up in sync with its slide -->
-            <div class="upx-rpcard__dots">
-              <div class="upx-rdot" style="animation:upx-dot-fade 14s infinite 0s"></div>
-              <div class="upx-rdot" style="animation:upx-dot-fade 14s infinite 3.5s"></div>
-              <div class="upx-rdot" style="animation:upx-dot-fade 14s infinite 7s"></div>
-              <div class="upx-rdot" style="animation:upx-dot-fade 14s infinite 10.5s"></div>
-            </div>
-            </div>
-          </div>
+        <!-- DYNAMIC PROJECTS CONTAINER (this is the important part) -->
+        <div id="projects-container">
+          <!-- All projects are automatically loaded here by JavaScript -->
         </div>
-
-            <!-- ── PROJECT 02 ── -->
-            <div class="upx-rpblock upx-rpblock--right">
-              <div class="upx-rpblock__num-row">
-                <div class="upx-rp__num upx-rp__num--amber">
-                02<span class="upx-rp__num-dot upx-rp__num-dot--amber"></span>
-                </div>
-              </div>
-
-              <div class="upx-rpcard upx-rpcard--amber upx-rpcard--img-left upx-rpcard-left-tile">
-                <!-- Image left – CSS auto-slideshow (5 images, 3.5s each) -->
-                <div class="upx-rpcard__img upx-left-image">
-                <div class="upx-slideshow-5">
-                  <div class="upx-slide">
-                  <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=700&auto=format&fit=crop&q=80" alt="Apartments view 1" style="border-radius:170px 30px 30px 30px"/>
-                  </div>
-                  <div class="upx-slide">
-                  <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=700&auto=format&fit=crop&q=80" alt="Apartments view 2" style="border-radius:170px 30px 30px 30px"/>
-                  </div>
-                  <div class="upx-slide">
-                  <img src="https://images.unsplash.com/photo-1560184897-ae75f418493e?w=700&auto=format&fit=crop&q=80" alt="Apartments view 3" style="border-radius:170px 30px 30px 30px"/>
-                  </div>
-                  <div class="upx-slide">
-                  <img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=700&auto=format&fit=crop&q=80" alt="Apartments view 4" style="border-radius:170px 30px 30px 30px"/>
-                  </div>
-                  <div class="upx-slide">
-                  <img src="https://images.unsplash.com/photo-1523217582562-09d0def993a6?w=700&auto=format&fit=crop&q=80" alt="Apartments view 5" style="border-radius:170px 30px 30px 30px"/>
-                  </div>
-                </div>
-                <!-- Animated dots -->
-                <div class="upx-rpcard__dots">
-                  <div class="upx-rdot" style="animation:upx-dot-fade 17.5s infinite 0s"></div>
-                  <div class="upx-rdot" style="animation:upx-dot-fade 17.5s infinite 3.5s"></div>
-                  <div class="upx-rdot" style="animation:upx-dot-fade 17.5s infinite 7s"></div>
-                  <div class="upx-rdot" style="animation:upx-dot-fade 17.5s infinite 10.5s"></div>
-                  <div class="upx-rdot" style="animation:upx-dot-fade 17.5s infinite 14s"></div>
-                </div>
-                </div>
-
-                <!-- Text right -->
-                <div class="upx-rpcard__text">
-                <h2 class="upx-rpcard__title">Residential Apartments Block</h2>
-
-                <div class="upx-rpcard__meta">
-                  <div class="upx-rpcard__meta-row">
-                  <span class="upx-rpcard__meta-key">Location:</span>
-                  <span class="upx-rpcard__meta-val">Ntinda – Kampala</span>
-                  </div>
-                  <div class="upx-rpcard__meta-row">
-                  <span class="upx-rpcard__meta-key">Project Type:</span>
-                  <span class="upx-rpcard__meta-val">Private Residential Home</span>
-                  </div>
-                  <div class="upx-rpcard__meta-row">
-                  <span class="upx-rpcard__meta-key">Status:</span>
-                  <span class="upx-rpcard__meta-val">Completed</span>
-                  </div>
-                </div>
-
-                <div class="upx-rpsection">
-                  <span class="upx-rpsection__title">Project Overview</span>
-                  <div class="dash-line orange-line"></div>
-                  <p class="upx-rpsection__text">
-                  A contemporary executive bungalow designed for efficient use of space and comfortable modern
-                  living. The project emphasizes natural lighting, functional layouts, and durable construction
-                  finishes suitable for long-term occupancy.
-                  </p>
-                </div>
-
-                <div class="upx-rpsection">
-                    <span class="upx-rpsection__title">Key Details</span>
-                    <div class="dash-line orange-line"></div>
-                    <div class="upx-rpdetails">
-                    <div class="upx-rpdetail-item">Single-storey structure</div>
-                    <div class="upx-rpdetail-item">Guest washroom</div>
-                    <div class="upx-rpdetail-item">3 bedrooms (Master ensuite)</div>
-                    <div class="upx-rpdetail-item">Front veranda</div>
-                    <div class="upx-rpdetail-item">Spacious living and dining areas</div>
-                    <div class="upx-rpdetail-item">Reinforced concrete structure</div>
-                    <div class="upx-rpdetail-item">Modern kitchen with pantry</div>
-                    <div class="upx-rpdetail-item">Concrete tile roofing</div>
-                    </div>
-                </div>
-
-                <div class="upx-rpsection">
-                    <span class="upx-rpsection__title">Scope of Work</span>
-                    <div class="dash-line orange-line"></div>
-                    <p class="upx-rpsection__text">
-                    Design coordination, site supervision, construction management, and quality control.
-                    </p>
-                </div>
-              </div>
-            </div>
-          </div>
 
       </div>
     </section>
-
-
-    <!-- <section class="upx-rp">
-      <div class="upx-rp__inner" id="projects-container">
-       
-      </div>
-    </section> -->
-
-
 
 
     <section class="upx-cta">
