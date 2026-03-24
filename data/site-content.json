@@ -218,101 +218,45 @@
     "cta": {
       "heading": "Planning to build or invest? Let's get it right from the start."
     }
-  },
+  }
+  
+  
+  ,
   "ourProjects": {
-    "introHeading": "We offer a range of services that help clients plan better, manage efficiently, and build with confidence.",
-    "introText": "At Uniprix Investment, we offer end-to-end solutions that support clients from the earliest planning stages through construction, interior design, and project completion. Our services are designed to ensure clarity, quality, and confidence at every stage.",
-    "pageLabel": "Residential Projects",
-    "projects": [
-      {
-        "number": "01",
-        "title": "Two-Storey Family Residence",
-        "location": "Kira – Wakiso District",
-        "projectType": "Private Residential Home",
-        "status": "Ongoing (Finishing Phase)",
-        "overview": "This is a modern two-storey residential home designed to provide comfortable family living while maintaining strong structural integrity. The project is currently in its advanced construction stage, with major structural works completed and roofing installed.",
-        "keyDetails": [
-          "Two floors (Ground + First Floor)",
-          "Family lounge on the upper floor",
-          "4 bedrooms (2 ensuite)",
-          "Balcony spaces for ventilation and natural light",
-          "Spacious living and dining areas",
-          "Reinforced concrete structure",
-          "Modern kitchen layout",
-          "Clay tile roofing system"
-        ],
-        "scope": "Architectural planning, structural supervision, construction management, and finishing coordination.",
-        "images": [
-          "media/project-residence-1.png",
-          "media/project-residence-2.png",
-          "media/project-residence-3.png",
-          "media/project-residence-4.png"
-        ]
-      },
-      {
-        "number": "02",
-        "title": "Residential Apartments Block",
-        "location": "Ntinda – Kampala",
-        "projectType": "Private Residential Home",
-        "status": "Completed",
-        "overview": "A contemporary executive bungalow designed for efficient use of space and comfortable modern living. The project emphasizes natural lighting, functional layouts, and durable construction finishes suitable for long-term occupancy.",
-        "keyDetails": [
-          "Single-storey structure",
-          "Guest washroom",
-          "3 bedrooms (Master ensuite)",
-          "Front veranda",
-          "Spacious living and dining areas",
-          "Reinforced concrete structure",
-          "Modern kitchen with pantry",
-          "Concrete tile roofing"
-        ],
-        "scope": "Design coordination, site supervision, construction management, and quality control.",
-        "images": [
-          "media/project-apartments-1.png",
-          "media/project-apartments-2.png",
-          "media/project-apartments-3.png",
-          "media/project-apartments-4.png",
-          "media/project-apartments-5.png"
-        ]
-      },
-      {
-        "number": "03",
-        "title": "Residential Rental Apartments",
-        "location": "Nansana – Wakiso District",
-        "projectType": "Rental Housing Development",
-        "status": "Completed",
-        "overview": "A purpose-built rental apartment block developed to maximize rental income while maintaining structural durability and low maintenance costs. The project serves middle-income tenants within an urban setting.",
-        "keyDetails": [
-          "8 apartment units ",
-          "Mix of 1-bedroom and 2-bedroom units",
-          " Two-storey building ",
-          "Shared parking space"
-        ],
-        "scope": "Site planning, construction supervision, contractor coordination, and project scheduling.",
-        "images": [
-          "/values-image.png",
-          ""
-        ]
-      },
-      {
-        "number": "04",
-        "title": "Luxury Family Residence",
-        "location": "Muyenga – Kampala",
-        "projectType": "High-End Private Residence",
-        "status": "High-End Private Residence",
-        "overview": "A luxury family home designed to offer privacy, generous living spaces, and premium finishes. The project blends modern architectural design with functional family living.",
-        "keyDetails": [
-          "Balconies and outdoor relaxation spaces ",
-          "High-quality interior finishes"
-        ],
-        "scope": "Construction supervision, finishing coordination, and quality assurance.",
-        "images": [
-          "/our-mission-image.png",
-          "/our-services-img-1.png"
-        ]
-      }
-    ]
-  },
+  "introHeading": "We offer a range of services that help clients plan better, manage efficiently, and build with confidence.",
+  "introText": "At Uniprix Investment, we offer end-to-end solutions that support clients from the earliest planning stages through construction, interior design, and project completion. Our services are designed to ensure clarity, quality, and confidence at every stage.",
+  "pageLabel": "Residential Projects",
+  "projects": [
+    {
+      "id": "project-01",
+      "number": "01",
+      "title": "Two-Storey Family Residence",
+      "location": "Kira – Wakiso District",
+      "projectType": "Private Residential Home",
+      "status": "Ongoing (Finishing Phase)",
+      "overview": "This is a modern two-storey residential home designed to provide comfortable family living while maintaining strong structural integrity. The project is currently in its advanced construction stage, with major structural works completed and roofing installed.",
+      "keyDetails": [ ... ],
+      "scope": "...",
+      "images": [ ... ]
+    },
+    {
+      "id": "project-02",
+      "number": "02",
+      "title": "Residential Apartments Block",
+      "location": "Ntinda – Kampala",
+      "projectType": "Private Residential Home",
+      "status": "Completed",
+      "overview": "...",
+      "keyDetails": [ ... ],
+      "scope": "...",
+      "images": [ ... ]
+    }
+  ]
+}
+  
+  
+  
+  ,
   "gallery": {
     "heading": "Snapshots from Our Projects",
     "subtitle": "This gallery brings together highlights from our construction sites, interior design works, 3D visualizations, and completed projects captured across different locations and stages of execution.",
@@ -388,64 +332,8 @@
         "isVideo": false
       }
     ]
-  },
-  "servicesCarousel": {
-    "items": [
-      {
-        "image": "media/our-services-img-1.png",
-        "title": "Project Planning & Management",
-        "desc": "We handle the planning, coordination, and control of your project from start to finish. Our structured approach ensures clear timelines, controlled costs, and smooth execution at every stage.",
-        "includes": [
-          "Site visits and assessments",
-          "Project planning and scheduling",
-          "Budget planning and coordination",
-          "Progress monitoring and reporting",
-          "Risk identification and mitigation"
-        ]
-      },
-      {
-        "image": "media/our-services-img-2.png",
-        "title": "Construction & Site Supervision",
-        "desc": "We provide hands-on site supervision to ensure construction is carried out according to approved designs, quality standards, and safety requirements.",
-        "includes": [
-          "Site visits and assessments",
-          "Project planning and scheduling",
-          "Budget planning and coordination"
-        ]
-      },
-      {
-        "image": "media/our-services-img-3.png",
-        "title": "Interior Design",
-        "desc": "We design functional, comfortable, and modern interior spaces that reflect your lifestyle and purpose. Every detail is planned to balance aesthetics and practicality.",
-        "includes": [
-          "Site visits and assessments",
-          "Project planning and scheduling",
-          "Budget planning and coordination",
-          "Progress monitoring and reporting"
-        ]
-      },
-      {
-        "image": "media/our-services-img-4.png",
-        "title": "Renovation & Remodeling",
-        "desc": "We help upgrade, redesign, or improve existing spaces while maintaining structural integrity and enhancing value.",
-        "includes": [
-          "Site visits and assessments",
-          "Project planning and scheduling",
-          "Budget planning and coordination",
-          "Progress monitoring and reporting",
-          "Risk identification and mitigation"
-        ]
-      },
-      {
-        "image": "/our-mission-image.png",
-        "title": "Landscaping Service",
-        "desc": "We do level compounds and plant flowers in your lawns",
-        "includes": [
-          "Site visits and assessments",
-          "Risk identification and mitigation",
-          "designs, quality standards, and safety requirements."
-        ]
-      }
-    ]
   }
+
+
+
 }

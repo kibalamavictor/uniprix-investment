@@ -64,45 +64,110 @@
 
 
 
-    <!-- ============================================================
-     SERVICES CAROUSEL SECTION – NOW POWERED BY SITEPINS
-     ============================================================ -->
-<section class="sc-section">
-  <div class="sc-inner">
-    <!-- ── CAROUSEL WRAPPER ── -->
-    <div class="sc-carousel-wrap">
-      <!-- PREV / NEXT arrows -->
-      <button class="sc-arrow sc-arrow--prev" id="scPrev" aria-label="Previous">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="15 18 9 12 15 6"/>
-        </svg>
-      </button>
-      <!-- Track -->
-      <div class="sc-track-outer" id="scTrackOuter">
-        <div class="sc-track" id="scTrack">
-          <!-- Cards will be injected here by JavaScript -->
+
+
+
+
+
+
+
+
+    <section class="upx-services">
+      <div class="upx-services__inner">
+
+        <h2 class="upx-services__heading" id="services-heading">Our Services</h2>
+
+        <div class="upx-services__carousel">
+        <div class="upx-services__grid" id="upxSvcGrid">
+
+          <!-- Card 1 -->
+          <div class="upx-svc-card">
+            <div class="upx-svc-card__img">
+              <img
+                src="./our-services-img-1.png"
+                alt="Project planning meeting with laptops and blueprints"
+              />
+            </div>
+            <div class="upx-svc-card__body">
+              <h3 class="upx-svc-card__title">Project Planning &amp; Management</h3>
+              <p class="upx-svc-card__desc">
+                We handle the planning, coordination, and control of your project from start to finish.
+                Our structured approach ensures clear timelines, controlled costs, and smooth
+                execution at every stage.
+              </p>
+            </div>
+            
+          </div>
+
+          <!-- Card 2 -->
+          <div class="upx-svc-card reverse-card">
+            <div class="upx-svc-card__img">
+              <img
+                src="./our-services-img-2.png"
+                alt="Construction workers reviewing blueprints on site"
+              />
+            </div>
+            <div class="upx-svc-card__body">
+              <h3 class="upx-svc-card__title">Construction &amp; Site Supervision</h3>
+              <p class="upx-svc-card__desc">
+                We provide hands-on site supervision to ensure construction is carried out
+                according to approved designs, quality standards, and safety requirements.
+              </p>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="upx-svc-card">
+            <div class="upx-svc-card__img">
+              <img
+                src="./our-services-img-3.png"
+                alt="Modern white kitchen interior design"
+              />
+            </div>
+            <div class="upx-svc-card__body">
+              <h3 class="upx-svc-card__title">Interior Design</h3>
+              <p class="upx-svc-card__desc">
+                We design functional, comfortable, and modern interior spaces that reflect your
+                lifestyle and purpose. Every detail is planned to balance aesthetics and practicality.
+              </p>
+            </div>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="upx-svc-card reverse-card">
+            <div class="upx-svc-card__img">
+              <img
+                src="./our-services-img-4.png"
+                alt="Kitchen renovation in progress"
+              />
+            </div>
+            <div class="upx-svc-card__body">
+              <h3 class="upx-svc-card__title">Renovation &amp; Remodeling</h3>
+              <p class="upx-svc-card__desc">
+                We help upgrade, redesign, or improve existing spaces while maintaining
+                structural integrity and enhancing value.
+              </p>
+            </div>
+          </div>
+
+        </div><!-- /.upx-services__grid -->
+
+        <!-- Carousel dots (mobile only) -->
+        <div class="upx-carousel-dots" id="upxDots">
+          <button class="upx-dot upx-dot--active" data-index="0"></button>
+          <button class="upx-dot" data-index="1"></button>
+          <button class="upx-dot" data-index="2"></button>
+          <button class="upx-dot" data-index="3"></button>
         </div>
+
+        </div><!-- /.upx-services__carousel -->
+
+        <div class="upx-services__footer">
+          <a href="./services/" class="upx-services__btn">See all our services</a>
+        </div>
+
       </div>
-      <!-- NEXT arrow -->
-      <button class="sc-arrow sc-arrow--next" id="scNext" aria-label="Next">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="9 18 15 12 9 6"/>
-        </svg>
-      </button>
-    </div>
-    <!-- Dots (generated dynamically) -->
-    <div class="sc-dots" id="scDots"></div>
-  </div>
-</section>
-
-
-
-
-
-
-
-
-
+    </section>
     
 
 

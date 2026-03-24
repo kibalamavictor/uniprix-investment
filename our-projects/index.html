@@ -13,7 +13,7 @@
   </head>
 
   <body>
-    
+
     <img src="./assets/images/our-projects-header-image.png" alt="Hero background" class="hero-bg-image"> 
 
     <header class="nav" >
@@ -66,8 +66,11 @@
         </div>
 
         <!-- DYNAMIC PROJECTS CONTAINER (this is the important part) -->
+
         <div id="projects-container">
+
           <!-- All projects are automatically loaded here by JavaScript -->
+
         </div>
 
       </div>
@@ -78,7 +81,7 @@
         <div class="upx-cta__inner">
           <h2 class="upx-cta__heading">Planning to build, renovate, or invest?</h2>
           <p class="upx-cta__sub">Let's guide your project from idea to completion with professionalism and care.</p>
-          <a href="#" class="upx-cta__btn">Book a Site Visit</a>
+          <a href="mailto:info@uniprixinvent.com" class="upx-cta__btn">Book a Site Visit</a>
         </div>
     </section>
 
@@ -224,109 +227,109 @@
 
 
 
-    <script>
-    // Load content for Our Projects page
-    fetch('../data/site-content.json')
-      .then(response => response.json())
-      .then(data => {
-        const p = data.ourProjects;
+   <script>
+// Load content for Our Projects page
+fetch('../data/site-content.json')
+  .then(response => response.json())
+  .then(data => {
+    const p = data.ourProjects;
 
-        // Intro
-        document.getElementById('proj-intro-heading').textContent = p.introHeading;
-        document.getElementById('proj-intro-text').textContent = p.introText;
-        document.getElementById('proj-page-label').textContent = p.pageLabel;
+    // Intro
+    document.getElementById('proj-intro-heading').textContent = p.introHeading;
+    document.getElementById('proj-intro-text').textContent = p.introText;
+    document.getElementById('proj-page-label').textContent = p.pageLabel;
 
-        // Generate all projects
-        const container = document.getElementById('projects-container');
-        container.innerHTML = '';
+    // Generate all projects with unique IDs
+    const container = document.getElementById('projects-container');
+    container.innerHTML = '';
 
-        p.projects.forEach((proj, index) => {
-          const isEven = index % 2 === 0;
-          const blockClass = isEven ? 'upx-rpblock' : 'upx-rpblock upx-rpblock--right';
-          const cardClass = isEven 
-            ? 'upx-rpcard' 
-            : 'upx-rpcard upx-rpcard--amber upx-rpcard--img-left upx-rpcard-left-tile';
-          
-          const numClass = isEven ? '' : 'upx-rp__num--amber';
-          const dotClass = isEven ? '' : 'upx-rp__num-dot--amber';
+    p.projects.forEach((proj) => {
+      const isEven = p.projects.indexOf(proj) % 2 === 0;   // keeps alternating layout
+      const blockClass = isEven ? 'upx-rpblock' : 'upx-rpblock upx-rpblock--right';
+      const cardClass = isEven 
+        ? 'upx-rpcard' 
+        : 'upx-rpcard upx-rpcard--amber upx-rpcard--img-left upx-rpcard-left-tile';
+      
+      const numClass = isEven ? '' : 'upx-rp__num--amber';
+      const dotClass = isEven ? '' : 'upx-rp__num-dot--amber';
 
-          const numImages = proj.images.length;
-          const slideshowClass = numImages === 5 ? 'upx-slideshow-5' : 'upx-slideshow-4';
-          const totalTime = numImages === 5 ? '17.5s' : '14s';
-          const borderRadius = isEven ? '30px 170px 30px 30px' : '170px 30px 30px 30px';
+      const numImages = proj.images.length;
+      const slideshowClass = numImages === 5 ? 'upx-slideshow-5' : 'upx-slideshow-4';
+      const totalTime = numImages === 5 ? '17.5s' : '14s';
+      const borderRadius = isEven ? '30px 170px 30px 30px' : '170px 30px 30px 30px';
 
-          let slidesHTML = '';
-          let dotsHTML = '';
-          proj.images.forEach((img, i) => {
-            slidesHTML += `
-              <div class="upx-slide">
-                <img src="../${img}" alt="${proj.title} view ${i+1}" style="border-radius:${borderRadius}"/>
-              </div>`;
-            const delay = (i * 3.5) + 's';
-            dotsHTML += `<div class="upx-rdot" style="animation:upx-dot-fade ${totalTime} infinite ${delay}"></div>`;
-          });
+      let slidesHTML = '';
+      let dotsHTML = '';
+      proj.images.forEach((img, i) => {
+        slidesHTML += `
+          <div class="upx-slide">
+            <img src="../${img}" alt="${proj.title} view ${i+1}" style="border-radius:${borderRadius}"/>
+          </div>`;
+        const delay = (i * 3.5) + 's';
+        dotsHTML += `<div class="upx-rdot" style="animation:upx-dot-fade ${totalTime} infinite ${delay}"></div>`;
+      });
 
-          const keyDetailsHTML = proj.keyDetails.map(item => 
-            `<div class="upx-rpdetail-item">${item}</div>`
-          ).join('');
+      const keyDetailsHTML = proj.keyDetails.map(item => 
+        `<div class="upx-rpdetail-item">${item}</div>`
+      ).join('');
 
-          const projectHTML = `
-            <div class="${blockClass}">
-              <div class="upx-rpblock__num-row">
-                <div class="upx-rp__num ${numClass}">
-                  ${proj.number}<span class="upx-rp__num-dot ${dotClass}"></span>
-                </div>
-              </div>
-
-              <div class="${cardClass}">
-                ${isEven 
-                  ? `
-                    <!-- Text left -->
-                    <div class="upx-rpcard__text">
-                      <h2 class="upx-rpcard__title">${proj.title}</h2>
-                      <div class="upx-rpcard__meta">
-                        <div class="upx-rpcard__meta-row"><span class="upx-rpcard__meta-key">Location:</span><span class="upx-rpcard__meta-val">${proj.location}</span></div>
-                        <div class="upx-rpcard__meta-row"><span class="upx-rpcard__meta-key">Project Type:</span><span class="upx-rpcard__meta-val">${proj.projectType}</span></div>
-                        <div class="upx-rpcard__meta-row"><span class="upx-rpcard__meta-key">Status:</span><span class="upx-rpcard__meta-val">${proj.status}</span></div>
-                      </div>
-                      <div class="upx-rpsection"><span class="upx-rpsection__title">Project Overview</span><div class="dash-line"></div><p class="upx-rpsection__text">${proj.overview}</p></div>
-                      <div class="upx-rpsection"><span class="upx-rpsection__title">Key Details</span><div class="dash-line"></div><div class="upx-rpdetails">${keyDetailsHTML}</div></div>
-                      <div class="upx-rpsection"><span class="upx-rpsection__title">Scope of Work</span><div class="dash-line"></div><p class="upx-rpsection__text">${proj.scope}</p></div>
-                    </div>
-                    <!-- Image right -->
-                    <div class="upx-rpcard__img">
-                      <div class="${slideshowClass}">${slidesHTML}</div>
-                      <div class="upx-rpcard__dots">${dotsHTML}</div>
-                    </div>
-                  ` 
-                  : `
-                    <!-- Image left -->
-                    <div class="upx-rpcard__img upx-left-image">
-                      <div class="${slideshowClass}">${slidesHTML}</div>
-                      <div class="upx-rpcard__dots">${dotsHTML}</div>
-                    </div>
-                    <!-- Text right -->
-                    <div class="upx-rpcard__text">
-                      <h2 class="upx-rpcard__title">${proj.title}</h2>
-                      <div class="upx-rpcard__meta">
-                        <div class="upx-rpcard__meta-row"><span class="upx-rpcard__meta-key">Location:</span><span class="upx-rpcard__meta-val">${proj.location}</span></div>
-                        <div class="upx-rpcard__meta-row"><span class="upx-rpcard__meta-key">Project Type:</span><span class="upx-rpcard__meta-val">${proj.projectType}</span></div>
-                        <div class="upx-rpcard__meta-row"><span class="upx-rpcard__meta-key">Status:</span><span class="upx-rpcard__meta-val">${proj.status}</span></div>
-                      </div>
-                      <div class="upx-rpsection"><span class="upx-rpsection__title">Project Overview</span><div class="dash-line orange-line"></div><p class="upx-rpsection__text">${proj.overview}</p></div>
-                      <div class="upx-rpsection"><span class="upx-rpsection__title">Key Details</span><div class="dash-line orange-line"></div><div class="upx-rpdetails">${keyDetailsHTML}</div></div>
-                      <div class="upx-rpsection"><span class="upx-rpsection__title">Scope of Work</span><div class="dash-line orange-line"></div><p class="upx-rpsection__text">${proj.scope}</p></div>
-                    </div>
-                  `}
-              </div>
+      const projectHTML = `
+        <div id="${proj.id}" class="${blockClass}">
+          <div class="upx-rpblock__num-row">
+            <div class="upx-rp__num ${numClass}">
+              ${proj.number}<span class="upx-rp__num-dot ${dotClass}"></span>
             </div>
-          `;
+          </div>
 
-          container.innerHTML += projectHTML;
-        });
-      })
-      .catch(err => console.error('Projects load error:', err));
-    </script>
+          <div class="${cardClass}">
+            ${isEven 
+              ? `
+                <!-- Text left -->
+                <div class="upx-rpcard__text">
+                  <h2 class="upx-rpcard__title">${proj.title}</h2>
+                  <div class="upx-rpcard__meta">
+                    <div class="upx-rpcard__meta-row"><span class="upx-rpcard__meta-key">Location:</span><span class="upx-rpcard__meta-val">${proj.location}</span></div>
+                    <div class="upx-rpcard__meta-row"><span class="upx-rpcard__meta-key">Project Type:</span><span class="upx-rpcard__meta-val">${proj.projectType}</span></div>
+                    <div class="upx-rpcard__meta-row"><span class="upx-rpcard__meta-key">Status:</span><span class="upx-rpcard__meta-val">${proj.status}</span></div>
+                  </div>
+                  <div class="upx-rpsection"><span class="upx-rpsection__title">Project Overview</span><div class="dash-line"></div><p class="upx-rpsection__text">${proj.overview}</p></div>
+                  <div class="upx-rpsection"><span class="upx-rpsection__title">Key Details</span><div class="dash-line"></div><div class="upx-rpdetails">${keyDetailsHTML}</div></div>
+                  <div class="upx-rpsection"><span class="upx-rpsection__title">Scope of Work</span><div class="dash-line"></div><p class="upx-rpsection__text">${proj.scope}</p></div>
+                </div>
+                <!-- Image right -->
+                <div class="upx-rpcard__img">
+                  <div class="${slideshowClass}">${slidesHTML}</div>
+                  <div class="upx-rpcard__dots">${dotsHTML}</div>
+                </div>
+              ` 
+              : `
+                <!-- Image left -->
+                <div class="upx-rpcard__img upx-left-image">
+                  <div class="${slideshowClass}">${slidesHTML}</div>
+                  <div class="upx-rpcard__dots">${dotsHTML}</div>
+                </div>
+                <!-- Text right -->
+                <div class="upx-rpcard__text">
+                  <h2 class="upx-rpcard__title">${proj.title}</h2>
+                  <div class="upx-rpcard__meta">
+                    <div class="upx-rpcard__meta-row"><span class="upx-rpcard__meta-key">Location:</span><span class="upx-rpcard__meta-val">${proj.location}</span></div>
+                    <div class="upx-rpcard__meta-row"><span class="upx-rpcard__meta-key">Project Type:</span><span class="upx-rpcard__meta-val">${proj.projectType}</span></div>
+                    <div class="upx-rpcard__meta-row"><span class="upx-rpcard__meta-key">Status:</span><span class="upx-rpcard__meta-val">${proj.status}</span></div>
+                  </div>
+                  <div class="upx-rpsection"><span class="upx-rpsection__title">Project Overview</span><div class="dash-line orange-line"></div><p class="upx-rpsection__text">${proj.overview}</p></div>
+                  <div class="upx-rpsection"><span class="upx-rpsection__title">Key Details</span><div class="dash-line orange-line"></div><div class="upx-rpdetails">${keyDetailsHTML}</div></div>
+                  <div class="upx-rpsection"><span class="upx-rpsection__title">Scope of Work</span><div class="dash-line orange-line"></div><p class="upx-rpsection__text">${proj.scope}</p></div>
+                </div>
+              `}
+          </div>
+        </div>
+      `;
+
+      container.innerHTML += projectHTML;
+    });
+  })
+  .catch(err => console.error('Projects load error:', err));
+</script>
 
 
 
