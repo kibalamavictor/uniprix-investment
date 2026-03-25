@@ -205,37 +205,13 @@
           "desc": "We deliver on our commitments, manage projects with consistency and trust."
         }
       ]
-    },
-    "testimonials": {
-      "title": "What Our Clients Say",
-      "subtitle": "We take pride in delivering projects that meet expectations and earn trust. Here's what our clients say about working with Uniprix Investment.",
-      "items": [
-        {
-          "name": "James M., Nairobi",
-          "text": "From the first consultation, Uniprix Investment showed they understood exactly what we needed. The build quality exceeded our expectations and the team was always available."
-        },
-        {
-          "name": "David O., Kampala",
-          "text": "Working with Uniprix Investment was seamless from start to finish. They kept us informed at every stage and delivered on time. We couldn't be more satisfied with the result."
-        },
-        {
-          "name": "Sarah K., Kyanja",
-          "text": "Uniprix Investment handled our project professionally from planning to execution. The site supervision and attention to detail gave us confidence throughout the process."
-        },
-        {
-          "name": "Marcus T., Entebbe",
-          "text": "Their team brought creative ideas while respecting our vision and budget. The finished property reflects everything we dreamed of. I would recommend them without hesitation."
-        },
-        {
-          "name": "Amara N., Jinja",
-          "text": "I was impressed by the transparency and honesty at every step. Uniprix Investment truly cares about client satisfaction — not just completing a job but building a lasting relationship."
-        }
-      ]
-    },
-    "cta": {
-      "heading": "Planning to build or invest? Let's get it right from the start."
     }
+
   },
+
+
+
+
   "ourProjects": {
     "introHeading": "We offer a range of services that help clients plan better, manage efficiently, and build with confidence.",
     "introText": "At Uniprix Investment, we offer end-to-end solutions that support clients from the earliest planning stages through construction, interior design, and project completion. Our services are designed to ensure clarity, quality, and confidence at every stage.",
@@ -314,6 +290,9 @@
       }
     ]
   },
+
+
+
   "gallery": {
     "heading": "Snapshots from Our Projects",
     "subtitle": "This gallery brings together highlights from our construction sites, interior design works, 3D visualizations, and completed projects captured across different locations and stages of execution.",
@@ -449,7 +428,47 @@
           ]
         }
       ]
-    }
+    },
+
+
+
+
+    "testimonialsSection": {
+    "heading": "What Our Clients Say",
+    "subheading": "We take pride in delivering projects that meet expectations and earn trust. Here's what our clients say about working with Uniprix Investment.",
+    "reviews": [
+      {
+        "id": 1,
+        "name": "Sarah K., Kyanja",
+        "text": "Uniprix Investment handled our project professionally from planning to execution. The site supervision and attention to detail gave us confidence throughout the process.",
+        "img": "https://cdn.codia.ai/figma/JGrbVETRuqt2yPG3MfW142/img-fba6023d216d6b7e.png"
+      },
+      {
+        "id": 2,
+        "name": "James O., Kampala",
+        "text": "Working with Uniprix Investment was a seamless experience. Their team delivered on time and kept us informed every step of the way.",
+        "img": "https://cdn.codia.ai/figma/JGrbVETRuqt2yPG3MfW142/img-99287bce4b22dc69.svg"
+      },
+      {
+        "id": 3,
+        "name": "Amara N., Entebbe",
+        "text": "The quality of construction and the professionalism shown by Uniprix Investment exceeded our expectations. Highly recommended.",
+        "img": "https://cdn.codia.ai/figma/JGrbVETRuqt2yPG3MfW142/img-c6869ad1643add30.svg"
+      },
+      {
+        "id": 4,
+        "name": "David M., Jinja",
+        "text": "From the first consultation to final handover, Uniprix Investment demonstrated expertise and commitment. We are very satisfied with the results.",
+        "img": "https://cdn.codia.ai/figma/JGrbVETRuqt2yPG3MfW142/img-a21f099226410a38.svg"
+      },
+      {
+        "id": 5,
+        "name": "Grace W., Mbarara",
+        "text": "Uniprix Investment brought our vision to life. Their attention to detail and transparent communication made the whole journey stress-free.",
+        "img": "https://cdn.codia.ai/figma/JGrbVETRuqt2yPG3MfW142/img-d7b7717898057b8c.svg"
+      }
+    ]
+  }
 
 
 }

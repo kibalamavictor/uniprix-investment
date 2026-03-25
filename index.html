@@ -520,6 +520,33 @@
 
 
 
+<!-- ============================================================
+     TESTIMONIALS SECTION
+     Content loaded from ../data/site-content.json
+     ============================================================ -->
+
+<section class="testimonials">
+  <h2 class="testimonials__heading" id="testimonialsHeading"></h2>
+  <p class="testimonials__subheading" id="testimonialsSubheading"></p>
+
+  <div class="carousel-stage" id="carouselStage"></div>
+
+  <div class="review-content" id="reviewContent">
+    <p class="review-name" id="reviewName"></p>
+    <p class="review-text" id="reviewText"></p>
+  </div>
+
+  <div class="carousel-nav">
+    <button id="prevBtn" aria-label="Previous review">&#8592;</button>
+    <button id="nextBtn" aria-label="Next review">&#8594;</button>
+  </div>
+
+</section>
+
+
+
+
+
 
 
 
@@ -771,6 +798,9 @@
       })
       .catch(err => console.error('Content load error:', err));
     </script>
+
+
+    
 
 
 

@@ -152,178 +152,134 @@
 
 
 /* ── 4. TESTIMONIALS – avatar carousel ─────────────────── */
-(function () {
-  const track = document.getElementById('avatarTrack');
-  if (!track) return;   // guard – only runs on pages with testimonials
+    (function () {
+      'use strict';
 
-  const panels = [...document.querySelectorAll('.testimonial')];
-  const dots   = [...document.querySelectorAll('.t-dot')];
-  if (!panels.length) return;
+      var stage         = document.getElementById('carouselStage');
+      var reviewContent = document.getElementById('reviewContent');
+      var reviewName    = document.getElementById('reviewName');
+      var reviewText    = document.getElementById('reviewText');
+      var prevBtn       = document.getElementById('prevBtn');
+      var nextBtn       = document.getElementById('nextBtn');
+      var reviewCta     = document.getElementById('reviewCta');
+      var heading       = document.getElementById('testimonialsHeading');
+      var subheading    = document.getElementById('testimonialsSubheading');
 
-  const DATA = [
-    { name: 'James M.',  img: 'https://i.pravatar.cc/150?img=12' },
-    { name: 'David O.',  img: 'https://i.pravatar.cc/150?img=33' },
-    { name: 'Sarah K.',  img: 'https://i.pravatar.cc/150?img=47' },
-    { name: 'Marcus T.', img: 'https://i.pravatar.cc/150?img=52' },
-    { name: 'Amara N.',  img: 'https://i.pravatar.cc/150?img=25' },
-  ];
-  const COUNT = DATA.length;
+      var reviews  = [];
+      var slots    = [];
+      var total    = 0;
+      var current  = 0;
+      var animating = false;
 
-  function getCSSPx(name) {
-    return parseFloat(getComputedStyle(document.documentElement).getPropertyValue(name)) || 0;
-  }
+      /* ── Render all slots from loaded data ── */
+      function renderSlots(data) {
+        var section = data.testimonialsSection;
 
-  function getSizes() {
-    const mobile = window.innerWidth <= 580;
-    return {
-      active: getCSSPx('--sz-active') || (mobile ? 84  : 110),
-      near:   getCSSPx('--sz-near')   || (mobile ? 58  : 76),
-      far:    getCSSPx('--sz-far')    || (mobile ? 44  : 58),
-      gap:    getCSSPx('--t-gap')     || (mobile ? 13  : 20),
-    };
-  }
+        /* Static text */
+        heading.textContent    = section.heading;
+        subheading.textContent = section.subheading;
+        // reviewCta.textContent  = section.ctaText;
+        // reviewCta.href         = section.ctaLink;
 
-  function slotSize(dist, sz) {
-    if (dist === 0) return sz.active;
-    if (dist === 1) return sz.near;
-    return sz.far;
-  }
+        reviews = section.reviews;
+        total   = reviews.length;
+        current = 0;
+        slots   = [];
+        stage.innerHTML = '';
 
-  const REPEATS   = 5;
-  const TOTAL     = COUNT * REPEATS;
-  const MID_START = COUNT * Math.floor(REPEATS / 2);
-  const slots     = [];
+        reviews.forEach(function (review, i) {
+          var el  = document.createElement('div');
+          el.className = 'avatar-slot';
+          var img = document.createElement('img');
+          img.src = review.img;
+          img.alt = review.name;
+          el.appendChild(img);
+          stage.appendChild(el);
+          slots.push(el);
 
-  for (let t = 0; t < TOTAL; t++) {
-    const d   = DATA[t % COUNT];
-    const btn = document.createElement('button');
-    btn.className        = 'av-slot';
-    btn.dataset.trackIdx = t;
-    btn.setAttribute('aria-label', d.name);
-    const img = document.createElement('img');
-    img.src = d.img; img.alt = d.name; img.draggable = false;
-    btn.appendChild(img);
-    track.appendChild(btn);
-    slots.push(btn);
-  }
+          el.addEventListener('click', function () {
+            if (el.getAttribute('data-pos') === '0') return;
+            goTo(i);
+          });
+        });
+      }
 
-  let realActive  = 2;
-  let trackActive = MID_START + realActive;
+      /* ── Position label relative to active index ── */
+      function posLabel(slotIndex) {
+        var diff = slotIndex - current;
+        if (diff >  total / 2) diff -= total;
+        if (diff < -total / 2) diff += total;
+        if (diff ===  0) return '0';
+        if (diff === -1) return '-1';
+        if (diff ===  1) return '1';
+        if (diff === -2) return '-2';
+        if (diff ===  2) return '2';
+        if (diff  <  -2) return 'hidden-left';
+        return 'hidden-right';
+      }
 
-  function computeX(tActive) {
-    const sz    = getSizes();
-    const allSz = slots.map((_, i) => slotSize(Math.abs(i - tActive), sz));
-    let cx = 0;
-    for (let i = 0; i < tActive; i++) cx += allSz[i] + sz.gap;
-    cx += allSz[tActive] / 2;
-    return track.parentElement.offsetWidth / 2 - cx;
-  }
+      function updateSlots() {
+        slots.forEach(function (slot, idx) {
+          slot.setAttribute('data-pos', posLabel(idx));
+        });
+      }
 
-  function applyClasses(tActive) {
-    slots.forEach((s, i) => {
-      const d = Math.abs(i - tActive);
-      s.classList.toggle('active', d === 0);
-      s.classList.toggle('near',   d === 1);
-    });
-  }
+      function updateText() {
+        reviewName.textContent = reviews[current].name;
+        reviewText.textContent = reviews[current].text;
+      }
 
-  function moveTrack(x, animate) {
-    track.style.transition = animate
-      ? 'transform 0.50s cubic-bezier(0.35,0,0.15,1)'
-      : 'none';
-    track.style.transform = `translateY(-50%) translateX(${x}px)`;
-    if (!animate) track.getBoundingClientRect(); // force reflow
-  }
+      function goTo(next) {
+        if (animating) return;
+        animating = true;
+        reviewContent.classList.add('fading');
+        current = ((next % total) + total) % total;
+        updateSlots();
+        setTimeout(function () {
+          updateText();
+          reviewContent.classList.remove('fading');
+          animating = false;
+        }, 350);
+      }
 
-  function loopJump() {
-    const center = MID_START + realActive;
-    if (trackActive === center) return;
-    trackActive = center;
-    applyClasses(trackActive);
-    moveTrack(computeX(trackActive), false);
-    requestAnimationFrame(() => requestAnimationFrame(() => {
-      track.style.transition = '';
-    }));
-  }
+      /* ── Arrow buttons ── */
+      prevBtn.addEventListener('click', function () { goTo(current - 1); });
+      nextBtn.addEventListener('click', function () { goTo(current + 1); });
 
-  let transitioning = false;
-
-  function goTo(newReal, animate = true) {
-    if (animate && transitioning) return;
-    const step   = newReal - realActive;
-    realActive   = ((newReal % COUNT) + COUNT) % COUNT;
-    trackActive += step;
-    applyClasses(trackActive);
-    moveTrack(computeX(trackActive), animate);
-    panels.forEach((p, i) => p.classList.toggle('active', i === realActive));
-    dots.forEach((d, i)   => d.classList.toggle('active', i === realActive));
-    if (animate) {
-      transitioning = true;
-      track.addEventListener('transitionend', function h() {
-        track.removeEventListener('transitionend', h);
-        loopJump();
-        transitioning = false;
+      /* ── Keyboard ── */
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowLeft')  goTo(current - 1);
+        if (e.key === 'ArrowRight') goTo(current + 1);
       });
-    }
-  }
 
-  slots.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const diff = +btn.dataset.trackIdx - trackActive;
-      if (Math.abs(diff) > 2) return;
-      goTo(realActive + diff, true);
-    });
-  });
+      /* ── Touch / swipe ── */
+      var touchStartX = 0;
+      stage.addEventListener('touchstart', function (e) {
+        touchStartX = e.touches[0].clientX;
+      }, { passive: true });
+      stage.addEventListener('touchend', function (e) {
+        var dx = e.changedTouches[0].clientX - touchStartX;
+        if (Math.abs(dx) > 40) goTo(dx < 0 ? current + 1 : current - 1);
+      }, { passive: true });
 
-  dots.forEach(dot => {
-    dot.addEventListener('click', () => {
-      let diff = +dot.dataset.index - realActive;
-      if (diff >  COUNT / 2) diff -= COUNT;
-      if (diff < -COUNT / 2) diff += COUNT;
-      if (diff === 0) return;
-      goTo(realActive + diff, true);
-    });
-  });
+      /* ── Fetch JSON and boot ── */
+      fetch('../data/site-content.json')
+        .then(function (res) {
+          if (!res.ok) throw new Error('HTTP ' + res.status);
+          return res.json();
+        })
+        .then(function (data) {
+          renderSlots(data);
+          updateSlots();
+          updateText();
+        })
+        .catch(function (err) {
+          console.error('Testimonials: failed to load site-content.json', err);
+          stage.innerHTML = '<div class="t-error">Could not load testimonials. Please try again later.</div>';
+        });
 
-  // Drag / swipe
-  let startX = null, didMove = false;
-  function onStart(x) { startX = x; didMove = false; }
-  function onEnd(x) {
-    if (startX === null) return;
-    const dx = x - startX;
-    if (Math.abs(dx) > 40) { didMove = true; goTo(realActive + (dx < 0 ? 1 : -1), true); }
-    startX = null;
-  }
-  track.addEventListener('mousedown',  e => onStart(e.clientX));
-  window.addEventListener('mouseup',   e => onEnd(e.clientX));
-  track.addEventListener('touchstart', e => onStart(e.touches[0].clientX), { passive: true });
-  track.addEventListener('touchend',   e => onEnd(e.changedTouches[0].clientX), { passive: true });
-  track.addEventListener('click', e => { if (didMove) e.stopPropagation(); }, true);
-
-  const carousel = track.parentElement;
-
-  function setCarouselWidth() {
-    const sz  = getSizes();
-    const w   = sz.active + 2 * sz.near + 2 * sz.far + 4 * sz.gap;
-    const max = document.querySelector('.testimonials').offsetWidth - 48;
-    carousel.style.width = Math.min(w, max) + 'px';
-  }
-
-  window.addEventListener('resize', () => {
-    setCarouselWidth();
-    applyClasses(trackActive);
-    moveTrack(computeX(trackActive), false);
-    track.style.transition = '';
-  }, { passive: true });
-
-  // Init
-  setCarouselWidth();
-  applyClasses(trackActive);
-  moveTrack(computeX(trackActive), false);
-  track.style.transition = '';
-  panels.forEach((p, i) => p.classList.toggle('active', i === realActive));
-  dots.forEach((d, i)   => d.classList.toggle('active', i === realActive));
-})();
+    }());
+   
 
 
 
