@@ -421,3 +421,96 @@ function upxLbOpen(el) {
 
 
 
+//       ============================================================
+//       SCRIPT  –  carousel logic (desktop = 3 visible, mobile = 1)
+//       ============================================================ 
+   
+    (function () {
+      const track      = document.getElementById('scTrack');
+      const trackOuter = document.getElementById('scTrackOuter');
+      const prevBtn    = document.getElementById('scPrev');
+      const nextBtn    = document.getElementById('scNext');
+      const dots       = document.querySelectorAll('.sc-dot');
+      const cards      = track.querySelectorAll('.sc-card');
+
+      const TOTAL   = cards.length;
+      const GAP     = 20;
+      let currentIndex = 0;
+
+      /* ── How many cards fit at this viewport width ── */
+      function visibleCount() {
+        const w = window.innerWidth;
+        if (w >= 1024) return 3;
+        if (w >= 640)  return 2;
+        return 1;
+      }
+
+      /* ── Size cards so they fill the track evenly ── */
+      function sizeCards() {
+        const vis        = visibleCount();
+        const outerW     = trackOuter.clientWidth;
+        const padH       = parseFloat(getComputedStyle(track).paddingLeft) * 2;
+        const available  = outerW - padH - GAP * (vis - 1);
+        const cardW      = Math.floor(available / vis);
+
+        cards.forEach(c => {
+          c.style.width = cardW + 'px';
+        });
+      }
+
+      /* ── Translate the track to show the right slide ── */
+      function goTo(index) {
+        const vis = visibleCount();
+        const maxIndex = Math.max(0, TOTAL - vis);
+        currentIndex = Math.max(0, Math.min(index, maxIndex));
+
+        const cardW  = cards[0].offsetWidth;
+        const offset = currentIndex * (cardW + GAP);
+        track.style.transform = `translateX(-${offset}px)`;
+
+        /* dots — highlight the first dot for each real "page" */
+        dots.forEach((d, i) => {
+          d.classList.toggle('sc-dot--active', i === currentIndex);
+        });
+
+        prevBtn.disabled = currentIndex === 0;
+        nextBtn.disabled = currentIndex >= maxIndex;
+      }
+
+      /* ── Init ── */
+      function init() {
+        sizeCards();
+        goTo(currentIndex);
+      }
+
+      /* ── Events ── */
+      prevBtn.addEventListener('click', () => goTo(currentIndex - 1));
+      nextBtn.addEventListener('click', () => goTo(currentIndex + 1));
+      dots.forEach(d => {
+        d.addEventListener('click', () => goTo(Number(d.dataset.index)));
+      });
+
+      /* ── Touch / swipe ── */
+      let touchStartX = 0;
+      track.addEventListener('touchstart', e => {
+        touchStartX = e.touches[0].clientX;
+      }, { passive: true });
+      track.addEventListener('touchend', e => {
+        const dx = e.changedTouches[0].clientX - touchStartX;
+        if (Math.abs(dx) > 50) goTo(currentIndex + (dx < 0 ? 1 : -1));
+      }, { passive: true });
+
+      /* ── Resize ── */
+      let resizeTimer;
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+          sizeCards();
+          goTo(currentIndex);
+        }, 120);
+      });
+
+      init();
+      window.reInitServicesCarousel = init;
+    })();
+ 

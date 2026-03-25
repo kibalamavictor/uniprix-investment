@@ -70,104 +70,59 @@
 
 
 
+    <!-- ============================================================
+     SERVICES CAROUSEL SECTION
+     All classes prefixed with  sc-  to avoid collisions
+     Carousel works on both desktop and mobile
+     ============================================================ -->
 
+    <!-- ============================================================
+     SERVICES CAROUSEL SECTION
+     Content loaded from ../data/site-content.json
+     ============================================================ -->
 
-    <section class="upx-services">
-      <div class="upx-services__inner">
+<section class="sc-section">
+  <div class="sc-inner">
 
-        <h2 class="upx-services__heading" id="services-heading">Our Services</h2>
+    <div class="sc-carousel-wrap">
+      <button class="sc-arrow sc-arrow--prev" id="scPrev" aria-label="Previous">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+             stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6"/>
+        </svg>
+      </button>
 
-        <div class="upx-services__carousel">
-        <div class="upx-services__grid" id="upxSvcGrid">
-
-          <!-- Card 1 -->
-          <div class="upx-svc-card">
-            <div class="upx-svc-card__img">
-              <img
-                src="./our-services-img-1.png"
-                alt="Project planning meeting with laptops and blueprints"
-              />
-            </div>
-            <div class="upx-svc-card__body">
-              <h3 class="upx-svc-card__title">Project Planning &amp; Management</h3>
-              <p class="upx-svc-card__desc">
-                We handle the planning, coordination, and control of your project from start to finish.
-                Our structured approach ensures clear timelines, controlled costs, and smooth
-                execution at every stage.
-              </p>
-            </div>
-            
-          </div>
-
-          <!-- Card 2 -->
-          <div class="upx-svc-card reverse-card">
-            <div class="upx-svc-card__img">
-              <img
-                src="./our-services-img-2.png"
-                alt="Construction workers reviewing blueprints on site"
-              />
-            </div>
-            <div class="upx-svc-card__body">
-              <h3 class="upx-svc-card__title">Construction &amp; Site Supervision</h3>
-              <p class="upx-svc-card__desc">
-                We provide hands-on site supervision to ensure construction is carried out
-                according to approved designs, quality standards, and safety requirements.
-              </p>
-            </div>
-          </div>
-
-          <!-- Card 3 -->
-          <div class="upx-svc-card">
-            <div class="upx-svc-card__img">
-              <img
-                src="./our-services-img-3.png"
-                alt="Modern white kitchen interior design"
-              />
-            </div>
-            <div class="upx-svc-card__body">
-              <h3 class="upx-svc-card__title">Interior Design</h3>
-              <p class="upx-svc-card__desc">
-                We design functional, comfortable, and modern interior spaces that reflect your
-                lifestyle and purpose. Every detail is planned to balance aesthetics and practicality.
-              </p>
-            </div>
-          </div>
-
-          <!-- Card 4 -->
-          <div class="upx-svc-card reverse-card">
-            <div class="upx-svc-card__img">
-              <img
-                src="./our-services-img-4.png"
-                alt="Kitchen renovation in progress"
-              />
-            </div>
-            <div class="upx-svc-card__body">
-              <h3 class="upx-svc-card__title">Renovation &amp; Remodeling</h3>
-              <p class="upx-svc-card__desc">
-                We help upgrade, redesign, or improve existing spaces while maintaining
-                structural integrity and enhancing value.
-              </p>
-            </div>
-          </div>
-
-        </div><!-- /.upx-services__grid -->
-
-        <!-- Carousel dots (mobile only) -->
-        <div class="upx-carousel-dots" id="upxDots">
-          <button class="upx-dot upx-dot--active" data-index="0"></button>
-          <button class="upx-dot" data-index="1"></button>
-          <button class="upx-dot" data-index="2"></button>
-          <button class="upx-dot" data-index="3"></button>
-        </div>
-
-        </div><!-- /.upx-services__carousel -->
-
-        <div class="upx-services__footer">
-          <a href="./services/" class="upx-services__btn">See all our services</a>
-        </div>
-
+      <div class="sc-track-outer" id="scTrackOuter">
+        <!-- Cards injected here by JS -->
+        <div class="sc-track" id="scTrack"></div>
       </div>
-    </section>
+
+      <button class="sc-arrow sc-arrow--next" id="scNext" aria-label="Next">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+             stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 18 15 12 9 6"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="sc-dots" id="scDots"></div>
+
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
     
 
 
@@ -328,5 +283,146 @@
             <p class="footer-copyright">© 2026, All Rights Reserved</p>
         </div>
     </footer>
+
+
+
+    
+
+    <script>
+(function () {
+
+  const track      = document.getElementById('scTrack');
+  const trackOuter = document.getElementById('scTrackOuter');
+  const dotsWrap   = document.getElementById('scDots');
+  const prevBtn    = document.getElementById('scPrev');
+  const nextBtn    = document.getElementById('scNext');
+
+  const GAP = 20;
+  let currentIndex = 0;
+  let cards = [];
+  let dots  = [];
+
+  /* ── Render cards from JSON data ── */
+  function renderCards(data) {
+    const cardList = data.servicesCarousel.cards;
+
+    track.innerHTML = cardList.map((card, i) => {
+      const brClass = i % 2 === 0 ? 'sc-card--br-right' : 'sc-card--br-left';
+      const delay   = (i + 1) * 0.1;
+      const includesHTML = card.includes
+        .map(item => `<div class="sc-inc-item">${item}</div>`)
+        .join('');
+
+      return `
+        <div class="sc-card ${brClass}"
+             style="animation: sc-rise 0.5s ease both ${delay}s">
+          <div class="sc-card__img">
+            <img src="${card.image}" alt="${card.imageAlt}">
+          </div>
+          <div class="sc-card__body">
+            <h3 class="sc-card__title">${card.title}</h3>
+            <p class="sc-card__desc">${card.description}</p>
+            <span class="sc-inc-label">Includes</span>
+            ${includesHTML}
+          </div>
+        </div>`;
+    }).join('');
+
+    /* Render dots — one per card */
+    dotsWrap.innerHTML = cardList.map((_, i) =>
+      `<button class="sc-dot${i === 0 ? ' sc-dot--active' : ''}"
+               data-index="${i}"></button>`
+    ).join('');
+
+    /* Re-query live DOM nodes */
+    cards = track.querySelectorAll('.sc-card');
+    dots  = dotsWrap.querySelectorAll('.sc-dot');
+
+    dots.forEach(d => {
+      d.addEventListener('click', () => goTo(Number(d.dataset.index)));
+    });
+  }
+
+  /* ── How many cards visible at this width ── */
+  function visibleCount() {
+    const w = window.innerWidth;
+    if (w >= 1024) return 3;
+    if (w >= 640)  return 2;
+    return 1;
+  }
+
+  /* ── Size cards to fill the track evenly ── */
+  function sizeCards() {
+    if (!cards.length) return;
+    const vis      = visibleCount();
+    const outerW   = trackOuter.clientWidth;
+    const padH     = parseFloat(getComputedStyle(track).paddingLeft) * 2;
+    const cardW    = Math.floor((outerW - padH - GAP * (vis - 1)) / vis);
+    cards.forEach(c => { c.style.width = cardW + 'px'; });
+  }
+
+  /* ── Translate the track ── */
+  function goTo(index) {
+    if (!cards.length) return;
+    const vis      = visibleCount();
+    const maxIndex = Math.max(0, cards.length - vis);
+    currentIndex   = Math.max(0, Math.min(index, maxIndex));
+
+    const cardW  = cards[0].offsetWidth;
+    const offset = currentIndex * (cardW + GAP);
+    track.style.transform = `translateX(-${offset}px)`;
+
+    dots.forEach((d, i) => {
+      d.classList.toggle('sc-dot--active', i === currentIndex);
+    });
+
+    prevBtn.disabled = currentIndex === 0;
+    nextBtn.disabled = currentIndex >= maxIndex;
+  }
+
+  /* ── Fetch JSON, render, then init carousel ── */
+  async function init() {
+    track.innerHTML = '<div class="sc-loading">Loading services…</div>';
+
+    try {
+      const res  = await fetch('../data/site-content.json');
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data = await res.json();
+
+      renderCards(data);
+      sizeCards();
+      goTo(0);
+    } catch (err) {
+      console.error('Services carousel: failed to load site-content.json', err);
+      track.innerHTML =
+        '<div class="sc-error">Could not load services. Please try again later.</div>';
+    }
+  }
+
+  /* ── Arrow events ── */
+  prevBtn.addEventListener('click', () => goTo(currentIndex - 1));
+  nextBtn.addEventListener('click', () => goTo(currentIndex + 1));
+
+  /* ── Touch / swipe ── */
+  let touchStartX = 0;
+  track.addEventListener('touchstart', e => {
+    touchStartX = e.touches[0].clientX;
+  }, { passive: true });
+  track.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    if (Math.abs(dx) > 50) goTo(currentIndex + (dx < 0 ? 1 : -1));
+  }, { passive: true });
+
+  /* ── Resize ── */
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => { sizeCards(); goTo(currentIndex); }, 120);
+  });
+
+  init();
+})();
+</script>
+ 
   </body>
 </html>
