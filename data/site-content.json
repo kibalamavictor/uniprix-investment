@@ -94,7 +94,7 @@
       {
         "id": "project-02",
         "title": "Commercial Projects",
-        "image": "./media/our-projects-home-2.png"
+        "image": ""
       },
       {
         "id": "project-03",
@@ -279,7 +279,7 @@
     "subtitle": "This gallery brings together highlights from our construction sites, interior design works, 3D visualizations, and completed projects captured across different locations and stages of execution.",
     "items": [
       {
-        "src": "media/gallery-1.jpg",
+        "src": "/INTERIOR.jpg",
         "alt": "Construction site at sunset",
         "isVideo": false
       },
