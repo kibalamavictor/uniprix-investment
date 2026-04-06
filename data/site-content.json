@@ -49,6 +49,11 @@
         "title": "Renovation & Remodeling",
         "desc": "We help upgrade, redesign, or improve existing spaces while maintaining structural integrity and enhancing value.",
         "image": "/RENOVATION.webp"
+      },
+      {
+        "title": "Land Surveying",
+        "desc": "We provide hands-on site supervision to ensure construction is carried out according to approved designs, quality standards, and safety requirements.",
+        "image": "/card-image-4.png"
       }
     ]
   },
