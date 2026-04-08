@@ -4,9 +4,10 @@
     "subtitle": "Professional project planning, construction management, and interior design services you can trust.",
     "ctaBook": "Book a Site Visit",
     "ctaTalk": "Talk to Us",
+    "heroImage": "./hero-image-home-page.png",
     "stats": [
       {
-        "number": "100+",
+        "number": "90+",
         "label": "Projects Done",
         "icon": "./hero-icon-3.svg"
       },
@@ -22,102 +23,120 @@
       }
     ]
   },
+
   "about": {
     "label": "About us",
     "text1": "Uniprix Investment is a Construction and Project management company specializing in project Planning, Construction, Interior designs, and Renovation and Property management services.",
-    "text2": "We believe every successful Construction project starts with proper planning from Site Visits, Project designs to construction, focusing on Accuracy, Quality control, Efficient and Execution at every stage."
+    "text2": "We believe every successful Construction project starts with proper planning from Site Visits, Project designs to construction, focusing on Accuracy, Quality control, Efficient and Execution at every stage.",
+    "image": "./campus-image.png",
+    "btnText": "Know Us Better",
+    "btnLink": "./about-us/"
   },
+
   "services": {
     "heading": "Our Services",
     "items": [
       {
         "title": "Project Planning & Management",
         "desc": "We handle the planning, coordination, and control of your project from start to finish. Our structured approach ensures clear timelines, controlled costs, and smooth execution at every stage.",
-        "image": "/our-services-img-1.png"
+        "image": "./our-services-img-1.png"
       },
       {
         "title": "Construction & Site Supervision",
         "desc": "We provide hands-on site supervision to ensure construction is carried out according to approved designs, quality standards, and safety requirements.",
-        "image": "/our-services-img-2.png"
+        "image": "./our-services-img-2.png"
       },
       {
         "title": "Interior Design",
         "desc": "We design functional, comfortable, and modern interior spaces that reflect your lifestyle and purpose. Every detail is planned to balance aesthetics and practicality.",
-        "image": "/INTERIOR_copy(1).jpg"
+        "image": "./media/our-services-img-3.png"
       },
       {
         "title": "Renovation & Remodeling",
         "desc": "We help upgrade, redesign, or improve existing spaces while maintaining structural integrity and enhancing value.",
-        "image": "/RENOVATION.webp"
+        "image": "./media/our-services-img-4.png"
       }
     ]
   },
+
   "whyChooseUs": {
     "label": "Why Choose Us",
     "subtitle": "Choosing the right partner makes all the difference. We combine proper planning, hands-on supervision, and clear communication to deliver projects with confidence and quality.",
+    "image": "./why-us-img.png",
     "features": [
       {
+        "icon": "./why-us-icon-1.svg",
         "title": "Structured Project Planning",
-        "desc": "We design every project carefully to avoid delays, reduce risks, and ensure smooth execution.",
-        "icon": "./why-us-icon-1.svg"
+        "desc": "We design every project carefully to avoid delays, reduce risks, and ensure smooth execution."
       },
       {
+        "icon": "./why-us-icon-4.svg",
         "title": "Hands-On Site Supervision",
-        "desc": "Our technical team is actively involved on site, ensuring proper standards, and timelines are followed.",
-        "icon": "./why-us-icon-4.svg"
+        "desc": "Our technical team is actively involved on site, ensuring proper standards, and timelines are followed."
       },
       {
+        "icon": "./why-us-icon-2.svg",
         "title": "Quality-Focused Execution",
-        "desc": "We prioritize durability, functionality, and attention to detail at every stage of construction and design.",
-        "icon": "./why-us-icon-2.svg"
+        "desc": "We prioritize durability, functionality, and attention to detail at every stage of construction and design."
       },
       {
+        "icon": "./why-us-icon-5.svg",
         "title": "Transparent Process",
-        "desc": "Clear communication, defined scopes, and professional coordination to keep clients informed and confident.",
-        "icon": "./why-us-icon-5.svg"
+        "desc": "Clear communication, defined scopes, and professional coordination to keep clients informed and confident."
       },
       {
+        "icon": "./why-us-icon-4.svg",
         "title": "Client-Centred Approach",
-        "desc": "We listen, advise honestly, and tailor solutions to match your goals, budget, and long-term vision.",
-        "icon": "./why-us-icon-4.svg"
+        "desc": "We listen, advise honestly, and tailor solutions to match your goals, budget, and long-term vision."
       }
     ]
-  },
+  }
+  
+  
+  
+  ,
   "projects": {
-    "heading": "Our Projects",
-    "items": [
-      {
-        "id": "project-01",
-        "title": "Residential Projects",
-        "image": "./media/our-projects-home-1.png"
-      },
-      {
-        "id": "project-02",
-        "title": "Commercial Projects",
-        "image": ""
-      },
-      {
-        "id": "project-03",
-        "title": "Interior Design",
-        "image": "./media/our-projects-home-3.png"
-      },
-      {
-        "id": "project-04",
-        "title": "Ongoing Projects",
-        "image": "./media/our-projects-home-4.png"
-      },
-      {
-        "id": "project-05",
-        "title": "Property Management",
-        "image": "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&auto=format&fit=crop&q=80"
-      },
-      {
-        "id": "project-06",
-        "title": "Renovation & Remodeling",
-        "image": "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=600&auto=format&fit=crop&q=80"
-      }
-    ]
-  },
+  "heading": "Our Projects",
+  "items": [
+    {
+      "id": "project-01",
+      "title": "Residential Projects",
+      "image": "./media/our-projects-home-1.png"
+    },
+    {
+      "id": "project-02",
+      "title": "Commercial Projects",
+      "image": "./media/our-projects-home-2.png"
+    },
+    {
+      "id": "project-03",
+      "title": "Interior Design",
+      "image": "./media/our-projects-home-3.png"
+    },
+    {
+      "id": "project-04",
+      "title": "Ongoing Projects",
+      "image": "./media/our-projects-home-4.png"
+    },
+    {
+      "id": "project-05",
+      "title": "Property Management",
+      "image": "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&auto=format&fit=crop&q=80"
+    },
+    {
+      "id": "project-06",
+      "title": "Renovation & Remodeling",
+      "image": "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=600&auto=format&fit=crop&q=80"
+    }
+  ]
+}
+  
+  
+  
+  
+  
+  
+  ,
   "ctaSection": {
     "heading": "Planning to build or invest? Let's get it right from the start."
   },
@@ -195,7 +214,12 @@
         }
       ]
     }
+
   },
+
+
+
+
   "ourProjects": {
     "introHeading": "We offer a range of services that help clients plan better, manage efficiently, and build with confidence.",
     "introText": "At Uniprix Investment, we offer end-to-end solutions that support clients from the earliest planning stages through construction, interior design, and project completion. Our services are designed to ensure clarity, quality, and confidence at every stage.",
@@ -274,17 +298,20 @@
       }
     ]
   },
+
+
+
   "gallery": {
     "heading": "Snapshots from Our Projects",
     "subtitle": "This gallery brings together highlights from our construction sites, interior design works, 3D visualizations, and completed projects captured across different locations and stages of execution.",
     "items": [
       {
-        "src": "/INTERIOR.jpg",
+        "src": "media/gallery-1.jpg",
         "alt": "Construction site at sunset",
         "isVideo": false
       },
       {
-        "src": "/FLAT1.webp",
+        "src": "media/gallery-2.jpg",
         "alt": "Construction ground work",
         "isVideo": false
       },
@@ -349,91 +376,96 @@
         "isVideo": false
       }
     ]
-  },
+  }
+
+
+  ,
   "servicesCarousel": {
-    "cards": [
-      {
-        "id": 1,
-        "image": "../our-services-img-1.png",
-        "imageAlt": "Project planning meeting with laptops and blueprints",
-        "title": "Project Planning & Management",
-        "description": "We handle the planning, coordination, and control of your project from start to finish. Our structured approach ensures clear timelines, controlled costs, and smooth execution at every stage.",
-        "includes": [
-          "Site visits and assessments",
-          "Project planning and scheduling",
-          "Budget planning and coordination",
-          "Progress monitoring and reporting",
-          "Risk identification and mitigation"
-        ]
-      },
-      {
-        "id": 2,
-        "image": "../our-services-img-2.png",
-        "imageAlt": "Construction workers reviewing blueprints on site",
-        "title": "Construction & Site Supervision",
-        "description": "We provide hands-on site supervision to ensure construction is carried out according to approved designs, quality standards, and safety requirements.",
-        "includes": [
-          "Site visits and assessments",
-          "Project planning and scheduling",
-          "Budget planning and coordination"
-        ]
-      },
-      {
-        "id": 3,
-        "image": "../our-services-img-3.png",
-        "imageAlt": "Modern white kitchen interior design",
-        "title": "Interior Design",
-        "description": "We design functional, comfortable, and modern interior spaces that reflect your lifestyle and purpose. Every detail is planned to balance aesthetics and practicality.",
-        "includes": [
-          "Site visits and assessments",
-          "Project planning and scheduling",
-          "Budget planning and coordination",
-          "Progress monitoring and reporting"
-        ]
-      },
-      {
-        "id": 4,
-        "image": "../our-services-img-4.png",
-        "imageAlt": "Kitchen renovation in progress",
-        "title": "Renovation & Remodeling",
-        "description": "We help upgrade, redesign, or improve existing spaces while maintaining structural integrity and enhancing value.",
-        "includes": [
-          "Site visits and assessments",
-          "Project planning and scheduling",
-          "Budget planning and coordination",
-          "Progress monitoring and reporting",
-          "Risk identification and mitigation"
-        ]
-      }
-    ]
-  },
-  "testimonialsSection": {
+      "cards": [
+        {
+          "id": 1,
+          "image": "../our-services-img-1.png",
+          "imageAlt": "Project planning meeting with laptops and blueprints",
+          "title": "Project Planning & Management",
+          "description": "We handle the planning, coordination, and control of your project from start to finish. Our structured approach ensures clear timelines, controlled costs, and smooth execution at every stage.",
+          "includes": [
+            "Site visits and assessments",
+            "Project planning and scheduling",
+            "Budget planning and coordination",
+            "Progress monitoring and reporting",
+            "Risk identification and mitigation"
+          ]
+        },
+        {
+          "id": 2,
+          "image": "../our-services-img-2.png",
+          "imageAlt": "Construction workers reviewing blueprints on site",
+          "title": "Construction & Site Supervision",
+          "description": "We provide hands-on site supervision to ensure construction is carried out according to approved designs, quality standards, and safety requirements.",
+          "includes": [
+            "Site visits and assessments",
+            "Project planning and scheduling",
+            "Budget planning and coordination"
+          ]
+        },
+        {
+          "id": 3,
+          "image": "../our-services-img-3.png",
+          "imageAlt": "Modern white kitchen interior design",
+          "title": "Interior Design",
+          "description": "We design functional, comfortable, and modern interior spaces that reflect your lifestyle and purpose. Every detail is planned to balance aesthetics and practicality.",
+          "includes": [
+            "Site visits and assessments",
+            "Project planning and scheduling",
+            "Budget planning and coordination",
+            "Progress monitoring and reporting"
+          ]
+        },
+        {
+          "id": 4,
+          "image": "../our-services-img-4.png",
+          "imageAlt": "Kitchen renovation in progress",
+          "title": "Renovation & Remodeling",
+          "description": "We help upgrade, redesign, or improve existing spaces while maintaining structural integrity and enhancing value.",
+          "includes": [
+            "Site visits and assessments",
+            "Project planning and scheduling",
+            "Budget planning and coordination",
+            "Progress monitoring and reporting",
+            "Risk identification and mitigation"
+          ]
+        }
+      ]
+    },
+
+
+
+
+    "testimonialsSection": {
     "heading": "What Our Clients Say",
-    "subheading": "We take pride in delivering projects that meet expectations and earn trust. Here's what our clients say about working with Uniprix Investment.",
+    "subheading": "Real feedback from people we have worked with across Uganda.",
+    "ctaText": "See All Reviews",
+    "ctaLink": "./testimonials/",
     "reviews": [
       {
-        "id": 1,
-        "name": "Sarah K., Kyanja",
-        "text": "Uniprix Investment handled our project professionally from planning to execution. The site supervision and attention to detail gave us confidence throughout the process.",
-        "img": "https://cdn.codia.ai/figma/JGrbVETRuqt2yPG3MfW142/img-fba6023d216d6b7e.png"
+        "name": "John Mukasa",
+        "text": "Uniprix handled our office renovation with professionalism and precision. They delivered on time and kept us informed every step of the way.",
+        "img": "https://randomuser.me/api/portraits/men/32.jpg"
       },
       {
-        "id": 2,
-        "name": "James O., Kampala",
-        "text": "Working with Uniprix Investment was a seamless experience. Their team delivered on time and kept us informed every step of the way.",
-        "img": "https://cdn.codia.ai/figma/JGrbVETRuqt2yPG3MfW142/img-99287bce4b22dc69.svg"
+        "name": "Sarah Nalubega",
+        "text": "The interior design team transformed our home beyond expectations. Great attention to detail and very client-focused throughout the project.",
+        "img": "https://randomuser.me/api/portraits/women/44.jpg"
       },
       {
-        "id": 3,
-        "name": "Amara N., Entebbe",
-        "text": "The quality of construction and the professionalism shown by Uniprix Investment exceeded our expectations. Highly recommended.",
-        "img": "https://cdn.codia.ai/figma/JGrbVETRuqt2yPG3MfW142/img-c6869ad1643add30.svg"
+        "name": "David Otieno",
+        "text": "From planning to execution, Uniprix Investment showed true expertise. Our commercial building was completed within budget and on schedule.",
+        "img": "https://randomuser.me/api/portraits/men/56.jpg"
       },
       {
-        "id": 4,
-        "name": "David M., Jinja",
-        "text": "From the first consultation to final handover, Uniprix Investment demonstrated expertise and commitment. We are very satisfied with the results.",
-        "img": "https://cdn.codia.ai/figma/JGrbVETRuqt2yPG3MfW142/img-a21f099226410a38.svg"
+        "name": "Grace Apio",
+        "text": "Reliable, honest, and skilled. I highly recommend Uniprix for any construction or renovation work. They genuinely care about quality.",
+        "img": "https://randomuser.me/api/portraits/women/68.jpg"
       },
       {
         "id": 5,
@@ -443,4 +475,6 @@
       }
     ]
   }
+
+
 }
