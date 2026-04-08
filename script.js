@@ -547,3 +547,79 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') upxLbClose()
       console.error('site-content.json failed to load:', err);
     });
 })();
+
+/* ── ABOUT PAGE content loader (appended) ───────────────── */
+/* Runs only when about-page elements exist in the DOM       */
+document.addEventListener('DOMContentLoaded', function () {
+  // These IDs only exist on the about-us page
+  if (!document.getElementById('about-hero-title')) return;
+
+  fetch('/data/site-content.json')
+    .then(res => { if (!res.ok) throw new Error('HTTP ' + res.status); return res.json(); })
+    .then(data => {
+      const about = data.aboutPage;
+      if (!about) return;
+
+      // Hero title
+      const el = id => document.getElementById(id);
+      const qs = sel => document.querySelector(sel);
+
+      if (el('about-hero-title'))    el('about-hero-title').textContent    = about.hero.title;
+
+      // Main section
+      if (el('about-main-heading'))  el('about-main-heading').textContent  = about.mainSection.heading;
+      if (el('about-main-text1'))    el('about-main-text1').textContent    = about.mainSection.text1;
+      if (el('about-main-text2'))    el('about-main-text2').textContent    = about.mainSection.text2;
+      if (qs('.about-image'))        qs('.about-image').src                = about.mainSection.image;
+
+      // Stats bar
+      const statsBar = el('about-stats-bar');
+      if (statsBar) {
+        statsBar.innerHTML = '';
+        about.stats.forEach(stat => {
+          const item = document.createElement('div');
+          item.className = 'stat-item';
+          item.innerHTML = `
+            <img src="${stat.icon}" alt="${stat.label} Icon" class="stat-icon">
+            <div class="stat-text"><h3>${stat.number}</h3><p>${stat.label}</p></div>
+          `;
+          statsBar.appendChild(item);
+        });
+      }
+
+      // Mission
+      if (el('about-mission-heading'))  el('about-mission-heading').textContent = about.mission.heading;
+      if (el('about-mission-text1'))    el('about-mission-text1').textContent   = about.mission.text1;
+      if (el('about-mission-text2'))    el('about-mission-text2').textContent   = about.mission.text2;
+      if (qs('.mission-grid .section-image')) qs('.mission-grid .section-image').src = about.mission.image;
+
+      // Vision
+      if (el('about-vision-heading'))   el('about-vision-heading').textContent  = about.vision.heading;
+      if (el('about-vision-text'))      el('about-vision-text').textContent     = about.vision.text;
+      if (qs('.vision-grid .section-image'))  qs('.vision-grid .section-image').src  = about.vision.image;
+
+      // Values
+      if (el('about-values-heading'))   el('about-values-heading').textContent  = about.values.heading;
+      if (qs('.values-grid .section-image')) qs('.values-grid .section-image').src = about.values.image;
+      const valuesList = el('about-values-list');
+      if (valuesList) {
+        valuesList.innerHTML = '';
+        about.values.items.forEach(value => {
+          const li = document.createElement('li');
+          li.className = 'value-item';
+          li.innerHTML = `<h3><span class="value-bullet"></span>${value.title}</h3><p>${value.desc}</p>`;
+          valuesList.appendChild(li);
+        });
+      }
+
+      // Testimonials — reuse the shared initTestimonials function
+      if (data.testimonialsSection) {
+        initTestimonials(data.testimonialsSection);
+      }
+
+      // Footer (about page has its own footer elements)
+      if (el('footer-phone')) el('footer-phone').textContent = data.footer.phone;
+      if (el('footer-email')) el('footer-email').textContent = data.footer.email;
+    })
+    .catch(err => console.error('About page: failed to load site-content.json', err));
+});
