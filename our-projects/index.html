@@ -16,30 +16,24 @@
 
     <img src="./assets/images/our-projects-header-image.png" alt="Hero background" class="hero-bg-image"> 
 
-    <header class="nav" >
+    <header class="nav">
       <nav class="navbar" style="box-shadow: 0 0px 0px rgba(0, 0, 0, 0);">
         <div class="nav-container">
           <a href="../" class="logo">
             <img src="../logo.svg" alt="Hayat Logo" class="logo-img" height="55px">
           </a>
-
           <div class="navlinks-container">
             <ul class="nav-links" id="navLinks">
               <li><a href="../">Home</a></li>
               <li><a href="../about-us/">About Us</a></li>
-              <li><a href="../services/" >Services</a></li>
+              <li><a href="../services/">Services</a></li>
               <li><a href="./" style="font-weight: 700; color: #193548;">Our Projects</a></li>
               <li><a href="../gallery/">Gallery</a></li>
               <li class="mobile-donate-item"><a href="../contact-us/">Contact Us</a></li>
             </ul>
           </div>
-          
-
           <a href="../contact-us/" class="nav-donate-btn">Contact Us</a>
-
-          <button class="mobile-menu-btn" id="mobileMenuBtn">
-            ☰
-          </button>          
+          <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
         </div>
       </nav>   
     </header>
@@ -50,46 +44,799 @@
     </div>
 
 
-    <!-- HERO SECTION -->
-
-
     <section class="upx-rp">
       <div class="upx-rp__inner">
 
-        <!-- Intro (already has the IDs you added) -->
         <div class="our-project-content upx-rp-min-size">
-          <h2 id="proj-intro-heading"></h2>
-          <p id="proj-intro-text"></p>
+          <h2 id="proj-intro-heading">A Portfolio Built on Trust, Skill, and Results</h2>
+          <p id="proj-intro-text">Each project we undertake reflects our commitment to quality craftsmanship, thoughtful design, and client satisfaction. From residential builds to commercial developments across Uganda, here is a selection of work we are proud to stand behind.</p>
         </div>
         <div>
-          <p class="upx-rp__page-label" id="proj-page-label"></p>
+          <p class="upx-rp__page-label" id="proj-page-label">Our Projects</p>
         </div>
 
-        <!-- DYNAMIC PROJECTS CONTAINER (this is the important part) -->
+        <!-- ══════════════════════════════════════════════════════
+             PROJECTS — edit each block directly in VS Code.
+
+             LAYOUT RULES:
+               Odd  projects (1,3,5…): BLUE  — class="upx-rpblock"
+                 card: class="upx-rpcard"   |  text LEFT, image RIGHT
+               Even projects (2,4,6…): AMBER — class="upx-rpblock upx-rpblock--right"
+                 card: class="upx-rpcard upx-rpcard--amber upx-rpcard--img-left upx-rpcard-left-tile"
+                 image LEFT, text RIGHT
+
+             IMAGE PATHS are relative to the our-projects/ folder.
+             Name your images: project-N-a.jpg, project-N-b.jpg, etc.
+             and place them in: our-projects/assets/images/
+             ══════════════════════════════════════════════════════ -->
 
         <div id="projects-container">
 
-          <!-- All projects are automatically loaded here by JavaScript -->
+
+          <!-- ══ PROJECT 01 — BLUE (text left, image right) ══ -->
+          <div id="project-1" class="upx-rpblock">
+            <div class="upx-rpblock__num-row">
+              <div class="upx-rp__num">01<span class="upx-rp__num-dot"></span></div>
+            </div>
+            <div class="upx-rpcard">
+              <div class="upx-rpcard__text">
+                <h2 class="upx-rpcard__title">Two-Storey Family Residence</h2>
+                <div class="upx-rpcard__meta">
+                  <div class="upx-rpcard__meta-row"><span class="upx-rpcard__meta-key">Location:</span><span class="upx-rpcard__meta-val">Kira, Wakiso District</span></div>
+                  <div class="upx-rpcard__meta-row"><span class="upx-rpcard__meta-key">Project Type:</span><span class="upx-rpcard__meta-val">Private Residential Home</span></div>
+                  <div class="upx-rpcard__meta-row"><span class="upx-rpcard__meta-key">Status:</span><span class="upx-rpcard__meta-val">Ongoing (Finishing Phase)</span></div>
+                </div>
+                <div class="upx-rpsection">
+                  <span class="upx-rpsection__title">Project Overview</span>
+                  <div class="dash-line"></div>
+                  <p class="upx-rpsection__text">A modern two-storey residential home designed to provide comfortable family living while maintaining strong structural integrity. The project is currently in its advanced construction stage, with major structural works completed and roofing installed.</p>
+                </div>
+                <div class="upx-rpsection">
+                  <span class="upx-rpsection__title">Key Details</span>
+                  <div class="dash-line"></div>
+                  <div class="upx-rpdetails">
+                    <div class="upx-rpdetail-item">Two floors (Ground + First Floor)</div>
+                    <div class="upx-rpdetail-item">4 bedrooms (2 ensuite)</div>
+                    <div class="upx-rpdetail-item">Spacious living and dining areas</div>
+                    <div class="upx-rpdetail-item">Modern kitchen layout</div>
+                    <div class="upx-rpdetail-item">Family lounge on the upper floor</div>
+                    <div class="upx-rpdetail-item">Balcony spaces for ventilation and natural light</div>
+                    <div class="upx-rpdetail-item">Reinforced concrete structure</div>
+                    <div class="upx-rpdetail-item">Clay tile roofing system</div>
+                  </div>
+                </div>
+                <div class="upx-rpsection">
+                  <span class="upx-rpsection__title">Scope of Work</span>
+                  <div class="dash-line"></div>
+                  <p class="upx-rpsection__text">Architectural planning, structural supervision, construction management, and finishing coordination.</p>
+                </div>
+              </div>
+              <div class="upx-rpcard__img">
+                <div class="upx-slideshow-4">
+                  <div class="upx-slide"><img src="./assets/images/project-1-a.jpg" alt="Two-Storey Family Residence view 1" style="border-radius:30px 170px 30px 30px"/></div>
+                  <div class="upx-slide"><img src="./assets/images/project-1-b.jpg" alt="Two-Storey Family Residence view 2" style="border-radius:30px 170px 30px 30px"/></div>
+                  <div class="upx-slide"><img src="./assets/images/project-1-c.jpg" alt="Two-Storey Family Residence view 3" style="border-radius:30px 170px 30px 30px"/></div>
+                  <div class="upx-slide"><img src="./assets/images/project-1-d.jpg" alt="Two-Storey Family Residence view 4" style="border-radius:30px 170px 30px 30px"/></div>
+                </div>
+                <div class="upx-rpcard__dots">
+                  <div class="upx-rdot" style="animation:upx-dot-fade 14s infinite 0s"></div>
+                  <div class="upx-rdot" style="animation:upx-dot-fade 14s infinite 3.5s"></div>
+                  <div class="upx-rdot" style="animation:upx-dot-fade 14s infinite 7s"></div>
+                  <div class="upx-rdot" style="animation:upx-dot-fade 14s infinite 10.5s"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- ══ PROJECT 02 — AMBER (image left, text right) ══ -->
+          <div id="project-2" class="upx-rpblock upx-rpblock--right">
+            <div class="upx-rpblock__num-row">
+              <div class="upx-rp__num upx-rp__num--amber">02<span class="upx-rp__num-dot upx-rp__num-dot--amber"></span></div>
+            </div>
+            <div class="upx-rpcard upx-rpcard--amber upx-rpcard--img-left upx-rpcard-left-tile">
+              <div class="upx-rpcard__img upx-left-image">
+                <div class="upx-slideshow-4">
+                  <div class="upx-slide"><img src="./assets/images/project-2-a.jpg" alt="Residential Apartments Block view 1" style="border-radius:170px 30px 30px 30px"/></div>
+                  <div class="upx-slide"><img src="./assets/images/project-2-b.jpg" alt="Residential Apartments Block view 2" style="border-radius:170px 30px 30px 30px"/></div>
+                  <div class="upx-slide"><img src="./assets/images/project-2-c.jpg" alt="Residential Apartments Block view 3" style="border-radius:170px 30px 30px 30px"/></div>
+                  <div class="upx-slide"><img src="./assets/images/project-2-d.jpg" alt="Residential Apartments Block view 4" style="border-radius:170px 30px 30px 30px"/></div>
+                </div>
+                <div class="upx-rpcard__dots">
+                  <div class="upx-rdot" style="animation:upx-dot-fade 14s infinite 0s"></div>
+                  <div class="upx-rdot" style="animation:upx-dot-fade 14s infinite 3.5s"></div>
+                  <div class="upx-rdot" style="animation:upx-dot-fade 14s infinite 7s"></div>
+                  <div class="upx-rdot" style="animation:upx-dot-fade 14s infinite 10.5s"></div>
+                </div>
+              </div>
+              <div class="upx-rpcard__text">
+                <h2 class="upx-rpcard__title">Residential Apartments Block</h2>
+                <div class="upx-rpcard__meta">
+                  <div class="upx-rpcard__meta-row"><span class="upx-rpcard__meta-key">Location:</span><span class="upx-rpcard__meta-val">Ntinda, Kampala</span></div>
+                  <div class="upx-rpcard__meta-row"><span class="upx-rpcard__meta-key">Project Type:</span><span class="upx-rpcard__meta-val">Private Residential Home</span></div>
+                  <div class="upx-rpcard__meta-row"><span class="upx-rpcard__meta-key">Status:</span><span class="upx-rpcard__meta-val">Completed</span></div>
+                </div>
+                <div class="upx-rpsection">
+                  <span class="upx-rpsection__title">Project Overview</span>
+                  <div class="dash-line orange-line"></div>
+                  <p class="upx-rpsection__text">A contemporary executive bungalow designed for efficient use of space and comfortable modern living. The project emphasizes natural lighting, functional layouts, and durable construction finishes suitable for long-term occupancy.</p>
+                </div>
+                <div class="upx-rpsection">
+                  <span class="upx-rpsection__title">Key Details</span>
+                  <div class="dash-line orange-line"></div>
+                  <div class="upx-rpdetails">
+                    <div class="upx-rpdetail-item">Single-storey structure</div>
+                    <div class="upx-rpdetail-item">3 bedrooms (Master ensuite)</div>
+                    <div class="upx-rpdetail-item">Spacious living and dining areas</div>
+                    <div class="upx-rpdetail-item">Modern kitchen with pantry</div>
+                    <div class="upx-rpdetail-item">Guest washroom</div>
+                    <div class="upx-rpdetail-item">Front veranda</div>
+                    <div class="upx-rpdetail-item">Reinforced concrete structure</div>
+                    <div class="upx-rpdetail-item">Concrete tile roofing</div>
+                  </div>
+                </div>
+                <div class="upx-rpsection">
+                  <span class="upx-rpsection__title">Scope of Work</span>
+                  <div class="dash-line orange-line"></div>
+                  <p class="upx-rpsection__text">Design coordination, site supervision, construction management, and quality control.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- ══ PROJECT 03 — BLUE ══ -->
+          <div id="project-3" class="upx-rpblock">
+            <div class="upx-rpblock__num-row">
+              <div class="upx-rp__num">03<span class="upx-rp__num-dot"></span></div>
+            </div>
+            <div class="upx-rpcard">
+              <div class="upx-rpcard__text">
+                <h2 class="upx-rpcard__title">Residential Rental Apartments</h2>
+                <div class="upx-rpcard__meta">
+                  <div class="upx-rpcard__meta-row"><span class="upx-rpcard__meta-key">Location:</span><span class="upx-rpcard__meta-val">Nansana, Wakiso District</span></div>
+                  <div class="upx-rpcard__meta-row"><span class="upx-rpcard__meta-key">Project Type:</span><span class="upx-rpcard__meta-val">Rental Housing Development</span></div>
+                  <div class="upx-rpcard__meta-row"><span class="upx-rpcard__meta-key">Status:</span><span class="upx-rpcard__meta-val">Completed</span></div>
+                </div>
+                <div class="upx-rpsection">
+                  <span class="upx-rpsection__title">Project Overview</span>
+                  <div class="dash-line"></div>
+                  <p class="upx-rpsection__text">A purpose-built rental apartment block developed to maximize rental income while maintaining structural durability and low maintenance costs. The project serves middle-income tenants within an urban setting.</p>
+                </div>
+                <div class="upx-rpsection">
+                  <span class="upx-rpsection__title">Key Details</span>
+                  <div class="dash-line"></div>
+                  <div class="upx-rpdetails">
+                    <div class="upx-rpdetail-item">8 apartment units</div>
+                    <div class="upx-rpdetail-item">Mix of 1-bedroom and 2-bedroom units</div>
+                    <div class="upx-rpdetail-item">Two-storey building</div>
+                    <div class="upx-rpdetail-item">Shared parking space</div>
+                    <div class="upx-rpdetail-item">Central water and power connections</div>
+                    <div class="upx-rpdetail-item">Reinforced concrete structure</div>
+                  </div>
+                </div>
+                <div class="upx-rpsection">
+                  <span class="upx-rpsection__title">Scope of Work</span>
+                  <div class="dash-line"></div>
+                  <p class="upx-rpsection__text">Site planning, construction supervision, contractor coordination, and project scheduling.</p>
+                </div>
+              </div>
+              <div class="upx-rpcard__img">
+                <div class="upx-slideshow-4">
+                  <div class="upx-slide"><img src="./assets/images/project-3-a.jpg" alt="Residential Rental Apartments view 1" style="border-radius:30px 170px 30px 30px"/></div>
+                  <div class="upx-slide"><img src="./assets/images/project-3-b.jpg" alt="Residential Rental Apartments view 2" style="border-radius:30px 170px 30px 30px"/></div>
+                  <div class="upx-slide"><img src="./assets/images/project-3-c.jpg" alt="Residential Rental Apartments view 3" style="border-radius:30px 170px 30px 30px"/></div>
+                  <div class="upx-slide"><img src="./assets/images/project-3-d.jpg" alt="Residential Rental Apartments view 4" style="border-radius:30px 170px 30px 30px"/></div>
+                </div>
+                <div class="upx-rpcard__dots">
+                  <div class="upx-rdot" style="animation:upx-dot-fade 14s infinite 0s"></div>
+                  <div class="upx-rdot" style="animation:upx-dot-fade 14s infinite 3.5s"></div>
+                  <div class="upx-rdot" style="animation:upx-dot-fade 14s infinite 7s"></div>
+                  <div class="upx-rdot" style="animation:upx-dot-fade 14s infinite 10.5s"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- ══ PROJECT 04 — AMBER ══ -->
+          <div id="project-4" class="upx-rpblock upx-rpblock--right">
+            <div class="upx-rpblock__num-row">
+              <div class="upx-rp__num upx-rp__num--amber">04<span class="upx-rp__num-dot upx-rp__num-dot--amber"></span></div>
+            </div>
+            <div class="upx-rpcard upx-rpcard--amber upx-rpcard--img-left upx-rpcard-left-tile">
+              <div class="upx-rpcard__img upx-left-image">
+                <div class="upx-slideshow-4">
+                  <div class="upx-slide"><img src="./assets/images/project-4-a.jpg" alt="Luxury Family Residence view 1" style="border-radius:170px 30px 30px 30px"/></div>
+                  <div class="upx-slide"><img src="./assets/images/project-4-b.jpg" alt="Luxury Family Residence view 2" style="border-radius:170px 30px 30px 30px"/></div>
+                  <div class="upx-slide"><img src="./assets/images/project-4-c.jpg" alt="Luxury Family Residence view 3" style="border-radius:170px 30px 30px 30px"/></div>
+                  <div class="upx-slide"><img src="./assets/images/project-4-d.jpg" alt="Luxury Family Residence view 4" style="border-radius:170px 30px 30px 30px"/></div>
+                </div>
+                <div class="upx-rpcard__dots">
+                  <div class="upx-rdot" style="animation:upx-dot-fade 14s infinite 0s"></div>
+                  <div class="upx-rdot" style="animation:upx-dot-fade 14s infinite 3.5s"></div>
+                  <div class="upx-rdot" style="animation:upx-dot-fade 14s infinite 7s"></div>
+                  <div class="upx-rdot" style="animation:upx-dot-fade 14s infinite 10.5s"></div>
+                </div>
+              </div>
+              <div class="upx-rpcard__text">
+                <h2 class="upx-rpcard__title">Luxury Family Residence</h2>
+                <div class="upx-rpcard__meta">
+                  <div class="upx-rpcard__meta-row"><span class="upx-rpcard__meta-key">Location:</span><span class="upx-rpcard__meta-val">Muyenga, Kampala</span></div>
+                  <div class="upx-rpcard__meta-row"><span class="upx-rpcard__meta-key">Project Type:</span><span class="upx-rpcard__meta-val">High-End Private Residence</span></div>
+                  <div class="upx-rpcard__meta-row"><span class="upx-rpcard__meta-key">Status:</span><span class="upx-rpcard__meta-val">Completed</span></div>
+                </div>
+                <div class="upx-rpsection">
+                  <span class="upx-rpsection__title">Project Overview</span>
+                  <div class="dash-line orange-line"></div>
+                  <p class="upx-rpsection__text">A luxury family home designed to offer privacy, generous living spaces, and premium finishes. The project blends modern architectural design with functional family living.</p>
+                </div>
+                <div class="upx-rpsection">
+                  <span class="upx-rpsection__title">Key Details</span>
+                  <div class="dash-line orange-line"></div>
+                  <div class="upx-rpdetails">
+                    <div class="upx-rpdetail-item">Two-storey structure</div>
+                    <div class="upx-rpdetail-item">5 bedrooms (All ensuite)</div>
+                    <div class="upx-rpdetail-item">Multiple living lounges</div>
+                    <div class="upx-rpdetail-item">Modern open-plan kitchen</div>
+                    <div class="upx-rpdetail-item">Balconies and outdoor relaxation spaces</div>
+                    <div class="upx-rpdetail-item">High-quality interior finishes</div>
+                  </div>
+                </div>
+                <div class="upx-rpsection">
+                  <span class="upx-rpsection__title">Scope of Work</span>
+                  <div class="dash-line orange-line"></div>
+                  <p class="upx-rpsection__text">Construction supervision, finishing coordination, and quality assurance.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- ══ PROJECT 05 — BLUE ══ -->
+          <div id="project-5" class="upx-rpblock">
+            <div class="upx-rpblock__num-row">
+              <div class="upx-rp__num">05<span class="upx-rp__num-dot"></span></div>
+            </div>
+            <div class="upx-rpcard">
+              <div class="upx-rpcard__text">
+                <h2 class="upx-rpcard__title">Office & Retail Complex</h2>
+                <div class="upx-rpcard__meta">
+                  <div class="upx-rpcard__meta-row"><span class="upx-rpcard__meta-key">Location:</span><span class="upx-rpcard__meta-val">Jinja City Central Business Area</span></div>
+                  <div class="upx-rpcard__meta-row"><span class="upx-rpcard__meta-key">Project Type:</span><span class="upx-rpcard__meta-val">Commercial Development</span></div>
+                  <div class="upx-rpcard__meta-row"><span class="upx-rpcard__meta-key">Status:</span><span class="upx-rpcard__meta-val">Ongoing</span></div>
+                </div>
+                <div class="upx-rpsection">
+                  <span class="upx-rpsection__title">Project Overview</span>
+                  <div class="dash-line"></div>
+                  <p class="upx-rpsection__text">A mixed-use commercial development designed to accommodate retail spaces on lower floors and office units on upper levels, supporting business growth in a high-traffic area.</p>
+                </div>
+                <div class="upx-rpsection">
+                  <span class="upx-rpsection__title">Key Details</span>
+                  <div class="dash-line"></div>
+                  <div class="upx-rpdetails">
+                    <div class="upx-rpdetail-item">Three-storey structure</div>
+                    <div class="upx-rpdetail-item">12 commercial units</div>
+                    <div class="upx-rpdetail-item">Retail spaces on ground floor</div>
+                    <div class="upx-rpdetail-item">Office units on upper floors</div>
+                    <div class="upx-rpdetail-item">Parking area for tenants and visitors</div>
+                  </div>
+                </div>
+                <div class="upx-rpsection">
+                  <span class="upx-rpsection__title">Scope of Work</span>
+                  <div class="dash-line"></div>
+                  <p class="upx-rpsection__text">Project planning, construction supervision, contractor coordination, and quality management.</p>
+                </div>
+              </div>
+              <div class="upx-rpcard__img">
+                <div class="upx-slideshow-4">
+                  <div class="upx-slide"><img src="./assets/images/project-5-a.jpg" alt="Office & Retail Complex view 1" style="border-radius:30px 170px 30px 30px"/></div>
+                  <div class="upx-slide"><img src="./assets/images/project-5-b.jpg" alt="Office & Retail Complex view 2" style="border-radius:30px 170px 30px 30px"/></div>
+                  <div class="upx-slide"><img src="./assets/images/project-5-c.jpg" alt="Office & Retail Complex view 3" style="border-radius:30px 170px 30px 30px"/></div>
+                  <div class="upx-slide"><img src="./assets/images/project-5-d.jpg" alt="Office & Retail Complex view 4" style="border-radius:30px 170px 30px 30px"/></div>
+                </div>
+                <div class="upx-rpcard__dots">
+                  <div class="upx-rdot" style="animation:upx-dot-fade 14s infinite 0s"></div>
+                  <div class="upx-rdot" style="animation:upx-dot-fade 14s infinite 3.5s"></div>
+                  <div class="upx-rdot" style="animation:upx-dot-fade 14s infinite 7s"></div>
+                  <div class="upx-rdot" style="animation:upx-dot-fade 14s infinite 10.5s"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- ══ PROJECT 06 — AMBER ══ -->
+          <div id="project-6" class="upx-rpblock upx-rpblock--right">
+            <div class="upx-rpblock__num-row">
+              <div class="upx-rp__num upx-rp__num--amber">06<span class="upx-rp__num-dot upx-rp__num-dot--amber"></span></div>
+            </div>
+            <div class="upx-rpcard upx-rpcard--amber upx-rpcard--img-left upx-rpcard-left-tile">
+              <div class="upx-rpcard__img upx-left-image">
+                <div class="upx-slideshow-4">
+                  <div class="upx-slide"><img src="./assets/images/project-6-a.jpg" alt="Industrial Warehouse Facility view 1" style="border-radius:170px 30px 30px 30px"/></div>
+                  <div class="upx-slide"><img src="./assets/images/project-6-b.jpg" alt="Industrial Warehouse Facility view 2" style="border-radius:170px 30px 30px 30px"/></div>
+                  <div class="upx-slide"><img src="./assets/images/project-6-c.jpg" alt="Industrial Warehouse Facility view 3" style="border-radius:170px 30px 30px 30px"/></div>
+                  <div class="upx-slide"><img src="./assets/images/project-6-d.jpg" alt="Industrial Warehouse Facility view 4" style="border-radius:170px 30px 30px 30px"/></div>
+                </div>
+                <div class="upx-rpcard__dots">
+                  <div class="upx-rdot" style="animation:upx-dot-fade 14s infinite 0s"></div>
+                  <div class="upx-rdot" style="animation:upx-dot-fade 14s infinite 3.5s"></div>
+                  <div class="upx-rdot" style="animation:upx-dot-fade 14s infinite 7s"></div>
+                  <div class="upx-rdot" style="animation:upx-dot-fade 14s infinite 10.5s"></div>
+                </div>
+              </div>
+              <div class="upx-rpcard__text">
+                <h2 class="upx-rpcard__title">Industrial Warehouse Facility</h2>
+                <div class="upx-rpcard__meta">
+                  <div class="upx-rpcard__meta-row"><span class="upx-rpcard__meta-key">Location:</span><span class="upx-rpcard__meta-val">Mukono Industrial Area</span></div>
+                  <div class="upx-rpcard__meta-row"><span class="upx-rpcard__meta-key">Project Type:</span><span class="upx-rpcard__meta-val">Industrial Construction</span></div>
+                  <div class="upx-rpcard__meta-row"><span class="upx-rpcard__meta-key">Status:</span><span class="upx-rpcard__meta-val">Completed</span></div>
+                </div>
+                <div class="upx-rpsection">
+                  <span class="upx-rpsection__title">Project Overview</span>
+                  <div class="dash-line orange-line"></div>
+                  <p class="upx-rpsection__text">A functional warehouse facility designed for storage, logistics, and operational efficiency. The structure prioritizes accessibility, durability, and safety.</p>
+                </div>
+                <div class="upx-rpsection">
+                  <span class="upx-rpsection__title">Key Details</span>
+                  <div class="dash-line orange-line"></div>
+                  <div class="upx-rpdetails">
+                    <div class="upx-rpdetail-item">Large open span warehouse layout</div>
+                    <div class="upx-rpdetail-item">Reinforced concrete foundation</div>
+                    <div class="upx-rpdetail-item">Steel roofing structure</div>
+                    <div class="upx-rpdetail-item">Loading and offloading access points</div>
+                    <div class="upx-rpdetail-item">Secure perimeter fencing</div>
+                  </div>
+                </div>
+                <div class="upx-rpsection">
+                  <span class="upx-rpsection__title">Scope of Work</span>
+                  <div class="dash-line orange-line"></div>
+                  <p class="upx-rpsection__text">Structural supervision, site management, and construction coordination.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- ══ PROJECT 07 — BLUE ══ -->
+          <div id="project-7" class="upx-rpblock">
+            <div class="upx-rpblock__num-row">
+              <div class="upx-rp__num">07<span class="upx-rp__num-dot"></span></div>
+            </div>
+            <div class="upx-rpcard">
+              <div class="upx-rpcard__text">
+                <h2 class="upx-rpcard__title">Modern Living & Dining Interior</h2>
+                <div class="upx-rpcard__meta">
+                  <div class="upx-rpcard__meta-row"><span class="upx-rpcard__meta-key">Location:</span><span class="upx-rpcard__meta-val">Kololo, Kampala</span></div>
+                  <div class="upx-rpcard__meta-row"><span class="upx-rpcard__meta-key">Project Type:</span><span class="upx-rpcard__meta-val">Residential Interior Design</span></div>
+                  <div class="upx-rpcard__meta-row"><span class="upx-rpcard__meta-key">Status:</span><span class="upx-rpcard__meta-val">Completed</span></div>
+                </div>
+                <div class="upx-rpsection">
+                  <span class="upx-rpsection__title">Project Overview</span>
+                  <div class="dash-line"></div>
+                  <p class="upx-rpsection__text">An interior design project focused on transforming living and dining spaces into a modern, elegant, and functional environment using carefully selected finishes and lighting.</p>
+                </div>
+                <div class="upx-rpsection">
+                  <span class="upx-rpsection__title">Key Details</span>
+                  <div class="dash-line"></div>
+                  <div class="upx-rpdetails">
+                    <div class="upx-rpdetail-item">Living room interior design</div>
+                    <div class="upx-rpdetail-item">Dining area design</div>
+                    <div class="upx-rpdetail-item">Custom lighting solutions</div>
+                    <div class="upx-rpdetail-item">Furniture layout planning</div>
+                    <div class="upx-rpdetail-item">Wall and ceiling finishes</div>
+                  </div>
+                </div>
+                <div class="upx-rpsection">
+                  <span class="upx-rpsection__title">Scope of Work</span>
+                  <div class="dash-line"></div>
+                  <p class="upx-rpsection__text">Interior concept design, material selection, and installation supervision.</p>
+                </div>
+              </div>
+              <div class="upx-rpcard__img">
+                <div class="upx-slideshow-4">
+                  <div class="upx-slide"><img src="./assets/images/project-7-a.jpg" alt="Modern Living & Dining Interior view 1" style="border-radius:30px 170px 30px 30px"/></div>
+                  <div class="upx-slide"><img src="./assets/images/project-7-b.jpg" alt="Modern Living & Dining Interior view 2" style="border-radius:30px 170px 30px 30px"/></div>
+                  <div class="upx-slide"><img src="./assets/images/project-7-c.jpg" alt="Modern Living & Dining Interior view 3" style="border-radius:30px 170px 30px 30px"/></div>
+                  <div class="upx-slide"><img src="./assets/images/project-7-d.jpg" alt="Modern Living & Dining Interior view 4" style="border-radius:30px 170px 30px 30px"/></div>
+                </div>
+                <div class="upx-rpcard__dots">
+                  <div class="upx-rdot" style="animation:upx-dot-fade 14s infinite 0s"></div>
+                  <div class="upx-rdot" style="animation:upx-dot-fade 14s infinite 3.5s"></div>
+                  <div class="upx-rdot" style="animation:upx-dot-fade 14s infinite 7s"></div>
+                  <div class="upx-rdot" style="animation:upx-dot-fade 14s infinite 10.5s"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- ══ PROJECT 08 — AMBER ══ -->
+          <div id="project-8" class="upx-rpblock upx-rpblock--right">
+            <div class="upx-rpblock__num-row">
+              <div class="upx-rp__num upx-rp__num--amber">08<span class="upx-rp__num-dot upx-rp__num-dot--amber"></span></div>
+            </div>
+            <div class="upx-rpcard upx-rpcard--amber upx-rpcard--img-left upx-rpcard-left-tile">
+              <div class="upx-rpcard__img upx-left-image">
+                <div class="upx-slideshow-4">
+                  <div class="upx-slide"><img src="./assets/images/project-8-a.jpg" alt="Bedroom & Home Office Interiors view 1" style="border-radius:170px 30px 30px 30px"/></div>
+                  <div class="upx-slide"><img src="./assets/images/project-8-b.jpg" alt="Bedroom & Home Office Interiors view 2" style="border-radius:170px 30px 30px 30px"/></div>
+                  <div class="upx-slide"><img src="./assets/images/project-8-c.jpg" alt="Bedroom & Home Office Interiors view 3" style="border-radius:170px 30px 30px 30px"/></div>
+                  <div class="upx-slide"><img src="./assets/images/project-8-d.jpg" alt="Bedroom & Home Office Interiors view 4" style="border-radius:170px 30px 30px 30px"/></div>
+                </div>
+                <div class="upx-rpcard__dots">
+                  <div class="upx-rdot" style="animation:upx-dot-fade 14s infinite 0s"></div>
+                  <div class="upx-rdot" style="animation:upx-dot-fade 14s infinite 3.5s"></div>
+                  <div class="upx-rdot" style="animation:upx-dot-fade 14s infinite 7s"></div>
+                  <div class="upx-rdot" style="animation:upx-dot-fade 14s infinite 10.5s"></div>
+                </div>
+              </div>
+              <div class="upx-rpcard__text">
+                <h2 class="upx-rpcard__title">Bedroom & Home Office Interiors</h2>
+                <div class="upx-rpcard__meta">
+                  <div class="upx-rpcard__meta-row"><span class="upx-rpcard__meta-key">Location:</span><span class="upx-rpcard__meta-val">Lubowa, Wakiso District</span></div>
+                  <div class="upx-rpcard__meta-row"><span class="upx-rpcard__meta-key">Project Type:</span><span class="upx-rpcard__meta-val">Residential Interior Design</span></div>
+                  <div class="upx-rpcard__meta-row"><span class="upx-rpcard__meta-key">Status:</span><span class="upx-rpcard__meta-val">Completed</span></div>
+                </div>
+                <div class="upx-rpsection">
+                  <span class="upx-rpsection__title">Project Overview</span>
+                  <div class="dash-line orange-line"></div>
+                  <p class="upx-rpsection__text">A customized interior design solution aimed at enhancing comfort, productivity, and efficient storage within private living spaces.</p>
+                </div>
+                <div class="upx-rpsection">
+                  <span class="upx-rpsection__title">Key Details</span>
+                  <div class="dash-line orange-line"></div>
+                  <div class="upx-rpdetails">
+                    <div class="upx-rpdetail-item">Master bedroom interior</div>
+                    <div class="upx-rpdetail-item">Secondary bedroom design</div>
+                    <div class="upx-rpdetail-item">Home office setup</div>
+                    <div class="upx-rpdetail-item">Wardrobe and storage solutions</div>
+                    <div class="upx-rpdetail-item">Lighting and finishes coordination</div>
+                  </div>
+                </div>
+                <div class="upx-rpsection">
+                  <span class="upx-rpsection__title">Scope of Work</span>
+                  <div class="dash-line orange-line"></div>
+                  <p class="upx-rpsection__text">Interior planning, detailing, and on-site execution supervision.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- ══ PROJECT 09 — BLUE ══ -->
+          <div id="project-9" class="upx-rpblock">
+            <div class="upx-rpblock__num-row">
+              <div class="upx-rp__num">09<span class="upx-rp__num-dot"></span></div>
+            </div>
+            <div class="upx-rpcard">
+              <div class="upx-rpcard__text">
+                <h2 class="upx-rpcard__title">Two-Storey Residential 3D Render</h2>
+                <div class="upx-rpcard__meta">
+                  <div class="upx-rpcard__meta-row"><span class="upx-rpcard__meta-key">Location:</span><span class="upx-rpcard__meta-val">Kyanja, Kampala</span></div>
+                  <div class="upx-rpcard__meta-row"><span class="upx-rpcard__meta-key">Project Type:</span><span class="upx-rpcard__meta-val">3D Architectural Visualization</span></div>
+                  <div class="upx-rpcard__meta-row"><span class="upx-rpcard__meta-key">Status:</span><span class="upx-rpcard__meta-val">Completed</span></div>
+                </div>
+                <div class="upx-rpsection">
+                  <span class="upx-rpsection__title">Project Overview</span>
+                  <div class="dash-line"></div>
+                  <p class="upx-rpsection__text">A detailed 3D visualization created to help the client visualize the final outcome before construction, supporting decision-making and approvals.</p>
+                </div>
+                <div class="upx-rpsection">
+                  <span class="upx-rpsection__title">Key Details</span>
+                  <div class="dash-line"></div>
+                  <div class="upx-rpdetails">
+                    <div class="upx-rpdetail-item">Exterior 3D renders</div>
+                    <div class="upx-rpdetail-item">Interior space visualization</div>
+                    <div class="upx-rpdetail-item">Material and color representation</div>
+                    <div class="upx-rpdetail-item">Day and night views</div>
+                  </div>
+                </div>
+                <div class="upx-rpsection">
+                  <span class="upx-rpsection__title">Scope of Work</span>
+                  <div class="dash-line"></div>
+                  <p class="upx-rpsection__text">3D modeling, rendering, and presentation development.</p>
+                </div>
+              </div>
+              <div class="upx-rpcard__img">
+                <div class="upx-slideshow-4">
+                  <div class="upx-slide"><img src="./assets/images/project-9-a.jpg" alt="Two-Storey Residential 3D Render view 1" style="border-radius:30px 170px 30px 30px"/></div>
+                  <div class="upx-slide"><img src="./assets/images/project-9-b.jpg" alt="Two-Storey Residential 3D Render view 2" style="border-radius:30px 170px 30px 30px"/></div>
+                  <div class="upx-slide"><img src="./assets/images/project-9-c.jpg" alt="Two-Storey Residential 3D Render view 3" style="border-radius:30px 170px 30px 30px"/></div>
+                  <div class="upx-slide"><img src="./assets/images/project-9-d.jpg" alt="Two-Storey Residential 3D Render view 4" style="border-radius:30px 170px 30px 30px"/></div>
+                </div>
+                <div class="upx-rpcard__dots">
+                  <div class="upx-rdot" style="animation:upx-dot-fade 14s infinite 0s"></div>
+                  <div class="upx-rdot" style="animation:upx-dot-fade 14s infinite 3.5s"></div>
+                  <div class="upx-rdot" style="animation:upx-dot-fade 14s infinite 7s"></div>
+                  <div class="upx-rdot" style="animation:upx-dot-fade 14s infinite 10.5s"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- ══ PROJECT 10 — AMBER ══ -->
+          <div id="project-10" class="upx-rpblock upx-rpblock--right">
+            <div class="upx-rpblock__num-row">
+              <div class="upx-rp__num upx-rp__num--amber">10<span class="upx-rp__num-dot upx-rp__num-dot--amber"></span></div>
+            </div>
+            <div class="upx-rpcard upx-rpcard--amber upx-rpcard--img-left upx-rpcard-left-tile">
+              <div class="upx-rpcard__img upx-left-image">
+                <div class="upx-slideshow-4">
+                  <div class="upx-slide"><img src="./assets/images/project-10-a.jpg" alt="Apartment Block 3D Concept view 1" style="border-radius:170px 30px 30px 30px"/></div>
+                  <div class="upx-slide"><img src="./assets/images/project-10-b.jpg" alt="Apartment Block 3D Concept view 2" style="border-radius:170px 30px 30px 30px"/></div>
+                  <div class="upx-slide"><img src="./assets/images/project-10-c.jpg" alt="Apartment Block 3D Concept view 3" style="border-radius:170px 30px 30px 30px"/></div>
+                  <div class="upx-slide"><img src="./assets/images/project-10-d.jpg" alt="Apartment Block 3D Concept view 4" style="border-radius:170px 30px 30px 30px"/></div>
+                </div>
+                <div class="upx-rpcard__dots">
+                  <div class="upx-rdot" style="animation:upx-dot-fade 14s infinite 0s"></div>
+                  <div class="upx-rdot" style="animation:upx-dot-fade 14s infinite 3.5s"></div>
+                  <div class="upx-rdot" style="animation:upx-dot-fade 14s infinite 7s"></div>
+                  <div class="upx-rdot" style="animation:upx-dot-fade 14s infinite 10.5s"></div>
+                </div>
+              </div>
+              <div class="upx-rpcard__text">
+                <h2 class="upx-rpcard__title">Apartment Block 3D Concept</h2>
+                <div class="upx-rpcard__meta">
+                  <div class="upx-rpcard__meta-row"><span class="upx-rpcard__meta-key">Location:</span><span class="upx-rpcard__meta-val">Mbale City</span></div>
+                  <div class="upx-rpcard__meta-row"><span class="upx-rpcard__meta-key">Project Type:</span><span class="upx-rpcard__meta-val">3D Development Concept</span></div>
+                  <div class="upx-rpcard__meta-row"><span class="upx-rpcard__meta-key">Status:</span><span class="upx-rpcard__meta-val">Completed</span></div>
+                </div>
+                <div class="upx-rpsection">
+                  <span class="upx-rpsection__title">Project Overview</span>
+                  <div class="dash-line orange-line"></div>
+                  <p class="upx-rpsection__text">A conceptual 3D apartment design developed for investment analysis and planning prior to construction.</p>
+                </div>
+                <div class="upx-rpsection">
+                  <span class="upx-rpsection__title">Key Details</span>
+                  <div class="dash-line orange-line"></div>
+                  <div class="upx-rpdetails">
+                    <div class="upx-rpdetail-item">10 apartment units</div>
+                    <div class="upx-rpdetail-item">Exterior massing visualization</div>
+                    <div class="upx-rpdetail-item">Floor plan concepts</div>
+                    <div class="upx-rpdetail-item">Investment-ready presentation</div>
+                  </div>
+                </div>
+                <div class="upx-rpsection">
+                  <span class="upx-rpsection__title">Scope of Work</span>
+                  <div class="dash-line orange-line"></div>
+                  <p class="upx-rpsection__text">Concept design development and 3D visualization.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- ══ PROJECT 11 — BLUE ══ -->
+          <div id="project-11" class="upx-rpblock">
+            <div class="upx-rpblock__num-row">
+              <div class="upx-rp__num">11<span class="upx-rp__num-dot"></span></div>
+            </div>
+            <div class="upx-rpcard">
+              <div class="upx-rpcard__text">
+                <h2 class="upx-rpcard__title">Ready-to-Move Family Home</h2>
+                <div class="upx-rpcard__meta">
+                  <div class="upx-rpcard__meta-row"><span class="upx-rpcard__meta-key">Location:</span><span class="upx-rpcard__meta-val">Kitende, Entebbe Road</span></div>
+                  <div class="upx-rpcard__meta-row"><span class="upx-rpcard__meta-key">Project Type:</span><span class="upx-rpcard__meta-val">Residential Home for Sale</span></div>
+                  <div class="upx-rpcard__meta-row"><span class="upx-rpcard__meta-key">Status:</span><span class="upx-rpcard__meta-val">Available for Sale</span></div>
+                </div>
+                <div class="upx-rpsection">
+                  <span class="upx-rpsection__title">Project Overview</span>
+                  <div class="dash-line"></div>
+                  <p class="upx-rpsection__text">A fully completed modern family home ready for immediate occupation, designed with comfort and functionality in mind.</p>
+                </div>
+                <div class="upx-rpsection">
+                  <span class="upx-rpsection__title">Key Details</span>
+                  <div class="dash-line"></div>
+                  <div class="upx-rpdetails">
+                    <div class="upx-rpdetail-item">3 bedrooms</div>
+                    <div class="upx-rpdetail-item">3 bathrooms</div>
+                    <div class="upx-rpdetail-item">Spacious living and dining areas</div>
+                    <div class="upx-rpdetail-item">Modern kitchen</div>
+                    <div class="upx-rpdetail-item">Private compound</div>
+                    <div class="upx-rpdetail-item">Parking for 2 vehicles</div>
+                  </div>
+                </div>
+                <div class="upx-rpsection">
+                  <span class="upx-rpsection__title">Scope of Work</span>
+                  <div class="dash-line"></div>
+                  <p class="upx-rpsection__text">Full development, construction, and sales coordination.</p>
+                </div>
+              </div>
+              <div class="upx-rpcard__img">
+                <div class="upx-slideshow-4">
+                  <div class="upx-slide"><img src="./assets/images/project-11-a.jpg" alt="Ready-to-Move Family Home view 1" style="border-radius:30px 170px 30px 30px"/></div>
+                  <div class="upx-slide"><img src="./assets/images/project-11-b.jpg" alt="Ready-to-Move Family Home view 2" style="border-radius:30px 170px 30px 30px"/></div>
+                  <div class="upx-slide"><img src="./assets/images/project-11-c.jpg" alt="Ready-to-Move Family Home view 3" style="border-radius:30px 170px 30px 30px"/></div>
+                  <div class="upx-slide"><img src="./assets/images/project-11-d.jpg" alt="Ready-to-Move Family Home view 4" style="border-radius:30px 170px 30px 30px"/></div>
+                </div>
+                <div class="upx-rpcard__dots">
+                  <div class="upx-rdot" style="animation:upx-dot-fade 14s infinite 0s"></div>
+                  <div class="upx-rdot" style="animation:upx-dot-fade 14s infinite 3.5s"></div>
+                  <div class="upx-rdot" style="animation:upx-dot-fade 14s infinite 7s"></div>
+                  <div class="upx-rdot" style="animation:upx-dot-fade 14s infinite 10.5s"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- ══ PROJECT 12 — AMBER ══ -->
+          <div id="project-12" class="upx-rpblock upx-rpblock--right">
+            <div class="upx-rpblock__num-row">
+              <div class="upx-rp__num upx-rp__num--amber">12<span class="upx-rp__num-dot upx-rp__num-dot--amber"></span></div>
+            </div>
+            <div class="upx-rpcard upx-rpcard--amber upx-rpcard--img-left upx-rpcard-left-tile">
+              <div class="upx-rpcard__img upx-left-image">
+                <div class="upx-slideshow-4">
+                  <div class="upx-slide"><img src="./assets/images/project-12-a.jpg" alt="Executive Two-Storey Home view 1" style="border-radius:170px 30px 30px 30px"/></div>
+                  <div class="upx-slide"><img src="./assets/images/project-12-b.jpg" alt="Executive Two-Storey Home view 2" style="border-radius:170px 30px 30px 30px"/></div>
+                  <div class="upx-slide"><img src="./assets/images/project-12-c.jpg" alt="Executive Two-Storey Home view 3" style="border-radius:170px 30px 30px 30px"/></div>
+                  <div class="upx-slide"><img src="./assets/images/project-12-d.jpg" alt="Executive Two-Storey Home view 4" style="border-radius:170px 30px 30px 30px"/></div>
+                </div>
+                <div class="upx-rpcard__dots">
+                  <div class="upx-rdot" style="animation:upx-dot-fade 14s infinite 0s"></div>
+                  <div class="upx-rdot" style="animation:upx-dot-fade 14s infinite 3.5s"></div>
+                  <div class="upx-rdot" style="animation:upx-dot-fade 14s infinite 7s"></div>
+                  <div class="upx-rdot" style="animation:upx-dot-fade 14s infinite 10.5s"></div>
+                </div>
+              </div>
+              <div class="upx-rpcard__text">
+                <h2 class="upx-rpcard__title">Executive Two-Storey Home</h2>
+                <div class="upx-rpcard__meta">
+                  <div class="upx-rpcard__meta-row"><span class="upx-rpcard__meta-key">Location:</span><span class="upx-rpcard__meta-val">Namugongo, Wakiso District</span></div>
+                  <div class="upx-rpcard__meta-row"><span class="upx-rpcard__meta-key">Project Type:</span><span class="upx-rpcard__meta-val">Luxury Home for Sale</span></div>
+                  <div class="upx-rpcard__meta-row"><span class="upx-rpcard__meta-key">Status:</span><span class="upx-rpcard__meta-val">Available for Sale</span></div>
+                </div>
+                <div class="upx-rpsection">
+                  <span class="upx-rpsection__title">Project Overview</span>
+                  <div class="dash-line orange-line"></div>
+                  <p class="upx-rpsection__text">An executive two-storey home offering spacious interiors, modern architectural design, and premium finishes suitable for family living or investment.</p>
+                </div>
+                <div class="upx-rpsection">
+                  <span class="upx-rpsection__title">Key Details</span>
+                  <div class="dash-line orange-line"></div>
+                  <div class="upx-rpdetails">
+                    <div class="upx-rpdetail-item">Two-storey structure</div>
+                    <div class="upx-rpdetail-item">4 bedrooms (All ensuite)</div>
+                    <div class="upx-rpdetail-item">Multiple living spaces</div>
+                    <div class="upx-rpdetail-item">Modern kitchen and dining</div>
+                    <div class="upx-rpdetail-item">Balconies and parking space</div>
+                  </div>
+                </div>
+                <div class="upx-rpsection">
+                  <span class="upx-rpsection__title">Scope of Work</span>
+                  <div class="dash-line orange-line"></div>
+                  <p class="upx-rpsection__text">Project development, construction management, and marketing.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- ══ PROJECT 13 — BLUE ══ -->
+          <div id="project-13" class="upx-rpblock">
+            <div class="upx-rpblock__num-row">
+              <div class="upx-rp__num">13<span class="upx-rp__num-dot"></span></div>
+            </div>
+            <div class="upx-rpcard">
+              <div class="upx-rpcard__text">
+                <h2 class="upx-rpcard__title">Apartment Development</h2>
+                <div class="upx-rpcard__meta">
+                  <div class="upx-rpcard__meta-row"><span class="upx-rpcard__meta-key">Location:</span><span class="upx-rpcard__meta-val">Najjera, Wakiso District</span></div>
+                  <div class="upx-rpcard__meta-row"><span class="upx-rpcard__meta-key">Project Type:</span><span class="upx-rpcard__meta-val">Residential Apartments</span></div>
+                  <div class="upx-rpcard__meta-row"><span class="upx-rpcard__meta-key">Status:</span><span class="upx-rpcard__meta-val">Ongoing</span></div>
+                </div>
+                <div class="upx-rpsection">
+                  <span class="upx-rpsection__title">Project Overview</span>
+                  <div class="dash-line"></div>
+                  <p class="upx-rpsection__text">An ongoing apartment project designed to meet the growing demand for urban rental housing.</p>
+                </div>
+                <div class="upx-rpsection">
+                  <span class="upx-rpsection__title">Key Details</span>
+                  <div class="dash-line"></div>
+                  <div class="upx-rpdetails">
+                    <div class="upx-rpdetail-item">16 apartment units</div>
+                    <div class="upx-rpdetail-item">Three-storey building</div>
+                    <div class="upx-rpdetail-item">Mix of 1 and 2 bedroom units</div>
+                    <div class="upx-rpdetail-item">Shared parking and utilities</div>
+                  </div>
+                </div>
+                <div class="upx-rpsection">
+                  <span class="upx-rpsection__title">Scope of Work</span>
+                  <div class="dash-line"></div>
+                  <p class="upx-rpsection__text">Construction management, site supervision, and quality control.</p>
+                </div>
+              </div>
+              <div class="upx-rpcard__img">
+                <div class="upx-slideshow-4">
+                  <div class="upx-slide"><img src="./assets/images/project-13-a.jpg" alt="Apartment Development view 1" style="border-radius:30px 170px 30px 30px"/></div>
+                  <div class="upx-slide"><img src="./assets/images/project-13-b.jpg" alt="Apartment Development view 2" style="border-radius:30px 170px 30px 30px"/></div>
+                  <div class="upx-slide"><img src="./assets/images/project-13-c.jpg" alt="Apartment Development view 3" style="border-radius:30px 170px 30px 30px"/></div>
+                  <div class="upx-slide"><img src="./assets/images/project-13-d.jpg" alt="Apartment Development view 4" style="border-radius:30px 170px 30px 30px"/></div>
+                </div>
+                <div class="upx-rpcard__dots">
+                  <div class="upx-rdot" style="animation:upx-dot-fade 14s infinite 0s"></div>
+                  <div class="upx-rdot" style="animation:upx-dot-fade 14s infinite 3.5s"></div>
+                  <div class="upx-rdot" style="animation:upx-dot-fade 14s infinite 7s"></div>
+                  <div class="upx-rdot" style="animation:upx-dot-fade 14s infinite 10.5s"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- ══ PROJECT 14 — AMBER ══ -->
+          <div id="project-14" class="upx-rpblock upx-rpblock--right">
+            <div class="upx-rpblock__num-row">
+              <div class="upx-rp__num upx-rp__num--amber">14<span class="upx-rp__num-dot upx-rp__num-dot--amber"></span></div>
+            </div>
+            <div class="upx-rpcard upx-rpcard--amber upx-rpcard--img-left upx-rpcard-left-tile">
+              <div class="upx-rpcard__img upx-left-image">
+                <div class="upx-slideshow-4">
+                   <div class="upx-slide"><img src="https://placehold.co/800x600/d97706/ffffff?text=Mixed-Use+Development+%7C+View+A" alt="Mixed-Use Development view 1" style="border-radius:170px 30px 30px 30px"/></div>
+                  <div class="upx-slide"><img src="https://placehold.co/800x600/d97706/ffffff?text=Mixed-Use+Development+%7C+View+B" alt="Mixed-Use Development view 2" style="border-radius:170px 30px 30px 30px"/></div>
+                  <div class="upx-slide"><img src="https://placehold.co/800x600/d97706/ffffff?text=Mixed-Use+Development+%7C+View+C" alt="Mixed-Use Development view 3" style="border-radius:170px 30px 30px 30px"/></div>
+                  <div class="upx-slide"><img src="https://placehold.co/800x600/d97706/ffffff?text=Mixed-Use+Development+%7C+View+D" alt="Mixed-Use Development view 4" style="border-radius:170px 30px 30px 30px"/></div>
+                </div>
+                <div class="upx-rpcard__dots">
+                  <div class="upx-rdot" style="animation:upx-dot-fade 14s infinite 0s"></div>
+                  <div class="upx-rdot" style="animation:upx-dot-fade 14s infinite 3.5s"></div>
+                  <div class="upx-rdot" style="animation:upx-dot-fade 14s infinite 7s"></div>
+                  <div class="upx-rdot" style="animation:upx-dot-fade 14s infinite 10.5s"></div>
+                </div>
+              </div>
+              <div class="upx-rpcard__text">
+                <h2 class="upx-rpcard__title">Mixed-Use Development</h2>
+                <div class="upx-rpcard__meta">
+                  <div class="upx-rpcard__meta-row"><span class="upx-rpcard__meta-key">Location:</span><span class="upx-rpcard__meta-val">Mbarara City</span></div>
+                  <div class="upx-rpcard__meta-row"><span class="upx-rpcard__meta-key">Project Type:</span><span class="upx-rpcard__meta-val">Commercial & Residential Development</span></div>
+                  <div class="upx-rpcard__meta-row"><span class="upx-rpcard__meta-key">Status:</span><span class="upx-rpcard__meta-val">Ongoing</span></div>
+                </div>
+                <div class="upx-rpsection">
+                  <span class="upx-rpsection__title">Project Overview</span>
+                  <div class="dash-line orange-line"></div>
+                  <p class="upx-rpsection__text">A mixed-use project combining residential units with commercial spaces to support both living and business operations.</p>
+                </div>
+                <div class="upx-rpsection">
+                  <span class="upx-rpsection__title">Key Details</span>
+                  <div class="dash-line orange-line"></div>
+                  <div class="upx-rpdetails">
+                    <div class="upx-rpdetail-item">20 total units</div>
+                    <div class="upx-rpdetail-item">Residential apartments</div>
+                    <div class="upx-rpdetail-item">Commercial units</div>
+                    <div class="upx-rpdetail-item">Shared amenities and parking</div>
+                  </div>
+                </div>
+                <div class="upx-rpsection">
+                  <span class="upx-rpsection__title">Scope of Work</span>
+                  <div class="dash-line orange-line"></div>
+                  <p class="upx-rpsection__text">Project planning, coordination, and construction supervision.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
 
         </div>
+        <!-- /projects-container -->
 
       </div>
     </section>
 
 
     <section class="upx-cta">
-        <div class="upx-cta__inner">
-          <h2 class="upx-cta__heading">Planning to build, renovate, or invest?</h2>
-          <p class="upx-cta__sub">Let's guide your project from idea to completion with professionalism and care.</p>
-          <a href="mailto:info@uniprixinvent.com" class="upx-cta__btn">Book a Site Visit</a>
-        </div>
+      <div class="upx-cta__inner">
+        <h2 class="upx-cta__heading">Planning to build, renovate, or invest?</h2>
+        <p class="upx-cta__sub">Let's guide your project from idea to completion with professionalism and care.</p>
+        <a href="mailto:info@uniprixinvestment.com" class="upx-cta__btn">Book a Site Visit</a>
+      </div>
     </section>
 
 
-
-
     <!-- CTA Section -->
-
     <section class="cta-section">
       <div class="cta-card">
         <img src="https://cdn.codia.ai/figma/JGrbVETRuqt2yPG3MfW142/img-84494308e5d0ccc8.png" alt="Modern house" class="cta-image">
@@ -103,11 +850,9 @@
       </div>
 
       <!-- Contact Form -->
-
       <div class="contact-section">
         <form id="contact-form" action="https://formspree.io/f/xnjgrenn" method="POST">
           <h2>Talk to Us</h2>
-
           <div class="form-row">
             <div class="form-group">
               <label for="firstName">First Name</label>
@@ -118,17 +863,14 @@
               <input type="text" id="lastName" name="lastName" required>
             </div>
           </div>
-
           <div class="form-group">
             <label for="company">Company</label>
             <input type="text" id="company" name="company">
           </div>
-
           <div class="form-group">
             <label for="email">Email</label>
             <input type="email" id="email" name="email" required>
           </div>
-
           <div class="form-group">
             <label for="phone">Phone Number</label>
             <div class="phone-input">
@@ -142,24 +884,13 @@
               <input type="tel" id="phone" name="phone" class="border-none">
             </div>
           </div>
-
           <div class="form-group">
             <label for="message">Message</label>
             <textarea id="message" name="message" required></textarea>
           </div>
-
-          <!-- Keep spam protection -->
           <input type="text" name="_gotcha" style="display:none">
-
-          <!-- Keep custom subject if you want -->
           <input type="hidden" name="_subject" value="New Contact Form Submission">
-
-          <!-- Comment out or remove _next when using AJAX -->
-          <!-- <input type="hidden" name="_next" value="https://yoursite.com/thank-you.html"> -->
-
           <button type="submit" class="submit-btn">Let's Talk</button>
-
-          <!-- Success message (hidden by default) -->
           <div id="form-success" style="display: none; margin-top: 1.5rem; padding: 1rem; background: #e6ffe6; border: 1px solid #b3ffb3; border-radius: 6px; color: #006600; text-align: center;">
             Thank you! Your message has been sent successfully. We'll get back to you soon.
           </div>
@@ -172,13 +903,11 @@
     </section>
 
     <!-- Footer -->
-
     <footer class="footer">
       <div class="footer-top">
         <div class="footer-logo-section">
           <div>
             <img src="../footer-logo.svg" alt="Unidrix Logo Icon" style="height: 76.65px; width: auto;">
-            <!-- <img src="https://cdn.codia.ai/figma/JGrbVETRuqt2yPG3MfW142/img-58d73c1486453317.png" alt="Unidrix Investment" style="height: 37.43px; width: auto; margin-left: 15px;"> -->
           </div>
           <div class="footer-contact">
             <div class="contact-item">
@@ -192,7 +921,7 @@
               <img src="https://cdn.codia.ai/figma/JGrbVETRuqt2yPG3MfW142/img-74cee43d8c71007a.svg" alt="Email Icon" class="contact-icon">
               <div class="contact-text">
                 <p>Contact us at</p>
-                <p> <a href="mailto:info@uniprixinvestment.com" id="footer-email">info@uniprixinvestment.com</a></p>
+                <p><a href="mailto:info@uniprixinvestment.com" id="footer-email">info@uniprixinvestment.com</a></p>
               </div>
             </div>
           </div>
@@ -222,117 +951,6 @@
         <p class="footer-copyright">© 2026, All Rights Reserved</p>
       </div>
     </footer>
-
-
-
-
-
-   <script>
-// Load content for Our Projects page
-fetch('../data/site-content.json')
-  .then(response => response.json())
-  .then(data => {
-    const p = data.ourProjects;
-
-    // Intro
-    document.getElementById('proj-intro-heading').textContent = p.introHeading;
-    document.getElementById('proj-intro-text').textContent = p.introText;
-    document.getElementById('proj-page-label').textContent = p.pageLabel;
-
-    // Generate all projects with unique IDs
-    const container = document.getElementById('projects-container');
-    container.innerHTML = '';
-
-    p.projects.forEach((proj) => {
-      const isEven = p.projects.indexOf(proj) % 2 === 0;   // keeps alternating layout
-      const blockClass = isEven ? 'upx-rpblock' : 'upx-rpblock upx-rpblock--right';
-      const cardClass = isEven 
-        ? 'upx-rpcard' 
-        : 'upx-rpcard upx-rpcard--amber upx-rpcard--img-left upx-rpcard-left-tile';
-      
-      const numClass = isEven ? '' : 'upx-rp__num--amber';
-      const dotClass = isEven ? '' : 'upx-rp__num-dot--amber';
-
-      const numImages = proj.images.length;
-      const slideshowClass = numImages === 5 ? 'upx-slideshow-5' : 'upx-slideshow-4';
-      const totalTime = numImages === 5 ? '17.5s' : '14s';
-      const borderRadius = isEven ? '30px 170px 30px 30px' : '170px 30px 30px 30px';
-
-      let slidesHTML = '';
-      let dotsHTML = '';
-      proj.images.forEach((img, i) => {
-        slidesHTML += `
-          <div class="upx-slide">
-            <img src="../${img}" alt="${proj.title} view ${i+1}" style="border-radius:${borderRadius}"/>
-          </div>`;
-        const delay = (i * 3.5) + 's';
-        dotsHTML += `<div class="upx-rdot" style="animation:upx-dot-fade ${totalTime} infinite ${delay}"></div>`;
-      });
-
-      const keyDetailsHTML = proj.keyDetails.map(item => 
-        `<div class="upx-rpdetail-item">${item}</div>`
-      ).join('');
-
-      const projectHTML = `
-        <div id="${proj.id}" class="${blockClass}">
-          <div class="upx-rpblock__num-row">
-            <div class="upx-rp__num ${numClass}">
-              ${proj.number}<span class="upx-rp__num-dot ${dotClass}"></span>
-            </div>
-          </div>
-
-          <div class="${cardClass}">
-            ${isEven 
-              ? `
-                <!-- Text left -->
-                <div class="upx-rpcard__text">
-                  <h2 class="upx-rpcard__title">${proj.title}</h2>
-                  <div class="upx-rpcard__meta">
-                    <div class="upx-rpcard__meta-row"><span class="upx-rpcard__meta-key">Location:</span><span class="upx-rpcard__meta-val">${proj.location}</span></div>
-                    <div class="upx-rpcard__meta-row"><span class="upx-rpcard__meta-key">Project Type:</span><span class="upx-rpcard__meta-val">${proj.projectType}</span></div>
-                    <div class="upx-rpcard__meta-row"><span class="upx-rpcard__meta-key">Status:</span><span class="upx-rpcard__meta-val">${proj.status}</span></div>
-                  </div>
-                  <div class="upx-rpsection"><span class="upx-rpsection__title">Project Overview</span><div class="dash-line"></div><p class="upx-rpsection__text">${proj.overview}</p></div>
-                  <div class="upx-rpsection"><span class="upx-rpsection__title">Key Details</span><div class="dash-line"></div><div class="upx-rpdetails">${keyDetailsHTML}</div></div>
-                  <div class="upx-rpsection"><span class="upx-rpsection__title">Scope of Work</span><div class="dash-line"></div><p class="upx-rpsection__text">${proj.scope}</p></div>
-                </div>
-                <!-- Image right -->
-                <div class="upx-rpcard__img">
-                  <div class="${slideshowClass}">${slidesHTML}</div>
-                  <div class="upx-rpcard__dots">${dotsHTML}</div>
-                </div>
-              ` 
-              : `
-                <!-- Image left -->
-                <div class="upx-rpcard__img upx-left-image">
-                  <div class="${slideshowClass}">${slidesHTML}</div>
-                  <div class="upx-rpcard__dots">${dotsHTML}</div>
-                </div>
-                <!-- Text right -->
-                <div class="upx-rpcard__text">
-                  <h2 class="upx-rpcard__title">${proj.title}</h2>
-                  <div class="upx-rpcard__meta">
-                    <div class="upx-rpcard__meta-row"><span class="upx-rpcard__meta-key">Location:</span><span class="upx-rpcard__meta-val">${proj.location}</span></div>
-                    <div class="upx-rpcard__meta-row"><span class="upx-rpcard__meta-key">Project Type:</span><span class="upx-rpcard__meta-val">${proj.projectType}</span></div>
-                    <div class="upx-rpcard__meta-row"><span class="upx-rpcard__meta-key">Status:</span><span class="upx-rpcard__meta-val">${proj.status}</span></div>
-                  </div>
-                  <div class="upx-rpsection"><span class="upx-rpsection__title">Project Overview</span><div class="dash-line orange-line"></div><p class="upx-rpsection__text">${proj.overview}</p></div>
-                  <div class="upx-rpsection"><span class="upx-rpsection__title">Key Details</span><div class="dash-line orange-line"></div><div class="upx-rpdetails">${keyDetailsHTML}</div></div>
-                  <div class="upx-rpsection"><span class="upx-rpsection__title">Scope of Work</span><div class="dash-line orange-line"></div><p class="upx-rpsection__text">${proj.scope}</p></div>
-                </div>
-              `}
-          </div>
-        </div>
-      `;
-
-      container.innerHTML += projectHTML;
-    });
-  })
-  .catch(err => console.error('Projects load error:', err));
-</script>
-
-
-
 
   </body>
 </html>

@@ -33,7 +33,6 @@
               <li class="mobile-donate-item"><a href="../contact-us/">Contact Us</a></li>
             </ul>
           </div>
-          
 
           <a href="../contact-us/" class="nav-donate-btn">Contact Us</a>
 
@@ -60,76 +59,135 @@
     <div class="service-hero-image">
         <img src="./assets/images/main-service-image.png" />
     </div>
-    
-
-
-
-
-
-
-
 
 
     <!-- ============================================================
      SERVICES CAROUSEL SECTION
-     All classes prefixed with  sc-  to avoid collisions
-     Carousel works on both desktop and mobile
+     Edit card content directly below — no JSON file needed.
+
+     TO ADD A CARD:    Copy one <div class="sc-card ..."> block and paste it
+     TO REMOVE A CARD: Delete the block
+     TO EDIT TEXT:     Change the text inside the tags
+     TO CHANGE IMAGE:  Update the src="..." on the <img> tag
+     TO EDIT INCLUDES: Add/remove <div class="sc-inc-item"> lines
      ============================================================ -->
 
-    <!-- ============================================================
-     SERVICES CAROUSEL SECTION
-     Content loaded from ../data/site-content.json
-     ============================================================ -->
+    <section class="sc-section">
+      <div class="sc-inner">
 
-<section class="sc-section">
-  <div class="sc-inner">
+        <div class="sc-carousel-wrap">
+          <button class="sc-arrow sc-arrow--prev" id="scPrev" aria-label="Previous">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                 stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="15 18 9 12 15 6"/>
+            </svg>
+          </button>
 
-    <div class="sc-carousel-wrap">
-      <button class="sc-arrow sc-arrow--prev" id="scPrev" aria-label="Previous">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-             stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="15 18 9 12 15 6"/>
-        </svg>
-      </button>
+          <div class="sc-track-outer" id="scTrackOuter">
+            <div class="sc-track" id="scTrack">
 
-      <div class="sc-track-outer" id="scTrackOuter">
-        <!-- Cards injected here by JS -->
-        <div class="sc-track" id="scTrack"></div>
+              <!-- ═══ CARD 1 ═══════════════════════════════════════ -->
+              <div class="sc-card sc-card--br-right" style="animation: sc-rise 0.5s ease both 0.1s">
+                <div class="sc-card__img">
+                  <img src="./assets/images/service-1.jpg" alt="Architectural & Structural Design">
+                </div>
+                <div class="sc-card__body">
+                  <h3 class="sc-card__title">Architectural & Structural Design</h3>
+                  <p class="sc-card__desc">We create detailed architectural plans and structural designs tailored to your vision, site conditions, and budget — ensuring safety, functionality, and aesthetic appeal.</p>
+                  <span class="sc-inc-label">Includes</span>
+                  <div class="sc-inc-item">Concept & schematic drawings</div>
+                  <div class="sc-inc-item">Full working drawings</div>
+                  <div class="sc-inc-item">Structural engineering plans</div>
+                  <div class="sc-inc-item">Permit-ready documentation</div>
+                </div>
+              </div>
+
+              <!-- ═══ CARD 2 ═══════════════════════════════════════ -->
+              <div class="sc-card sc-card--br-left" style="animation: sc-rise 0.5s ease both 0.2s">
+                <div class="sc-card__img">
+                  <img src="./assets/images/service-2.jpg" alt="Construction & Project Management">
+                </div>
+                <div class="sc-card__body">
+                  <h3 class="sc-card__title">Construction & Project Management</h3>
+                  <p class="sc-card__desc">From groundbreaking to handover, we manage every aspect of the build — coordinating contractors, materials, timelines, and quality control so your project is delivered on time and on budget.</p>
+                  <span class="sc-inc-label">Includes</span>
+                  <div class="sc-inc-item">Site supervision & coordination</div>
+                  <div class="sc-inc-item">Contractor procurement</div>
+                  <div class="sc-inc-item">Progress reporting</div>
+                  <div class="sc-inc-item">Quality assurance inspections</div>
+                </div>
+              </div>
+
+              <!-- ═══ CARD 3 ═══════════════════════════════════════ -->
+              <div class="sc-card sc-card--br-right" style="animation: sc-rise 0.5s ease both 0.3s">
+                <div class="sc-card__img">
+                  <img src="./assets/images/service-3.jpg" alt="Interior Design & Finishing">
+                </div>
+                <div class="sc-card__body">
+                  <h3 class="sc-card__title">Interior Design & Finishing</h3>
+                  <p class="sc-card__desc">Our interior design team transforms spaces into functional, beautiful environments — selecting materials, finishes, furniture, and lighting that reflect your style and purpose.</p>
+                  <span class="sc-inc-label">Includes</span>
+                  <div class="sc-inc-item">Space planning & mood boards</div>
+                  <div class="sc-inc-item">Material & finish selection</div>
+                  <div class="sc-inc-item">Furniture & décor sourcing</div>
+                  <div class="sc-inc-item">Full fit-out supervision</div>
+                </div>
+              </div>
+
+              <!-- ═══ CARD 4 ═══════════════════════════════════════ -->
+              <div class="sc-card sc-card--br-left" style="animation: sc-rise 0.5s ease both 0.4s">
+                <div class="sc-card__img">
+                  <img src="./assets/images/service-4.jpg" alt="Renovation & Remodelling">
+                </div>
+                <div class="sc-card__body">
+                  <h3 class="sc-card__title">Renovation & Remodelling</h3>
+                  <p class="sc-card__desc">We breathe new life into existing structures — from residential upgrades to full commercial overhauls — with minimal disruption and maximum impact.</p>
+                  <span class="sc-inc-label">Includes</span>
+                  <div class="sc-inc-item">Site assessment & feasibility</div>
+                  <div class="sc-inc-item">Demolition & structural changes</div>
+                  <div class="sc-inc-item">MEP upgrades (electrical, plumbing)</div>
+                  <div class="sc-inc-item">Final finishing & handover</div>
+                </div>
+              </div>
+
+              <!-- ═══ CARD 5 ═══════════════════════════════════════ -->
+              <div class="sc-card sc-card--br-right" style="animation: sc-rise 0.5s ease both 0.5s">
+                <div class="sc-card__img">
+                  <img src="./assets/images/service-5.jpg" alt="Real Estate Consultation">
+                </div>
+                <div class="sc-card__body">
+                  <h3 class="sc-card__title">Real Estate Consultation</h3>
+                  <p class="sc-card__desc">We guide investors and homeowners through Uganda's real estate landscape — from site identification and valuation to market analysis and investment strategy.</p>
+                  <span class="sc-inc-label">Includes</span>
+                  <div class="sc-inc-item">Land & property search</div>
+                  <div class="sc-inc-item">Market & investment analysis</div>
+                  <div class="sc-inc-item">Due diligence & title verification</div>
+                  <div class="sc-inc-item">Negotiation support</div>
+                </div>
+              </div>
+
+            </div><!-- /sc-track -->
+          </div><!-- /sc-track-outer -->
+
+          <button class="sc-arrow sc-arrow--next" id="scNext" aria-label="Next">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                 stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 18 15 12 9 6"/>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Dots — one per card. Keep count in sync with the cards above -->
+        <div class="sc-dots" id="scDots">
+          <button class="sc-dot sc-dot--active" data-index="0"></button>
+          <button class="sc-dot" data-index="1"></button>
+          <button class="sc-dot" data-index="2"></button>
+          <button class="sc-dot" data-index="3"></button>
+          <button class="sc-dot" data-index="4"></button>
+        </div>
+
       </div>
-
-      <button class="sc-arrow sc-arrow--next" id="scNext" aria-label="Next">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-             stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="9 18 15 12 9 6"/>
-        </svg>
-      </button>
-    </div>
-
-    <div class="sc-dots" id="scDots"></div>
-
-  </div>
-</section>
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-    
-
-
-
-
-
-
+    </section>
 
 
     <section class="upx-cta">
@@ -141,16 +199,7 @@
     </section>
 
 
-
-
-
-
-
-
-
-
     <!-- CTA Section -->
-
     <section class="cta-section">
       <div class="cta-card">
         <img src="https://cdn.codia.ai/figma/JGrbVETRuqt2yPG3MfW142/img-84494308e5d0ccc8.png" alt="Modern house" class="cta-image">
@@ -164,7 +213,6 @@
       </div>
 
       <!-- Contact Form -->
-
       <div class="contact-section">
         <form id="contact-form" action="https://formspree.io/f/xnjgrenn" method="POST">
           <h2>Talk to Us</h2>
@@ -209,18 +257,11 @@
             <textarea id="message" name="message" required></textarea>
           </div>
 
-          <!-- Keep spam protection -->
           <input type="text" name="_gotcha" style="display:none">
-
-          <!-- Keep custom subject if you want -->
           <input type="hidden" name="_subject" value="New Contact Form Submission">
-
-          <!-- Comment out or remove _next when using AJAX -->
-          <!-- <input type="hidden" name="_next" value="https://yoursite.com/thank-you.html"> -->
 
           <button type="submit" class="submit-btn">Let's Talk</button>
 
-          <!-- Success message (hidden by default) -->
           <div id="form-success" style="display: none; margin-top: 1.5rem; padding: 1rem; background: #e6ffe6; border: 1px solid #b3ffb3; border-radius: 6px; color: #006600; text-align: center;">
             Thank you! Your message has been sent successfully. We'll get back to you soon.
           </div>
@@ -233,7 +274,6 @@
     </section>
 
     <!-- Footer -->
-
     <footer class="footer">
       <div class="footer-top">
         <div class="footer-logo-section">
@@ -252,7 +292,7 @@
               <img src="https://cdn.codia.ai/figma/JGrbVETRuqt2yPG3MfW142/img-74cee43d8c71007a.svg" alt="Email Icon" class="contact-icon">
               <div class="contact-text">
                 <p>Contact us at</p>
-                <p> <a href="mailto:info@uniprixinvestment.com" id="footer-email">info@uniprixinvestment.com</a></p>
+                <p><a href="mailto:info@uniprixinvestment.com" id="footer-email">info@uniprixinvestment.com</a></p>
               </div>
             </div>
           </div>
@@ -283,145 +323,5 @@
       </div>
     </footer>
 
-
-
-    
-
-    <script>
-(function () {
-
-  const track      = document.getElementById('scTrack');
-  const trackOuter = document.getElementById('scTrackOuter');
-  const dotsWrap   = document.getElementById('scDots');
-  const prevBtn    = document.getElementById('scPrev');
-  const nextBtn    = document.getElementById('scNext');
-
-  const GAP = 20;
-  let currentIndex = 0;
-  let cards = [];
-  let dots  = [];
-
-  /* ── Render cards from JSON data ── */
-  function renderCards(data) {
-    const cardList = data.servicesCarousel.cards;
-
-    track.innerHTML = cardList.map((card, i) => {
-      const brClass = i % 2 === 0 ? 'sc-card--br-right' : 'sc-card--br-left';
-      const delay   = (i + 1) * 0.1;
-      const includesHTML = card.includes
-        .map(item => `<div class="sc-inc-item">${item}</div>`)
-        .join('');
-
-      return `
-        <div class="sc-card ${brClass}"
-             style="animation: sc-rise 0.5s ease both ${delay}s">
-          <div class="sc-card__img">
-            <img src="${card.image}" alt="${card.imageAlt}">
-          </div>
-          <div class="sc-card__body">
-            <h3 class="sc-card__title">${card.title}</h3>
-            <p class="sc-card__desc">${card.description}</p>
-            <span class="sc-inc-label">Includes</span>
-            ${includesHTML}
-          </div>
-        </div>`;
-    }).join('');
-
-    /* Render dots — one per card */
-    dotsWrap.innerHTML = cardList.map((_, i) =>
-      `<button class="sc-dot${i === 0 ? ' sc-dot--active' : ''}"
-               data-index="${i}"></button>`
-    ).join('');
-
-    /* Re-query live DOM nodes */
-    cards = track.querySelectorAll('.sc-card');
-    dots  = dotsWrap.querySelectorAll('.sc-dot');
-
-    dots.forEach(d => {
-      d.addEventListener('click', () => goTo(Number(d.dataset.index)));
-    });
-  }
-
-  /* ── How many cards visible at this width ── */
-  function visibleCount() {
-    const w = window.innerWidth;
-    if (w >= 1024) return 3;
-    if (w >= 640)  return 2;
-    return 1;
-  }
-
-  /* ── Size cards to fill the track evenly ── */
-  function sizeCards() {
-    if (!cards.length) return;
-    const vis      = visibleCount();
-    const outerW   = trackOuter.clientWidth;
-    const padH     = parseFloat(getComputedStyle(track).paddingLeft) * 2;
-    const cardW    = Math.floor((outerW - padH - GAP * (vis - 1)) / vis);
-    cards.forEach(c => { c.style.width = cardW + 'px'; });
-  }
-
-  /* ── Translate the track ── */
-  function goTo(index) {
-    if (!cards.length) return;
-    const vis      = visibleCount();
-    const maxIndex = Math.max(0, cards.length - vis);
-    currentIndex   = Math.max(0, Math.min(index, maxIndex));
-
-    const cardW  = cards[0].offsetWidth;
-    const offset = currentIndex * (cardW + GAP);
-    track.style.transform = `translateX(-${offset}px)`;
-
-    dots.forEach((d, i) => {
-      d.classList.toggle('sc-dot--active', i === currentIndex);
-    });
-
-    prevBtn.disabled = currentIndex === 0;
-    nextBtn.disabled = currentIndex >= maxIndex;
-  }
-
-  /* ── Fetch JSON, render, then init carousel ── */
-  async function init() {
-    track.innerHTML = '<div class="sc-loading">Loading services…</div>';
-
-    try {
-      const res  = await fetch('../data/site-content.json');
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const data = await res.json();
-
-      renderCards(data);
-      sizeCards();
-      goTo(0);
-    } catch (err) {
-      console.error('Services carousel: failed to load site-content.json', err);
-      track.innerHTML =
-        '<div class="sc-error">Could not load services. Please try again later.</div>';
-    }
-  }
-
-  /* ── Arrow events ── */
-  prevBtn.addEventListener('click', () => goTo(currentIndex - 1));
-  nextBtn.addEventListener('click', () => goTo(currentIndex + 1));
-
-  /* ── Touch / swipe ── */
-  let touchStartX = 0;
-  track.addEventListener('touchstart', e => {
-    touchStartX = e.touches[0].clientX;
-  }, { passive: true });
-  track.addEventListener('touchend', e => {
-    const dx = e.changedTouches[0].clientX - touchStartX;
-    if (Math.abs(dx) > 50) goTo(currentIndex + (dx < 0 ? 1 : -1));
-  }, { passive: true });
-
-  /* ── Resize ── */
-  let resizeTimer;
-  window.addEventListener('resize', () => {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(() => { sizeCards(); goTo(currentIndex); }, 120);
-  });
-
-  init();
-})();
-</script>
- 
   </body>
 </html>

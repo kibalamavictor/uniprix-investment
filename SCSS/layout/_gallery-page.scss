@@ -210,6 +210,12 @@
     .upx-gallery__grid   { animation: upx-gal-rise 0.6s ease both 0.22s; }
 
     /* ── RESPONSIVE ── */
+    @media (min-width: 768px){
+        .mobile-disp{
+            display: none;
+        }
+    }
+
     @media (max-width: 768px) {
         .upx-gallery__grid {
         grid-template-columns: repeat(3, 1fr);
@@ -228,6 +234,8 @@
         grid-column: span 2 !important;
         grid-row: span 2 !important;
         }
+
+
     }
 
     @media (max-width: 480px) {

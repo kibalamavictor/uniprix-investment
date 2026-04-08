@@ -16,34 +16,27 @@
 
     <img src="./assets/images/gallery.png" alt="Hero background" class="hero-bg-image"> 
 
-    <header class="nav" >
+    <header class="nav">
       <nav class="navbar" style="box-shadow: 0 0px 0px rgba(0, 0, 0, 0);">
         <div class="nav-container">
           <a href="../" class="logo">
             <img src="../logo.svg" alt="Hayat Logo" class="logo-img" height="55px">
           </a>
-
           <div class="navlinks-container">
             <ul class="nav-links" id="navLinks">
               <li><a href="../">Home</a></li>
               <li><a href="../about-us/">About Us</a></li>
-              <li><a href="../services/" >Services</a></li>
-              <li><a href="../our-projects/" >Our Projects</a></li>
+              <li><a href="../services/">Services</a></li>
+              <li><a href="../our-projects/">Our Projects</a></li>
               <li><a href="./" style="font-weight: 700; color: #193548;">Gallery</a></li>
               <li class="mobile-donate-item"><a href="../contact-us/">Contact Us</a></li>
             </ul>
           </div>
-          
-
           <a href="../contact-us/" class="nav-donate-btn">Contact Us</a>
-
-          <button class="mobile-menu-btn" id="mobileMenuBtn">
-            ☰
-          </button>          
+          <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
         </div>
       </nav>   
     </header>
-
 
 
     <div class="hero-content">
@@ -51,45 +44,115 @@
     </div>
 
 
-
-
-
-
-
     <section class="upx-gallery">
-        <div class="upx-gallery__inner">
+      <div class="upx-gallery__inner">
 
-            <!-- Header -->
-            <div class="upx-gallery__header">
-            <h2 class="upx-gallery__heading" id="gallery-heading">Snapshots from Our Projects</h2>
-            <p class="upx-gallery__sub" id="gallery-subtitle">
-                This gallery brings together highlights from our construction sites, interior design works,
-                3D visualizations, and completed projects captured across different locations and stages of execution.
-            </p>
-            </div>
-
-            <!-- Grid -->
-            <div class="upx-gallery__grid" id="gallery-grid">
-              <!-- All images will be generated here by JavaScript -->
-            </div>
+        <!-- ══════════════════════════════════════════════════
+             HEADER — edit heading and subtitle text here
+             ══════════════════════════════════════════════════ -->
+        <div class="upx-gallery__header">
+          <h2 class="upx-gallery__heading" id="gallery-heading">Snapshots from Our Projects</h2>
+          <p class="upx-gallery__sub" id="gallery-subtitle">
+            This gallery brings together highlights from our construction sites, interior design works,
+            3D visualizations, and completed projects captured across different locations and stages of execution.
+          </p>
         </div>
+
+        <!-- ══════════════════════════════════════════════════
+             GALLERY GRID — edit images directly here.
+
+             TO ADD AN IMAGE:
+               Copy any <div class="upx-gitem"> block and paste it.
+               Update the src="..." and alt="..." on the <img> tag.
+
+             TO ADD A VIDEO THUMBNAIL:
+               Copy a block and add the play-button overlay inside it
+               (see the video example item below).
+
+             TO REMOVE AN IMAGE:
+               Delete the entire <div class="upx-gitem"> block.
+
+             IMAGE PATHS are relative to the gallery/ folder,
+             e.g. src="./assets/images/my-photo.jpg"
+             ══════════════════════════════════════════════════ -->
+        <div class="upx-gallery__grid" id="gallery-grid">
+
+          <!-- ─── Standard image item ───────────────────── -->
+          <div class="upx-gitem" onclick="upxLbOpen(this)">
+            <img src="./assets/images/gallery-1.png" alt="Construction site progress" />
+          </div>
+
+          <div class="upx-gitem" onclick="upxLbOpen(this)">
+            <img src="./assets/images/gallery-2.png" alt="Completed residential exterior" />
+          </div>
+
+          <div class="upx-gitem" onclick="upxLbOpen(this)">
+            <img src="./assets/images/gallery-3.png" alt="Interior living room design" />
+          </div>
+
+          <div class="upx-gitem" onclick="upxLbOpen(this)">
+            <img src="./assets/images/gallery-4.png" alt="Kitchen finishing and fit-out" />
+          </div>
+
+          <div class="upx-gitem" onclick="upxLbOpen(this)">
+            <img src="./assets/images/gallery-5.png" alt="Architectural 3D render" />
+          </div>
+
+          <div class="upx-gitem" onclick="upxLbOpen(this)">
+            <img src="./assets/images/gallery-6.png" alt="Office renovation works" />
+          </div>
+
+          <div class="upx-gitem" onclick="upxLbOpen(this)">
+            <img src="./assets/images/gallery-7.png" alt="Roofing and structural work" />
+          </div>
+
+          <div class="upx-gitem" onclick="upxLbOpen(this)">
+            <img src="./assets/images/gallery-8.png" alt="Master bedroom interior" />
+          </div>
+
+          <div class="upx-gitem" onclick="upxLbOpen(this)">
+            <img src="./assets/images/gallery-9.png" alt="Commercial building exterior" />
+          </div>
+
+          <div class="upx-gitem" onclick="upxLbOpen(this)">
+            <img src="./assets/images/gallery-10.png" alt="Landscaped garden and outdoor space" />
+          </div>
+
+          <div class="upx-gitem" onclick="upxLbOpen(this)">
+            <img src="./assets/images/gallery-11.png" alt="Bathroom tiling and fixtures" />
+          </div>
+
+          <div class="upx-gitem mobile-disp" onclick="upxLbOpen(this)">
+            <img src="./assets/images/gallery-12.png" alt="Site survey and planning" />
+          </div>
+
+          <!-- ─── Video thumbnail item (copy this pattern for videos) -->
+          <!--
+          <div class="upx-gitem" onclick="upxLbOpen(this)">
+            <img src="./assets/images/gallery-video-thumb.jpg" alt="Project walkthrough video" />
+            <div class="upx-gitem__play">
+              <div class="upx-gitem__play-icon">
+                <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+              </div>
+            </div>
+          </div>
+          -->
+
+        </div>
+        <!-- /gallery-grid -->
+
+      </div>
     </section>
+
 
     <!-- Lightbox -->
     <div class="upx-lightbox" id="upxLightbox" onclick="upxLbClose()">
-    <button class="upx-lightbox__close" onclick="upxLbClose()">✕</button>
-    <img class="upx-lightbox__media" id="upxLbImg" src="" alt=""/>
+      <button class="upx-lightbox__close" onclick="upxLbClose()">✕</button>
+      <img class="upx-lightbox__media" id="upxLbImg" src="" alt=""/>
     </div>
 
 
-
-
-
-
-
-
     <!-- CTA Section -->
-
     <section class="cta-section">
       <div class="cta-card">
         <img src="https://cdn.codia.ai/figma/JGrbVETRuqt2yPG3MfW142/img-84494308e5d0ccc8.png" alt="Modern house" class="cta-image">
@@ -103,7 +166,6 @@
       </div>
 
       <!-- Contact Form -->
-
       <div class="contact-section">
         <form id="contact-form" action="https://formspree.io/f/xnjgrenn" method="POST">
           <h2>Talk to Us</h2>
@@ -148,18 +210,11 @@
             <textarea id="message" name="message" required></textarea>
           </div>
 
-          <!-- Keep spam protection -->
           <input type="text" name="_gotcha" style="display:none">
-
-          <!-- Keep custom subject if you want -->
           <input type="hidden" name="_subject" value="New Contact Form Submission">
-
-          <!-- Comment out or remove _next when using AJAX -->
-          <!-- <input type="hidden" name="_next" value="https://yoursite.com/thank-you.html"> -->
 
           <button type="submit" class="submit-btn">Let's Talk</button>
 
-          <!-- Success message (hidden by default) -->
           <div id="form-success" style="display: none; margin-top: 1.5rem; padding: 1rem; background: #e6ffe6; border: 1px solid #b3ffb3; border-radius: 6px; color: #006600; text-align: center;">
             Thank you! Your message has been sent successfully. We'll get back to you soon.
           </div>
@@ -172,13 +227,11 @@
     </section>
 
     <!-- Footer -->
-
     <footer class="footer">
       <div class="footer-top">
         <div class="footer-logo-section">
           <div>
             <img src="../footer-logo.svg" alt="Unidrix Logo Icon" style="height: 76.65px; width: auto;">
-            <!-- <img src="https://cdn.codia.ai/figma/JGrbVETRuqt2yPG3MfW142/img-58d73c1486453317.png" alt="Unidrix Investment" style="height: 37.43px; width: auto; margin-left: 15px;"> -->
           </div>
           <div class="footer-contact">
             <div class="contact-item">
@@ -192,7 +245,7 @@
               <img src="https://cdn.codia.ai/figma/JGrbVETRuqt2yPG3MfW142/img-74cee43d8c71007a.svg" alt="Email Icon" class="contact-icon">
               <div class="contact-text">
                 <p>Contact us at</p>
-                <p> <a href="mailto:info@uniprixinvestment.com" id="footer-email">info@uniprixinvestment.com</a></p>
+                <p><a href="mailto:info@uniprixinvestment.com" id="footer-email">info@uniprixinvestment.com</a></p>
               </div>
             </div>
           </div>
@@ -223,42 +276,5 @@
       </div>
     </footer>
 
-
-
-
-
-    <script>
-    // Load Gallery from Sitepins JSON
-    fetch('../data/site-content.json')
-      .then(response => response.json())
-      .then(data => {
-        const g = data.gallery;
-
-        // Update header
-        document.getElementById('gallery-heading').textContent = g.heading;
-        document.getElementById('gallery-subtitle').textContent = g.subtitle;
-
-        // Generate dynamic gallery grid
-        const grid = document.getElementById('gallery-grid');
-        grid.innerHTML = '';
-
-        g.items.forEach(item => {
-          const itemHTML = `
-            <div class="upx-gitem" onclick="upxLbOpen(this)">
-              <img src="../${item.src}" alt="${item.alt}" />
-              ${item.isVideo ? `
-                <div class="upx-gitem__play">
-                  <div class="upx-gitem__play-icon">
-                    <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                  </div>
-                </div>
-              ` : ''}
-            </div>
-          `;
-          grid.innerHTML += itemHTML;
-        });
-      })
-      .catch(err => console.error('Gallery load error:', err));
-    </script>
   </body>
 </html>
