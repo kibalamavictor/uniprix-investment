@@ -154,27 +154,27 @@
     {
       name: 'John Mukasa',
       text: 'Uniprix handled our office renovation with professionalism and precision. They delivered on time and kept us informed every step of the way.',
-      img:  'https://randomuser.me/api/portraits/men/32.jpg'
+      img:  'https://randomuser.me/api/portraits/men/70.jpg'
     },
     {
       name: 'Sarah Nalubega',
       text: 'The interior design team transformed our home beyond expectations. Great attention to detail and very client-focused throughout the project.',
-      img:  'https://randomuser.me/api/portraits/women/44.jpg'
+      img:  'https://randomuser.me/api/portraits/women/89.jpg'
     },
     {
       name: 'David Otieno',
       text: 'From planning to execution, Uniprix Investment showed true expertise. Our commercial building was completed within budget and on schedule.',
-      img:  'https://randomuser.me/api/portraits/men/56.jpg'
+      img:  'https://randomuser.me/api/portraits/men/53.jpg'
     },
     {
       name: 'Grace Apio',
       text: 'Reliable, honest, and skilled. I highly recommend Uniprix for any construction or renovation work. They genuinely care about quality.',
-      img:  'https://randomuser.me/api/portraits/women/68.jpg'
+      img:  'https://randomuser.me/api/portraits/women/92.jpg'
     },
     {
       name: 'Robert Ssemakula',
       text: 'Excellent project management from start to finish. The site visits were thorough and the team communicated clearly throughout.',
-      img:  'https://randomuser.me/api/portraits/men/77.jpg'
+      img:  'https://randomuser.me/api/portraits/men/83.jpg'
     },
   ];
   // ─────────────────────────────────────────────────────
