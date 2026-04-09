@@ -8,7 +8,6 @@
 
 
     .upx-gallery {
-        font-family: 'Barlow', sans-serif;
         background: var(--upx-white);
         padding: 0px 6vw 0px;
     }
@@ -108,29 +107,7 @@
         margin-left: 3px;
     }
 
-    /*
-    * ── EXPLICIT GRID PLACEMENT (6 cols × 8 rows) ──
-    *
-    *  Col:  1   2   3   4   5   6
-    *  R1:  [──img1──][──img2──][──img3──]
-    *  R2:  [        ][──img5──][6 ][7  ]
-    *  R3:  [──img4──][──img8──][9 ][10 ]
-    *  R4:  [        ][──────────────────]
-    *  R5:  [12][13 ][──────img14───────]
-    *  R6:  [  ][   ][                  ]
-    *
-    *  item4  = col 1-3, row 2-6  (tall left, 4 rows)
-    *  item5  = col 3-5, row 2-4  (mid top)
-    *  item6  = col 5-6, row 2-4  (small top-right A)
-    *  item7  = col 6-7, row 2-4  (small top-right B)
-    *  item8  = col 3-5, row 4-6  (mid bottom)
-    *  item9  = col 5-6, row 4-6  (small bottom-right A)
-    *  item10 = col 6-7, row 4-6  (small bottom-right B)
-    *  item11 = col 1-3, row 6-8  (bottom left wide)  — removed, replaced by 12+13
-    *  item12 = col 1-2, row 6-8  (small bottom left A)
-    *  item13 = col 2-3, row 6-8  (small bottom left B)
-    *  item14 = col 3-7, row 6-8  (wide bottom right)
-    */
+    
 
     /* Row 1 */
     .upx-gitem:nth-child(1)  { grid-column: 1 / 3; grid-row: 1 / 2; }

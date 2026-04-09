@@ -35,7 +35,7 @@
         width: 100%;
         display: flex;
         flex-direction: column;
-        gap: 56px;
+        gap: 20px;
     }
 
     /* ── PAGE HEADING ── */
@@ -79,6 +79,7 @@
         display: flex;
         flex-direction: column;
         gap: 12px;
+        padding-top: 25px;
     }
 
     .upx-rpblock__num-row {
@@ -88,7 +89,7 @@
 
     .upx-rpblock--right .upx-rpblock__num-row {
         justify-content: flex-end;
-        padding-top: 20px;
+        // padding-top: 20px;
     }
 
     /* ── CARD ── */
