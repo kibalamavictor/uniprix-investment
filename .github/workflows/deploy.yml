@@ -15,7 +15,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build:
+  eleventy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -33,7 +33,7 @@ jobs:
           path: _site
 
   deploy:
-    needs: build
+    needs: eleventy
     runs-on: ubuntu-latest
     environment:
       name: github-pages
