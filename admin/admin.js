@@ -1,5 +1,6 @@
 const STORAGE_KEY = 'uniprix-cms-auth';
 const PUBLISH_KEY = 'uniprix-cms-last-publish';
+const PUBLISH_HISTORY_KEY = 'uniprix-cms-publish-history';
 
 const PAGE_META = {
   site: {
@@ -57,7 +58,7 @@ const PAGE_LABELS = Object.fromEntries(
   Object.entries(PAGE_META).map(([k, v]) => [k, v.label])
 );
 
-const IMAGE_KEYS = new Set(['image', 'img', 'src', 'icon', 'logo', 'avatar', 'photo', 'thumbnail']);
+const IMAGE_KEYS = new Set(['image', 'img', 'src', 'icon', 'logo', 'avatar', 'photo', 'thumbnail', 'heroimage', 'ogimage']);
 const LONG_TEXT_KEYS = new Set(['text', 'description', 'body', 'content', 'paragraph', 'quote', 'bio', 'summary', 'subheading', 'heading']);
 
 let config = null;
@@ -65,6 +66,7 @@ let auth = null;
 let currentPage = 'dashboard';
 let content = {};
 let fileMeta = {};
+let dashboardCharts = [];
 
 const $ = (sel) => document.querySelector(sel);
 
@@ -106,6 +108,21 @@ function setLastPublish(page) {
   const data = getLastPublish();
   data[page] = new Date().toISOString();
   localStorage.setItem(PUBLISH_KEY, JSON.stringify(data));
+  recordPublishHistory(page);
+}
+
+function getPublishHistory() {
+  try {
+    return JSON.parse(localStorage.getItem(PUBLISH_HISTORY_KEY) || '[]');
+  } catch {
+    return [];
+  }
+}
+
+function recordPublishHistory(page) {
+  const history = getPublishHistory();
+  history.push({ page, at: new Date().toISOString() });
+  localStorage.setItem(PUBLISH_HISTORY_KEY, JSON.stringify(history.slice(-50)));
 }
 
 function formatRelativeTime(iso) {
@@ -142,6 +159,81 @@ async function githubRequest(path, options = {}) {
     throw new Error(err.message || `GitHub API error (${res.status})`);
   }
   return res.json();
+}
+
+async function githubListDir(path) {
+  const data = await githubRequest(path);
+  return Array.isArray(data) ? data : [];
+}
+
+function sanitizeFilename(name) {
+  const parts = name.split('.');
+  const ext = parts.length > 1 ? `.${parts.pop().toLowerCase()}` : '';
+  const base = parts.join('.')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '') || 'image';
+  return `${base}${ext}`;
+}
+
+function fileToBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result.split(',')[1]);
+    reader.onerror = () => reject(new Error('Could not read file.'));
+    reader.readAsDataURL(file);
+  });
+}
+
+async function uploadMediaFile(file) {
+  if (!auth?.token) throw new Error('Sign in to upload images.');
+
+  const maxMb = config.maxUploadMB || 10;
+  if (file.size > maxMb * 1024 * 1024) {
+    throw new Error(`Image must be under ${maxMb} MB.`);
+  }
+
+  const allowed = ['image/jpeg', 'image/png', 'image/webp', 'image/gif', 'image/svg+xml'];
+  if (!allowed.includes(file.type)) {
+    throw new Error('Use JPEG, PNG, WebP, GIF, or SVG.');
+  }
+
+  const mediaPath = config.mediaPath || 'media';
+  const filename = `${Date.now()}-${sanitizeFilename(file.name)}`;
+  const path = `${mediaPath}/${filename}`;
+  const base64 = await fileToBase64(file);
+
+  const res = await fetch(`https://api.github.com/repos/${auth.repo}/contents/${path}`, {
+    method: 'PUT',
+    headers: {
+      Accept: 'application/vnd.github+json',
+      Authorization: `Bearer ${auth.token}`,
+      'X-GitHub-Api-Version': '2022-11-28',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      message: `CMS: upload ${filename}`,
+      content: base64,
+      branch: auth.branch,
+    }),
+  });
+
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.message || `Upload failed (${res.status})`);
+  }
+
+  return `/${path}`;
+}
+
+async function copyText(text) {
+  try {
+    await navigator.clipboard.writeText(text);
+    return true;
+  } catch {
+    return false;
+  }
 }
 
 async function fetchLocalFile(path) {
@@ -224,9 +316,244 @@ function getDashboardStats() {
   const projects = content.projects?.projects?.length ?? content.projects?.items?.length ?? 0;
   const gallery = content.gallery?.images?.length ?? content.gallery?.items?.length ?? 0;
   const testimonials = content.home?.testimonials?.reviews?.length ?? 0;
+  const services = content.services?.cards?.length ?? content.home?.services?.items?.length ?? 0;
   const pages = Object.keys(config.contentFiles).filter((k) => k !== 'site').length;
 
-  return { pages, projects, gallery, testimonials };
+  return { pages, projects, gallery, testimonials, services };
+}
+
+function getDashboardChartData() {
+  const pageKeys = Object.keys(config.contentFiles).filter((k) => k !== 'site');
+  const publish = getLastPublish();
+
+  const contentByPage = pageKeys.map((key) => ({
+    key,
+    label: PAGE_LABELS[key] || key,
+    count: countItems(content[key]),
+    color: PAGE_META[key]?.color || '#64748b',
+    lastPublish: publish[key] || null,
+  }));
+
+  const stats = getDashboardStats();
+  const contentMix = {
+    labels: ['Projects', 'Gallery', 'Testimonials', 'Services'],
+    values: [stats.projects, stats.gallery, stats.testimonials, stats.services],
+    colors: ['#10b981', '#ec4899', '#3b82f6', '#8b5cf6'],
+  };
+
+  const freshness = pageKeys.map((key) => {
+    const iso = publish[key];
+    if (!iso) return { label: PAGE_LABELS[key] || key, days: null, color: PAGE_META[key]?.color || '#64748b' };
+    const days = Math.floor((Date.now() - new Date(iso).getTime()) / 86400000);
+    return { label: PAGE_LABELS[key] || key, days, color: PAGE_META[key]?.color || '#64748b' };
+  });
+
+  const activity = { labels: [], values: [] };
+  for (let i = 6; i >= 0; i -= 1) {
+    const d = new Date();
+    d.setDate(d.getDate() - i);
+    const key = d.toISOString().slice(0, 10);
+    activity.labels.push(d.toLocaleDateString('en', { weekday: 'short' }));
+    activity.values.push(getPublishHistory().filter((h) => h.at.startsWith(key)).length);
+  }
+
+  return { contentByPage, contentMix, freshness, activity, stats };
+}
+
+function destroyDashboardCharts() {
+  dashboardCharts.forEach((chart) => chart.destroy());
+  dashboardCharts = [];
+}
+
+function waitForChart() {
+  return new Promise((resolve) => {
+    if (window.Chart) {
+      resolve(true);
+      return;
+    }
+    let attempts = 0;
+    const timer = setInterval(() => {
+      attempts += 1;
+      if (window.Chart || attempts > 100) {
+        clearInterval(timer);
+        resolve(!!window.Chart);
+      }
+    }, 30);
+  });
+}
+
+function addChart(canvas, config) {
+  const chart = new Chart(canvas, config);
+  dashboardCharts.push(chart);
+  return chart;
+}
+
+function renderDashboardCharts() {
+  destroyDashboardCharts();
+
+  waitForChart().then((ready) => {
+    if (!ready || !window.Chart) return;
+
+    const { contentByPage, contentMix, freshness, activity } = getDashboardChartData();
+
+    Chart.defaults.font.family = '"Inter", system-ui, sans-serif';
+    Chart.defaults.color = '#64748b';
+
+    const contentCanvas = document.getElementById('chart-content-by-page');
+    if (contentCanvas) {
+      addChart(contentCanvas, {
+        type: 'bar',
+        data: {
+          labels: contentByPage.map((p) => p.label),
+          datasets: [{
+            label: 'Content fields',
+            data: contentByPage.map((p) => p.count),
+            backgroundColor: contentByPage.map((p) => `${p.color}cc`),
+            borderColor: contentByPage.map((p) => p.color),
+            borderWidth: 1,
+            borderRadius: 6,
+            borderSkipped: false,
+          }],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              backgroundColor: '#0f2433',
+              padding: 10,
+              cornerRadius: 8,
+            },
+          },
+          scales: {
+            x: {
+              grid: { display: false },
+              ticks: { font: { size: 11 } },
+            },
+            y: {
+              beginAtZero: true,
+              grid: { color: '#e2e8f0' },
+              ticks: { precision: 0 },
+            },
+          },
+        },
+      });
+    }
+
+    const mixCanvas = document.getElementById('chart-content-mix');
+    if (mixCanvas) {
+      addChart(mixCanvas, {
+        type: 'doughnut',
+        data: {
+          labels: contentMix.labels,
+          datasets: [{
+            data: contentMix.values,
+            backgroundColor: contentMix.colors,
+            borderColor: '#ffffff',
+            borderWidth: 3,
+            hoverOffset: 6,
+          }],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          cutout: '62%',
+          plugins: {
+            legend: {
+              position: 'bottom',
+              labels: { boxWidth: 12, padding: 14, font: { size: 11 } },
+            },
+          },
+        },
+      });
+    }
+
+    const freshnessCanvas = document.getElementById('chart-freshness');
+    if (freshnessCanvas) {
+      const labels = freshness.map((f) => f.label);
+      const published = freshness.filter((f) => f.days !== null);
+      const maxDays = Math.max(30, ...published.map((f) => f.days), 1);
+
+      addChart(freshnessCanvas, {
+        type: 'bar',
+        data: {
+          labels,
+          datasets: [{
+            label: 'Days since last publish',
+            data: freshness.map((f) => (f.days === null ? maxDays : f.days)),
+            backgroundColor: freshness.map((f) => (f.days === null ? '#e2e8f0' : `${f.color}bb`)),
+            borderColor: freshness.map((f) => (f.days === null ? '#cbd5e1' : f.color)),
+            borderWidth: 1,
+            borderRadius: 6,
+          }],
+        },
+        options: {
+          indexAxis: 'y',
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: {
+                label(ctx) {
+                  const f = freshness[ctx.dataIndex];
+                  return f.days === null ? 'Never published' : `${f.days} day${f.days === 1 ? '' : 's'} ago`;
+                },
+              },
+            },
+          },
+          scales: {
+            x: {
+              beginAtZero: true,
+              grid: { color: '#e2e8f0' },
+              title: { display: true, text: 'Days since publish', font: { size: 11 } },
+            },
+            y: { grid: { display: false } },
+          },
+        },
+      });
+    }
+
+    const activityCanvas = document.getElementById('chart-activity');
+    if (activityCanvas) {
+      addChart(activityCanvas, {
+        type: 'line',
+        data: {
+          labels: activity.labels,
+          datasets: [{
+            label: 'Publishes',
+            data: activity.values,
+            borderColor: '#faa21b',
+            backgroundColor: 'rgba(250, 162, 27, 0.15)',
+            borderWidth: 2.5,
+            pointBackgroundColor: '#faa21b',
+            pointBorderColor: '#fff',
+            pointBorderWidth: 2,
+            pointRadius: 4,
+            pointHoverRadius: 6,
+            fill: true,
+            tension: 0.35,
+          }],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+          },
+          scales: {
+            x: { grid: { display: false } },
+            y: {
+              beginAtZero: true,
+              ticks: { stepSize: 1, precision: 0 },
+              grid: { color: '#e2e8f0' },
+            },
+          },
+        },
+      });
+    }
+  });
 }
 
 function navigateTo(page) {
@@ -237,8 +564,8 @@ function navigateTo(page) {
 }
 
 function isImageField(key, value) {
+  if (IMAGE_KEYS.has(key.toLowerCase())) return true;
   if (typeof value !== 'string') return false;
-  if (IMAGE_KEYS.has(key)) return true;
   return /^(\/|https?:\/\/).+\.(png|jpe?g|webp|gif|svg)(\?.*)?$/i.test(value);
 }
 
@@ -255,9 +582,59 @@ function fieldLabel(key) {
     .replace(/^\w/, (c) => c.toUpperCase());
 }
 
+function attachImageUpload(wrap, input, onUploaded) {
+  const fileInput = document.createElement('input');
+  fileInput.type = 'file';
+  fileInput.accept = 'image/jpeg,image/png,image/webp,image/gif,image/svg+xml';
+  fileInput.hidden = true;
+
+  const uploadBtn = document.createElement('button');
+  uploadBtn.type = 'button';
+  uploadBtn.className = 'btn btn-ghost btn-upload';
+  uploadBtn.textContent = 'Upload';
+
+  const hint = document.createElement('p');
+  hint.className = 'image-field__hint';
+  hint.textContent = `JPEG, PNG, WebP, GIF, SVG · max ${config?.maxUploadMB || 10} MB`;
+
+  const setHint = (text, state = '') => {
+    hint.textContent = text;
+    hint.className = `image-field__hint${state ? ` is-${state}` : ''}`;
+  };
+
+  const handleFile = async (file) => {
+    if (!file) return;
+    uploadBtn.disabled = true;
+    setHint('Uploading…', 'uploading');
+    try {
+      const url = await uploadMediaFile(file);
+      input.value = url;
+      input.dispatchEvent(new Event('input', { bubbles: true }));
+      onUploaded?.(url);
+      setHint('Uploaded — path set automatically.', 'success');
+      setTimeout(() => setHint(`JPEG, PNG, WebP, GIF, SVG · max ${config?.maxUploadMB || 10} MB`), 3000);
+    } catch (err) {
+      setHint(err.message, 'error');
+    } finally {
+      uploadBtn.disabled = false;
+      fileInput.value = '';
+    }
+  };
+
+  uploadBtn.addEventListener('click', () => fileInput.click());
+  fileInput.addEventListener('change', () => handleFile(fileInput.files?.[0]));
+
+  const row = document.createElement('div');
+  row.className = 'image-field__row';
+  input.remove();
+  row.append(input, uploadBtn, fileInput);
+  wrap.append(row, hint);
+}
+
 function createField(key, value, onChange) {
   const wrap = document.createElement('div');
-  wrap.className = 'field';
+  const isImage = isImageField(key, value);
+  wrap.className = isImage ? 'field image-field' : 'field';
 
   const label = document.createElement('label');
   label.textContent = fieldLabel(key);
@@ -274,25 +651,33 @@ function createField(key, value, onChange) {
       input.appendChild(opt);
     });
     input.addEventListener('change', () => onChange(key, input.value === 'true'));
+    wrap.appendChild(input);
   } else if (typeof value === 'number') {
     input = document.createElement('input');
     input.type = 'number';
     input.value = value;
     input.addEventListener('input', () => onChange(key, Number(input.value)));
-  } else if (isLongText(key, value)) {
+    wrap.appendChild(input);
+  } else if (isLongText(key, value) && !isImage) {
     input = document.createElement('textarea');
     input.value = value ?? '';
     input.addEventListener('input', () => onChange(key, input.value));
+    wrap.appendChild(input);
   } else {
     input = document.createElement('input');
     input.type = 'text';
     input.value = value ?? '';
+    input.placeholder = isImage ? '/media/your-image.webp' : '';
     input.addEventListener('input', () => onChange(key, input.value));
+
+    if (isImage) {
+      attachImageUpload(wrap, input, (url) => onChange(key, url));
+    } else {
+      wrap.appendChild(input);
+    }
   }
 
-  wrap.appendChild(input);
-
-  if (isImageField(key, value)) {
+  if (isImage) {
     const preview = document.createElement('img');
     preview.className = 'image-preview';
     preview.alt = '';
@@ -423,6 +808,7 @@ function renderObject(obj, onChange, depth = 0, sectionTitle = '') {
 }
 
 function renderDashboard() {
+  destroyDashboardCharts();
   const el = $('#dashboard');
   const stats = getDashboardStats();
   const lastPublish = getLastPublish();
@@ -432,7 +818,7 @@ function renderDashboard() {
   el.innerHTML = `
     <div class="dashboard__hero">
       <h2>Welcome back</h2>
-      <p>Manage content for <strong>${siteName}</strong>. Select a page below to edit, then publish to update the live site.</p>
+      <p>Manage content for <strong>${siteName}</strong>. Charts below show your content overview — select a page to edit and publish.</p>
     </div>
 
     <div class="stats-grid">
@@ -458,6 +844,48 @@ function renderDashboard() {
       </div>
     </div>
 
+    <div class="charts-grid">
+      <div class="chart-card">
+        <div class="chart-card__header">
+          <h3>Content by page</h3>
+          <p>Total editable fields per section</p>
+        </div>
+        <div class="chart-card__body">
+          <canvas id="chart-content-by-page" aria-label="Content fields per page"></canvas>
+        </div>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-card__header">
+          <h3>Content mix</h3>
+          <p>Projects, gallery, testimonials &amp; services</p>
+        </div>
+        <div class="chart-card__body">
+          <canvas id="chart-content-mix" aria-label="Content type distribution"></canvas>
+        </div>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-card__header">
+          <h3>Publish freshness</h3>
+          <p>How recently each page was published</p>
+        </div>
+        <div class="chart-card__body">
+          <canvas id="chart-freshness" aria-label="Days since last publish per page"></canvas>
+        </div>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-card__header">
+          <h3>Publish activity</h3>
+          <p>Updates published over the last 7 days</p>
+        </div>
+        <div class="chart-card__body">
+          <canvas id="chart-activity" aria-label="Publish activity over time"></canvas>
+        </div>
+      </div>
+    </div>
+
     <h2 class="section-heading">Edit content</h2>
     <div class="page-cards" id="page-cards"></div>
 
@@ -471,6 +899,10 @@ function renderDashboard() {
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
         Preview live site
       </a>
+      <button type="button" class="quick-action" data-action="media">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        Upload images
+      </button>
       <button type="button" class="quick-action" data-action="site-settings">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2"/></svg>
         Site settings
@@ -519,6 +951,120 @@ function renderDashboard() {
   });
 
   el.querySelector('[data-action="site-settings"]')?.addEventListener('click', () => navigateTo('site'));
+  el.querySelector('[data-action="media"]')?.addEventListener('click', () => navigateTo('media'));
+
+  renderDashboardCharts();
+}
+
+async function loadMediaFiles() {
+  const mediaPath = config.mediaPath || 'media';
+  try {
+    const files = await githubListDir(mediaPath);
+    return files
+      .filter((f) => f.type === 'file' && /\.(png|jpe?g|webp|gif|svg)$/i.test(f.name))
+      .sort((a, b) => b.name.localeCompare(a.name));
+  } catch (err) {
+    if (/not found/i.test(err.message)) return [];
+    throw err;
+  }
+}
+
+function setupMediaUploadZone(zone, fileInput, onUploaded) {
+  const pickFile = () => fileInput.click();
+
+  zone.addEventListener('click', pickFile);
+  zone.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    zone.classList.add('is-dragover');
+  });
+  zone.addEventListener('dragleave', () => zone.classList.remove('is-dragover'));
+  zone.addEventListener('drop', (e) => {
+    e.preventDefault();
+    zone.classList.remove('is-dragover');
+    const file = e.dataTransfer?.files?.[0];
+    if (file) onUploaded(file);
+  });
+
+  fileInput.addEventListener('change', () => {
+    const file = fileInput.files?.[0];
+    if (file) onUploaded(file);
+    fileInput.value = '';
+  });
+}
+
+async function renderMediaLibrary() {
+  const el = $('#media-library');
+  const mediaPath = config.mediaPath || 'media';
+  const maxMb = config.maxUploadMB || 10;
+
+  el.innerHTML = `
+    <div class="media-upload-zone" id="media-drop-zone" tabindex="0" role="button" aria-label="Upload image">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+      <h3>Upload an image</h3>
+      <p>Drag and drop or click to browse · saved to <code>/${mediaPath}/</code> on GitHub</p>
+      <p class="hint" style="margin-top:0.5rem">JPEG, PNG, WebP, GIF, SVG · max ${maxMb} MB</p>
+    </div>
+    <input type="file" id="media-file-input" accept="image/jpeg,image/png,image/webp,image/gif,image/svg+xml" hidden>
+    <div id="media-grid" class="media-grid"><p class="media-empty">Loading media…</p></div>
+  `;
+
+  const grid = el.querySelector('#media-grid');
+  const fileInput = el.querySelector('#media-file-input');
+  const zone = el.querySelector('#media-drop-zone');
+
+  const renderGrid = async () => {
+    try {
+      const files = await loadMediaFiles();
+      if (!files.length) {
+        grid.innerHTML = '<p class="media-empty">No images yet. Upload your first image above.</p>';
+        return;
+      }
+
+      grid.innerHTML = '';
+      files.forEach((file) => {
+        const url = `/${mediaPath}/${file.name}`;
+        const item = document.createElement('div');
+        item.className = 'media-item';
+        item.innerHTML = `
+          <img src="${url}" alt="${file.name}" loading="lazy">
+          <div class="media-item__footer">
+            <span class="media-item__name">${file.name}</span>
+            <div class="media-item__actions">
+              <button type="button" class="btn btn-ghost" data-copy="${url}">Copy path</button>
+            </div>
+          </div>
+        `;
+        grid.appendChild(item);
+      });
+
+      grid.querySelectorAll('[data-copy]').forEach((btn) => {
+        btn.addEventListener('click', async (e) => {
+          e.stopPropagation();
+          const path = btn.dataset.copy;
+          const copied = await copyText(path);
+          setStatus(copied ? `Copied ${path}` : path, copied ? 'success' : 'info');
+          if (copied) setTimeout(() => setStatus(''), 2500);
+        });
+      });
+    } catch (err) {
+      grid.innerHTML = `<p class="media-empty">${err.message}</p>`;
+    }
+  };
+
+  const handleUpload = async (file) => {
+    setStatus('Uploading image…');
+    try {
+      const url = await uploadMediaFile(file);
+      setStatus(`Uploaded ${url}`, 'success');
+      await renderGrid();
+      setTimeout(() => setStatus(''), 3000);
+    } catch (err) {
+      setStatus(err.message, 'error');
+    }
+  };
+
+  setupMediaUploadZone(zone, fileInput, handleUpload);
+  await renderGrid();
 }
 
 function renderEditor() {
@@ -555,18 +1101,26 @@ function renderEditor() {
 }
 
 function renderView() {
+  if (currentPage !== 'dashboard') destroyDashboardCharts();
+
   const isDashboard = currentPage === 'dashboard';
-  const meta = PAGE_META[currentPage];
+  const isMedia = currentPage === 'media';
+  const isEditor = !isDashboard && !isMedia;
 
   $('#dashboard').classList.toggle('hidden', !isDashboard);
-  $('#editor').classList.toggle('hidden', isDashboard);
-  $('#save-btn').classList.toggle('hidden', isDashboard);
-  $('#download-btn').classList.toggle('hidden', isDashboard);
+  $('#media-library').classList.toggle('hidden', !isMedia);
+  $('#editor').classList.toggle('hidden', !isEditor);
+  $('#save-btn').classList.toggle('hidden', !isEditor);
+  $('#download-btn').classList.toggle('hidden', !isEditor);
 
   if (isDashboard) {
     $('#breadcrumb').textContent = 'Overview';
     $('#page-title').textContent = 'Dashboard';
     renderDashboard();
+  } else if (isMedia) {
+    $('#breadcrumb').textContent = 'Assets';
+    $('#page-title').textContent = 'Media library';
+    renderMediaLibrary();
   } else {
     $('#breadcrumb').textContent = 'Content';
     $('#page-title').textContent = PAGE_LABELS[currentPage] || currentPage;
@@ -652,6 +1206,7 @@ async function handleSave() {
     await saveFile(path, content[currentPage]);
     setLastPublish(currentPage);
     setStatus(`Published ${PAGE_LABELS[currentPage] || currentPage}. GitHub Actions will rebuild the site shortly.`, 'success');
+    if (currentPage === 'dashboard') renderDashboardCharts();
   } catch (err) {
     setStatus(err.message, 'error');
   } finally {
@@ -696,7 +1251,9 @@ async function init() {
     showLogin();
   });
 
-  document.querySelector('.nav-item[data-page="dashboard"]')?.addEventListener('click', () => navigateTo('dashboard'));
+  document.querySelectorAll('.nav-item[data-page]').forEach((btn) => {
+    btn.addEventListener('click', () => navigateTo(btn.dataset.page));
+  });
 
   $('#sidebar-toggle')?.addEventListener('click', () => {
     $('#sidebar')?.classList.toggle('is-open');

@@ -362,7 +362,7 @@ body {
 .main {
   flex: 1;
   padding: 1.5rem;
-  max-width: 1200px;
+  max-width: 1280px;
   width: 100%;
 }
 
@@ -446,6 +446,80 @@ body {
   font-size: 0.85rem;
   color: var(--text-muted);
   font-weight: 500;
+}
+
+/* ── Dashboard charts ───────────────────────── */
+.charts-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.chart-card {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  min-height: 320px;
+}
+
+.chart-card--wide {
+  grid-column: 1 / -1;
+}
+
+.chart-card__header {
+  margin-bottom: 0.75rem;
+}
+
+.chart-card__header h3 {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.chart-card__header p {
+  margin: 0.25rem 0 0;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.chart-card__body {
+  position: relative;
+  flex: 1;
+  min-height: 220px;
+}
+
+.chart-card__body canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.chart-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.25rem;
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border);
+}
+
+.chart-legend__item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.chart-legend__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
 }
 
 .section-heading {
@@ -762,6 +836,130 @@ body {
   background: var(--bg);
 }
 
+.image-field {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.image-field__row {
+  display: flex;
+  gap: 0.5rem;
+  align-items: stretch;
+}
+
+.image-field__row input {
+  flex: 1;
+  min-width: 0;
+}
+
+.image-field__row .btn-upload {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.image-field__hint {
+  margin: 0;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.image-field__hint.is-uploading { color: var(--info); }
+.image-field__hint.is-error { color: var(--danger); }
+.image-field__hint.is-success { color: var(--success); }
+
+/* ── Media library ──────────────────────────── */
+.media-upload-zone {
+  border: 2px dashed var(--border-strong);
+  border-radius: var(--radius);
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+  background: var(--bg-elevated);
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.media-upload-zone:hover,
+.media-upload-zone.is-dragover {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.media-upload-zone svg {
+  width: 40px;
+  height: 40px;
+  color: var(--accent);
+  margin-bottom: 0.75rem;
+}
+
+.media-upload-zone h3 {
+  margin: 0 0 0.35rem;
+  font-size: 1rem;
+}
+
+.media-upload-zone p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.media-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.media-item {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  transition: box-shadow 0.2s;
+}
+
+.media-item:hover {
+  box-shadow: var(--shadow);
+}
+
+.media-item img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  display: block;
+  background: var(--bg);
+}
+
+.media-item__footer {
+  padding: 0.6rem 0.75rem;
+  display: grid;
+  gap: 0.4rem;
+}
+
+.media-item__name {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  word-break: break-all;
+  line-height: 1.3;
+}
+
+.media-item__actions {
+  display: flex;
+  gap: 0.35rem;
+}
+
+.media-item__actions .btn {
+  flex: 1;
+  padding: 0.35rem 0.5rem;
+  font-size: 0.75rem;
+}
+
+.media-empty {
+  text-align: center;
+  padding: 2rem;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
 /* ── Toast / status ─────────────────────────── */
 .toast {
   margin: 0 1.5rem;
@@ -793,6 +991,8 @@ body {
 /* ── Responsive ─────────────────────────────── */
 @media (max-width: 1100px) {
   .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .charts-grid { grid-template-columns: 1fr; }
+  .chart-card--wide { grid-column: auto; }
 }
 
 @media (max-width: 900px) {

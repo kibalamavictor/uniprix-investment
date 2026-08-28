@@ -1,6 +1,9 @@
 {
   "repo": "kibalamavictor/uniprix-investment",
   "branch": "main",
+  "siteUrl": "https://www.uniprixinvestment.com",
+  "mediaPath": "media",
+  "maxUploadMB": 10,
   "contentFiles": {
     "site": "_data/site.json",
     "home": "data/cms/home.json",
