@@ -1,0 +1,11 @@
+{
+  "name": "uniprix-investment",
+  "private": true,
+  "scripts": {
+    "build:css": "sass SCSS/style.scss dist/style.css --style=compressed --no-source-map",
+    "watch:css": "sass SCSS/style.scss dist/style.css --watch --style=compressed --no-source-map"
+  },
+  "devDependencies": {
+    "sass": "^1.89.0"
+  }
+}

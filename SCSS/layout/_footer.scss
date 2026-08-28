@@ -60,6 +60,11 @@
 .contact-info__value--muted {
   color: #8a9aaa;
   font-weight: 400;
+  text-decoration: none;
+}
+
+a.contact-info__value--muted:hover {
+  text-decoration: underline;
 }
 
 /* ── SMALL IMAGE ── */

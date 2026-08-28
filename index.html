@@ -5,8 +5,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home | Uniprix Investment</title>
-    <link rel="icon" type="image/png" sizes="32x32" href="./favicon.svg">
-    <link rel="icon" type="image/png" sizes="16x16" href="./favicon.svg">
+    <meta name="description" content="Uniprix Investment offers professional construction, project management, interior design, and renovation services in Uganda." />
+    <link rel="canonical" href="https://www.uniprixinvestment.com/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Uniprix Investment" />
+    <meta property="og:title" content="Home | Uniprix Investment" />
+    <meta property="og:description" content="Uniprix Investment offers professional construction, project management, interior design, and renovation services in Uganda." />
+    <meta property="og:url" content="https://www.uniprixinvestment.com/" />
+    <meta property="og:image" content="https://www.uniprixinvestment.com/hero-image-home-page.webp" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg">
     <link rel="apple-touch-icon" sizes="180x180" href="./favicon.svg">
     <link rel="stylesheet" href="./dist/style.css" />
     <script defer src="./script.js"></script>
@@ -19,7 +28,7 @@
       <nav class="navbar" style="box-shadow: 0 0px 0px rgba(0, 0, 0, 0);">
         <div class="nav-container">
           <a href="./" class="logo">
-            <img src="./logo.svg" alt="Hayat Logo" class="logo-img" height="55px">
+            <img src="./logo.svg" alt="Uniprix Investment logo" class="logo-img" height="55px">
           </a>
 
           <div class="navlinks-container">
@@ -36,7 +45,7 @@
 
           <a href="./contact-us/" class="nav-donate-btn">Contact Us</a>
 
-          <button class="mobile-menu-btn" id="mobileMenuBtn">
+          <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
             ☰
           </button>          
         </div>
@@ -113,7 +122,7 @@
       <div class="upx-hero__img-blob"></div>
       <div class="upx-hero__img-wrap">
         <img
-          src="./hero-image-home-page.png"
+          src="./hero-image-home-page.webp" fetchpriority="high"
           alt="Two construction workers in safety vests reviewing a building site"
         />
       </div>
@@ -140,7 +149,7 @@
     <div class="upx-about__visual">
       <div class="upx-about__img-wrap">
         <img
-          src="./campus-image.png"
+          src="./campus-image.webp" loading="lazy"
           alt="Architect drawing blueprints with a compass"
         />
       </div>
@@ -191,7 +200,7 @@
       <div class="upx-svc-card">
         <div class="upx-svc-card__img">
           <img
-            src="./our-services-img-1.png"
+            src="./our-services-img-1.webp" loading="lazy"
             alt="Project planning meeting with laptops and blueprints"
           />
         </div>
@@ -210,7 +219,7 @@
       <div class="upx-svc-card reverse-card">
         <div class="upx-svc-card__img">
           <img
-            src="./our-services-img-2.png"
+            src="./our-services-img-2.webp" loading="lazy"
             alt="Construction workers reviewing blueprints on site"
           />
         </div>
@@ -227,7 +236,7 @@
       <div class="upx-svc-card">
         <div class="upx-svc-card__img">
           <img
-            src="./our-services-img-3.png"
+            src="./our-services-img-3.webp" loading="lazy"
             alt="Modern white kitchen interior design"
           />
         </div>
@@ -244,7 +253,7 @@
       <div class="upx-svc-card reverse-card">
         <div class="upx-svc-card__img">
           <img
-            src="./our-services-img-4.png"
+            src="./our-services-img-4.webp" loading="lazy"
             alt="Kitchen renovation in progress"
           />
         </div>
@@ -261,10 +270,10 @@
 
     <!-- Carousel dots (mobile only) -->
     <div class="upx-carousel-dots" id="upxDots">
-      <button class="upx-dot upx-dot--active" data-index="0"></button>
-      <button class="upx-dot" data-index="1"></button>
-      <button class="upx-dot" data-index="2"></button>
-      <button class="upx-dot" data-index="3"></button>
+      <button class="upx-dot upx-dot--active" data-index="0" aria-label="Show service 1"></button>
+      <button class="upx-dot" data-index="1" aria-label="Show service 2"></button>
+      <button class="upx-dot" data-index="2" aria-label="Show service 3"></button>
+      <button class="upx-dot" data-index="3" aria-label="Show service 4"></button>
     </div>
 
     </div><!-- /.upx-services__carousel -->
@@ -375,7 +384,7 @@
 
         <!-- CTAs -->
         <div class="upx-why__ctas mobilex-view">
-          <a href="mailto:uniprixinvestment@gmail.com" class="upx-wbtn upx-wbtn--outline">Book a Site Visit</a>
+          <a href="mailto:info@uniprixinvestment.com" class="upx-wbtn upx-wbtn--outline">Book a Site Visit</a>
           <a href="./contact-us/" class="upx-wbtn upx-wbtn--amber">Contact Us</a>
         </div>
 
@@ -387,14 +396,14 @@
     <div class="upx-why__visual">
       <div class="upx-why__img-wrap">
         <img
-          src="./why-us-img.png"
+          src="./why-us-img.webp" loading="lazy"
           alt="Person signing construction documents on clipboard"
         />
       </div>
     </div>
 
     <div class="upx-why__ctas desktopx-view">
-      <a href="mailto:uniprixinvestment@gmail.com" class="upx-wbtn upx-wbtn--outline">Book a Site Visit</a>
+      <a href="mailto:info@uniprixinvestment.com" class="upx-wbtn upx-wbtn--outline">Book a Site Visit</a>
       <a href="./contact-us/" class="upx-wbtn upx-wbtn--amber">Contact Us</a>
     </div>
 
@@ -443,7 +452,7 @@
         <div class="upx-pcard">
           <div class="upx-pcard__img-wrap">
             <img
-              src="./our-projects-home-1.png"
+              src="./our-projects-home-1.webp" loading="lazy"
               alt="Modern residential apartment complex"
             />
           </div>
@@ -455,7 +464,7 @@
         <div class="upx-pcard">
           <div class="upx-pcard__img-wrap reverse-pcard">
             <img
-              src="./our-projects-home-2.png"
+              src="./our-projects-home-2.webp" loading="lazy"
               alt="Commercial building lit up at night"
             />
           </div>
@@ -467,7 +476,7 @@
         <div class="upx-pcard">
           <div class="upx-pcard__img-wrap">
             <img
-              src="./our-projects-home-3.png"
+              src="./our-projects-home-3.webp" loading="lazy"
               alt="Elegant interior dining area"
             />
           </div>
@@ -479,7 +488,7 @@
         <div class="upx-pcard">
           <div class="upx-pcard__img-wrap reverse-pcard">
             <img
-              src="./our-projects-home-4.png"
+              src="./our-projects-home-4.webp" loading="lazy"
               alt="Ongoing construction with scaffolding"
             />
           </div>
@@ -555,12 +564,12 @@
 
     <section class="cta-section">
       <div class="cta-card">
-        <img src="https://cdn.codia.ai/figma/JGrbVETRuqt2yPG3MfW142/img-84494308e5d0ccc8.png" alt="Modern house" class="cta-image">
+        <img src="./assets/images/cta-house.webp" alt="Modern house" class="cta-image" loading="lazy">
         <div class="cta-content">
           <h2 id="cta-heading">Planning to build or invest? Let's get it right from the start.</h2>
           <div class="cta-buttons">
-            <a href="./contact-us/"><button class="cta-btn-dark">Contact Uniprix</button></a>
-            <a href="mailto:info@uniprixinvestment.com"><button class="cta-btn-light">Book A site visit</button></a>
+            <a href="./contact-us/" class="cta-btn-dark">Contact Uniprix</a>
+            <a href="mailto:info@uniprixinvestment.com" class="cta-btn-light">Book A site visit</a>
           </div>
         </div>
       </div>
@@ -633,8 +642,8 @@
 
 
         <div class="contact-images">
-          <img src="https://cdn.codia.ai/figma/JGrbVETRuqt2yPG3MfW142/img-6762376e27edf594.png" alt="Modern house exterior" class="contact-image-main">
-          <img src="https://cdn.codia.ai/figma/JGrbVETRuqt2yPG3MfW142/img-a76f9bfa7419b576.png" alt="Modern house interior" class="contact-image-small">
+          <img src="./assets/images/contact-exterior.webp" alt="Modern house exterior" class="contact-image-main" loading="lazy">
+          <img src="./assets/images/contact-interior.webp" alt="Modern house interior" class="contact-image-small" loading="lazy">
         </div>
       </div>
 
@@ -646,19 +655,18 @@
       <div class="footer-top">
         <div class="footer-logo-section">
           <div>
-            <img src="./footer-logo.svg" alt="Unidrix Logo Icon" style="height: 76.65px; width: auto;">
-            <!-- <img src="https://cdn.codia.ai/figma/JGrbVETRuqt2yPG3MfW142/img-58d73c1486453317.png" alt="Unidrix Investment" style="height: 37.43px; width: auto; margin-left: 15px;"> -->
+            <img src="./footer-logo.svg" alt="Uniprix Investment logo" style="height: 76.65px; width: auto;">
           </div>
           <div class="footer-contact">
             <div class="contact-item">
-              <img src="https://cdn.codia.ai/figma/JGrbVETRuqt2yPG3MfW142/img-88ec4fb18fc5b8b7.svg" alt="Phone Icon" class="contact-icon">
+              <img src="./phone-icon.svg" alt="Phone Icon" class="contact-icon">
               <div class="contact-text">
                 <p>Have a question?</p>
                 <p class="contact-number" id="footer-phone">+256 700 847399</p>
               </div>
             </div>
             <div class="contact-item">
-              <img src="https://cdn.codia.ai/figma/JGrbVETRuqt2yPG3MfW142/img-74cee43d8c71007a.svg" alt="Email Icon" class="contact-icon">
+              <img src="./mail-icon.svg" alt="Email Icon" class="contact-icon">
               <div class="contact-text">
                 <p>Contact us at</p>
                 <p> <a href="mailto:info@uniprixinvestment.com" id="footer-email">info@uniprixinvestment.com</a></p>
@@ -666,17 +674,12 @@
             </div>
           </div>
         </div>
-        <div class="footer-newsletter">
-          <div class="newsletter-form">
-            <img src="https://cdn.codia.ai/figma/JGrbVETRuqt2yPG3MfW142/img-5238ad028a3615dd.svg" alt="Email Icon" class="newsletter-icon">
-            <input type="email" placeholder="Enter your email">
-            <button class="newsletter-btn">Submit</button>
-          </div>
+        <div class="footer-social">
           <div class="social-icons">
-            <a href="https://wa.me/+256700847399" target="_blank" rel="noopener noreferrer"><img src="https://cdn.codia.ai/figma/JGrbVETRuqt2yPG3MfW142/img-fd1c7d631c0be7c9.png" alt="Whatsapp" class="social-icon"></a>
-            <a href="https://www.tiktok.com/@uniprix.investment?_r=1&_t=ZS-94wEhA49oNr"><img src="https://cdn.codia.ai/figma/JGrbVETRuqt2yPG3MfW142/img-6c33266badbbf944.png" alt="TikTok" class="social-icon"></a>
-            <a href="https://x.com/kizzafaisal27?s=20" target="_blank" rel="noopener noreferrer"><img src="https://cdn.codia.ai/figma/JGrbVETRuqt2yPG3MfW142/img-5600ef39b099981a.png" alt="Twitter" class="social-icon"></a>
-            <a href="https://www.instagram.com/uniprixinvestment" target="_blank" rel="noopener noreferrer"><img src="https://cdn.codia.ai/figma/JGrbVETRuqt2yPG3MfW142/img-4df026f771016870.png" alt="Instagram" class="social-icon"></a>
+            <a href="https://wa.me/+256700847399" target="_blank" aria-label="WhatsApp" rel="noopener noreferrer"><img src="./assets/images/social/whatsapp.png" alt="" class="social-icon"></a>
+            <a href="https://www.tiktok.com/@uniprix.investment" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><img src="./assets/images/social/tiktok.png" alt="" class="social-icon"></a>
+            <a href="https://x.com/kizzafaisal27?s=20" target="_blank" aria-label="X (Twitter)" rel="noopener noreferrer"><img src="./assets/images/social/twitter.png" alt="" class="social-icon"></a>
+            <a href="https://www.instagram.com/uniprixinvestment" target="_blank" aria-label="Instagram" rel="noopener noreferrer"><img src="./assets/images/social/instagram.png" alt="" class="social-icon"></a>
           </div>
         </div>
       </div>

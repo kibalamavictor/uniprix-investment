@@ -557,6 +557,10 @@ body {
 }
 
 .cta-btn-dark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
   background: #193548;
   color: #EAEAEA;
   padding: 1px 10px;
@@ -575,6 +579,10 @@ body {
 }
 
 .cta-btn-light {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
   background: #FFFFFF;
   color: #193548;
   padding: 1px 10px;
@@ -783,7 +791,8 @@ body {
   white-space: nowrap;
 }
 
-.footer-newsletter {
+.footer-newsletter,
+.footer-social {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -993,7 +1002,8 @@ body {
     gap: 40px;
   }
 
-  .footer-newsletter {
+  .footer-newsletter,
+  .footer-social {
     align-items: flex-start;
   }
 }

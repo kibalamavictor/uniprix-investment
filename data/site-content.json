@@ -132,33 +132,33 @@
       {
         "name": "John Mukasa",
         "text": "Uniprix handled our office renovation with professionalism and precision. They delivered on time and kept us informed every step of the way.",
-        "img": "https://randomuser.me/api/portraits/men/32.jpg"
+        "img": "./client-1.png"
       },
       {
         "name": "Sarah Nalubega",
         "text": "The interior design team transformed our home beyond expectations. Great attention to detail and very client-focused throughout the project.",
-        "img": "/images.jpeg"
+        "img": "./client-2.png"
       },
       {
         "name": "David Otieno",
         "text": "From planning to execution, Uniprix Investment showed true expertise. Our commercial building was completed within budget and on schedule.",
-        "img": "https://randomuser.me/api/portraits/men/56.jpg"
+        "img": "./client-3.png"
       },
       {
         "name": "Grace Apio",
         "text": "Reliable, honest, and skilled. I highly recommend Uniprix for any construction or renovation work. They genuinely care about quality.",
-        "img": "https://randomuser.me/api/portraits/women/68.jpg"
+        "img": "./client-4.png"
       },
       {
         "name": "Robert Ssemakula",
         "text": "Excellent project management from start to finish. The site visits were thorough and the team communicated clearly throughout.",
-        "img": "https://randomuser.me/api/portraits/men/77.jpg"
+        "img": "./client-5.png"
       }
     ]
   },
   "cta": {
     "heading": "Planning to build or invest? Let's get it right from the start.",
-    "image": "https://cdn.codia.ai/figma/JGrbVETRuqt2yPG3MfW142/img-84494308e5d0ccc8.png",
+    "image": "./assets/images/cta-house.webp",
     "btnContact": "Contact Uniprix",
     "btnContactLink": "./contact-us/",
     "btnBook": "Book A Site Visit"
@@ -176,31 +176,31 @@
       "heading": "We help clients plan better, build smarter, and manage projects with confidence.",
       "text1": "Uniprix Investment is a Construction and Project management company specializing in project Planning, Construction, Interior designs, and Renovation and Property management services.",
       "text2": "We believe every successful Construction project starts with proper planning from Site Visits, Project designs to construction, focusing on Accuracy, Quality control, Efficient and Execution at every stage.",
-      "image": "https://cdn.codia.ai/figma/JGrbVETRuqt2yPG3MfW142/img-d6e47b25d6224451.png"
+      "image": "./assets/images/about-team.webp"
     },
     "stats": [
       {
-        "icon": "https://cdn.codia.ai/figma/JGrbVETRuqt2yPG3MfW142/img-def7046fda1bd567.png",
+        "icon": "./assets/images/stat-projects-done.png",
         "number": "90+",
         "label": "Projects Done"
       },
       {
-        "icon": "https://cdn.codia.ai/figma/JGrbVETRuqt2yPG3MfW142/img-9fed578381a06122.png",
+        "icon": "./assets/images/stat-projects-managed.png",
         "number": "100+",
         "label": "Projects Managed"
       },
       {
-        "icon": "https://cdn.codia.ai/figma/JGrbVETRuqt2yPG3MfW142/img-36f752a2741d8b98.png",
+        "icon": "./assets/images/stat-sites-visited.png",
         "number": "200+",
         "label": "Sites Visited"
       },
       {
-        "icon": "https://cdn.codia.ai/figma/JGrbVETRuqt2yPG3MfW142/img-701d219a086db189.png",
+        "icon": "./assets/images/stat-interior.png",
         "number": "150+",
         "label": "Interior Spaces Designed"
       },
       {
-        "icon": "https://cdn.codia.ai/figma/JGrbVETRuqt2yPG3MfW142/img-193e81c044209c17.png",
+        "icon": "./assets/images/stat-ongoing.png",
         "number": "50+",
         "label": "Ongoing Projects"
       }
@@ -209,16 +209,16 @@
       "heading": "Our Mission",
       "text1": "To provide professional project planning, construction, interior design and Property Management services that deliver quality, and efficiency.",
       "text2": "We are committed to managing every project with accuracy, transparency, and attention to detail, ensuring our clients' ideas are transformed into well-executed and lasting developments.",
-      "image": "https://cdn.codia.ai/figma/JGrbVETRuqt2yPG3MfW142/img-598d40426d788956.png"
+      "image": "./assets/images/mission.webp"
     },
     "vision": {
       "heading": "Our Vision",
       "text": "To be a trusted and respectable construction property Management partner, known for reliable project management, quality execution, and a client-focused approach that adds long-term value to every investment.",
-      "image": "https://cdn.codia.ai/figma/JGrbVETRuqt2yPG3MfW142/img-79938c8dad9a7506.png"
+      "image": "./assets/images/vision.webp"
     },
     "values": {
       "heading": "Our Core Values",
-      "image": "https://cdn.codia.ai/figma/JGrbVETRuqt2yPG3MfW142/img-d93c307eda5afe02.png",
+      "image": "./assets/images/values.webp",
       "items": [
         {
           "title": "Professionalism",
