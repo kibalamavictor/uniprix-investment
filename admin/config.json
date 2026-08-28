@@ -1,0 +1,13 @@
+{
+  "repo": "kibalamavictor/uniprix-investment",
+  "branch": "main",
+  "contentFiles": {
+    "site": "_data/site.json",
+    "home": "data/cms/home.json",
+    "about": "data/cms/about.json",
+    "services": "data/cms/services.json",
+    "projects": "data/cms/projects.json",
+    "gallery": "data/cms/gallery.json",
+    "contact": "data/cms/contact.json"
+  }
+}

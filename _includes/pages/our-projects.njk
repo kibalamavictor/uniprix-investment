@@ -1,0 +1,27 @@
+{% from "macros/project-block.njk" import projectBlock %}
+{% set p = cms.projects %}
+
+<section class="upx-rp">
+  <div class="upx-rp__inner">
+    <div class="our-project-content upx-rp-min-size">
+      <h2 id="proj-intro-heading">{{ p.intro.heading }}</h2>
+      <p id="proj-intro-text">{{ p.intro.text }}</p>
+    </div>
+    <div>
+      <p class="upx-rp__page-label" id="proj-page-label">{{ p.intro.label }}</p>
+    </div>
+    <div id="projects-container">
+      {% for project in p.projects %}
+      {{ projectBlock(project) }}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="upx-cta">
+  <div class="upx-cta__inner">
+    <h2 class="upx-cta__heading">Planning to build, renovate, or invest?</h2>
+    <p class="upx-cta__sub">Let's guide your project from idea to completion with professionalism and care.</p>
+    <a href="mailto:info@uniprixinvestment.com" class="upx-cta__btn">Book a Site Visit</a>
+  </div>
+</section>

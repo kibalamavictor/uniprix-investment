@@ -1,0 +1,137 @@
+{% set p = cms.home %}
+
+<section class="upx-hero">
+  <div class="upx-hero__inner">
+    <div class="upx-hero__content">
+      <h1 class="upx-hero__headline">{{ p.hero.headline | safe }}</h1>
+      <p class="upx-hero__sub">{{ p.hero.subtitle }}</p>
+      <div class="upx-hero__ctas">
+        <a href="{{ p.hero.ctaBookLink }}" class="upx-btn upx-btn--dark">{{ p.hero.ctaBook }}</a>
+        <a href="{{ p.hero.ctaTalkLink }}" class="upx-btn upx-btn--amber">{{ p.hero.ctaTalk }}</a>
+      </div>
+      <div class="upx-hero__stats">
+        {% for stat in p.hero.stats %}
+        <div class="upx-stat">
+          <div class="upx-stat__icon"><img src="{{ stat.icon }}" alt="" aria-hidden="true"></div>
+          <div class="upx-stat__info">
+            <span class="upx-stat__number">{{ stat.number }}</span>
+            <span class="upx-stat__label">{{ stat.label }}</span>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="upx-hero__visual">
+      <div class="upx-hero__img-blob"></div>
+      <div class="upx-hero__img-wrap">
+        <img src="{{ p.hero.image }}" alt="{{ p.hero.imageAlt }}" fetchpriority="high">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="upx-about">
+  <div class="upx-about__inner">
+    <div class="upx-about__visual">
+      <div class="upx-about__img-wrap">
+        <img src="{{ p.about.image }}" alt="{{ p.about.imageAlt }}" loading="lazy">
+      </div>
+    </div>
+    <div class="upx-about__content">
+      <h2 class="upx-about__label">{{ p.about.label }}</h2>
+      <p class="upx-about__text">{{ p.about.text1 }}</p>
+      <p class="upx-about__text">{{ p.about.text2 }}</p>
+      <a href="{{ p.about.buttonLink }}" class="upx-about__btn">{{ p.about.buttonText }}</a>
+    </div>
+  </div>
+</section>
+
+<section class="upx-services">
+  <div class="upx-services__inner">
+    <h2 class="upx-services__heading">{{ p.services.heading }}</h2>
+    <div class="upx-services__carousel">
+      <div class="upx-services__grid" id="upxSvcGrid">
+        {% for item in p.services.items %}
+        <div class="upx-svc-card{% if loop.index0 % 2 == 1 %} reverse-card{% endif %}">
+          <div class="upx-svc-card__img"><img src="{{ item.image }}" alt="{{ item.imageAlt }}" loading="lazy"></div>
+          <div class="upx-svc-card__body">
+            <h3 class="upx-svc-card__title">{{ item.title }}</h3>
+            <p class="upx-svc-card__desc">{{ item.description }}</p>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <div class="upx-carousel-dots" id="upxDots" role="tablist" aria-label="Service slides">
+        {% for item in p.services.items %}
+        <button type="button" class="upx-dot{% if loop.first %} upx-dot--active{% endif %}" data-index="{{ loop.index0 }}" role="tab" aria-label="Show service {{ loop.index }}" aria-selected="{{ 'true' if loop.first else 'false' }}"></button>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="upx-services__footer">
+      <a href="/services/" class="upx-services__btn">See all our services</a>
+    </div>
+  </div>
+</section>
+
+<section class="upx-why">
+  <div class="upx-why__inner">
+    <div class="upx-why__left">
+      <div class="upx-why__intro">
+        <h2 class="upx-why__label">{{ p.whyChooseUs.label }}</h2>
+        <p class="upx-why__sub">{{ p.whyChooseUs.subtitle }}</p>
+      </div>
+      <div class="upx-why__features" id="why-features">
+        {% for feature in p.whyChooseUs.features %}
+        <div class="upx-feature">
+          <div class="upx-feature__icon"><img src="{{ feature.icon }}" alt="" aria-hidden="true"></div>
+          <h3 class="upx-feature__title">{{ feature.title }}</h3>
+          <p class="upx-feature__desc">{{ feature.description }}</p>
+        </div>
+        {% endfor %}
+      </div>
+      <div class="upx-why__bottom">
+        <div class="upx-why__ctas mobilex-view">
+          <a href="{{ p.whyChooseUs.ctaBookLink }}" class="upx-wbtn upx-wbtn--outline">Book a Site Visit</a>
+          <a href="{{ p.whyChooseUs.ctaTalkLink }}" class="upx-wbtn upx-wbtn--amber">Contact Us</a>
+        </div>
+      </div>
+    </div>
+    <div class="upx-why__visual">
+      <div class="upx-why__img-wrap">
+        <img src="{{ p.whyChooseUs.image }}" alt="{{ p.whyChooseUs.imageAlt }}" loading="lazy">
+      </div>
+    </div>
+    <div class="upx-why__ctas desktopx-view">
+      <a href="{{ p.whyChooseUs.ctaBookLink }}" class="upx-wbtn upx-wbtn--outline">Book a Site Visit</a>
+      <a href="{{ p.whyChooseUs.ctaTalkLink }}" class="upx-wbtn upx-wbtn--amber">Contact Us</a>
+    </div>
+  </div>
+</section>
+
+<section class="upx-proj">
+  <div class="upx-proj__inner">
+    <div class="upx-proj__header">
+      <h2 class="upx-proj__heading">{{ p.projects.heading }}</h2>
+      <div class="upx-proj__nav" aria-label="Project carousel controls">
+        <button type="button" class="upx-proj__nav-btn" id="upxProjPrev" aria-label="Show previous projects"><svg viewBox="0 0 16 16"><polyline points="10,2 4,8 10,14"/></svg></button>
+        <button type="button" class="upx-proj__nav-btn" id="upxProjNext" aria-label="Show next projects"><svg viewBox="0 0 16 16"><polyline points="6,2 12,8 6,14"/></svg></button>
+      </div>
+    </div>
+    <div class="upx-proj__track-wrap" id="upxProjWrap" role="region" aria-label="Project categories" aria-roledescription="carousel">
+      <div class="upx-proj__track" id="upxProjTrack">
+        {% for item in p.projects.items %}
+        <div class="upx-pcard">
+          <div class="upx-pcard__img-wrap{% if loop.index0 % 2 == 1 %} reverse-pcard{% endif %}">
+            <img src="{{ item.image }}" alt="{{ item.title }}" loading="lazy">
+          </div>
+          <span class="upx-pcard__title">{{ item.title }}</span>
+          <a href="{{ item.link }}" class="upx-pcard__btn">View Projects</a>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% set testimonials = p.testimonials %}
+{% include "partials/testimonials.njk" %}

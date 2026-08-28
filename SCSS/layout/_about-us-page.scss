@@ -319,6 +319,10 @@ body {
 }
 
 .avatar-slot {
+  border: none;
+  padding: 0;
+  background: none;
+  cursor: pointer;
   position: absolute;
   border-radius: 50%;
   overflow: hidden;
@@ -778,6 +782,15 @@ body {
     line-height: 19.5px;
     margin-top: 2px;
     white-space: nowrap;
+
+    a {
+      color: inherit;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
   }
 
 }

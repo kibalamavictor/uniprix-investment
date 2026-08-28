@@ -1,0 +1,45 @@
+<footer class="footer">
+  <div class="footer-top">
+    <div class="footer-logo-section">
+      <div>
+        <img src="/footer-logo.svg" alt="" style="height: 76.65px; width: auto;" aria-hidden="true">
+        <span class="visually-hidden">Uniprix Investment</span>
+      </div>
+      <div class="footer-contact">
+        <div class="contact-item">
+          <img src="/phone-icon.svg" alt="" class="contact-icon" aria-hidden="true">
+          <div class="contact-text">
+            <p>Have a question?</p>
+            <p class="contact-number">
+              <a href="tel:{{ site.phone | replace(' ', '') }}">{{ site.phone }}</a>
+            </p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <img src="/mail-icon.svg" alt="" class="contact-icon" aria-hidden="true">
+          <div class="contact-text">
+            <p>Contact us at</p>
+            <p><a href="mailto:{{ site.email }}">{{ site.email }}</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-social">
+      <div class="social-icons" aria-label="Social media links">
+        {%- for item in site.social %}
+        <a href="{{ item.url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ item.label }}">
+          <img src="{{ item.icon }}" alt="" class="social-icon" aria-hidden="true">
+        </a>
+        {%- endfor %}
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <ul class="footer-links">
+      {%- for item in site.footerLinks %}
+      <li><a href="{{ item.url }}">{{ item.label }}</a></li>
+      {%- endfor %}
+    </ul>
+    <p class="footer-copyright">© 2026, All Rights Reserved</p>
+  </div>
+</footer>

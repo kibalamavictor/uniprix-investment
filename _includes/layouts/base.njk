@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    {% include "partials/head.njk" %}
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
+    {%- if heroImage %}
+    <img src="{{ heroImage }}" alt="" class="hero-bg-image" aria-hidden="true">
+    {%- endif %}
+
+    {% include "partials/nav.njk" %}
+
+    <main id="main-content">
+      {%- if heroTitle %}
+      <div class="hero-content">
+        <h1>{{ heroTitle }}</h1>
+      </div>
+      {%- endif %}
+
+      {{ content | safe }}
+
+      {%- if showCtaContact %}
+      {% include "partials/cta-contact.njk" %}
+      {%- endif %}
+    </main>
+
+    {% include "partials/footer.njk" %}
+  </body>
+</html>

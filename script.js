@@ -1,7 +1,6 @@
 /* ============================================================
    script.js  –  Uniprix Investment
-   Pure interactivity — no JSON fetch, no CMS.
-   Edit content directly in the HTML files in VS Code.
+   Page interactivity; testimonials load from CMS JSON in HTML.
    ============================================================ */
 
 
@@ -12,9 +11,11 @@
   const navbar        = document.querySelector('.navbar');
   if (!mobileMenuBtn || !navLinks || !navbar) return;
 
+  const menuIcon = mobileMenuBtn.querySelector('[aria-hidden="true"]');
+
   function setMenuOpen(isOpen) {
     navLinks.classList.toggle('active', isOpen);
-    mobileMenuBtn.textContent = isOpen ? '✕' : '☰';
+    if (menuIcon) menuIcon.textContent = isOpen ? '✕' : '☰';
     mobileMenuBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
     mobileMenuBtn.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
   }
@@ -63,7 +64,11 @@
   }
 
   function updateDots(index) {
-    dots.forEach((d, i) => d.classList.toggle('upx-dot--active', i === index));
+    dots.forEach((d, i) => {
+      const active = i === index;
+      d.classList.toggle('upx-dot--active', active);
+      d.setAttribute('aria-selected', active ? 'true' : 'false');
+    });
   }
 
   grid.addEventListener('scroll', () => updateDots(getActiveIndex()), { passive: true });
@@ -102,11 +107,18 @@
   }
   function maxIndex() { return Math.max(0, getCards().length - getVisible()); }
 
+  function setNavState(btn, disabled) {
+    btn.disabled = disabled;
+    btn.setAttribute('aria-disabled', disabled ? 'true' : 'false');
+  }
+
   function goTo(index) {
     current = Math.max(0, Math.min(index, maxIndex()));
     track.style.transform = `translateX(-${current * getCardWidth()}px)`;
     prev.style.opacity    = current === 0         ? '0.4' : '1';
     next.style.opacity    = current >= maxIndex() ? '0.4' : '1';
+    setNavState(prev, current === 0);
+    setNavState(next, current >= maxIndex());
   }
 
   prev.addEventListener('click', () => goTo(current - 1));
@@ -125,19 +137,8 @@
 
 
 /* ── 4. TESTIMONIALS ────────────────────────────────────── */
-/*
-   ╔══════════════════════════════════════════════════════╗
-   ║  EDIT YOUR TESTIMONIALS HERE — no other file needed  ║
-   ╚══════════════════════════════════════════════════════╝
-   - name : reviewer's name
-   - text : their quote
-   - img  : photo URL or local path e.g. "./assets/photo.jpg"
-
-   To add a review:    copy one block { ... } and paste it
-   To remove a review: delete the block
-   To change text:     just retype inside the quotes
-*/
 (function () {
+  const section       = document.querySelector('.testimonials');
   const stage         = document.getElementById('carouselStage');
   const reviewContent = document.getElementById('reviewContent');
   const reviewName    = document.getElementById('reviewName');
@@ -148,42 +149,19 @@
   const subheading    = document.getElementById('testimonialsSubheading');
   if (!stage || !prevBtn || !nextBtn) return;
 
-  // ── HEADING & SUBHEADING ──────────────────────────────
-  const HEADING    = 'What Our Clients Say';
-  const SUBHEADING = 'Real feedback from people we have worked with across Uganda.';
-
-  // ── REVIEWS ──────────────────────────────────────────
-  const reviews = [
-    {
-      name: 'John Mukasa',
-      text: 'Uniprix handled our office renovation with professionalism and precision. They delivered on time and kept us informed every step of the way.',
-      img:  '/client-1.png'
-    },
-    {
-      name: 'Sarah Nalubega',
-      text: 'The interior design team transformed our home beyond expectations. Great attention to detail and very client-focused throughout the project.',
-      img:  '/client-2.png'
-    },
-    {
-      name: 'David Otieno',
-      text: 'From planning to execution, Uniprix Investment showed true expertise. Our commercial building was completed within budget and on schedule.',
-      img:  '/client-3.png'
-    },
-    {
-      name: 'Grace Apio',
-      text: 'Reliable, honest, and skilled. I highly recommend Uniprix for any construction or renovation work. They genuinely care about quality.',
-      img:  '/client-4.png'
-    },
-    {
-      name: 'Robert Ssemakula',
-      text: 'Excellent project management from start to finish. The site visits were thorough and the team communicated clearly throughout.',
-      img:  '/client-5.png'
-    },
-  ];
-  // ─────────────────────────────────────────────────────
-
-  if (heading)    heading.textContent    = HEADING;
-  if (subheading) subheading.textContent = SUBHEADING;
+  const dataEl = document.getElementById('testimonials-data');
+  let reviews = [];
+  if (dataEl) {
+    try {
+      const config = JSON.parse(dataEl.textContent);
+      reviews = (config.reviews || []).map(r => ({
+        name: r.name,
+        text: r.text,
+        img: r.image || r.img,
+      }));
+    } catch { /* ignore */ }
+  }
+  if (!reviews.length) return;
 
   const total = reviews.length;
   let current  = 0;
@@ -191,11 +169,14 @@
   const slots  = [];
 
   reviews.forEach((review, i) => {
-    const el  = document.createElement('div');
+    const el  = document.createElement('button');
+    el.type = 'button';
     el.className = 'avatar-slot';
+    el.setAttribute('aria-label', `Show review from ${review.name}`);
     const img = document.createElement('img');
     img.src = review.img;
-    img.alt = review.name;
+    img.alt = '';
+    img.setAttribute('aria-hidden', 'true');
     el.appendChild(img);
     stage.appendChild(el);
     slots.push(el);
@@ -214,7 +195,14 @@
     return diff < -2 ? 'hidden-left' : 'hidden-right';
   }
 
-  function updateSlots() { slots.forEach((s, i) => s.setAttribute('data-pos', posLabel(i))); }
+  function updateSlots() {
+    slots.forEach((s, i) => {
+      const active = posLabel(i) === '0';
+      s.setAttribute('data-pos', posLabel(i));
+      s.setAttribute('aria-current', active ? 'true' : 'false');
+    });
+  }
+
   function updateText()  {
     if (reviewName) reviewName.textContent = reviews[current].name;
     if (reviewText) reviewText.textContent = reviews[current].text;
@@ -235,9 +223,10 @@
 
   prevBtn.addEventListener('click', () => goTo(current - 1));
   nextBtn.addEventListener('click', () => goTo(current + 1));
-  document.addEventListener('keydown', e => {
-    if (e.key === 'ArrowLeft')  goTo(current - 1);
-    if (e.key === 'ArrowRight') goTo(current + 1);
+
+  section?.addEventListener('keydown', e => {
+    if (e.key === 'ArrowLeft')  { e.preventDefault(); goTo(current - 1); }
+    if (e.key === 'ArrowRight') { e.preventDefault(); goTo(current + 1); }
   });
 
   let touchStartX = 0;
@@ -253,22 +242,61 @@
 
 
 /* ── 5. LIGHTBOX (Gallery) ──────────────────────────────── */
-function upxLbOpen(el) {
-  const img   = el.querySelector('img');
-  const lb    = document.getElementById('upxLightbox');
-  const lbImg = document.getElementById('upxLbImg');
-  if (!img || !lb || !lbImg) return;
-  lbImg.src = img.src;
-  lb.classList.add('upx-lb-open');
-  document.body.style.overflow = 'hidden';
-}
-function upxLbClose() {
-  const lb = document.getElementById('upxLightbox');
-  if (!lb) return;
-  lb.classList.remove('upx-lb-open');
-  document.body.style.overflow = '';
-}
-document.addEventListener('keydown', e => { if (e.key === 'Escape') upxLbClose(); });
+(function () {
+  const lb      = document.getElementById('upxLightbox');
+  const lbImg   = document.getElementById('upxLbImg');
+  const lbClose = document.getElementById('upxLbClose');
+  if (!lb || !lbImg || !lbClose) return;
+
+  let lastFocus = null;
+
+  function upxLbOpen(el) {
+    const img = el.querySelector('img');
+    if (!img) return;
+    lastFocus = document.activeElement;
+    lbImg.src = img.src;
+    lbImg.alt = img.alt || 'Enlarged gallery image';
+    lb.hidden = false;
+    lb.classList.add('upx-lb-open');
+    document.body.style.overflow = 'hidden';
+    lbClose.focus();
+  }
+
+  function upxLbClose() {
+    lb.classList.remove('upx-lb-open');
+    lb.hidden = true;
+    lbImg.src = '';
+    lbImg.alt = '';
+    document.body.style.overflow = '';
+    if (lastFocus && typeof lastFocus.focus === 'function') lastFocus.focus();
+  }
+
+  window.upxLbOpen = upxLbOpen;
+  window.upxLbClose = upxLbClose;
+
+  lbClose.addEventListener('click', upxLbClose);
+  lb.addEventListener('click', e => { if (e.target === lb) upxLbClose(); });
+
+  document.addEventListener('keydown', e => {
+    if (!lb.classList.contains('upx-lb-open')) return;
+    if (e.key === 'Escape') upxLbClose();
+  });
+
+  document.querySelectorAll('.upx-gitem').forEach(item => {
+    const img = item.querySelector('img');
+    const label = img?.alt ? `View larger image: ${img.alt}` : 'View larger image';
+    item.setAttribute('role', 'button');
+    item.setAttribute('tabindex', '0');
+    item.setAttribute('aria-label', label);
+    item.addEventListener('click', () => upxLbOpen(item));
+    item.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        upxLbOpen(item);
+      }
+    });
+  });
+})();
 
 
 /* ── 6. CONTACT FORM (Formspree) ────────────────────────── */
@@ -277,12 +305,28 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') upxLbClose()
   const successDiv = document.getElementById('form-success');
   if (!form) return;
 
+  let errorDiv = document.getElementById('form-error');
+  if (!errorDiv) {
+    errorDiv = document.createElement('div');
+    errorDiv.id = 'form-error';
+    errorDiv.setAttribute('role', 'alert');
+    errorDiv.style.cssText = 'display:none;margin-top:1rem;padding:1rem;background:#ffe6e6;border:1px solid #ffb3b3;border-radius:6px;color:#660000;text-align:center;';
+    form.appendChild(errorDiv);
+  }
+
+  function showError(message) {
+    errorDiv.textContent = message;
+    errorDiv.style.display = 'block';
+    if (successDiv) successDiv.style.display = 'none';
+  }
+
   form.addEventListener('submit', async function (e) {
     e.preventDefault();
     const submitBtn    = form.querySelector('.submit-btn');
     const originalText = submitBtn.textContent;
     submitBtn.disabled    = true;
     submitBtn.textContent = 'Sending...';
+    errorDiv.style.display = 'none';
 
     try {
       const response = await fetch(form.action, {
@@ -297,10 +341,10 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') upxLbClose()
           setTimeout(() => { successDiv.style.display = 'none'; }, 8000);
         }
       } else {
-        alert('Something went wrong. Please try again.');
+        showError('Something went wrong. Please try again.');
       }
     } catch {
-      alert('Network error — please check your connection.');
+      showError('Network error — please check your connection.');
     } finally {
       submitBtn.textContent = originalText;
       submitBtn.disabled    = false;
@@ -343,9 +387,15 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') upxLbClose()
     const maxIndex = Math.max(0, TOTAL - vis);
     currentIndex   = Math.max(0, Math.min(index, maxIndex));
     track.style.transform = `translateX(-${currentIndex * (cards[0].offsetWidth + GAP)}px)`;
-    dots.forEach((d, i) => d.classList.toggle('sc-dot--active', i === currentIndex));
+    dots.forEach((d, i) => {
+      const active = i === currentIndex;
+      d.classList.toggle('sc-dot--active', active);
+      d.setAttribute('aria-selected', active ? 'true' : 'false');
+    });
     prevBtn.disabled = currentIndex === 0;
     nextBtn.disabled = currentIndex >= maxIndex;
+    prevBtn.setAttribute('aria-disabled', currentIndex === 0 ? 'true' : 'false');
+    nextBtn.setAttribute('aria-disabled', currentIndex >= maxIndex ? 'true' : 'false');
   }
 
   prevBtn.addEventListener('click', () => goTo(currentIndex - 1));

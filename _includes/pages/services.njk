@@ -1,0 +1,56 @@
+{% set p = cms.services %}
+
+<div class="upx-proj footer">
+  <div class="our-project-content upx-rp-min-size">
+    <h2>{{ p.intro.heading }}</h2>
+    <p>{{ p.intro.text }}</p>
+  </div>
+</div>
+
+<div class="service-hero-image">
+  <img src="{{ p.mainImage }}" alt="Uniprix services showcase" loading="lazy">
+</div>
+
+<section class="sc-section" aria-labelledby="services-carousel-heading">
+  <div class="sc-inner">
+    <h2 id="services-carousel-heading" class="visually-hidden">Service offerings carousel</h2>
+    <div class="sc-carousel-wrap">
+      <button type="button" class="sc-arrow sc-arrow--prev" id="scPrev" aria-label="Show previous services">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <div class="sc-track-outer" id="scTrackOuter" role="region" aria-label="Service offerings" aria-roledescription="carousel">
+        <div class="sc-track" id="scTrack">
+          {% for card in p.cards %}
+          <div class="sc-card {{ card.style }}" style="animation: sc-rise 0.5s ease both {{ (loop.index * 0.1) }}s">
+            <div class="sc-card__img"><img src="{{ card.image }}" alt="{{ card.imageAlt }}"></div>
+            <div class="sc-card__body">
+              <h3 class="sc-card__title">{{ card.title }}</h3>
+              <p class="sc-card__desc">{{ card.description }}</p>
+              <span class="sc-inc-label">Includes</span>
+              {% for inc in card.includes %}
+              <div class="sc-inc-item">{{ inc }}</div>
+              {% endfor %}
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      <button type="button" class="sc-arrow sc-arrow--next" id="scNext" aria-label="Show next services">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+    <div class="sc-dots" id="scDots" role="tablist" aria-label="Service cards">
+      {% for card in p.cards %}
+      <button type="button" class="sc-dot{% if loop.first %} sc-dot--active{% endif %}" data-index="{{ loop.index0 }}" role="tab" aria-label="Show service card {{ loop.index }}" aria-selected="{{ 'true' if loop.first else 'false' }}"></button>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="upx-cta">
+  <div class="upx-cta__inner">
+    <h2 class="upx-cta__heading">{{ p.cta.heading }}</h2>
+    <p class="upx-cta__sub">{{ p.cta.text }}</p>
+    <a href="{{ p.cta.buttonLink }}" class="upx-cta__btn">{{ p.cta.buttonText }}</a>
+  </div>
+</section>

@@ -1,0 +1,111 @@
+{
+  "heroTitle": "About Us",
+  "heroImage": "/about-us/assets/images/hero-background-image.png",
+  "main": {
+    "heading": "We help clients plan better, build smarter, and manage projects with confidence.",
+    "text1": "Uniprix Investment is a Construction and Project management company specializing in project Planning, Construction, Interior designs, and Renovation and Property management services.",
+    "text2": "We believe every successful Construction project starts with proper planning from Site Visits, Project designs to construction, focusing on Accuracy, Quality control, Efficient and Execution at every stage.",
+    "image": "/assets/images/about-team.webp",
+    "engineerIcon": "/assets/images/engineer-icon.png"
+  },
+  "stats": [
+    {
+      "icon": "/assets/images/stat-projects-done.png",
+      "number": "90+",
+      "label": "Projects Done"
+    },
+    {
+      "icon": "/assets/images/stat-projects-managed.png",
+      "number": "100+",
+      "label": "Projects Managed"
+    },
+    {
+      "icon": "/assets/images/stat-sites-visited.png",
+      "number": "200+",
+      "label": "Sites Visited"
+    },
+    {
+      "icon": "/assets/images/stat-interior.png",
+      "number": "150+",
+      "label": "Interior Spaces Designed"
+    },
+    {
+      "icon": "/assets/images/stat-ongoing.png",
+      "number": "50+",
+      "label": "Ongoing Projects"
+    }
+  ],
+  "mission": {
+    "heading": "Our Mission",
+    "text1": "To provide professional project planning, construction, interior design and Property Management services that deliver quality, and efficiency.",
+    "text2": "We are committed to managing every project with accuracy, transparency, and attention to detail, ensuring our clients' ideas are transformed into well-executed and lasting developments.",
+    "image": "/assets/images/mission.webp",
+    "icon": "/assets/icons/mission-icon.svg"
+  },
+  "vision": {
+    "heading": "Our Vision",
+    "text": "To be a trusted and respectable construction property Management partner, known for reliable project management, quality execution, and a client-focused approach that adds long-term value to every investment.",
+    "image": "/assets/images/vision.webp",
+    "icon": "/assets/icons/vision-icon.svg"
+  },
+  "values": {
+    "heading": "Our Core Values",
+    "image": "/assets/images/values.webp",
+    "icon": "/assets/icons/values-icon.svg",
+    "items": [
+      {
+        "title": "Professionalism",
+        "description": "We uphold high standards in Plan Designs, Construction and Property Management ensuring execution at every stage of a project."
+      },
+      {
+        "title": "Quality & Attention to Detail",
+        "description": "We prioritize durability, functionality, and finishing, ensuring every detail meets approval standards."
+      },
+      {
+        "title": "Transparency & Accountability",
+        "description": "We maintain clear communication, honest advice, and responsible project coordination."
+      },
+      {
+        "title": "Client-Centered Approach",
+        "description": "We listen, understand our clients' goals, to tailor make solutions that align with their vision and budget."
+      },
+      {
+        "title": "Integrity & Reliability",
+        "description": "We deliver on our commitments, manage projects with consistency and trust."
+      }
+    ]
+  },
+  "testimonials": {
+    "heading": "What Our Clients Say",
+    "subheading": "Real feedback from people we have worked with across Uganda.",
+    "ctaText": "See All Reviews",
+    "ctaLink": "./testimonials/",
+    "reviews": [
+      {
+        "name": "John Mukasa",
+        "text": "Uniprix handled our office renovation with professionalism and precision. They delivered on time and kept us informed every step of the way.",
+        "image": "/client-1.png"
+      },
+      {
+        "name": "Sarah Nalubega",
+        "text": "The interior design team transformed our home beyond expectations. Great attention to detail and very client-focused throughout the project.",
+        "image": "/client-2.png"
+      },
+      {
+        "name": "David Otieno",
+        "text": "From planning to execution, Uniprix Investment showed true expertise. Our commercial building was completed within budget and on schedule.",
+        "image": "/client-3.png"
+      },
+      {
+        "name": "Grace Apio",
+        "text": "Reliable, honest, and skilled. I highly recommend Uniprix for any construction or renovation work. They genuinely care about quality.",
+        "image": "/client-4.png"
+      },
+      {
+        "name": "Robert Ssemakula",
+        "text": "Excellent project management from start to finish. The site visits were thorough and the team communicated clearly throughout.",
+        "image": "/client-5.png"
+      }
+    ]
+  }
+}

@@ -1,0 +1,19 @@
+{% set p = cms.gallery %}
+
+<section class="upx-gallery">
+  <div class="upx-gallery__inner">
+    <div class="upx-gallery__header">
+      <h2 class="upx-gallery__heading" id="gallery-heading">{{ p.heading }}</h2>
+      <p class="upx-gallery__sub" id="gallery-subtitle">{{ p.subtitle }}</p>
+    </div>
+    <div class="upx-gallery__grid" id="gallery-grid">
+      {% for item in p.items %}
+      <div class="upx-gitem{% if item.mobileOnly %} mobile-disp{% endif %}">
+        <img src="{{ item.src }}" alt="{{ item.alt }}">
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% include "partials/lightbox.njk" %}

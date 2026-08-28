@@ -1,0 +1,44 @@
+{
+  "url": "https://www.uniprixinvestment.com",
+  "name": "Uniprix Investment",
+  "email": "info@uniprixinvestment.com",
+  "phone": "+256 700 847399",
+  "formspree": "https://formspree.io/f/xnjgrenn",
+  "ogImage": "/hero-image-home-page.webp",
+  "nav": [
+    { "label": "Home", "url": "/" },
+    { "label": "About Us", "url": "/about-us/" },
+    { "label": "Services", "url": "/services/" },
+    { "label": "Our Projects", "url": "/our-projects/" },
+    { "label": "Gallery", "url": "/gallery/" }
+  ],
+  "social": [
+    {
+      "label": "WhatsApp",
+      "url": "https://wa.me/+256700847399",
+      "icon": "/assets/images/social/whatsapp.png"
+    },
+    {
+      "label": "TikTok",
+      "url": "https://www.tiktok.com/@uniprix.investment",
+      "icon": "/assets/images/social/tiktok.png"
+    },
+    {
+      "label": "X (Twitter)",
+      "url": "https://x.com/kizzafaisal27?s=20",
+      "icon": "/assets/images/social/twitter.png"
+    },
+    {
+      "label": "Instagram",
+      "url": "https://www.instagram.com/uniprixinvestment",
+      "icon": "/assets/images/social/instagram.png"
+    }
+  ],
+  "footerLinks": [
+    { "label": "About us", "url": "/about-us/" },
+    { "label": "Contact Us", "url": "/contact-us/" },
+    { "label": "Services", "url": "/services/" },
+    { "label": "Our Projects", "url": "/our-projects/" },
+    { "label": "Gallery", "url": "/gallery/" }
+  ]
+}

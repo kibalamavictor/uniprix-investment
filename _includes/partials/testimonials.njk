@@ -1,0 +1,18 @@
+{% set t = testimonials %}
+<section class="testimonials" aria-labelledby="testimonialsHeading">
+  <h2 class="testimonials__heading" id="testimonialsHeading">{{ t.heading }}</h2>
+  <p class="testimonials__subheading" id="testimonialsSubheading">{{ t.subheading }}</p>
+  <script type="application/json" id="testimonials-data">{{ t | dump | safe }}</script>
+
+  <div class="carousel-stage" id="carouselStage" aria-label="Client review portraits"></div>
+
+  <div class="review-content" id="reviewContent" aria-live="polite" aria-atomic="true">
+    <p class="review-name" id="reviewName"></p>
+    <p class="review-text" id="reviewText"></p>
+  </div>
+
+  <div class="carousel-nav" aria-label="Review navigation">
+    <button type="button" id="prevBtn" aria-label="Previous review">&#8592;</button>
+    <button type="button" id="nextBtn" aria-label="Next review">&#8594;</button>
+  </div>
+</section>

@@ -1,0 +1,76 @@
+{% set cta = cms.home.cta %}
+<section class="cta-section">
+  {%- if showCtaCard %}
+  <div class="cta-card">
+    <img src="{{ cta.image }}" alt="Modern house" class="cta-image" loading="lazy">
+    <div class="cta-content">
+      <h2 id="cta-heading">{{ cta.heading }}</h2>
+      <div class="cta-buttons">
+        <a href="/contact-us/" class="cta-btn-dark">Contact Uniprix</a>
+        <a href="mailto:{{ site.email }}" class="cta-btn-light">Book A site visit</a>
+      </div>
+    </div>
+  </div>
+  {%- endif %}
+
+  <div class="contact-section">
+    <form id="contact-form" action="{{ site.formspree }}" method="POST">
+      <h2>Talk to Us</h2>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="firstName">First Name</label>
+          <input type="text" id="firstName" name="firstName" required>
+        </div>
+        <div class="form-group">
+          <label for="lastName">Last Name</label>
+          <input type="text" id="lastName" name="lastName" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="company">Company</label>
+        <input type="text" id="company" name="company">
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+
+      <div class="form-group">
+        <label for="phone">Phone Number</label>
+        <div class="phone-input">
+          <label for="countryCode" class="visually-hidden">Country code</label>
+          <select id="countryCode" class="country-code-select" name="countryCode" aria-label="Country code">
+            <option value="+256">+256</option>
+            <option value="+254">+254</option>
+            <option value="+255">+255</option>
+            <option value="+1">+1</option>
+            <option value="+44">+44</option>
+          </select>
+          <input type="tel" id="phone" name="phone" class="border-none">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="message">Message</label>
+        <textarea id="message" name="message" required></textarea>
+      </div>
+
+      <input type="text" name="_gotcha" style="display:none">
+      <input type="hidden" name="_subject" value="New Contact Form Submission">
+
+      <button type="submit" class="submit-btn">Let's Talk</button>
+
+      <div id="form-success" role="status" aria-live="polite" style="display: none; margin-top: 1.5rem; padding: 1rem; background: #e6ffe6; border: 1px solid #b3ffb3; border-radius: 6px; color: #006600; text-align: center;">
+        Thank you! Your message has been sent successfully. We'll get back to you soon.
+      </div>
+    </form>
+
+    <div class="contact-images">
+      <img src="/assets/images/contact-exterior.webp" alt="Modern house exterior" class="contact-image-main" loading="lazy">
+      <img src="/assets/images/contact-interior.webp" alt="Modern house interior" class="contact-image-small" loading="lazy">
+    </div>
+  </div>
+</section>

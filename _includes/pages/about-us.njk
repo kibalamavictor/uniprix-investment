@@ -1,0 +1,79 @@
+{% set p = cms.about %}
+
+<section class="about-section">
+  <div class="about-image-container">
+    <img src="{{ p.main.image }}" alt="Construction team meeting" class="about-image" loading="lazy">
+    <div class="icon-box">
+      <img src="{{ p.main.engineerIcon }}" alt="" aria-hidden="true">
+    </div>
+  </div>
+  <div class="about-content">
+    <h2>{{ p.main.heading }}</h2>
+    <p>{{ p.main.text1 }}</p>
+    <p>{{ p.main.text2 }}</p>
+  </div>
+</section>
+
+<div class="stats-bar" id="about-stats-bar">
+  {% for stat in p.stats %}
+  <div class="stat-item">
+    <img src="{{ stat.icon }}" alt="" class="stat-icon" aria-hidden="true">
+    <div class="stat-text">
+      <h3>{{ stat.number }}</h3>
+      <p>{{ stat.label }}</p>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+<section class="content-section">
+  <div class="mission-grid">
+    <div class="section-content">
+      <h2>{{ p.mission.heading }}</h2>
+      <p>{{ p.mission.text1 }}</p>
+      <p>{{ p.mission.text2 }}</p>
+    </div>
+    <div class="section-image-wrapper image-wrapper-left">
+      <img src="{{ p.mission.image }}" alt="Mission" class="section-image" loading="lazy">
+      <div class="section-icon-box mission-icon-box">
+        <img src="{{ p.mission.icon }}" alt="" aria-hidden="true">
+      </div>
+    </div>
+  </div>
+
+  <div class="vision-grid">
+    <div class="section-image-wrapper">
+      <img src="{{ p.vision.image }}" alt="Vision" class="section-image" loading="lazy">
+      <div class="section-icon-box vision-icon-box vision-icon-box-1">
+        <img src="{{ p.vision.icon }}" alt="" aria-hidden="true">
+      </div>
+    </div>
+    <div class="section-content">
+      <h2>{{ p.vision.heading }}</h2>
+      <p>{{ p.vision.text }}</p>
+    </div>
+  </div>
+
+  <div class="values-grid">
+    <div class="section-content">
+      <h2>{{ p.values.heading }}</h2>
+      <ul class="values-list" id="about-values-list">
+        {% for value in p.values.items %}
+        <li class="value-item">
+          <h3><span class="value-bullet"></span>{{ value.title }}</h3>
+          <p>{{ value.description }}</p>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="section-image-wrapper image-wrapper-left">
+      <img src="{{ p.values.image }}" alt="Values" class="section-image" loading="lazy">
+      <div class="section-icon-box values-icon-box">
+        <img src="{{ p.values.icon }}" alt="" aria-hidden="true">
+      </div>
+    </div>
+  </div>
+</section>
+
+{% set testimonials = p.testimonials %}
+{% include "partials/testimonials.njk" %}

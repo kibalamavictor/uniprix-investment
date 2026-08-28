@@ -1,0 +1,73 @@
+{% macro projectBlock(project) %}
+<div id="{{ project.id }}" class="upx-rpblock{% if project.variant == 'amber' %} upx-rpblock--right{% endif %}">
+  <div class="upx-rpblock__num-row">
+    <div class="upx-rp__num">{{ project.number }}<span class="upx-rp__num-dot"></span></div>
+  </div>
+  <div class="upx-rpcard{% if project.variant == 'amber' %} upx-rpcard--amber upx-rpcard--img-left upx-rpcard-left-tile{% endif %}">
+    {% if project.variant == 'amber' %}
+    <div class="upx-rpcard__img">
+      <div class="upx-slideshow-4">
+        {% for img in project.images %}
+        <div class="upx-slide"><img src="{{ img.src }}" alt="{{ img.alt }}" style="border-radius:170px 30px 30px 30px"/></div>
+        {% endfor %}
+      </div>
+      <div class="upx-rpcard__dots">
+        {% for img in project.images %}
+        <div class="upx-rdot" style="animation:upx-dot-fade 14s infinite {{ (loop.index0 * 3.5) }}s"></div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+    <div class="upx-rpcard__text">
+      <h2 class="upx-rpcard__title">{{ project.title }}</h2>
+      <div class="upx-rpcard__meta">
+        {% for row in project.meta %}
+        <div class="upx-rpcard__meta-row">
+          <span class="upx-rpcard__meta-key">{{ row.key }}:</span>
+          <span class="upx-rpcard__meta-val">{{ row.value }}</span>
+        </div>
+        {% endfor %}
+      </div>
+      {% if project.overview %}
+      <div class="upx-rpsection">
+        <span class="upx-rpsection__title">Project Overview</span>
+        <div class="dash-line"></div>
+        <p class="upx-rpsection__text">{{ project.overview }}</p>
+      </div>
+      {% endif %}
+      {% if project.details | length %}
+      <div class="upx-rpsection">
+        <span class="upx-rpsection__title">Key Details</span>
+        <div class="dash-line"></div>
+        <div class="upx-rpdetails">
+          {% for detail in project.details %}
+          <div class="upx-rpdetail-item">{{ detail }}</div>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+      {% if project.scope %}
+      <div class="upx-rpsection">
+        <span class="upx-rpsection__title">Scope of Work</span>
+        <div class="dash-line"></div>
+        <p class="upx-rpsection__text">{{ project.scope }}</p>
+      </div>
+      {% endif %}
+    </div>
+    {% if project.variant != 'amber' %}
+    <div class="upx-rpcard__img">
+      <div class="upx-slideshow-4">
+        {% for img in project.images %}
+        <div class="upx-slide"><img src="{{ img.src }}" alt="{{ img.alt }}" style="border-radius:30px 170px 30px 30px"/></div>
+        {% endfor %}
+      </div>
+      <div class="upx-rpcard__dots">
+        {% for img in project.images %}
+        <div class="upx-rdot" style="animation:upx-dot-fade 14s infinite {{ (loop.index0 * 3.5) }}s"></div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</div>
+{% endmacro %}

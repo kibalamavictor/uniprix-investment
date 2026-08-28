@@ -1,0 +1,29 @@
+<header class="nav">
+  <nav class="navbar" aria-label="Main navigation"{% if navNoShadow %} style="box-shadow: 0 0px 0px rgba(0, 0, 0, 0);"{% endif %}>
+    <div class="nav-container">
+      <a href="/" class="logo"{% if activeNav == '/' %} aria-current="page"{% endif %}>
+        <img src="/logo.svg" alt="" class="logo-img" height="55" width="148" aria-hidden="true">
+        <span class="visually-hidden">Uniprix Investment</span>
+      </a>
+
+      <div class="navlinks-container">
+        <ul class="nav-links" id="navLinks">
+          {%- for item in site.nav %}
+          <li>
+            <a href="{{ item.url }}"{% if activeNav == item.url %} aria-current="page" style="font-weight: 700; color: #193548;"{% endif %}>{{ item.label }}</a>
+          </li>
+          {%- endfor %}
+          <li class="mobile-donate-item">
+            <a href="/contact-us/"{% if activeNav == '/contact-us/' %} aria-current="page" style="font-weight: 700; color: #193548;"{% endif %}>Contact Us</a>
+          </li>
+        </ul>
+      </div>
+
+      <a href="/contact-us/" class="nav-donate-btn">Contact Us</a>
+
+      <button type="button" class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
+        <span aria-hidden="true">☰</span>
+      </button>
+    </div>
+  </nav>
+</header>

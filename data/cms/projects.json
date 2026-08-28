@@ -1,0 +1,674 @@
+{
+  "heroTitle": "Our Projects",
+  "heroImage": "/our-projects/assets/images/our-projects-header-image.png",
+  "intro": {
+    "heading": "A Portfolio Built on Trust, Skill, and Results",
+    "text": "Each project we undertake reflects our commitment to quality craftsmanship, thoughtful design, and client satisfaction. From residential builds to commercial developments across Uganda, here is a selection of work we are proud to stand behind.",
+    "label": "Our Projects"
+  },
+  "projects": [
+    {
+      "id": "project-1",
+      "number": "01",
+      "variant": "blue",
+      "title": "Two-Storey Family Residence",
+      "meta": [
+        {
+          "key": "Location",
+          "value": "Kira, Wakiso District"
+        },
+        {
+          "key": "Project Type",
+          "value": "Private Residential Home"
+        },
+        {
+          "key": "Status",
+          "value": "Ongoing (Finishing Phase)"
+        }
+      ],
+      "overview": "A modern two-storey residential home designed to provide comfortable family living while maintaining strong structural integrity. The project is currently in its advanced construction stage, with major structural works completed and roofing installed.",
+      "details": [
+        "Two floors (Ground + First Floor)",
+        "4 bedrooms (2 ensuite)",
+        "Spacious living and dining areas",
+        "Modern kitchen layout",
+        "Family lounge on the upper floor",
+        "Balcony spaces for ventilation and natural light",
+        "Reinforced concrete structure",
+        "Clay tile roofing system"
+      ],
+      "scope": "",
+      "images": [
+        {
+          "src": "/assets/images/1/project-1.png",
+          "alt": "Two-Storey Family Residence view 1"
+        },
+        {
+          "src": "/assets/images/1/2170.jpg",
+          "alt": "Two-Storey Family Residence view 2"
+        },
+        {
+          "src": "/assets/images/1/2220.jpg",
+          "alt": "Two-Storey Family Residence view 3"
+        },
+        {
+          "src": "/assets/images/1/4897.jpg",
+          "alt": "Two-Storey Family Residence view 4"
+        }
+      ]
+    },
+    {
+      "id": "project-2",
+      "number": "",
+      "variant": "amber",
+      "title": "Residential Apartments Block",
+      "meta": [
+        {
+          "key": "Location",
+          "value": "Ntinda, Kampala"
+        },
+        {
+          "key": "Project Type",
+          "value": "Private Residential Home"
+        },
+        {
+          "key": "Status",
+          "value": "Completed"
+        }
+      ],
+      "overview": "A contemporary executive bungalow designed for efficient use of space and comfortable modern living. The project emphasizes natural lighting, functional layouts, and durable construction finishes suitable for long-term occupancy.",
+      "details": [
+        "Single-storey structure",
+        "3 bedrooms (Master ensuite)",
+        "Spacious living and dining areas",
+        "Modern kitchen with pantry",
+        "Guest washroom",
+        "Front veranda",
+        "Reinforced concrete structure",
+        "Concrete tile roofing"
+      ],
+      "scope": "",
+      "images": [
+        {
+          "src": "/assets/images/2/2054.jpg",
+          "alt": "Residential Apartments Block view 1"
+        },
+        {
+          "src": "/assets/images/2/2725.jpg",
+          "alt": "Residential Apartments Block view 2"
+        },
+        {
+          "src": "/assets/images/2/2792.jpg",
+          "alt": "Residential Apartments Block view 3"
+        },
+        {
+          "src": "/assets/images/2/6044.jpg",
+          "alt": "Residential Apartments Block view 4"
+        }
+      ]
+    },
+    {
+      "id": "project-3",
+      "number": "03",
+      "variant": "blue",
+      "title": "Residential Rental Apartments",
+      "meta": [
+        {
+          "key": "Location",
+          "value": "Nansana, Wakiso District"
+        },
+        {
+          "key": "Project Type",
+          "value": "Rental Housing Development"
+        },
+        {
+          "key": "Status",
+          "value": "Completed"
+        }
+      ],
+      "overview": "A purpose-built rental apartment block developed to maximize rental income while maintaining structural durability and low maintenance costs. The project serves middle-income tenants within an urban setting.",
+      "details": [
+        "8 apartment units",
+        "Mix of 1-bedroom and 2-bedroom units",
+        "Two-storey building",
+        "Shared parking space",
+        "Central water and power connections",
+        "Reinforced concrete structure"
+      ],
+      "scope": "",
+      "images": [
+        {
+          "src": "/assets/images/3/1105.jpg",
+          "alt": "Residential Rental Apartments view 1"
+        },
+        {
+          "src": "/assets/images/3/18474.jpg",
+          "alt": "Residential Rental Apartments view 2"
+        },
+        {
+          "src": "/assets/images/3/2156.jpg",
+          "alt": "Residential Rental Apartments view 3"
+        },
+        {
+          "src": "/assets/images/3/3519.jpg",
+          "alt": "Residential Rental Apartments view 4"
+        }
+      ]
+    },
+    {
+      "id": "project-4",
+      "number": "",
+      "variant": "amber",
+      "title": "Luxury Family Residence",
+      "meta": [
+        {
+          "key": "Location",
+          "value": "Muyenga, Kampala"
+        },
+        {
+          "key": "Project Type",
+          "value": "High-End Private Residence"
+        },
+        {
+          "key": "Status",
+          "value": "Completed"
+        }
+      ],
+      "overview": "A luxury family home designed to offer privacy, generous living spaces, and premium finishes. The project blends modern architectural design with functional family living.",
+      "details": [
+        "Two-storey structure",
+        "5 bedrooms (All ensuite)",
+        "Multiple living lounges",
+        "Modern open-plan kitchen",
+        "Balconies and outdoor relaxation spaces",
+        "High-quality interior finishes"
+      ],
+      "scope": "",
+      "images": [
+        {
+          "src": "/assets/images/4/125160.jpg",
+          "alt": "Luxury Family Residence view 1"
+        },
+        {
+          "src": "/assets/images/4/2076.jpg",
+          "alt": "Luxury Family Residence view 2"
+        },
+        {
+          "src": "/assets/images/4/2982.jpg",
+          "alt": "Luxury Family Residence view 3"
+        },
+        {
+          "src": "/assets/images/4/6537.jpg",
+          "alt": "Luxury Family Residence view 4"
+        }
+      ]
+    },
+    {
+      "id": "project-5",
+      "number": "05",
+      "variant": "blue",
+      "title": "Office & Retail Complex",
+      "meta": [
+        {
+          "key": "Location",
+          "value": "Jinja City Central Business Area"
+        },
+        {
+          "key": "Project Type",
+          "value": "Commercial Development"
+        },
+        {
+          "key": "Status",
+          "value": "Ongoing"
+        }
+      ],
+      "overview": "A mixed-use commercial development designed to accommodate retail spaces on lower floors and office units on upper levels, supporting business growth in a high-traffic area.",
+      "details": [
+        "Three-storey structure",
+        "12 commercial units",
+        "Retail spaces on ground floor",
+        "Office units on upper floors",
+        "Parking area for tenants and visitors"
+      ],
+      "scope": "",
+      "images": [
+        {
+          "src": "/assets/images/5/13879.jpg",
+          "alt": "Office & Retail Complex view 1"
+        },
+        {
+          "src": "/assets/images/5/2149008873.jpg",
+          "alt": "Office & Retail Complex view 2"
+        },
+        {
+          "src": "/assets/images/5/3450.jpg",
+          "alt": "Office & Retail Complex view 3"
+        },
+        {
+          "src": "/assets/images/5/5635.jpg",
+          "alt": "Office & Retail Complex view 4"
+        }
+      ]
+    },
+    {
+      "id": "project-6",
+      "number": "",
+      "variant": "amber",
+      "title": "Industrial Warehouse Facility",
+      "meta": [
+        {
+          "key": "Location",
+          "value": "Mukono Industrial Area"
+        },
+        {
+          "key": "Project Type",
+          "value": "Industrial Construction"
+        },
+        {
+          "key": "Status",
+          "value": "Completed"
+        }
+      ],
+      "overview": "A functional warehouse facility designed for storage, logistics, and operational efficiency. The structure prioritizes accessibility, durability, and safety.",
+      "details": [
+        "Large open span warehouse layout",
+        "Reinforced concrete foundation",
+        "Steel roofing structure",
+        "Loading and offloading access points",
+        "Secure perimeter fencing"
+      ],
+      "scope": "",
+      "images": [
+        {
+          "src": "/assets/images/6/1934.jpg",
+          "alt": "Industrial Warehouse Facility view 1"
+        },
+        {
+          "src": "/assets/images/6/2033.jpg",
+          "alt": "Industrial Warehouse Facility view 2"
+        },
+        {
+          "src": "/assets/images/6/2152016398.jpg",
+          "alt": "Industrial Warehouse Facility view 3"
+        },
+        {
+          "src": "/assets/images/6/8779.jpg",
+          "alt": "Industrial Warehouse Facility view 4"
+        }
+      ]
+    },
+    {
+      "id": "project-7",
+      "number": "07",
+      "variant": "blue",
+      "title": "Modern Living & Dining Interior",
+      "meta": [
+        {
+          "key": "Location",
+          "value": "Kololo, Kampala"
+        },
+        {
+          "key": "Project Type",
+          "value": "Residential Interior Design"
+        },
+        {
+          "key": "Status",
+          "value": "Completed"
+        }
+      ],
+      "overview": "An interior design project focused on transforming living and dining spaces into a modern, elegant, and functional environment using carefully selected finishes and lighting.",
+      "details": [
+        "Living room interior design",
+        "Dining area design",
+        "Custom lighting solutions",
+        "Furniture layout planning",
+        "Wall and ceiling finishes"
+      ],
+      "scope": "",
+      "images": [
+        {
+          "src": "/assets/images/7/124.jpg",
+          "alt": "Modern Living & Dining Interior view 1"
+        },
+        {
+          "src": "/assets/images/7/362.jpg",
+          "alt": "Modern Living & Dining Interior view 2"
+        },
+        {
+          "src": "/assets/images/7/688.jpg",
+          "alt": "Modern Living & Dining Interior view 3"
+        },
+        {
+          "src": "/assets/images/7/71240.jpg",
+          "alt": "Modern Living & Dining Interior view 4"
+        }
+      ]
+    },
+    {
+      "id": "project-8",
+      "number": "",
+      "variant": "amber",
+      "title": "Bedroom & Home Office Interiors",
+      "meta": [
+        {
+          "key": "Location",
+          "value": "Lubowa, Wakiso District"
+        },
+        {
+          "key": "Project Type",
+          "value": "Residential Interior Design"
+        },
+        {
+          "key": "Status",
+          "value": "Completed"
+        }
+      ],
+      "overview": "A customized interior design solution aimed at enhancing comfort, productivity, and efficient storage within private living spaces.",
+      "details": [
+        "Master bedroom interior",
+        "Secondary bedroom design",
+        "Home office setup",
+        "Wardrobe and storage solutions",
+        "Lighting and finishes coordination"
+      ],
+      "scope": "",
+      "images": [
+        {
+          "src": "/assets/images/8/14125.jpg",
+          "alt": "Bedroom & Home Office Interiors view 1"
+        },
+        {
+          "src": "/assets/images/8/2151113871.jpg",
+          "alt": "Bedroom & Home Office Interiors view 2"
+        },
+        {
+          "src": "/assets/images/8/274.jpg",
+          "alt": "Bedroom & Home Office Interiors view 3"
+        },
+        {
+          "src": "/assets/images/8/3614.jpg",
+          "alt": "Bedroom & Home Office Interiors view 4"
+        }
+      ]
+    },
+    {
+      "id": "project-9",
+      "number": "09",
+      "variant": "blue",
+      "title": "Two-Storey Residential 3D Render",
+      "meta": [
+        {
+          "key": "Location",
+          "value": "Kyanja, Kampala"
+        },
+        {
+          "key": "Project Type",
+          "value": "3D Architectural Visualization"
+        },
+        {
+          "key": "Status",
+          "value": "Completed"
+        }
+      ],
+      "overview": "A detailed 3D visualization created to help the client visualize the final outcome before construction, supporting decision-making and approvals.",
+      "details": [
+        "Exterior 3D renders",
+        "Interior space visualization",
+        "Material and color representation",
+        "Day and night views"
+      ],
+      "scope": "",
+      "images": [
+        {
+          "src": "/assets/images/9/2150761202.jpg",
+          "alt": "Two-Storey Residential 3D Render view 1"
+        },
+        {
+          "src": "/assets/images/9/2151003982.jpg",
+          "alt": "Two-Storey Residential 3D Render view 2"
+        },
+        {
+          "src": "/assets/images/9/2151004066.jpg",
+          "alt": "Two-Storey Residential 3D Render view 3"
+        },
+        {
+          "src": "/assets/images/9/69897.jpg",
+          "alt": "Two-Storey Residential 3D Render view 4"
+        }
+      ]
+    },
+    {
+      "id": "project-10",
+      "number": "",
+      "variant": "amber",
+      "title": "Apartment Block 3D Concept",
+      "meta": [
+        {
+          "key": "Location",
+          "value": "Mbale City"
+        },
+        {
+          "key": "Project Type",
+          "value": "3D Development Concept"
+        },
+        {
+          "key": "Status",
+          "value": "Completed"
+        }
+      ],
+      "overview": "A conceptual 3D apartment design developed for investment analysis and planning prior to construction.",
+      "details": [
+        "10 apartment units",
+        "Exterior massing visualization",
+        "Floor plan concepts",
+        "Investment-ready presentation"
+      ],
+      "scope": "",
+      "images": [
+        {
+          "src": "/assets/images/10/2375.jpg",
+          "alt": "Apartment Block 3D Concept view 1"
+        },
+        {
+          "src": "/assets/images/10/4192.jpg",
+          "alt": "Apartment Block 3D Concept view 2"
+        },
+        {
+          "src": "/assets/images/10/4594.jpg",
+          "alt": "Apartment Block 3D Concept view 3"
+        },
+        {
+          "src": "/assets/images/10/5228.jpg",
+          "alt": "Apartment Block 3D Concept view 4"
+        }
+      ]
+    },
+    {
+      "id": "project-11",
+      "number": "11",
+      "variant": "blue",
+      "title": "Ready-to-Move Family Home",
+      "meta": [
+        {
+          "key": "Location",
+          "value": "Kitende, Entebbe Road"
+        },
+        {
+          "key": "Project Type",
+          "value": "Residential Home for Sale"
+        },
+        {
+          "key": "Status",
+          "value": "Available for Sale"
+        }
+      ],
+      "overview": "A fully completed modern family home ready for immediate occupation, designed with comfort and functionality in mind.",
+      "details": [
+        "3 bedrooms",
+        "3 bathrooms",
+        "Spacious living and dining areas",
+        "Modern kitchen",
+        "Private compound",
+        "Parking for 2 vehicles"
+      ],
+      "scope": "",
+      "images": [
+        {
+          "src": "/assets/images/11/1277.jpg",
+          "alt": "Ready-to-Move Family Home view 1"
+        },
+        {
+          "src": "/assets/images/11/3217.jpg",
+          "alt": "Ready-to-Move Family Home view 2"
+        },
+        {
+          "src": "/assets/images/11/3221.jpg",
+          "alt": "Ready-to-Move Family Home view 3"
+        },
+        {
+          "src": "/assets/images/11/4169.jpg",
+          "alt": "Ready-to-Move Family Home view 4"
+        }
+      ]
+    },
+    {
+      "id": "project-12",
+      "number": "",
+      "variant": "amber",
+      "title": "Executive Two-Storey Home",
+      "meta": [
+        {
+          "key": "Location",
+          "value": "Namugongo, Wakiso District"
+        },
+        {
+          "key": "Project Type",
+          "value": "Luxury Home for Sale"
+        },
+        {
+          "key": "Status",
+          "value": "Available for Sale"
+        }
+      ],
+      "overview": "An executive two-storey home offering spacious interiors, modern architectural design, and premium finishes suitable for family living or investment.",
+      "details": [
+        "Two-storey structure",
+        "4 bedrooms (All ensuite)",
+        "Multiple living spaces",
+        "Modern kitchen and dining",
+        "Balconies and parking space"
+      ],
+      "scope": "",
+      "images": [
+        {
+          "src": "/assets/images/12/21965.jpg",
+          "alt": "Executive Two-Storey Home view 1"
+        },
+        {
+          "src": "/assets/images/12/23530.jpg",
+          "alt": "Executive Two-Storey Home view 2"
+        },
+        {
+          "src": "/assets/images/12/43537.jpg",
+          "alt": "Executive Two-Storey Home view 3"
+        },
+        {
+          "src": "/assets/images/12/595.jpg",
+          "alt": "Executive Two-Storey Home view 4"
+        }
+      ]
+    },
+    {
+      "id": "project-13",
+      "number": "13",
+      "variant": "blue",
+      "title": "Apartment Development",
+      "meta": [
+        {
+          "key": "Location",
+          "value": "Najjera, Wakiso District"
+        },
+        {
+          "key": "Project Type",
+          "value": "Residential Apartments"
+        },
+        {
+          "key": "Status",
+          "value": "Ongoing"
+        }
+      ],
+      "overview": "An ongoing apartment project designed to meet the growing demand for urban rental housing.",
+      "details": [
+        "16 apartment units",
+        "Three-storey building",
+        "Mix of 1 and 2 bedroom units",
+        "Shared parking and utilities"
+      ],
+      "scope": "",
+      "images": [
+        {
+          "src": "/assets/images/13/15678.jpg",
+          "alt": "Apartment Development view 1"
+        },
+        {
+          "src": "/assets/images/13/18370.jpg",
+          "alt": "Apartment Development view 2"
+        },
+        {
+          "src": "/assets/images/13/18371.jpg",
+          "alt": "Apartment Development view 3"
+        },
+        {
+          "src": "/assets/images/13/20470.jpg",
+          "alt": "Apartment Development view 4"
+        }
+      ]
+    },
+    {
+      "id": "project-14",
+      "number": "",
+      "variant": "amber",
+      "title": "Mixed-Use Development",
+      "meta": [
+        {
+          "key": "Location",
+          "value": "Mbarara City"
+        },
+        {
+          "key": "Project Type",
+          "value": "Commercial & Residential Development"
+        },
+        {
+          "key": "Status",
+          "value": "Ongoing"
+        }
+      ],
+      "overview": "A mixed-use project combining residential units with commercial spaces to support both living and business operations.",
+      "details": [
+        "20 total units",
+        "Residential apartments",
+        "Commercial units",
+        "Shared amenities and parking"
+      ],
+      "scope": "",
+      "images": [
+        {
+          "src": "/assets/images/14/2149661444.jpg",
+          "alt": "Mixed-Use Development view 1"
+        },
+        {
+          "src": "/assets/images/14/freepik__photo-a-brick-building-with-many-windows-and-cars-__21108.jpeg",
+          "alt": "Mixed-Use Development view 2"
+        },
+        {
+          "src": "/assets/images/14/freepik__talk__56673.jpeg",
+          "alt": "Mixed-Use Development view 3"
+        },
+        {
+          "src": "/assets/images/14/2149661444.jpg",
+          "alt": "Mixed-Use Development view 4"
+        }
+      ]
+    }
+  ]
+}
