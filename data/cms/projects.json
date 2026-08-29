@@ -40,26 +40,26 @@
       "scope": "",
       "images": [
         {
-          "src": "/assets/images/1/project-1.png",
+          "src": "/our-projects/assets/images/1/project-1.png",
           "alt": "Two-Storey Family Residence view 1"
         },
         {
-          "src": "/assets/images/1/2170.jpg",
+          "src": "/our-projects/assets/images/1/2170.jpg",
           "alt": "Two-Storey Family Residence view 2"
         },
         {
-          "src": "/assets/images/1/2220.jpg",
+          "src": "/our-projects/assets/images/1/2220.jpg",
           "alt": "Two-Storey Family Residence view 3"
         },
         {
-          "src": "/assets/images/1/4897.jpg",
+          "src": "/our-projects/assets/images/1/4897.jpg",
           "alt": "Two-Storey Family Residence view 4"
         }
       ]
     },
     {
       "id": "project-2",
-      "number": "",
+      "number": "02",
       "variant": "amber",
       "title": "Residential Apartments Block",
       "meta": [
@@ -90,19 +90,19 @@
       "scope": "",
       "images": [
         {
-          "src": "/assets/images/2/2054.jpg",
+          "src": "/our-projects/assets/images/2/2054.jpg",
           "alt": "Residential Apartments Block view 1"
         },
         {
-          "src": "/assets/images/2/2725.jpg",
+          "src": "/our-projects/assets/images/2/2725.jpg",
           "alt": "Residential Apartments Block view 2"
         },
         {
-          "src": "/assets/images/2/2792.jpg",
+          "src": "/our-projects/assets/images/2/2792.jpg",
           "alt": "Residential Apartments Block view 3"
         },
         {
-          "src": "/assets/images/2/6044.jpg",
+          "src": "/our-projects/assets/images/2/6044.jpg",
           "alt": "Residential Apartments Block view 4"
         }
       ]
@@ -138,26 +138,26 @@
       "scope": "",
       "images": [
         {
-          "src": "/assets/images/3/1105.jpg",
+          "src": "/our-projects/assets/images/3/1105.jpg",
           "alt": "Residential Rental Apartments view 1"
         },
         {
-          "src": "/assets/images/3/18474.jpg",
+          "src": "/our-projects/assets/images/3/18474.jpg",
           "alt": "Residential Rental Apartments view 2"
         },
         {
-          "src": "/assets/images/3/2156.jpg",
+          "src": "/our-projects/assets/images/3/2156.jpg",
           "alt": "Residential Rental Apartments view 3"
         },
         {
-          "src": "/assets/images/3/3519.jpg",
+          "src": "/our-projects/assets/images/3/3519.jpg",
           "alt": "Residential Rental Apartments view 4"
         }
       ]
     },
     {
       "id": "project-4",
-      "number": "",
+      "number": "04",
       "variant": "amber",
       "title": "Luxury Family Residence",
       "meta": [
@@ -186,19 +186,19 @@
       "scope": "",
       "images": [
         {
-          "src": "/assets/images/4/125160.jpg",
+          "src": "/our-projects/assets/images/4/125160.jpg",
           "alt": "Luxury Family Residence view 1"
         },
         {
-          "src": "/assets/images/4/2076.jpg",
+          "src": "/our-projects/assets/images/4/2076.jpg",
           "alt": "Luxury Family Residence view 2"
         },
         {
-          "src": "/assets/images/4/2982.jpg",
+          "src": "/our-projects/assets/images/4/2982.jpg",
           "alt": "Luxury Family Residence view 3"
         },
         {
-          "src": "/assets/images/4/6537.jpg",
+          "src": "/our-projects/assets/images/4/6537.jpg",
           "alt": "Luxury Family Residence view 4"
         }
       ]
@@ -233,26 +233,26 @@
       "scope": "",
       "images": [
         {
-          "src": "/assets/images/5/13879.jpg",
+          "src": "/our-projects/assets/images/5/13879.jpg",
           "alt": "Office & Retail Complex view 1"
         },
         {
-          "src": "/assets/images/5/2149008873.jpg",
+          "src": "/our-projects/assets/images/5/2149008873.jpg",
           "alt": "Office & Retail Complex view 2"
         },
         {
-          "src": "/assets/images/5/3450.jpg",
+          "src": "/our-projects/assets/images/5/3450.jpg",
           "alt": "Office & Retail Complex view 3"
         },
         {
-          "src": "/assets/images/5/5635.jpg",
+          "src": "/our-projects/assets/images/5/5635.jpg",
           "alt": "Office & Retail Complex view 4"
         }
       ]
     },
     {
       "id": "project-6",
-      "number": "",
+      "number": "06",
       "variant": "amber",
       "title": "Industrial Warehouse Facility",
       "meta": [
@@ -280,19 +280,19 @@
       "scope": "",
       "images": [
         {
-          "src": "/assets/images/6/1934.jpg",
+          "src": "/our-projects/assets/images/6/1934.jpg",
           "alt": "Industrial Warehouse Facility view 1"
         },
         {
-          "src": "/assets/images/6/2033.jpg",
+          "src": "/our-projects/assets/images/6/2033.jpg",
           "alt": "Industrial Warehouse Facility view 2"
         },
         {
-          "src": "/assets/images/6/2152016398.jpg",
+          "src": "/our-projects/assets/images/6/2152016398.jpg",
           "alt": "Industrial Warehouse Facility view 3"
         },
         {
-          "src": "/assets/images/6/8779.jpg",
+          "src": "/our-projects/assets/images/6/8779.jpg",
           "alt": "Industrial Warehouse Facility view 4"
         }
       ]
@@ -327,26 +327,26 @@
       "scope": "",
       "images": [
         {
-          "src": "/assets/images/7/124.jpg",
+          "src": "/our-projects/assets/images/7/124.jpg",
           "alt": "Modern Living & Dining Interior view 1"
         },
         {
-          "src": "/assets/images/7/362.jpg",
+          "src": "/our-projects/assets/images/7/362.jpg",
           "alt": "Modern Living & Dining Interior view 2"
         },
         {
-          "src": "/assets/images/7/688.jpg",
+          "src": "/our-projects/assets/images/7/688.jpg",
           "alt": "Modern Living & Dining Interior view 3"
         },
         {
-          "src": "/assets/images/7/71240.jpg",
+          "src": "/our-projects/assets/images/7/71240.jpg",
           "alt": "Modern Living & Dining Interior view 4"
         }
       ]
     },
     {
       "id": "project-8",
-      "number": "",
+      "number": "08",
       "variant": "amber",
       "title": "Bedroom & Home Office Interiors",
       "meta": [
@@ -374,19 +374,19 @@
       "scope": "",
       "images": [
         {
-          "src": "/assets/images/8/14125.jpg",
+          "src": "/our-projects/assets/images/8/14125.jpg",
           "alt": "Bedroom & Home Office Interiors view 1"
         },
         {
-          "src": "/assets/images/8/2151113871.jpg",
+          "src": "/our-projects/assets/images/8/2151113871.jpg",
           "alt": "Bedroom & Home Office Interiors view 2"
         },
         {
-          "src": "/assets/images/8/274.jpg",
+          "src": "/our-projects/assets/images/8/274.jpg",
           "alt": "Bedroom & Home Office Interiors view 3"
         },
         {
-          "src": "/assets/images/8/3614.jpg",
+          "src": "/our-projects/assets/images/8/3614.jpg",
           "alt": "Bedroom & Home Office Interiors view 4"
         }
       ]
@@ -420,26 +420,26 @@
       "scope": "",
       "images": [
         {
-          "src": "/assets/images/9/2150761202.jpg",
+          "src": "/our-projects/assets/images/9/2150761202.jpg",
           "alt": "Two-Storey Residential 3D Render view 1"
         },
         {
-          "src": "/assets/images/9/2151003982.jpg",
+          "src": "/our-projects/assets/images/9/2151003982.jpg",
           "alt": "Two-Storey Residential 3D Render view 2"
         },
         {
-          "src": "/assets/images/9/2151004066.jpg",
+          "src": "/our-projects/assets/images/9/2151004066.jpg",
           "alt": "Two-Storey Residential 3D Render view 3"
         },
         {
-          "src": "/assets/images/9/69897.jpg",
+          "src": "/our-projects/assets/images/9/69897.jpg",
           "alt": "Two-Storey Residential 3D Render view 4"
         }
       ]
     },
     {
       "id": "project-10",
-      "number": "",
+      "number": "10",
       "variant": "amber",
       "title": "Apartment Block 3D Concept",
       "meta": [
@@ -466,19 +466,19 @@
       "scope": "",
       "images": [
         {
-          "src": "/assets/images/10/2375.jpg",
+          "src": "/our-projects/assets/images/10/2375.jpg",
           "alt": "Apartment Block 3D Concept view 1"
         },
         {
-          "src": "/assets/images/10/4192.jpg",
+          "src": "/our-projects/assets/images/10/4192.jpg",
           "alt": "Apartment Block 3D Concept view 2"
         },
         {
-          "src": "/assets/images/10/4594.jpg",
+          "src": "/our-projects/assets/images/10/4594.jpg",
           "alt": "Apartment Block 3D Concept view 3"
         },
         {
-          "src": "/assets/images/10/5228.jpg",
+          "src": "/our-projects/assets/images/10/5228.jpg",
           "alt": "Apartment Block 3D Concept view 4"
         }
       ]
@@ -514,26 +514,26 @@
       "scope": "",
       "images": [
         {
-          "src": "/assets/images/11/1277.jpg",
+          "src": "/our-projects/assets/images/11/1277.jpg",
           "alt": "Ready-to-Move Family Home view 1"
         },
         {
-          "src": "/assets/images/11/3217.jpg",
+          "src": "/our-projects/assets/images/11/3217.jpg",
           "alt": "Ready-to-Move Family Home view 2"
         },
         {
-          "src": "/assets/images/11/3221.jpg",
+          "src": "/our-projects/assets/images/11/3221.jpg",
           "alt": "Ready-to-Move Family Home view 3"
         },
         {
-          "src": "/assets/images/11/4169.jpg",
+          "src": "/our-projects/assets/images/11/4169.jpg",
           "alt": "Ready-to-Move Family Home view 4"
         }
       ]
     },
     {
       "id": "project-12",
-      "number": "",
+      "number": "12",
       "variant": "amber",
       "title": "Executive Two-Storey Home",
       "meta": [
@@ -561,19 +561,19 @@
       "scope": "",
       "images": [
         {
-          "src": "/assets/images/12/21965.jpg",
+          "src": "/our-projects/assets/images/12/21965.jpg",
           "alt": "Executive Two-Storey Home view 1"
         },
         {
-          "src": "/assets/images/12/23530.jpg",
+          "src": "/our-projects/assets/images/12/23530.jpg",
           "alt": "Executive Two-Storey Home view 2"
         },
         {
-          "src": "/assets/images/12/43537.jpg",
+          "src": "/our-projects/assets/images/12/43537.jpg",
           "alt": "Executive Two-Storey Home view 3"
         },
         {
-          "src": "/assets/images/12/595.jpg",
+          "src": "/our-projects/assets/images/12/595.jpg",
           "alt": "Executive Two-Storey Home view 4"
         }
       ]
@@ -607,26 +607,26 @@
       "scope": "",
       "images": [
         {
-          "src": "/assets/images/13/15678.jpg",
+          "src": "/our-projects/assets/images/13/15678.jpg",
           "alt": "Apartment Development view 1"
         },
         {
-          "src": "/assets/images/13/18370.jpg",
+          "src": "/our-projects/assets/images/13/18370.jpg",
           "alt": "Apartment Development view 2"
         },
         {
-          "src": "/assets/images/13/18371.jpg",
+          "src": "/our-projects/assets/images/13/18371.jpg",
           "alt": "Apartment Development view 3"
         },
         {
-          "src": "/assets/images/13/20470.jpg",
+          "src": "/our-projects/assets/images/13/20470.jpg",
           "alt": "Apartment Development view 4"
         }
       ]
     },
     {
       "id": "project-14",
-      "number": "",
+      "number": "14",
       "variant": "amber",
       "title": "Mixed-Use Development",
       "meta": [
@@ -653,19 +653,19 @@
       "scope": "",
       "images": [
         {
-          "src": "/assets/images/14/2149661444.jpg",
+          "src": "/our-projects/assets/images/14/2149661444.jpg",
           "alt": "Mixed-Use Development view 1"
         },
         {
-          "src": "/assets/images/14/freepik__photo-a-brick-building-with-many-windows-and-cars-__21108.jpeg",
+          "src": "/our-projects/assets/images/14/freepik__photo-a-brick-building-with-many-windows-and-cars-__21108.jpeg",
           "alt": "Mixed-Use Development view 2"
         },
         {
-          "src": "/assets/images/14/freepik__talk__56673.jpeg",
+          "src": "/our-projects/assets/images/14/freepik__talk__56673.jpeg",
           "alt": "Mixed-Use Development view 3"
         },
         {
-          "src": "/assets/images/14/2149661444.jpg",
+          "src": "/our-projects/assets/images/14/2149661444.jpg",
           "alt": "Mixed-Use Development view 4"
         }
       ]

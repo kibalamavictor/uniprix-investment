@@ -9,6 +9,6 @@
     "GITHUB_REPO": "kibalamavictor/uniprix-investment",
     "GITHUB_BRANCH": "main",
     "CMS_USERNAME": "admin",
-    "ALLOWED_ORIGINS": "https://www.uniprixinvestment.com,http://localhost:8080,http://127.0.0.1:8080"
+    "ALLOWED_ORIGINS": "https://www.uniprixinvestment.com,https://uniprixinvestment.com,http://localhost:8080,http://127.0.0.1:8080"
   }
 }

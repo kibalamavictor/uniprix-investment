@@ -120,13 +120,13 @@
     <div class="upx-proj__track-wrap" id="upxProjWrap" role="region" aria-label="Project categories" aria-roledescription="carousel">
       <div class="upx-proj__track" id="upxProjTrack">
         {% for item in p.projects.items %}
-        <div class="upx-pcard">
+        <a href="{{ item.link or ('/our-projects/#project-' ~ loop.index) }}" class="upx-pcard">
           <div class="upx-pcard__img-wrap{% if loop.index0 % 2 == 1 %} reverse-pcard{% endif %}">
             <img src="{{ item.image }}" alt="{{ item.title }}" loading="lazy">
           </div>
           <span class="upx-pcard__title">{{ item.title }}</span>
-          <a href="{{ item.link }}" class="upx-pcard__btn">View Projects</a>
-        </div>
+          <span class="upx-pcard__btn">View Projects</span>
+        </a>
         {% endfor %}
       </div>
     </div>

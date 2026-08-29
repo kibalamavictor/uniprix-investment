@@ -5,11 +5,11 @@
     "heading": "We offer a range of services that help clients plan better, manage efficiently, and build with confidence.",
     "text": "At Uniprix Investment, we offer end-to-end solutions that support clients from the earliest planning stages through construction, interior design, and project completion. Our services are designed to ensure clarity, quality, and confidence at every stage."
   },
-  "mainImage": "/assets/images/main-service-image.png",
+  "mainImage": "/services/assets/images/main-service-image.png",
   "cards": [
     {
       "style": "sc-card--br-right",
-      "image": "/assets/images/card-image-1.png",
+      "image": "/services/assets/images/card-image-1.png",
       "imageAlt": "Architectural & Structural Design",
       "title": "Architectural & Structural Design",
       "description": "We create detailed architectural plans and structural designs tailored to your vision, site conditions, and budget \u2014 ensuring safety, functionality, and aesthetic appeal.",
@@ -21,7 +21,7 @@
     },
     {
       "style": "sc-card--br-left",
-      "image": "/assets/images/card-image-2.png",
+      "image": "/services/assets/images/card-image-2.png",
       "imageAlt": "Construction & Project Management",
       "title": "Construction & Project Management",
       "description": "From groundbreaking to handover, we manage every aspect of the build \u2014 coordinating contractors, materials, timelines, and quality control so your project is delivered on time and on budget.",
@@ -33,7 +33,7 @@
     },
     {
       "style": "sc-card--br-right",
-      "image": "/assets/images/card-image-3.png",
+      "image": "/services/assets/images/card-image-3.png",
       "imageAlt": "Interior Design & Finishing",
       "title": "Interior Design & Finishing",
       "description": "Our interior design team transforms spaces into functional, beautiful environments \u2014 selecting materials, finishes, furniture, and lighting that reflect your style and purpose.",
@@ -45,7 +45,7 @@
     },
     {
       "style": "sc-card--br-left",
-      "image": "/assets/images/card-image-4.png",
+      "image": "/services/assets/images/card-image-4.png",
       "imageAlt": "Renovation & Remodelling",
       "title": "Renovation & Remodelling",
       "description": "We breathe new life into existing structures \u2014 from residential upgrades to full commercial overhauls \u2014 with minimal disruption and maximum impact.",
@@ -57,7 +57,7 @@
     },
     {
       "style": "sc-card--br-right",
-      "image": "/assets/images/card-image-1.png",
+      "image": "/services/assets/images/card-image-1.png",
       "imageAlt": "Real Estate Consultation",
       "title": "Real Estate Consultation",
       "description": "We guide investors and homeowners through Uganda's real estate landscape \u2014 from site identification and valuation to market analysis and investment strategy.",

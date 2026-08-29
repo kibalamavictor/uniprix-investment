@@ -245,3 +245,21 @@
          padding: 0;
         }
     }
+
+    .contact-page-phones {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px 24px;
+        margin-top: 8px;
+    }
+
+    .contact-page-phones__link {
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--upx-navy);
+        text-decoration: none;
+    }
+
+    .contact-page-phones__link:hover {
+        text-decoration: underline;
+    }

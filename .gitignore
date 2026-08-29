@@ -1,2 +1,4 @@
 node_modules/
 _site/
+workers/cms-api/.dev.vars
+workers/cms-api/setup-secrets.sh

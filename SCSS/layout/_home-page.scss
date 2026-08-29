@@ -993,6 +993,9 @@
     align-items: center;
     gap: 14px;
     min-width: 0;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
   }
 
   .upx-pcard__img-wrap {
@@ -1045,9 +1048,10 @@
     border: 2px solid var(--upx-amber);
     transition: background 0.2s, color 0.2s;
     letter-spacing: 0.2px;
+    pointer-events: none;
   }
 
-  .upx-pcard__btn:hover {
+  .upx-pcard:hover .upx-pcard__btn {
     background: transparent;
     color: var(--upx-amber);
   }

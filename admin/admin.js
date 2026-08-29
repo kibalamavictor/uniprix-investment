@@ -62,14 +62,29 @@ const PAGE_LABELS = Object.fromEntries(
 );
 
 const IMAGE_KEYS = new Set(['image', 'img', 'src', 'icon', 'logo', 'avatar', 'photo', 'thumbnail', 'heroimage', 'ogimage']);
-const LONG_TEXT_KEYS = new Set(['text', 'description', 'body', 'content', 'paragraph', 'quote', 'bio', 'summary', 'subheading', 'heading']);
+const LONG_TEXT_KEYS = new Set(['text', 'description', 'body', 'content', 'paragraph', 'quote', 'bio', 'summary', 'subheading', 'heading', 'overview', 'scope', 'subtitle', 'headline', 'text1', 'text2', 'tagline', 'defaultDescription']);
 
 let config = null;
 let auth = null;
 let currentPage = 'dashboard';
+let editingProjectIndex = null;
+let editingGalleryIndex = null;
+let homeSection = null;
+let editingHomeList = null;
+let editingHomeIndex = null;
+let aboutSection = null;
+let editingAboutList = null;
+let editingAboutIndex = null;
+let servicesSection = null;
+let editingServicesIndex = null;
+let siteSection = null;
+let editingSiteList = null;
+let editingSiteIndex = null;
 let content = {};
 let fileMeta = {};
 let dashboardCharts = [];
+
+const PROJECT_META_KEYS = ['Location', 'Project Type', 'Status'];
 
 const $ = (sel) => document.querySelector(sel);
 
@@ -564,10 +579,2427 @@ function renderDashboardCharts() {
 }
 
 function navigateTo(page) {
+  if (page !== 'projects') editingProjectIndex = null;
+  if (page !== 'gallery') editingGalleryIndex = null;
+  if (page !== 'home') {
+    homeSection = null;
+    editingHomeList = null;
+    editingHomeIndex = null;
+  }
+  if (page !== 'about') {
+    aboutSection = null;
+    editingAboutList = null;
+    editingAboutIndex = null;
+  }
+  if (page !== 'services') {
+    servicesSection = null;
+    editingServicesIndex = null;
+  }
+  if (page !== 'site') {
+    siteSection = null;
+    editingSiteList = null;
+    editingSiteIndex = null;
+  }
   currentPage = page;
   buildNav();
   renderView();
   $('#sidebar')?.classList.remove('is-open');
+}
+
+function getProjectMeta(project, key) {
+  return project.meta?.find((row) => row.key === key)?.value || '';
+}
+
+function setProjectMeta(project, key, value) {
+  const meta = [...(project.meta || [])];
+  const index = meta.findIndex((row) => row.key === key);
+  if (index >= 0) meta[index] = { ...meta[index], value };
+  else meta.push({ key, value });
+  return { ...project, meta };
+}
+
+function updateProjectsList(updater) {
+  const projects = updater([...content.projects.projects]);
+  content.projects = { ...content.projects, projects };
+}
+
+function updateProject(index, patch) {
+  updateProjectsList((projects) => {
+    projects[index] = { ...projects[index], ...patch };
+    return projects;
+  });
+}
+
+function openProjectEditor(index) {
+  editingProjectIndex = index;
+  renderView();
+}
+
+function closeProjectEditor() {
+  editingProjectIndex = null;
+  renderView();
+}
+
+function createBlankProject(index) {
+  const num = String(index + 1).padStart(2, '0');
+  return {
+    id: `project-${index + 1}`,
+    number: num,
+    variant: (index + 1) % 2 === 0 ? 'amber' : 'blue',
+    title: 'New Project',
+    meta: PROJECT_META_KEYS.map((key) => ({ key, value: '' })),
+    overview: '',
+    details: [],
+    scope: '',
+    images: [],
+  };
+}
+
+function addProject() {
+  updateProjectsList((projects) => [...projects, createBlankProject(projects.length)]);
+  openProjectEditor(content.projects.projects.length - 1);
+}
+
+function removeProject(index) {
+  const title = content.projects.projects[index]?.title || `Project ${index + 1}`;
+  if (!window.confirm(`Remove "${title}"? This cannot be undone until you reload without publishing.`)) return;
+  updateProjectsList((projects) => projects.filter((_, i) => i !== index));
+  editingProjectIndex = null;
+  renderView();
+}
+
+function buildProjectCard(project, index) {
+  const card = document.createElement('button');
+  card.type = 'button';
+  card.className = `project-card project-card--${project.variant || 'blue'}`;
+  const thumb = project.images?.[0]?.src || '';
+  const location = getProjectMeta(project, 'Location');
+  const status = getProjectMeta(project, 'Status');
+  const imageCount = project.images?.length || 0;
+
+  card.innerHTML = `
+    <div class="project-card__media">
+      ${thumb ? `<img src="${thumb}" alt="" loading="lazy">` : '<div class="project-card__placeholder">No image</div>'}
+      <span class="project-card__badge">${project.number || String(index + 1).padStart(2, '0')}</span>
+    </div>
+    <div class="project-card__body">
+      <h4>${project.title || 'Untitled project'}</h4>
+      <p class="project-card__meta">${location || 'No location'}${status ? ` · ${status}` : ''}</p>
+      <p class="project-card__count">${imageCount} image${imageCount === 1 ? '' : 's'}</p>
+    </div>
+    <span class="project-card__edit">Edit project</span>
+  `;
+
+  card.addEventListener('click', () => openProjectEditor(index));
+  return card;
+}
+
+function renderDetailsEditor(project, index) {
+  const wrap = document.createElement('div');
+  wrap.className = 'detail-list';
+
+  const renderItems = () => {
+    wrap.innerHTML = '';
+    const details = project.details || [];
+
+    details.forEach((detail, detailIndex) => {
+      const row = document.createElement('div');
+      row.className = 'detail-list__row';
+
+      const input = document.createElement('input');
+      input.type = 'text';
+      input.value = detail;
+      input.placeholder = 'e.g. 4 bedrooms (2 ensuite)';
+      input.addEventListener('input', () => {
+        const next = [...(content.projects.projects[index].details || [])];
+        next[detailIndex] = input.value;
+        updateProject(index, { details: next });
+        project.details = next;
+      });
+
+      const removeBtn = document.createElement('button');
+      removeBtn.type = 'button';
+      removeBtn.className = 'btn btn-danger';
+      removeBtn.textContent = 'Remove';
+      removeBtn.addEventListener('click', () => {
+        const next = (content.projects.projects[index].details || []).filter((_, i) => i !== detailIndex);
+        updateProject(index, { details: next });
+        project.details = next;
+        renderItems();
+      });
+
+      row.append(input, removeBtn);
+      wrap.appendChild(row);
+    });
+
+    const addBtn = document.createElement('button');
+    addBtn.type = 'button';
+    addBtn.className = 'btn btn-ghost';
+    addBtn.textContent = '+ Add detail';
+    addBtn.addEventListener('click', () => {
+      const next = [...(content.projects.projects[index].details || []), ''];
+      updateProject(index, { details: next });
+      project.details = next;
+      renderItems();
+    });
+    wrap.appendChild(addBtn);
+  };
+
+  renderItems();
+  return wrap;
+}
+
+function renderImagesEditor(project, index) {
+  const wrap = document.createElement('div');
+  wrap.className = 'project-images';
+
+  const renderItems = () => {
+    wrap.innerHTML = '';
+    const images = content.projects.projects[index].images || [];
+
+    images.forEach((image, imageIndex) => {
+      const card = document.createElement('div');
+      card.className = 'project-image-card';
+
+      const preview = document.createElement('img');
+      preview.className = 'project-image-card__preview';
+      preview.alt = image.alt || '';
+      preview.src = image.src || '';
+
+      const fields = document.createElement('div');
+      fields.className = 'project-image-card__fields';
+
+      const srcField = createField('src', image.src, (_, value) => {
+        const next = [...content.projects.projects[index].images];
+        next[imageIndex] = { ...next[imageIndex], src: value };
+        updateProject(index, { images: next });
+        preview.src = value;
+      });
+
+      const altField = createField('alt', image.alt, (_, value) => {
+        const next = [...content.projects.projects[index].images];
+        next[imageIndex] = { ...next[imageIndex], alt: value };
+        updateProject(index, { images: next });
+        preview.alt = value;
+      });
+
+      const actions = document.createElement('div');
+      actions.className = 'project-image-card__actions';
+
+      const removeBtn = document.createElement('button');
+      removeBtn.type = 'button';
+      removeBtn.className = 'btn btn-danger';
+      removeBtn.textContent = 'Remove';
+      removeBtn.addEventListener('click', () => {
+        const next = (content.projects.projects[index].images || []).filter((_, i) => i !== imageIndex);
+        updateProject(index, { images: next });
+        renderItems();
+      });
+
+      actions.appendChild(removeBtn);
+      fields.append(srcField, altField, actions);
+      card.append(preview, fields);
+      wrap.appendChild(card);
+    });
+
+    const addBtn = document.createElement('button');
+    addBtn.type = 'button';
+    addBtn.className = 'btn btn-ghost project-images__add';
+    addBtn.textContent = '+ Add image';
+    addBtn.addEventListener('click', () => {
+      const next = [...(content.projects.projects[index].images || []), { src: '', alt: '' }];
+      updateProject(index, { images: next });
+      renderItems();
+    });
+    wrap.appendChild(addBtn);
+  };
+
+  renderItems();
+  return wrap;
+}
+
+function renderProjectDetail(editor, index) {
+  const project = content.projects.projects[index];
+  if (!project) {
+    editingProjectIndex = null;
+    renderProjectsEditor();
+    return;
+  }
+
+  const back = document.createElement('button');
+  back.type = 'button';
+  back.className = 'project-editor-back';
+  back.innerHTML = `
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+    Back to all projects
+  `;
+  back.addEventListener('click', closeProjectEditor);
+  editor.appendChild(back);
+
+  const actions = document.createElement('div');
+  actions.className = 'project-editor-actions';
+  actions.innerHTML = `<p class="hint">Editing project ${project.number || index + 1}. Publish when you are done.</p>`;
+
+  const deleteBtn = document.createElement('button');
+  deleteBtn.type = 'button';
+  deleteBtn.className = 'btn btn-danger';
+  deleteBtn.textContent = 'Delete project';
+  deleteBtn.addEventListener('click', () => removeProject(index));
+  actions.appendChild(deleteBtn);
+  editor.appendChild(actions);
+
+  const basics = document.createElement('div');
+  basics.className = 'grid-2';
+  basics.appendChild(createField('title', project.title, (_, value) => updateProject(index, { title: value })));
+
+  const numberField = createField('number', project.number, (_, value) => updateProject(index, { number: value }));
+  basics.appendChild(numberField);
+
+  const variantWrap = document.createElement('div');
+  variantWrap.className = 'field';
+  const variantLabel = document.createElement('label');
+  variantLabel.textContent = 'Layout style';
+  const variantSelect = document.createElement('select');
+  [
+    { value: 'blue', label: 'Blue — image on the right' },
+    { value: 'amber', label: 'Amber — image on the left' },
+  ].forEach(({ value, label }) => {
+    const opt = document.createElement('option');
+    opt.value = value;
+    opt.textContent = label;
+    if (project.variant === value) opt.selected = true;
+    variantSelect.appendChild(opt);
+  });
+  variantSelect.addEventListener('change', () => updateProject(index, { variant: variantSelect.value }));
+  variantWrap.append(variantLabel, variantSelect);
+  basics.appendChild(variantWrap);
+
+  const idField = createField('id', project.id, (_, value) => updateProject(index, { id: value }));
+  basics.appendChild(idField);
+  editor.appendChild(makeSection('Project basics', basics, false));
+
+  const metaGrid = document.createElement('div');
+  metaGrid.className = 'grid-2';
+  PROJECT_META_KEYS.forEach((key) => {
+    metaGrid.appendChild(createField(key, getProjectMeta(project, key), (_, value) => {
+      updateProject(index, setProjectMeta(content.projects.projects[index], key, value));
+    }));
+  });
+  editor.appendChild(makeSection('Location & status', metaGrid, false));
+
+  const contentGrid = document.createElement('div');
+  contentGrid.className = 'grid-1';
+  contentGrid.appendChild(createField('overview', project.overview, (_, value) => updateProject(index, { overview: value })));
+  contentGrid.appendChild(createField('scope', project.scope, (_, value) => updateProject(index, { scope: value })));
+  editor.appendChild(makeSection('Project description', contentGrid, false));
+
+  editor.appendChild(makeSection('Key details', renderDetailsEditor(project, index), false));
+  editor.appendChild(makeSection('Project images', renderImagesEditor(project, index), false));
+}
+
+function renderProjectsEditor() {
+  const editor = $('#editor');
+  editor.innerHTML = '';
+
+  if (editingProjectIndex !== null) {
+    renderProjectDetail(editor, editingProjectIndex);
+    return;
+  }
+
+  const pageData = content.projects;
+  const pageSettings = document.createElement('div');
+  pageSettings.className = 'grid-2';
+  pageSettings.appendChild(createField('heroTitle', pageData.heroTitle, (_, value) => {
+    content.projects = { ...content.projects, heroTitle: value };
+  }));
+  pageSettings.appendChild(createField('heroImage', pageData.heroImage, (_, value) => {
+    content.projects = { ...content.projects, heroImage: value };
+  }));
+  editor.appendChild(makeSection('Page header', pageSettings));
+
+  const introGrid = document.createElement('div');
+  introGrid.className = 'grid-1';
+  introGrid.appendChild(createField('heading', pageData.intro?.heading, (_, value) => {
+    content.projects = { ...content.projects, intro: { ...content.projects.intro, heading: value } };
+  }));
+  introGrid.appendChild(createField('text', pageData.intro?.text, (_, value) => {
+    content.projects = { ...content.projects, intro: { ...content.projects.intro, text: value } };
+  }));
+  introGrid.appendChild(createField('label', pageData.intro?.label, (_, value) => {
+    content.projects = { ...content.projects, intro: { ...content.projects.intro, label: value } };
+  }));
+  editor.appendChild(makeSection('Page introduction', introGrid));
+
+  const toolbar = document.createElement('div');
+  toolbar.className = 'projects-toolbar';
+  toolbar.innerHTML = `
+    <div>
+      <h3 class="projects-toolbar__title">All projects</h3>
+      <p class="hint">Click a project to edit its details, images, and description.</p>
+    </div>
+  `;
+  const addBtn = document.createElement('button');
+  addBtn.type = 'button';
+  addBtn.className = 'btn btn-accent';
+  addBtn.textContent = '+ Add project';
+  addBtn.addEventListener('click', addProject);
+  toolbar.appendChild(addBtn);
+  editor.appendChild(toolbar);
+
+  const grid = document.createElement('div');
+  grid.className = 'project-cards';
+  (pageData.projects || []).forEach((project, index) => {
+    grid.appendChild(buildProjectCard(project, index));
+  });
+  editor.appendChild(grid);
+
+  if (!pageData.projects?.length) {
+    const empty = document.createElement('p');
+    empty.className = 'media-empty';
+    empty.textContent = 'No projects yet. Add your first project above.';
+    editor.appendChild(empty);
+  }
+}
+
+function updateGalleryItems(updater) {
+  const items = updater([...(content.gallery.items || [])]);
+  content.gallery = { ...content.gallery, items };
+}
+
+function updateGalleryItem(index, patch) {
+  updateGalleryItems((items) => {
+    items[index] = { ...items[index], ...patch };
+    return items;
+  });
+}
+
+function openGalleryEditor(index) {
+  editingGalleryIndex = index;
+  renderView();
+}
+
+function closeGalleryEditor() {
+  editingGalleryIndex = null;
+  renderView();
+}
+
+function createBlankGalleryItem() {
+  return { src: '', alt: '', mobileOnly: false };
+}
+
+function addGalleryItem() {
+  updateGalleryItems((items) => [...items, createBlankGalleryItem()]);
+  openGalleryEditor((content.gallery.items || []).length - 1);
+}
+
+function removeGalleryItem(index) {
+  const alt = content.gallery.items[index]?.alt || `Image ${index + 1}`;
+  if (!window.confirm(`Remove "${alt}" from the gallery?`)) return;
+  updateGalleryItems((items) => items.filter((_, i) => i !== index));
+  editingGalleryIndex = null;
+  renderView();
+}
+
+function moveGalleryItem(index, direction) {
+  const items = [...(content.gallery.items || [])];
+  const target = index + direction;
+  if (target < 0 || target >= items.length) return;
+  [items[index], items[target]] = [items[target], items[index]];
+  content.gallery = { ...content.gallery, items };
+  editingGalleryIndex = target;
+  renderView();
+}
+
+function buildGalleryCard(item, index) {
+  const card = document.createElement('button');
+  card.type = 'button';
+  card.className = `gallery-cms-card${item.mobileOnly ? ' gallery-cms-card--mobile' : ''}`;
+
+  card.innerHTML = `
+    <div class="gallery-cms-card__media">
+      ${item.src ? `<img src="${item.src}" alt="" loading="lazy">` : '<div class="gallery-cms-card__placeholder">No image</div>'}
+      <span class="gallery-cms-card__index">${index + 1}</span>
+      ${item.mobileOnly ? '<span class="gallery-cms-card__badge">Mobile only</span>' : ''}
+    </div>
+    <div class="gallery-cms-card__body">
+      <p>${item.alt || 'No description'}</p>
+      <span class="gallery-cms-card__edit">Edit image</span>
+    </div>
+  `;
+
+  card.addEventListener('click', () => openGalleryEditor(index));
+  return card;
+}
+
+function createCheckboxField(label, checked, onChange) {
+  const wrap = document.createElement('div');
+  wrap.className = 'field field--checkbox';
+
+  const row = document.createElement('label');
+  row.className = 'checkbox-row';
+  const input = document.createElement('input');
+  input.type = 'checkbox';
+  input.checked = !!checked;
+  input.addEventListener('change', () => onChange(input.checked));
+  row.append(input, document.createTextNode(` ${label}`));
+  wrap.appendChild(row);
+  return wrap;
+}
+
+function renderGalleryItemDetail(editor, index) {
+  const item = content.gallery.items?.[index];
+  if (!item) {
+    editingGalleryIndex = null;
+    renderGalleryEditor();
+    return;
+  }
+
+  const total = content.gallery.items.length;
+
+  const back = document.createElement('button');
+  back.type = 'button';
+  back.className = 'project-editor-back';
+  back.innerHTML = `
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+    Back to gallery
+  `;
+  back.addEventListener('click', closeGalleryEditor);
+  editor.appendChild(back);
+
+  const actions = document.createElement('div');
+  actions.className = 'project-editor-actions';
+  actions.innerHTML = `<p class="hint">Editing image ${index + 1} of ${total}. Publish when you are done.</p>`;
+
+  const moveGroup = document.createElement('div');
+  moveGroup.className = 'gallery-editor-moves';
+
+  const moveUp = document.createElement('button');
+  moveUp.type = 'button';
+  moveUp.className = 'btn btn-ghost';
+  moveUp.textContent = 'Move up';
+  moveUp.disabled = index === 0;
+  moveUp.addEventListener('click', () => moveGalleryItem(index, -1));
+
+  const moveDown = document.createElement('button');
+  moveDown.type = 'button';
+  moveDown.className = 'btn btn-ghost';
+  moveDown.textContent = 'Move down';
+  moveDown.disabled = index === total - 1;
+  moveDown.addEventListener('click', () => moveGalleryItem(index, 1));
+
+  const deleteBtn = document.createElement('button');
+  deleteBtn.type = 'button';
+  deleteBtn.className = 'btn btn-danger';
+  deleteBtn.textContent = 'Delete image';
+  deleteBtn.addEventListener('click', () => removeGalleryItem(index));
+
+  moveGroup.append(moveUp, moveDown);
+  actions.prepend(moveGroup);
+  actions.appendChild(deleteBtn);
+  editor.appendChild(actions);
+
+  const previewWrap = document.createElement('div');
+  previewWrap.className = 'gallery-editor-preview';
+  const preview = document.createElement('img');
+  preview.className = 'gallery-editor-preview__image';
+  preview.alt = item.alt || '';
+  preview.src = item.src || '';
+  previewWrap.appendChild(preview);
+  editor.appendChild(makeSection('Preview', previewWrap, false));
+
+  const fields = document.createElement('div');
+  fields.className = 'grid-1';
+
+  const srcField = createField('src', item.src, (_, value) => {
+    updateGalleryItem(index, { src: value });
+    preview.src = value;
+  });
+  fields.appendChild(srcField);
+
+  const altField = createField('alt', item.alt, (_, value) => {
+    updateGalleryItem(index, { alt: value });
+    preview.alt = value;
+  });
+  fields.appendChild(altField);
+
+  fields.appendChild(createCheckboxField(
+    'Show on mobile only (hidden on desktop)',
+    item.mobileOnly,
+    (value) => updateGalleryItem(index, { mobileOnly: value })
+  ));
+
+  editor.appendChild(makeSection('Image details', fields, false));
+}
+
+function renderGalleryEditor() {
+  const editor = $('#editor');
+  editor.innerHTML = '';
+
+  if (editingGalleryIndex !== null) {
+    renderGalleryItemDetail(editor, editingGalleryIndex);
+    return;
+  }
+
+  const pageData = content.gallery;
+  const pageSettings = document.createElement('div');
+  pageSettings.className = 'grid-2';
+  pageSettings.appendChild(createField('heroTitle', pageData.heroTitle, (_, value) => {
+    content.gallery = { ...content.gallery, heroTitle: value };
+  }));
+  pageSettings.appendChild(createField('heroImage', pageData.heroImage, (_, value) => {
+    content.gallery = { ...content.gallery, heroImage: value };
+  }));
+  editor.appendChild(makeSection('Page header', pageSettings));
+
+  const introGrid = document.createElement('div');
+  introGrid.className = 'grid-1';
+  introGrid.appendChild(createField('heading', pageData.heading, (_, value) => {
+    content.gallery = { ...content.gallery, heading: value };
+  }));
+  introGrid.appendChild(createField('subtitle', pageData.subtitle, (_, value) => {
+    content.gallery = { ...content.gallery, subtitle: value };
+  }));
+  editor.appendChild(makeSection('Page introduction', introGrid));
+
+  const toolbar = document.createElement('div');
+  toolbar.className = 'projects-toolbar';
+  toolbar.innerHTML = `
+    <div>
+      <h3 class="projects-toolbar__title">Gallery images</h3>
+      <p class="hint">Click an image to edit it. Order here matches the live gallery grid.</p>
+    </div>
+  `;
+  const addBtn = document.createElement('button');
+  addBtn.type = 'button';
+  addBtn.className = 'btn btn-accent';
+  addBtn.textContent = '+ Add image';
+  addBtn.addEventListener('click', addGalleryItem);
+  toolbar.appendChild(addBtn);
+  editor.appendChild(toolbar);
+
+  const grid = document.createElement('div');
+  grid.className = 'gallery-cms-grid';
+  (pageData.items || []).forEach((item, index) => {
+    grid.appendChild(buildGalleryCard(item, index));
+  });
+  editor.appendChild(grid);
+
+  if (!pageData.items?.length) {
+    const empty = document.createElement('p');
+    empty.className = 'media-empty';
+    empty.textContent = 'No gallery images yet. Add your first image above.';
+    editor.appendChild(empty);
+  }
+}
+
+const HOME_SECTIONS = {
+  hero: {
+    label: 'Hero banner',
+    desc: 'Headline, buttons, hero image, and statistics.',
+    color: '#faa21b',
+    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9.5z"/></svg>',
+  },
+  about: {
+    label: 'About preview',
+    desc: 'Short about section with image and link.',
+    color: '#3b82f6',
+    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="7" r="4"/><path d="M5.5 21a6.5 6.5 0 0 1 13 0"/></svg>',
+  },
+  services: {
+    label: 'Services carousel',
+    desc: 'Service cards in the homepage slider.',
+    color: '#8b5cf6',
+    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>',
+  },
+  whyChooseUs: {
+    label: 'Why choose us',
+    desc: 'Feature highlights and supporting image.',
+    color: '#10b981',
+    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.56 5.82 22 7 14.14l-5-4.87 6.91-1.01L12 2z"/></svg>',
+  },
+  projects: {
+    label: 'Projects carousel',
+    desc: 'Project category cards linking to the projects page.',
+    color: '#f59e0b',
+    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 20h20M4 20V10l8-6 8 6v10"/></svg>',
+  },
+  testimonials: {
+    label: 'Testimonials',
+    desc: 'Client reviews shown in the carousel.',
+    color: '#ec4899',
+    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>',
+  },
+  cta: {
+    label: 'Bottom call to action',
+    desc: 'Banner above the footer with heading and image.',
+    color: '#64748b',
+    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 12h8M12 8v8"/></svg>',
+  },
+};
+
+const HOME_LIST_PATHS = {
+  stats: ['hero', 'stats'],
+  services: ['services', 'items'],
+  features: ['whyChooseUs', 'features'],
+  projectCards: ['projects', 'items'],
+  reviews: ['testimonials', 'reviews'],
+};
+
+const HOME_LIST_LABELS = {
+  stats: 'hero stats',
+  services: 'services',
+  features: 'features',
+  projectCards: 'project cards',
+  reviews: 'reviews',
+};
+
+const HOME_ITEM_BLANKS = {
+  stats: { icon: '', number: '', label: '' },
+  services: { title: '', description: '', image: '', imageAlt: '' },
+  features: { icon: '', title: '', description: '' },
+  projectCards: { id: '', title: '', image: '', link: '' },
+  reviews: { name: '', text: '', image: '' },
+};
+
+function getHomeList(listName) {
+  const [section, key] = HOME_LIST_PATHS[listName];
+  return content.home[section]?.[key] || [];
+}
+
+function updateHomeSection(section, patch) {
+  content.home = { ...content.home, [section]: { ...content.home[section], ...patch } };
+}
+
+function updateHomeList(listName, updater) {
+  const [section, key] = HOME_LIST_PATHS[listName];
+  const items = updater([...getHomeList(listName)]);
+  content.home = { ...content.home, [section]: { ...content.home[section], [key]: items } };
+}
+
+function updateHomeListItem(listName, index, patch) {
+  updateHomeList(listName, (items) => {
+    items[index] = { ...items[index], ...patch };
+    return items;
+  });
+}
+
+function openHomeSection(section) {
+  homeSection = section;
+  editingHomeList = null;
+  editingHomeIndex = null;
+  renderView();
+}
+
+function closeHomeSection() {
+  homeSection = null;
+  editingHomeList = null;
+  editingHomeIndex = null;
+  renderView();
+}
+
+function openHomeItem(listName, index) {
+  editingHomeList = listName;
+  editingHomeIndex = index;
+  renderView();
+}
+
+function closeHomeItem() {
+  editingHomeList = null;
+  editingHomeIndex = null;
+  renderView();
+}
+
+function addHomeListItem(listName) {
+  updateHomeList(listName, (items) => [...items, { ...HOME_ITEM_BLANKS[listName] }]);
+  openHomeItem(listName, getHomeList(listName).length - 1);
+}
+
+function removeHomeListItem(listName, index) {
+  const item = getHomeList(listName)[index];
+  const label = item?.title || item?.name || item?.label || `Item ${index + 1}`;
+  if (!window.confirm(`Remove "${label}"?`)) return;
+  updateHomeList(listName, (items) => items.filter((_, i) => i !== index));
+  editingHomeList = null;
+  editingHomeIndex = null;
+  renderView();
+}
+
+function moveHomeListItem(listName, index, direction) {
+  const target = index + direction;
+  const items = [...getHomeList(listName)];
+  if (target < 0 || target >= items.length) return;
+  [items[index], items[target]] = [items[target], items[index]];
+  const [section, key] = HOME_LIST_PATHS[listName];
+  content.home = { ...content.home, [section]: { ...content.home[section], [key]: items } };
+  editingHomeIndex = target;
+  renderView();
+}
+
+function appendBackButton(editor, label, onClick) {
+  const back = document.createElement('button');
+  back.type = 'button';
+  back.className = 'project-editor-back';
+  back.innerHTML = `
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+    ${label}
+  `;
+  back.addEventListener('click', onClick);
+  editor.appendChild(back);
+}
+
+function appendListToolbar(editor, title, hint, addLabel, onAdd) {
+  const toolbar = document.createElement('div');
+  toolbar.className = 'projects-toolbar';
+  toolbar.innerHTML = `
+    <div>
+      <h3 class="projects-toolbar__title">${title}</h3>
+      <p class="hint">${hint}</p>
+    </div>
+  `;
+  const addBtn = document.createElement('button');
+  addBtn.type = 'button';
+  addBtn.className = 'btn btn-accent';
+  addBtn.textContent = addLabel;
+  addBtn.addEventListener('click', onAdd);
+  toolbar.appendChild(addBtn);
+  editor.appendChild(toolbar);
+}
+
+function appendItemActions(editor, listName, index) {
+  const total = getHomeList(listName).length;
+  const actions = document.createElement('div');
+  actions.className = 'project-editor-actions';
+  actions.innerHTML = `<p class="hint">Editing item ${index + 1} of ${total}.</p>`;
+
+  const moveGroup = document.createElement('div');
+  moveGroup.className = 'gallery-editor-moves';
+
+  const moveUp = document.createElement('button');
+  moveUp.type = 'button';
+  moveUp.className = 'btn btn-ghost';
+  moveUp.textContent = 'Move up';
+  moveUp.disabled = index === 0;
+  moveUp.addEventListener('click', () => moveHomeListItem(listName, index, -1));
+
+  const moveDown = document.createElement('button');
+  moveDown.type = 'button';
+  moveDown.className = 'btn btn-ghost';
+  moveDown.textContent = 'Move down';
+  moveDown.disabled = index === total - 1;
+  moveDown.addEventListener('click', () => moveHomeListItem(listName, index, 1));
+
+  const deleteBtn = document.createElement('button');
+  deleteBtn.type = 'button';
+  deleteBtn.className = 'btn btn-danger';
+  deleteBtn.textContent = 'Delete';
+  deleteBtn.addEventListener('click', () => removeHomeListItem(listName, index));
+
+  moveGroup.append(moveUp, moveDown);
+  actions.prepend(moveGroup);
+  actions.appendChild(deleteBtn);
+  editor.appendChild(actions);
+}
+
+function buildHomeListCard(item, index, listName, config) {
+  const card = document.createElement('button');
+  card.type = 'button';
+  card.className = 'home-list-card';
+  const image = config.imageKey ? item[config.imageKey] : '';
+  const title = config.titleKey ? item[config.titleKey] : '';
+  const subtitle = config.subtitleKey ? item[config.subtitleKey] : '';
+
+  card.innerHTML = `
+    <div class="home-list-card__media">
+      ${image ? `<img src="${image}" alt="" loading="lazy">` : '<div class="gallery-cms-card__placeholder">No image</div>'}
+      <span class="gallery-cms-card__index">${index + 1}</span>
+    </div>
+    <div class="home-list-card__body">
+      <h4>${title || config.fallbackTitle || 'Untitled'}</h4>
+      ${subtitle ? `<p>${subtitle}</p>` : ''}
+      <span class="gallery-cms-card__edit">Edit</span>
+    </div>
+  `;
+
+  card.addEventListener('click', () => openHomeItem(listName, index));
+  return card;
+}
+
+function appendHomeListGrid(editor, listName, config) {
+  const grid = document.createElement('div');
+  grid.className = 'gallery-cms-grid';
+  getHomeList(listName).forEach((item, index) => {
+    grid.appendChild(buildHomeListCard(item, index, listName, config));
+  });
+  editor.appendChild(grid);
+
+  if (!getHomeList(listName).length) {
+    const empty = document.createElement('p');
+    empty.className = 'media-empty';
+    empty.textContent = config.emptyText || 'No items yet.';
+    editor.appendChild(empty);
+  }
+}
+
+function renderHomeItemDetail(editor, listName, index) {
+  const item = getHomeList(listName)[index];
+  if (!item) {
+    closeHomeItem();
+    return;
+  }
+
+  appendBackButton(editor, `Back to ${HOME_SECTIONS[homeSection]?.label || 'section'}`, closeHomeItem);
+  appendItemActions(editor, listName, index);
+
+  const fields = document.createElement('div');
+  fields.className = 'grid-1';
+
+  let preview = null;
+  if (item.image || item.icon) {
+    preview = document.createElement('img');
+    preview.className = 'gallery-editor-preview__image';
+    preview.src = item.image || item.icon || '';
+    preview.alt = '';
+    const previewWrap = document.createElement('div');
+    previewWrap.className = 'gallery-editor-preview';
+    previewWrap.appendChild(preview);
+    editor.appendChild(makeSection('Preview', previewWrap, false));
+  }
+
+  Object.keys(HOME_ITEM_BLANKS[listName]).forEach((key) => {
+    fields.appendChild(createField(key, item[key], (_, value) => {
+      updateHomeListItem(listName, index, { [key]: value });
+      if (preview && (key === 'image' || key === 'icon')) preview.src = value;
+    }));
+  });
+
+  editor.appendChild(makeSection('Details', fields, false));
+}
+
+function renderHomeHeroSection(editor) {
+  const hero = content.home.hero;
+  appendBackButton(editor, 'Back to all sections', closeHomeSection);
+
+  const main = document.createElement('div');
+  main.className = 'grid-1';
+  main.appendChild(createField('headline', hero.headline, (_, value) => updateHomeSection('hero', { headline: value })));
+  const headlineHint = document.createElement('p');
+  headlineHint.className = 'hint';
+  headlineHint.textContent = 'HTML is allowed — e.g. <br> for line breaks and <span class="upx-hl-amber"> for highlighted text.';
+  main.appendChild(headlineHint);
+  main.appendChild(createField('subtitle', hero.subtitle, (_, value) => updateHomeSection('hero', { subtitle: value })));
+  editor.appendChild(makeSection('Headline & intro', main, false));
+
+  const ctas = document.createElement('div');
+  ctas.className = 'grid-2';
+  ctas.appendChild(createField('ctaBook', hero.ctaBook, (_, value) => updateHomeSection('hero', { ctaBook: value })));
+  ctas.appendChild(createField('ctaBookLink', hero.ctaBookLink, (_, value) => updateHomeSection('hero', { ctaBookLink: value })));
+  ctas.appendChild(createField('ctaTalk', hero.ctaTalk, (_, value) => updateHomeSection('hero', { ctaTalk: value })));
+  ctas.appendChild(createField('ctaTalkLink', hero.ctaTalkLink, (_, value) => updateHomeSection('hero', { ctaTalkLink: value })));
+  editor.appendChild(makeSection('Call-to-action buttons', ctas, false));
+
+  const visual = document.createElement('div');
+  visual.className = 'grid-2';
+  visual.appendChild(createField('image', hero.image, (_, value) => updateHomeSection('hero', { image: value })));
+  visual.appendChild(createField('imageAlt', hero.imageAlt, (_, value) => updateHomeSection('hero', { imageAlt: value })));
+  editor.appendChild(makeSection('Hero image', visual, false));
+
+  appendListToolbar(editor, 'Statistics', 'Numbers shown below the hero buttons.', '+ Add stat', () => addHomeListItem('stats'));
+  appendHomeListGrid(editor, 'stats', {
+    imageKey: 'icon',
+    titleKey: 'number',
+    subtitleKey: 'label',
+    fallbackTitle: 'Stat',
+    emptyText: 'No stats yet. Add your first stat above.',
+  });
+}
+
+function renderHomeAboutSection(editor) {
+  const about = content.home.about;
+  appendBackButton(editor, 'Back to all sections', closeHomeSection);
+
+  const grid = document.createElement('div');
+  grid.className = 'grid-1';
+  grid.appendChild(createField('label', about.label, (_, value) => updateHomeSection('about', { label: value })));
+  grid.appendChild(createField('text1', about.text1, (_, value) => updateHomeSection('about', { text1: value })));
+  grid.appendChild(createField('text2', about.text2, (_, value) => updateHomeSection('about', { text2: value })));
+  grid.appendChild(createField('image', about.image, (_, value) => updateHomeSection('about', { image: value })));
+  grid.appendChild(createField('imageAlt', about.imageAlt, (_, value) => updateHomeSection('about', { imageAlt: value })));
+  grid.appendChild(createField('buttonText', about.buttonText, (_, value) => updateHomeSection('about', { buttonText: value })));
+  grid.appendChild(createField('buttonLink', about.buttonLink, (_, value) => updateHomeSection('about', { buttonLink: value })));
+  editor.appendChild(makeSection('About preview', grid, false));
+}
+
+function renderHomeServicesSection(editor) {
+  const services = content.home.services;
+  appendBackButton(editor, 'Back to all sections', closeHomeSection);
+
+  const heading = document.createElement('div');
+  heading.className = 'grid-1';
+  heading.appendChild(createField('heading', services.heading, (_, value) => updateHomeSection('services', { heading: value })));
+  editor.appendChild(makeSection('Section heading', heading, false));
+
+  appendListToolbar(editor, 'Service cards', 'Cards shown in the homepage services carousel.', '+ Add service', () => addHomeListItem('services'));
+  appendHomeListGrid(editor, 'services', {
+    imageKey: 'image',
+    titleKey: 'title',
+    subtitleKey: 'description',
+    emptyText: 'No services yet. Add your first service above.',
+  });
+}
+
+function renderHomeWhySection(editor) {
+  const why = content.home.whyChooseUs;
+  appendBackButton(editor, 'Back to all sections', closeHomeSection);
+
+  const intro = document.createElement('div');
+  intro.className = 'grid-1';
+  intro.appendChild(createField('label', why.label, (_, value) => updateHomeSection('whyChooseUs', { label: value })));
+  intro.appendChild(createField('subtitle', why.subtitle, (_, value) => updateHomeSection('whyChooseUs', { subtitle: value })));
+  intro.appendChild(createField('image', why.image, (_, value) => updateHomeSection('whyChooseUs', { image: value })));
+  intro.appendChild(createField('imageAlt', why.imageAlt, (_, value) => updateHomeSection('whyChooseUs', { imageAlt: value })));
+  editor.appendChild(makeSection('Section content', intro, false));
+
+  const ctas = document.createElement('div');
+  ctas.className = 'grid-2';
+  ctas.appendChild(createField('ctaBookLink', why.ctaBookLink, (_, value) => updateHomeSection('whyChooseUs', { ctaBookLink: value })));
+  ctas.appendChild(createField('ctaTalkLink', why.ctaTalkLink, (_, value) => updateHomeSection('whyChooseUs', { ctaTalkLink: value })));
+  editor.appendChild(makeSection('Section buttons', ctas, false));
+
+  appendListToolbar(editor, 'Features', 'Highlight cards in the why choose us grid.', '+ Add feature', () => addHomeListItem('features'));
+  appendHomeListGrid(editor, 'features', {
+    imageKey: 'icon',
+    titleKey: 'title',
+    subtitleKey: 'description',
+    emptyText: 'No features yet. Add your first feature above.',
+  });
+}
+
+function renderHomeProjectsSection(editor) {
+  const projects = content.home.projects;
+  appendBackButton(editor, 'Back to all sections', closeHomeSection);
+
+  const heading = document.createElement('div');
+  heading.className = 'grid-1';
+  heading.appendChild(createField('heading', projects.heading, (_, value) => updateHomeSection('projects', { heading: value })));
+  editor.appendChild(makeSection('Section heading', heading, false));
+
+  appendListToolbar(editor, 'Project cards', 'Category cards in the homepage projects carousel.', '+ Add card', () => addHomeListItem('projectCards'));
+  appendHomeListGrid(editor, 'projectCards', {
+    imageKey: 'image',
+    titleKey: 'title',
+    emptyText: 'No project cards yet. Add your first card above.',
+  });
+}
+
+function renderHomeTestimonialsSection(editor) {
+  const testimonials = content.home.testimonials;
+  appendBackButton(editor, 'Back to all sections', closeHomeSection);
+
+  const intro = document.createElement('div');
+  intro.className = 'grid-1';
+  intro.appendChild(createField('heading', testimonials.heading, (_, value) => updateHomeSection('testimonials', { heading: value })));
+  intro.appendChild(createField('subheading', testimonials.subheading, (_, value) => updateHomeSection('testimonials', { subheading: value })));
+  intro.appendChild(createField('ctaText', testimonials.ctaText, (_, value) => updateHomeSection('testimonials', { ctaText: value })));
+  intro.appendChild(createField('ctaLink', testimonials.ctaLink, (_, value) => updateHomeSection('testimonials', { ctaLink: value })));
+  editor.appendChild(makeSection('Section settings', intro, false));
+
+  appendListToolbar(editor, 'Client reviews', 'Reviews shown in the testimonials carousel.', '+ Add review', () => addHomeListItem('reviews'));
+  appendHomeListGrid(editor, 'reviews', {
+    imageKey: 'image',
+    titleKey: 'name',
+    subtitleKey: 'text',
+    emptyText: 'No reviews yet. Add your first review above.',
+  });
+}
+
+function renderHomeCtaSection(editor) {
+  const cta = content.home.cta;
+  appendBackButton(editor, 'Back to all sections', closeHomeSection);
+
+  const grid = document.createElement('div');
+  grid.className = 'grid-1';
+  grid.appendChild(createField('heading', cta.heading, (_, value) => updateHomeSection('cta', { heading: value })));
+  grid.appendChild(createField('image', cta.image, (_, value) => updateHomeSection('cta', { image: value })));
+  editor.appendChild(makeSection('Bottom CTA banner', grid, false));
+}
+
+function renderHomeSectionEditor(editor, section) {
+  const renderers = {
+    hero: renderHomeHeroSection,
+    about: renderHomeAboutSection,
+    services: renderHomeServicesSection,
+    whyChooseUs: renderHomeWhySection,
+    projects: renderHomeProjectsSection,
+    testimonials: renderHomeTestimonialsSection,
+    cta: renderHomeCtaSection,
+  };
+  renderers[section]?.(editor);
+}
+
+function renderHomeOverview(editor) {
+  const intro = document.createElement('div');
+  intro.className = 'dashboard__hero';
+  intro.innerHTML = `
+    <h2>Home page sections</h2>
+    <p>Select a section to edit. Each area matches a block on your homepage.</p>
+  `;
+  editor.appendChild(intro);
+
+  const grid = document.createElement('div');
+  grid.className = 'page-cards';
+
+  Object.entries(HOME_SECTIONS).forEach(([key, meta]) => {
+    const card = document.createElement('button');
+    card.type = 'button';
+    card.className = 'page-card';
+    const count = (() => {
+      if (key === 'hero') return content.home.hero?.stats?.length || 0;
+      if (key === 'services') return content.home.services?.items?.length || 0;
+      if (key === 'whyChooseUs') return content.home.whyChooseUs?.features?.length || 0;
+      if (key === 'projects') return content.home.projects?.items?.length || 0;
+      if (key === 'testimonials') return content.home.testimonials?.reviews?.length || 0;
+      return null;
+    })();
+
+    card.innerHTML = `
+      <div class="page-card__top">
+        <div class="page-card__icon" style="background:${meta.color}18;color:${meta.color}">${meta.icon}</div>
+        <svg class="page-card__arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+      </div>
+      <h3>${meta.label}</h3>
+      <p>${meta.desc}</p>
+      <div class="page-card__meta">${count !== null ? `${count} items · ` : ''}Click to edit</div>
+    `;
+    card.addEventListener('click', () => openHomeSection(key));
+    grid.appendChild(card);
+  });
+
+  editor.appendChild(grid);
+}
+
+function renderHomeEditor() {
+  const editor = $('#editor');
+  editor.innerHTML = '';
+
+  if (editingHomeList !== null && editingHomeIndex !== null) {
+    renderHomeItemDetail(editor, editingHomeList, editingHomeIndex);
+    return;
+  }
+
+  if (homeSection) {
+    renderHomeSectionEditor(editor, homeSection);
+    return;
+  }
+
+  renderHomeOverview(editor);
+}
+
+const ABOUT_SECTIONS = {
+  header: {
+    label: 'Page header',
+    desc: 'Hero title and background image at the top.',
+    color: '#64748b',
+    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg>',
+  },
+  main: {
+    label: 'Company intro',
+    desc: 'Main about text and team image.',
+    color: '#3b82f6',
+    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="7" r="4"/><path d="M5.5 21a6.5 6.5 0 0 1 13 0"/></svg>',
+  },
+  stats: {
+    label: 'Statistics bar',
+    desc: 'Numbers shown in the stats strip.',
+    color: '#faa21b',
+    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>',
+  },
+  mission: {
+    label: 'Our mission',
+    desc: 'Mission statement with image.',
+    color: '#10b981',
+    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>',
+  },
+  vision: {
+    label: 'Our vision',
+    desc: 'Vision statement with image.',
+    color: '#8b5cf6',
+    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>',
+  },
+  values: {
+    label: 'Core values',
+    desc: 'Value cards and supporting image.',
+    color: '#f59e0b',
+    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.56 5.82 22 7 14.14l-5-4.87 6.91-1.01L12 2z"/></svg>',
+  },
+  testimonials: {
+    label: 'Testimonials',
+    desc: 'Client reviews carousel.',
+    color: '#ec4899',
+    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>',
+  },
+};
+
+const ABOUT_LIST_PATHS = {
+  values: ['values', 'items'],
+  reviews: ['testimonials', 'reviews'],
+};
+
+const ABOUT_ITEM_BLANKS = {
+  stats: { icon: '', number: '', label: '' },
+  values: { title: '', description: '' },
+  reviews: { name: '', text: '', image: '' },
+};
+
+function getAboutList(listName) {
+  if (listName === 'stats') return content.about.stats || [];
+  const [section, key] = ABOUT_LIST_PATHS[listName];
+  return content.about[section]?.[key] || [];
+}
+
+function updateAboutTop(patch) {
+  content.about = { ...content.about, ...patch };
+}
+
+function updateAboutNested(section, patch) {
+  content.about = { ...content.about, [section]: { ...content.about[section], ...patch } };
+}
+
+function updateAboutList(listName, updater) {
+  if (listName === 'stats') {
+    content.about = { ...content.about, stats: updater([...(content.about.stats || [])]) };
+    return;
+  }
+  const [section, key] = ABOUT_LIST_PATHS[listName];
+  const items = updater([...getAboutList(listName)]);
+  content.about = { ...content.about, [section]: { ...content.about[section], [key]: items } };
+}
+
+function updateAboutListItem(listName, index, patch) {
+  updateAboutList(listName, (items) => {
+    items[index] = { ...items[index], ...patch };
+    return items;
+  });
+}
+
+function openAboutSection(section) {
+  aboutSection = section;
+  editingAboutList = null;
+  editingAboutIndex = null;
+  renderView();
+}
+
+function closeAboutSection() {
+  aboutSection = null;
+  editingAboutList = null;
+  editingAboutIndex = null;
+  renderView();
+}
+
+function openAboutItem(listName, index) {
+  editingAboutList = listName;
+  editingAboutIndex = index;
+  renderView();
+}
+
+function closeAboutItem() {
+  editingAboutList = null;
+  editingAboutIndex = null;
+  renderView();
+}
+
+function addAboutListItem(listName) {
+  updateAboutList(listName, (items) => [...items, { ...ABOUT_ITEM_BLANKS[listName] }]);
+  openAboutItem(listName, getAboutList(listName).length - 1);
+}
+
+function removeAboutListItem(listName, index) {
+  const item = getAboutList(listName)[index];
+  const label = item?.title || item?.name || item?.label || `Item ${index + 1}`;
+  if (!window.confirm(`Remove "${label}"?`)) return;
+  updateAboutList(listName, (items) => items.filter((_, i) => i !== index));
+  editingAboutList = null;
+  editingAboutIndex = null;
+  renderView();
+}
+
+function moveAboutListItem(listName, index, direction) {
+  const target = index + direction;
+  const items = [...getAboutList(listName)];
+  if (target < 0 || target >= items.length) return;
+  [items[index], items[target]] = [items[target], items[index]];
+  if (listName === 'stats') {
+    content.about = { ...content.about, stats: items };
+  } else {
+    const [section, key] = ABOUT_LIST_PATHS[listName];
+    content.about = { ...content.about, [section]: { ...content.about[section], [key]: items } };
+  }
+  editingAboutIndex = target;
+  renderView();
+}
+
+function appendAboutItemActions(editor, listName, index) {
+  const total = getAboutList(listName).length;
+  const actions = document.createElement('div');
+  actions.className = 'project-editor-actions';
+  actions.innerHTML = `<p class="hint">Editing item ${index + 1} of ${total}.</p>`;
+
+  const moveGroup = document.createElement('div');
+  moveGroup.className = 'gallery-editor-moves';
+
+  const moveUp = document.createElement('button');
+  moveUp.type = 'button';
+  moveUp.className = 'btn btn-ghost';
+  moveUp.textContent = 'Move up';
+  moveUp.disabled = index === 0;
+  moveUp.addEventListener('click', () => moveAboutListItem(listName, index, -1));
+
+  const moveDown = document.createElement('button');
+  moveDown.type = 'button';
+  moveDown.className = 'btn btn-ghost';
+  moveDown.textContent = 'Move down';
+  moveDown.disabled = index === total - 1;
+  moveDown.addEventListener('click', () => moveAboutListItem(listName, index, 1));
+
+  const deleteBtn = document.createElement('button');
+  deleteBtn.type = 'button';
+  deleteBtn.className = 'btn btn-danger';
+  deleteBtn.textContent = 'Delete';
+  deleteBtn.addEventListener('click', () => removeAboutListItem(listName, index));
+
+  moveGroup.append(moveUp, moveDown);
+  actions.prepend(moveGroup);
+  actions.appendChild(deleteBtn);
+  editor.appendChild(actions);
+}
+
+function buildAboutListCard(item, index, listName, config) {
+  const card = document.createElement('button');
+  card.type = 'button';
+  card.className = 'home-list-card';
+  const image = config.imageKey ? item[config.imageKey] : '';
+  const title = config.titleKey ? item[config.titleKey] : '';
+  const subtitle = config.subtitleKey ? item[config.subtitleKey] : '';
+
+  card.innerHTML = `
+    <div class="home-list-card__media">
+      ${image ? `<img src="${image}" alt="" loading="lazy">` : '<div class="gallery-cms-card__placeholder">No image</div>'}
+      <span class="gallery-cms-card__index">${index + 1}</span>
+    </div>
+    <div class="home-list-card__body">
+      <h4>${title || config.fallbackTitle || 'Untitled'}</h4>
+      ${subtitle ? `<p>${subtitle}</p>` : ''}
+      <span class="gallery-cms-card__edit">Edit</span>
+    </div>
+  `;
+
+  card.addEventListener('click', () => openAboutItem(listName, index));
+  return card;
+}
+
+function appendAboutListGrid(editor, listName, config) {
+  const grid = document.createElement('div');
+  grid.className = 'gallery-cms-grid';
+  getAboutList(listName).forEach((item, index) => {
+    grid.appendChild(buildAboutListCard(item, index, listName, config));
+  });
+  editor.appendChild(grid);
+
+  if (!getAboutList(listName).length) {
+    const empty = document.createElement('p');
+    empty.className = 'media-empty';
+    empty.textContent = config.emptyText || 'No items yet.';
+    editor.appendChild(empty);
+  }
+}
+
+function renderAboutItemDetail(editor, listName, index) {
+  const item = getAboutList(listName)[index];
+  if (!item) {
+    closeAboutItem();
+    return;
+  }
+
+  appendBackButton(editor, `Back to ${ABOUT_SECTIONS[aboutSection]?.label || 'section'}`, closeAboutItem);
+  appendAboutItemActions(editor, listName, index);
+
+  let preview = null;
+  if (item.image || item.icon) {
+    preview = document.createElement('img');
+    preview.className = 'gallery-editor-preview__image';
+    preview.src = item.image || item.icon || '';
+    preview.alt = '';
+    const previewWrap = document.createElement('div');
+    previewWrap.className = 'gallery-editor-preview';
+    previewWrap.appendChild(preview);
+    editor.appendChild(makeSection('Preview', previewWrap, false));
+  }
+
+  const fields = document.createElement('div');
+  fields.className = 'grid-1';
+  Object.keys(ABOUT_ITEM_BLANKS[listName]).forEach((key) => {
+    fields.appendChild(createField(key, item[key], (_, value) => {
+      updateAboutListItem(listName, index, { [key]: value });
+      if (preview && (key === 'image' || key === 'icon')) preview.src = value;
+    }));
+  });
+  editor.appendChild(makeSection('Details', fields, false));
+}
+
+function renderAboutHeaderSection(editor) {
+  appendBackButton(editor, 'Back to all sections', closeAboutSection);
+  const grid = document.createElement('div');
+  grid.className = 'grid-2';
+  grid.appendChild(createField('heroTitle', content.about.heroTitle, (_, value) => updateAboutTop({ heroTitle: value })));
+  grid.appendChild(createField('heroImage', content.about.heroImage, (_, value) => updateAboutTop({ heroImage: value })));
+  editor.appendChild(makeSection('Page header', grid, false));
+}
+
+function renderAboutMainSection(editor) {
+  const main = content.about.main;
+  appendBackButton(editor, 'Back to all sections', closeAboutSection);
+
+  const grid = document.createElement('div');
+  grid.className = 'grid-1';
+  grid.appendChild(createField('heading', main.heading, (_, value) => updateAboutNested('main', { heading: value })));
+  grid.appendChild(createField('text1', main.text1, (_, value) => updateAboutNested('main', { text1: value })));
+  grid.appendChild(createField('text2', main.text2, (_, value) => updateAboutNested('main', { text2: value })));
+  grid.appendChild(createField('image', main.image, (_, value) => updateAboutNested('main', { image: value })));
+  grid.appendChild(createField('engineerIcon', main.engineerIcon, (_, value) => updateAboutNested('main', { engineerIcon: value })));
+  editor.appendChild(makeSection('Company intro', grid, false));
+}
+
+function renderAboutStatsSection(editor) {
+  appendBackButton(editor, 'Back to all sections', closeAboutSection);
+  appendListToolbar(editor, 'Statistics', 'Numbers shown in the horizontal stats bar.', '+ Add stat', () => addAboutListItem('stats'));
+  appendAboutListGrid(editor, 'stats', {
+    imageKey: 'icon',
+    titleKey: 'number',
+    subtitleKey: 'label',
+    fallbackTitle: 'Stat',
+    emptyText: 'No stats yet. Add your first stat above.',
+  });
+}
+
+function renderAboutMissionSection(editor) {
+  const mission = content.about.mission;
+  appendBackButton(editor, 'Back to all sections', closeAboutSection);
+
+  const grid = document.createElement('div');
+  grid.className = 'grid-1';
+  grid.appendChild(createField('heading', mission.heading, (_, value) => updateAboutNested('mission', { heading: value })));
+  grid.appendChild(createField('text1', mission.text1, (_, value) => updateAboutNested('mission', { text1: value })));
+  grid.appendChild(createField('text2', mission.text2, (_, value) => updateAboutNested('mission', { text2: value })));
+  grid.appendChild(createField('image', mission.image, (_, value) => updateAboutNested('mission', { image: value })));
+  grid.appendChild(createField('icon', mission.icon, (_, value) => updateAboutNested('mission', { icon: value })));
+  editor.appendChild(makeSection('Our mission', grid, false));
+}
+
+function renderAboutVisionSection(editor) {
+  const vision = content.about.vision;
+  appendBackButton(editor, 'Back to all sections', closeAboutSection);
+
+  const grid = document.createElement('div');
+  grid.className = 'grid-1';
+  grid.appendChild(createField('heading', vision.heading, (_, value) => updateAboutNested('vision', { heading: value })));
+  grid.appendChild(createField('text', vision.text, (_, value) => updateAboutNested('vision', { text: value })));
+  grid.appendChild(createField('image', vision.image, (_, value) => updateAboutNested('vision', { image: value })));
+  grid.appendChild(createField('icon', vision.icon, (_, value) => updateAboutNested('vision', { icon: value })));
+  editor.appendChild(makeSection('Our vision', grid, false));
+}
+
+function renderAboutValuesSection(editor) {
+  const values = content.about.values;
+  appendBackButton(editor, 'Back to all sections', closeAboutSection);
+
+  const intro = document.createElement('div');
+  intro.className = 'grid-1';
+  intro.appendChild(createField('heading', values.heading, (_, value) => updateAboutNested('values', { heading: value })));
+  intro.appendChild(createField('image', values.image, (_, value) => updateAboutNested('values', { image: value })));
+  intro.appendChild(createField('icon', values.icon, (_, value) => updateAboutNested('values', { icon: value })));
+  editor.appendChild(makeSection('Section content', intro, false));
+
+  appendListToolbar(editor, 'Core values', 'Individual value cards listed on the page.', '+ Add value', () => addAboutListItem('values'));
+  appendAboutListGrid(editor, 'values', {
+    titleKey: 'title',
+    subtitleKey: 'description',
+    fallbackTitle: 'Value',
+    emptyText: 'No values yet. Add your first value above.',
+  });
+}
+
+function renderAboutTestimonialsSection(editor) {
+  const testimonials = content.about.testimonials;
+  appendBackButton(editor, 'Back to all sections', closeAboutSection);
+
+  const intro = document.createElement('div');
+  intro.className = 'grid-1';
+  intro.appendChild(createField('heading', testimonials.heading, (_, value) => updateAboutNested('testimonials', { heading: value })));
+  intro.appendChild(createField('subheading', testimonials.subheading, (_, value) => updateAboutNested('testimonials', { subheading: value })));
+  intro.appendChild(createField('ctaText', testimonials.ctaText, (_, value) => updateAboutNested('testimonials', { ctaText: value })));
+  intro.appendChild(createField('ctaLink', testimonials.ctaLink, (_, value) => updateAboutNested('testimonials', { ctaLink: value })));
+  editor.appendChild(makeSection('Section settings', intro, false));
+
+  appendListToolbar(editor, 'Client reviews', 'Reviews shown in the testimonials carousel.', '+ Add review', () => addAboutListItem('reviews'));
+  appendAboutListGrid(editor, 'reviews', {
+    imageKey: 'image',
+    titleKey: 'name',
+    subtitleKey: 'text',
+    emptyText: 'No reviews yet. Add your first review above.',
+  });
+}
+
+function renderAboutSectionEditor(editor, section) {
+  const renderers = {
+    header: renderAboutHeaderSection,
+    main: renderAboutMainSection,
+    stats: renderAboutStatsSection,
+    mission: renderAboutMissionSection,
+    vision: renderAboutVisionSection,
+    values: renderAboutValuesSection,
+    testimonials: renderAboutTestimonialsSection,
+  };
+  renderers[section]?.(editor);
+}
+
+function renderAboutOverview(editor) {
+  const intro = document.createElement('div');
+  intro.className = 'dashboard__hero';
+  intro.innerHTML = `
+    <h2>About us sections</h2>
+    <p>Select a section to edit. Each area matches a block on your About Us page.</p>
+  `;
+  editor.appendChild(intro);
+
+  const grid = document.createElement('div');
+  grid.className = 'page-cards';
+
+  Object.entries(ABOUT_SECTIONS).forEach(([key, meta]) => {
+    const card = document.createElement('button');
+    card.type = 'button';
+    card.className = 'page-card';
+    const count = (() => {
+      if (key === 'stats') return content.about.stats?.length || 0;
+      if (key === 'values') return content.about.values?.items?.length || 0;
+      if (key === 'testimonials') return content.about.testimonials?.reviews?.length || 0;
+      return null;
+    })();
+
+    card.innerHTML = `
+      <div class="page-card__top">
+        <div class="page-card__icon" style="background:${meta.color}18;color:${meta.color}">${meta.icon}</div>
+        <svg class="page-card__arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+      </div>
+      <h3>${meta.label}</h3>
+      <p>${meta.desc}</p>
+      <div class="page-card__meta">${count !== null ? `${count} items · ` : ''}Click to edit</div>
+    `;
+    card.addEventListener('click', () => openAboutSection(key));
+    grid.appendChild(card);
+  });
+
+  editor.appendChild(grid);
+}
+
+function renderAboutEditor() {
+  const editor = $('#editor');
+  editor.innerHTML = '';
+
+  if (editingAboutList !== null && editingAboutIndex !== null) {
+    renderAboutItemDetail(editor, editingAboutList, editingAboutIndex);
+    return;
+  }
+
+  if (aboutSection) {
+    renderAboutSectionEditor(editor, aboutSection);
+    return;
+  }
+
+  renderAboutOverview(editor);
+}
+
+const SERVICES_SECTIONS = {
+  header: {
+    label: 'Page header',
+    desc: 'Hero title and background image.',
+    color: '#64748b',
+    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg>',
+  },
+  intro: {
+    label: 'Introduction',
+    desc: 'Heading and text below the hero.',
+    color: '#3b82f6',
+    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>',
+  },
+  showcase: {
+    label: 'Showcase image',
+    desc: 'Large image shown above the service cards.',
+    color: '#10b981',
+    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>',
+  },
+  cards: {
+    label: 'Service cards',
+    desc: 'Cards in the services carousel.',
+    color: '#8b5cf6',
+    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>',
+  },
+  cta: {
+    label: 'Call to action',
+    desc: 'Banner at the bottom of the page.',
+    color: '#faa21b',
+    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>',
+  },
+};
+
+function updateServicesTop(patch) {
+  content.services = { ...content.services, ...patch };
+}
+
+function updateServicesIntro(patch) {
+  content.services = { ...content.services, intro: { ...content.services.intro, ...patch } };
+}
+
+function updateServicesCta(patch) {
+  content.services = { ...content.services, cta: { ...content.services.cta, ...patch } };
+}
+
+function updateServicesCards(updater) {
+  const cards = updater([...(content.services.cards || [])]);
+  content.services = { ...content.services, cards };
+}
+
+function updateServiceCard(index, patch) {
+  updateServicesCards((cards) => {
+    cards[index] = { ...cards[index], ...patch };
+    return cards;
+  });
+}
+
+function openServicesSection(section) {
+  servicesSection = section;
+  editingServicesIndex = null;
+  renderView();
+}
+
+function closeServicesSection() {
+  servicesSection = null;
+  editingServicesIndex = null;
+  renderView();
+}
+
+function openServiceCard(index) {
+  editingServicesIndex = index;
+  renderView();
+}
+
+function closeServiceCard() {
+  editingServicesIndex = null;
+  renderView();
+}
+
+function createBlankServiceCard(index) {
+  return {
+    style: index % 2 === 0 ? 'sc-card--br-right' : 'sc-card--br-left',
+    image: '',
+    imageAlt: '',
+    title: 'New Service',
+    description: '',
+    includes: [],
+  };
+}
+
+function addServiceCard() {
+  updateServicesCards((cards) => [...cards, createBlankServiceCard(cards.length)]);
+  openServiceCard((content.services.cards || []).length - 1);
+}
+
+function removeServiceCard(index) {
+  const title = content.services.cards[index]?.title || `Service ${index + 1}`;
+  if (!window.confirm(`Remove "${title}"?`)) return;
+  updateServicesCards((cards) => cards.filter((_, i) => i !== index));
+  editingServicesIndex = null;
+  renderView();
+}
+
+function moveServiceCard(index, direction) {
+  const target = index + direction;
+  const cards = [...(content.services.cards || [])];
+  if (target < 0 || target >= cards.length) return;
+  [cards[index], cards[target]] = [cards[target], cards[index]];
+  content.services = { ...content.services, cards };
+  editingServicesIndex = target;
+  renderView();
+}
+
+function buildServiceCard(item, index) {
+  const card = document.createElement('button');
+  card.type = 'button';
+  card.className = 'home-list-card';
+  const image = item.image || '';
+
+  card.innerHTML = `
+    <div class="home-list-card__media">
+      ${image ? `<img src="${image}" alt="" loading="lazy">` : '<div class="gallery-cms-card__placeholder">No image</div>'}
+      <span class="gallery-cms-card__index">${index + 1}</span>
+    </div>
+    <div class="home-list-card__body">
+      <h4>${item.title || 'Untitled service'}</h4>
+      <p>${item.description || 'No description'}</p>
+      <span class="gallery-cms-card__edit">Edit service</span>
+    </div>
+  `;
+
+  card.addEventListener('click', () => openServiceCard(index));
+  return card;
+}
+
+function renderServiceIncludesEditor(index) {
+  const wrap = document.createElement('div');
+  wrap.className = 'detail-list';
+
+  const renderItems = () => {
+    wrap.innerHTML = '';
+    const includes = content.services.cards[index]?.includes || [];
+
+    includes.forEach((line, lineIndex) => {
+      const row = document.createElement('div');
+      row.className = 'detail-list__row';
+
+      const input = document.createElement('input');
+      input.type = 'text';
+      input.value = line;
+      input.placeholder = 'e.g. Site supervision & coordination';
+      input.addEventListener('input', () => {
+        const next = [...(content.services.cards[index].includes || [])];
+        next[lineIndex] = input.value;
+        updateServiceCard(index, { includes: next });
+      });
+
+      const removeBtn = document.createElement('button');
+      removeBtn.type = 'button';
+      removeBtn.className = 'btn btn-danger';
+      removeBtn.textContent = 'Remove';
+      removeBtn.addEventListener('click', () => {
+        const next = (content.services.cards[index].includes || []).filter((_, i) => i !== lineIndex);
+        updateServiceCard(index, { includes: next });
+        renderItems();
+      });
+
+      row.append(input, removeBtn);
+      wrap.appendChild(row);
+    });
+
+    const addBtn = document.createElement('button');
+    addBtn.type = 'button';
+    addBtn.className = 'btn btn-ghost';
+    addBtn.textContent = '+ Add item';
+    addBtn.addEventListener('click', () => {
+      const next = [...(content.services.cards[index].includes || []), ''];
+      updateServiceCard(index, { includes: next });
+      renderItems();
+    });
+    wrap.appendChild(addBtn);
+  };
+
+  renderItems();
+  return wrap;
+}
+
+function renderServiceCardDetail(editor, index) {
+  const card = content.services.cards?.[index];
+  if (!card) {
+    closeServiceCard();
+    return;
+  }
+
+  const total = content.services.cards.length;
+
+  appendBackButton(editor, `Back to ${SERVICES_SECTIONS.cards.label}`, closeServiceCard);
+
+  const actions = document.createElement('div');
+  actions.className = 'project-editor-actions';
+  actions.innerHTML = `<p class="hint">Editing service ${index + 1} of ${total}.</p>`;
+
+  const moveGroup = document.createElement('div');
+  moveGroup.className = 'gallery-editor-moves';
+
+  const moveUp = document.createElement('button');
+  moveUp.type = 'button';
+  moveUp.className = 'btn btn-ghost';
+  moveUp.textContent = 'Move up';
+  moveUp.disabled = index === 0;
+  moveUp.addEventListener('click', () => moveServiceCard(index, -1));
+
+  const moveDown = document.createElement('button');
+  moveDown.type = 'button';
+  moveDown.className = 'btn btn-ghost';
+  moveDown.textContent = 'Move down';
+  moveDown.disabled = index === total - 1;
+  moveDown.addEventListener('click', () => moveServiceCard(index, 1));
+
+  const deleteBtn = document.createElement('button');
+  deleteBtn.type = 'button';
+  deleteBtn.className = 'btn btn-danger';
+  deleteBtn.textContent = 'Delete service';
+  deleteBtn.addEventListener('click', () => removeServiceCard(index));
+
+  moveGroup.append(moveUp, moveDown);
+  actions.prepend(moveGroup);
+  actions.appendChild(deleteBtn);
+  editor.appendChild(actions);
+
+  const preview = document.createElement('img');
+  preview.className = 'gallery-editor-preview__image';
+  preview.src = card.image || '';
+  preview.alt = card.imageAlt || '';
+  const previewWrap = document.createElement('div');
+  previewWrap.className = 'gallery-editor-preview';
+  previewWrap.appendChild(preview);
+  editor.appendChild(makeSection('Preview', previewWrap, false));
+
+  const basics = document.createElement('div');
+  basics.className = 'grid-1';
+  basics.appendChild(createField('title', card.title, (_, value) => updateServiceCard(index, { title: value })));
+  basics.appendChild(createField('description', card.description, (_, value) => updateServiceCard(index, { description: value })));
+  basics.appendChild(createField('image', card.image, (_, value) => {
+    updateServiceCard(index, { image: value });
+    preview.src = value;
+  }));
+  basics.appendChild(createField('imageAlt', card.imageAlt, (_, value) => {
+    updateServiceCard(index, { imageAlt: value });
+    preview.alt = value;
+  }));
+
+  const styleWrap = document.createElement('div');
+  styleWrap.className = 'field';
+  const styleLabel = document.createElement('label');
+  styleLabel.textContent = 'Card layout';
+  const styleSelect = document.createElement('select');
+  [
+    { value: 'sc-card--br-right', label: 'Image left — rounded bottom-right' },
+    { value: 'sc-card--br-left', label: 'Image right — rounded bottom-left' },
+  ].forEach(({ value, label }) => {
+    const opt = document.createElement('option');
+    opt.value = value;
+    opt.textContent = label;
+    if (card.style === value) opt.selected = true;
+    styleSelect.appendChild(opt);
+  });
+  styleSelect.addEventListener('change', () => updateServiceCard(index, { style: styleSelect.value }));
+  styleWrap.append(styleLabel, styleSelect);
+  basics.appendChild(styleWrap);
+
+  editor.appendChild(makeSection('Service details', basics, false));
+  editor.appendChild(makeSection('What\'s included', renderServiceIncludesEditor(index), false));
+}
+
+function renderServicesHeaderSection(editor) {
+  appendBackButton(editor, 'Back to all sections', closeServicesSection);
+  const grid = document.createElement('div');
+  grid.className = 'grid-2';
+  grid.appendChild(createField('heroTitle', content.services.heroTitle, (_, value) => updateServicesTop({ heroTitle: value })));
+  grid.appendChild(createField('heroImage', content.services.heroImage, (_, value) => updateServicesTop({ heroImage: value })));
+  editor.appendChild(makeSection('Page header', grid, false));
+}
+
+function renderServicesIntroSection(editor) {
+  appendBackButton(editor, 'Back to all sections', closeServicesSection);
+  const grid = document.createElement('div');
+  grid.className = 'grid-1';
+  grid.appendChild(createField('heading', content.services.intro?.heading, (_, value) => updateServicesIntro({ heading: value })));
+  grid.appendChild(createField('text', content.services.intro?.text, (_, value) => updateServicesIntro({ text: value })));
+  editor.appendChild(makeSection('Introduction', grid, false));
+}
+
+function renderServicesShowcaseSection(editor) {
+  appendBackButton(editor, 'Back to all sections', closeServicesSection);
+  const grid = document.createElement('div');
+  grid.className = 'grid-1';
+  grid.appendChild(createField('mainImage', content.services.mainImage, (_, value) => updateServicesTop({ mainImage: value })));
+  editor.appendChild(makeSection('Showcase image', grid, false));
+}
+
+function renderServicesCardsSection(editor) {
+  appendBackButton(editor, 'Back to all sections', closeServicesSection);
+  appendListToolbar(editor, 'Service cards', 'Cards shown in the services carousel.', '+ Add service', addServiceCard);
+
+  const grid = document.createElement('div');
+  grid.className = 'gallery-cms-grid';
+  (content.services.cards || []).forEach((card, index) => {
+    grid.appendChild(buildServiceCard(card, index));
+  });
+  editor.appendChild(grid);
+
+  if (!content.services.cards?.length) {
+    const empty = document.createElement('p');
+    empty.className = 'media-empty';
+    empty.textContent = 'No services yet. Add your first service above.';
+    editor.appendChild(empty);
+  }
+}
+
+function renderServicesCtaSection(editor) {
+  appendBackButton(editor, 'Back to all sections', closeServicesSection);
+  const grid = document.createElement('div');
+  grid.className = 'grid-1';
+  grid.appendChild(createField('heading', content.services.cta?.heading, (_, value) => updateServicesCta({ heading: value })));
+  grid.appendChild(createField('text', content.services.cta?.text, (_, value) => updateServicesCta({ text: value })));
+  grid.appendChild(createField('buttonText', content.services.cta?.buttonText, (_, value) => updateServicesCta({ buttonText: value })));
+  grid.appendChild(createField('buttonLink', content.services.cta?.buttonLink, (_, value) => updateServicesCta({ buttonLink: value })));
+  editor.appendChild(makeSection('Call to action', grid, false));
+}
+
+function renderServicesSectionEditor(editor, section) {
+  const renderers = {
+    header: renderServicesHeaderSection,
+    intro: renderServicesIntroSection,
+    showcase: renderServicesShowcaseSection,
+    cards: renderServicesCardsSection,
+    cta: renderServicesCtaSection,
+  };
+  renderers[section]?.(editor);
+}
+
+function renderServicesOverview(editor) {
+  const intro = document.createElement('div');
+  intro.className = 'dashboard__hero';
+  intro.innerHTML = `
+    <h2>Services page sections</h2>
+    <p>Select a section to edit. Each area matches a block on your Services page.</p>
+  `;
+  editor.appendChild(intro);
+
+  const grid = document.createElement('div');
+  grid.className = 'page-cards';
+
+  Object.entries(SERVICES_SECTIONS).forEach(([key, meta]) => {
+    const card = document.createElement('button');
+    card.type = 'button';
+    card.className = 'page-card';
+    const count = key === 'cards' ? content.services.cards?.length || 0 : null;
+
+    card.innerHTML = `
+      <div class="page-card__top">
+        <div class="page-card__icon" style="background:${meta.color}18;color:${meta.color}">${meta.icon}</div>
+        <svg class="page-card__arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+      </div>
+      <h3>${meta.label}</h3>
+      <p>${meta.desc}</p>
+      <div class="page-card__meta">${count !== null ? `${count} cards · ` : ''}Click to edit</div>
+    `;
+    card.addEventListener('click', () => openServicesSection(key));
+    grid.appendChild(card);
+  });
+
+  editor.appendChild(grid);
+}
+
+function renderServicesEditor() {
+  const editor = $('#editor');
+  editor.innerHTML = '';
+
+  if (editingServicesIndex !== null) {
+    renderServiceCardDetail(editor, editingServicesIndex);
+    return;
+  }
+
+  if (servicesSection) {
+    renderServicesSectionEditor(editor, servicesSection);
+    return;
+  }
+
+  renderServicesOverview(editor);
+}
+
+function renderContactEditor() {
+  const editor = $('#editor');
+  editor.innerHTML = '';
+  const contact = content.contact;
+
+  const intro = document.createElement('div');
+  intro.className = 'dashboard__hero';
+  intro.innerHTML = `
+    <h2>Contact page</h2>
+    <p>Edit the hero, intro text, and phone numbers shown on the Contact page. The contact form and footer email are managed elsewhere (see hints below).</p>
+  `;
+  editor.appendChild(intro);
+
+  const hero = document.createElement('div');
+  hero.className = 'grid-2';
+  hero.appendChild(createField('heroTitle', contact.heroTitle, (_, value) => {
+    content.contact = { ...content.contact, heroTitle: value };
+  }));
+  hero.appendChild(createField('heroImage', contact.heroImage, (_, value) => {
+    content.contact = { ...content.contact, heroImage: value };
+  }));
+  editor.appendChild(makeSection('Page hero', hero, false));
+
+  const copy = document.createElement('div');
+  copy.className = 'grid-1';
+  copy.appendChild(createField('heading', contact.heading, (_, value) => {
+    content.contact = { ...content.contact, heading: value };
+  }));
+  copy.appendChild(createField('subtitle', contact.subtitle, (_, value) => {
+    content.contact = { ...content.contact, subtitle: value };
+  }));
+  editor.appendChild(makeSection('Page intro', copy, false));
+
+  const phones = document.createElement('div');
+  phones.className = 'grid-2';
+  phones.appendChild(createField('phone', contact.phone, (_, value) => {
+    content.contact = { ...content.contact, phone: value };
+  }));
+  phones.appendChild(createField('phoneSecondary', contact.phoneSecondary, (_, value) => {
+    content.contact = { ...content.contact, phoneSecondary: value };
+  }));
+  const phoneHint = document.createElement('p');
+  phoneHint.className = 'hint';
+  phoneHint.textContent = 'Shown below the intro on the Contact page. Footer phone and email are under Site settings → Contact details.';
+  phones.appendChild(phoneHint);
+  editor.appendChild(makeSection('Phone numbers', phones, false));
+
+  const formNote = document.createElement('div');
+  formNote.className = 'seo-intro';
+  formNote.innerHTML = `
+    <p><strong>Contact form submissions</strong> are sent via Formspree. Update the form endpoint under <em>Site settings → Contact details → formspree</em>.</p>
+  `;
+  editor.appendChild(formNote);
+}
+
+const SITE_SECTIONS = {
+  general: {
+    label: 'General & SEO',
+    desc: 'Site name, URL, and social share image.',
+    color: '#64748b',
+    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2"/></svg>',
+  },
+  contact: {
+    label: 'Contact details',
+    desc: 'Email, phone, and contact form endpoint.',
+    color: '#3b82f6',
+    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"/><polyline points="22,6 12,13 2,6"/></svg>',
+  },
+  navigation: {
+    label: 'Main navigation',
+    desc: 'Links in the top menu bar.',
+    color: '#10b981',
+    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>',
+  },
+  social: {
+    label: 'Social links',
+    desc: 'Social icons in the footer.',
+    color: '#ec4899',
+    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>',
+  },
+  footer: {
+    label: 'Footer links',
+    desc: 'Quick links shown in the footer.',
+    color: '#f59e0b',
+    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>',
+  },
+};
+
+const SITE_LIST_KEYS = {
+  navigation: 'nav',
+  social: 'social',
+  footer: 'footerLinks',
+};
+
+const SITE_ITEM_BLANKS = {
+  nav: { label: '', url: '' },
+  social: { label: '', url: '', icon: '' },
+  footerLinks: { label: '', url: '' },
+};
+
+function getSiteList(listKey) {
+  return content.site[listKey] || [];
+}
+
+function updateSite(patch) {
+  content.site = { ...content.site, ...patch };
+}
+
+function updateSiteList(listKey, updater) {
+  const items = updater([...getSiteList(listKey)]);
+  content.site = { ...content.site, [listKey]: items };
+}
+
+function updateSiteListItem(listKey, index, patch) {
+  updateSiteList(listKey, (items) => {
+    items[index] = { ...items[index], ...patch };
+    return items;
+  });
+}
+
+function openSiteSection(section) {
+  siteSection = section;
+  editingSiteList = null;
+  editingSiteIndex = null;
+  renderView();
+}
+
+function closeSiteSection() {
+  siteSection = null;
+  editingSiteList = null;
+  editingSiteIndex = null;
+  renderView();
+}
+
+function openSiteItem(listKey, index) {
+  editingSiteList = listKey;
+  editingSiteIndex = index;
+  renderView();
+}
+
+function closeSiteItem() {
+  editingSiteList = null;
+  editingSiteIndex = null;
+  renderView();
+}
+
+function addSiteListItem(listKey) {
+  updateSiteList(listKey, (items) => [...items, { ...SITE_ITEM_BLANKS[listKey] }]);
+  openSiteItem(listKey, getSiteList(listKey).length - 1);
+}
+
+function removeSiteListItem(listKey, index) {
+  const item = getSiteList(listKey)[index];
+  const label = item?.label || `Item ${index + 1}`;
+  if (!window.confirm(`Remove "${label}"?`)) return;
+  updateSiteList(listKey, (items) => items.filter((_, i) => i !== index));
+  editingSiteList = null;
+  editingSiteIndex = null;
+  renderView();
+}
+
+function moveSiteListItem(listKey, index, direction) {
+  const target = index + direction;
+  const items = [...getSiteList(listKey)];
+  if (target < 0 || target >= items.length) return;
+  [items[index], items[target]] = [items[target], items[index]];
+  content.site = { ...content.site, [listKey]: items };
+  editingSiteIndex = target;
+  renderView();
+}
+
+function appendSiteItemActions(editor, listKey, index) {
+  const total = getSiteList(listKey).length;
+  const actions = document.createElement('div');
+  actions.className = 'project-editor-actions';
+  actions.innerHTML = `<p class="hint">Editing item ${index + 1} of ${total}.</p>`;
+
+  const moveGroup = document.createElement('div');
+  moveGroup.className = 'gallery-editor-moves';
+
+  const moveUp = document.createElement('button');
+  moveUp.type = 'button';
+  moveUp.className = 'btn btn-ghost';
+  moveUp.textContent = 'Move up';
+  moveUp.disabled = index === 0;
+  moveUp.addEventListener('click', () => moveSiteListItem(listKey, index, -1));
+
+  const moveDown = document.createElement('button');
+  moveDown.type = 'button';
+  moveDown.className = 'btn btn-ghost';
+  moveDown.textContent = 'Move down';
+  moveDown.disabled = index === total - 1;
+  moveDown.addEventListener('click', () => moveSiteListItem(listKey, index, 1));
+
+  const deleteBtn = document.createElement('button');
+  deleteBtn.type = 'button';
+  deleteBtn.className = 'btn btn-danger';
+  deleteBtn.textContent = 'Delete';
+  deleteBtn.addEventListener('click', () => removeSiteListItem(listKey, index));
+
+  moveGroup.append(moveUp, moveDown);
+  actions.prepend(moveGroup);
+  actions.appendChild(deleteBtn);
+  editor.appendChild(actions);
+}
+
+function buildSiteLinkCard(item, index, listKey) {
+  const card = document.createElement('button');
+  card.type = 'button';
+  card.className = 'site-link-card';
+  const hasIcon = listKey === 'social' && item.icon;
+
+  card.innerHTML = `
+    <div class="site-link-card__main">
+      ${hasIcon ? `<img src="${item.icon}" alt="" class="site-link-card__icon">` : `<span class="site-link-card__index">${index + 1}</span>`}
+      <div>
+        <h4>${item.label || 'Untitled link'}</h4>
+        <p>${item.url || 'No URL set'}</p>
+      </div>
+    </div>
+    <span class="gallery-cms-card__edit">Edit</span>
+  `;
+
+  card.addEventListener('click', () => openSiteItem(listKey, index));
+  return card;
+}
+
+function renderSiteItemDetail(editor, listKey, index) {
+  const item = getSiteList(listKey)[index];
+  if (!item) {
+    closeSiteItem();
+    return;
+  }
+
+  const sectionLabel = SITE_SECTIONS[siteSection]?.label || 'section';
+  appendBackButton(editor, `Back to ${sectionLabel}`, closeSiteItem);
+  appendSiteItemActions(editor, listKey, index);
+
+  let preview = null;
+  if (item.icon) {
+    preview = document.createElement('img');
+    preview.className = 'gallery-editor-preview__image';
+    preview.src = item.icon;
+    preview.alt = '';
+    const previewWrap = document.createElement('div');
+    previewWrap.className = 'gallery-editor-preview';
+    previewWrap.appendChild(preview);
+    editor.appendChild(makeSection('Icon preview', previewWrap, false));
+  }
+
+  const fields = document.createElement('div');
+  fields.className = 'grid-1';
+  Object.keys(SITE_ITEM_BLANKS[listKey]).forEach((key) => {
+    fields.appendChild(createField(key, item[key], (_, value) => {
+      updateSiteListItem(listKey, index, { [key]: value });
+      if (preview && key === 'icon') preview.src = value;
+    }));
+  });
+  editor.appendChild(makeSection('Link details', fields, false));
+}
+
+function renderSiteListSection(editor, section, listKey, title, hint, addLabel) {
+  appendBackButton(editor, 'Back to all settings', closeSiteSection);
+  appendListToolbar(editor, title, hint, addLabel, () => addSiteListItem(listKey));
+
+  const grid = document.createElement('div');
+  grid.className = 'site-link-cards';
+  getSiteList(listKey).forEach((item, index) => {
+    grid.appendChild(buildSiteLinkCard(item, index, listKey));
+  });
+  editor.appendChild(grid);
+
+  if (!getSiteList(listKey).length) {
+    const empty = document.createElement('p');
+    empty.className = 'media-empty';
+    empty.textContent = 'No links yet. Add your first link above.';
+    editor.appendChild(empty);
+  }
+}
+
+function renderSiteGeneralSection(editor) {
+  appendBackButton(editor, 'Back to all settings', closeSiteSection);
+
+  const intro = document.createElement('div');
+  intro.className = 'seo-intro';
+  intro.innerHTML = `
+    <p>These settings apply across your entire website — search engines, social media previews, and browser tabs all use the values below.</p>
+  `;
+  editor.appendChild(intro);
+
+  const previewSection = document.createElement('div');
+  previewSection.className = 'seo-preview-panel';
+  previewSection.innerHTML = `
+    <h3 class="seo-preview-panel__title">Live preview</h3>
+    <div class="seo-preview-grid">
+      <div class="seo-preview-card">
+        <span class="seo-preview-card__label">Google search result</span>
+        <div class="seo-preview-google">
+          <p class="seo-preview-google__url" data-seo-preview="url"></p>
+          <p class="seo-preview-google__title" data-seo-preview="title"></p>
+          <p class="seo-preview-google__desc" data-seo-preview="desc"></p>
+        </div>
+      </div>
+      <div class="seo-preview-card">
+        <span class="seo-preview-card__label">Social share card</span>
+        <div class="seo-preview-social">
+          <div class="seo-preview-social__image" data-seo-preview="image-wrap">
+            <img data-seo-preview="image" alt="">
+            <span class="seo-preview-social__placeholder">No image set</span>
+          </div>
+          <div class="seo-preview-social__body">
+            <p class="seo-preview-social__site" data-seo-preview="site"></p>
+            <p class="seo-preview-social__title" data-seo-preview="social-title"></p>
+            <p class="seo-preview-social__desc" data-seo-preview="social-desc"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+  editor.appendChild(previewSection);
+
+  const refreshSeoPreview = () => {
+    const site = content.site;
+    const name = site.name || 'Your site name';
+    const url = site.url || 'https://www.example.com';
+    const desc = site.defaultDescription || site.tagline || 'Add a default description for search engines and social sharing.';
+    const hostname = (() => {
+      try { return new URL(url).hostname; } catch { return 'www.example.com'; }
+    })();
+
+    previewSection.querySelector('[data-seo-preview="url"]').textContent = `${hostname} › Home`;
+    previewSection.querySelector('[data-seo-preview="title"]').textContent = `Home | ${name}`;
+    previewSection.querySelector('[data-seo-preview="desc"]').textContent = desc;
+    previewSection.querySelector('[data-seo-preview="site"]').textContent = hostname;
+    previewSection.querySelector('[data-seo-preview="social-title"]').textContent = `Home | ${name}`;
+    previewSection.querySelector('[data-seo-preview="social-desc"]').textContent = desc;
+
+    const img = previewSection.querySelector('[data-seo-preview="image"]');
+    const wrap = previewSection.querySelector('[data-seo-preview="image-wrap"]');
+    if (site.ogImage) {
+      img.src = site.ogImage.startsWith('http') ? site.ogImage : site.ogImage;
+      img.classList.remove('hidden');
+      wrap.classList.add('has-image');
+    } else {
+      img.removeAttribute('src');
+      img.classList.add('hidden');
+      wrap.classList.remove('has-image');
+    }
+  };
+
+  const onSiteFieldChange = (patch) => {
+    updateSite(patch);
+    refreshSeoPreview();
+  };
+
+  const brand = document.createElement('div');
+  brand.className = 'grid-1';
+  brand.appendChild(createField('name', content.site.name, (_, value) => onSiteFieldChange({ name: value })));
+  brand.appendChild(createField('tagline', content.site.tagline, (_, value) => onSiteFieldChange({ tagline: value })));
+  const brandHint = document.createElement('p');
+  brandHint.className = 'field-hint';
+  brandHint.textContent = 'Your business name appears in the browser tab, navigation, and when your site is shared. The tagline is a short phrase describing what you do.';
+  brand.appendChild(brandHint);
+  editor.appendChild(makeSection('Brand identity', brand, false));
+
+  const website = document.createElement('div');
+  website.className = 'grid-1';
+  website.appendChild(createField('url', content.site.url, (_, value) => onSiteFieldChange({ url: value })));
+  const websiteHint = document.createElement('p');
+  websiteHint.className = 'field-hint';
+  websiteHint.textContent = 'Your live website address (include https://). Used for canonical URLs, sitemap links, and social share URLs.';
+  website.appendChild(websiteHint);
+  editor.appendChild(makeSection('Website address', website, false));
+
+  const search = document.createElement('div');
+  search.className = 'grid-1';
+  search.appendChild(createField('defaultDescription', content.site.defaultDescription, (_, value) => onSiteFieldChange({ defaultDescription: value })));
+  search.appendChild(createField('ogImage', content.site.ogImage, (_, value) => onSiteFieldChange({ ogImage: value })));
+  const searchHint = document.createElement('p');
+  searchHint.className = 'field-hint';
+  searchHint.textContent = 'The default description is used when a page does not have its own. Recommended: 120–160 characters. The share image should be at least 1200×630 px for best results on Facebook and LinkedIn.';
+  search.appendChild(searchHint);
+  editor.appendChild(makeSection('Search & social sharing', search, false));
+
+  const technical = document.createElement('div');
+  technical.className = 'grid-2';
+  technical.appendChild(createField('locale', content.site.locale, (_, value) => updateSite({ locale: value })));
+  technical.appendChild(createField('twitterHandle', content.site.twitterHandle, (_, value) => updateSite({ twitterHandle: value })));
+  technical.appendChild(createField('favicon', content.site.favicon, (_, value) => updateSite({ favicon: value })));
+  technical.appendChild(createField('themeColor', content.site.themeColor, (_, value) => updateSite({ themeColor: value })));
+  const technicalHint = document.createElement('p');
+  technicalHint.className = 'field-hint';
+  technicalHint.textContent = 'Locale (e.g. en_UG), Twitter handle (e.g. @uniprixinvestment), favicon path, and theme color for mobile browser chrome.';
+  technical.appendChild(technicalHint);
+  editor.appendChild(makeSection('Technical SEO & appearance', technical, false));
+
+  const reference = document.createElement('div');
+  reference.className = 'seo-reference';
+  reference.innerHTML = `
+    <h4>What these settings control</h4>
+    <ul>
+      <li><strong>Site name</strong> — shown in navigation, footer, and <code>og:site_name</code></li>
+      <li><strong>Website URL</strong> — used for canonical links on every page</li>
+      <li><strong>Default description</strong> — fallback meta description for search engines</li>
+      <li><strong>Share image</strong> — default image when any page is shared on social media</li>
+      <li><strong>Favicon</strong> — small icon in the browser tab</li>
+    </ul>
+    <p class="hint">Individual page titles and descriptions (e.g. "About Us | Uniprix Investment") are set per page in the site build. Contact your developer to update those.</p>
+  `;
+  editor.appendChild(makeSection('Reference guide', reference, false));
+
+  refreshSeoPreview();
+}
+
+function renderSiteContactSection(editor) {
+  appendBackButton(editor, 'Back to all settings', closeSiteSection);
+  const grid = document.createElement('div');
+  grid.className = 'grid-1';
+  grid.appendChild(createField('email', content.site.email, (_, value) => updateSite({ email: value })));
+  grid.appendChild(createField('phone', content.site.phone, (_, value) => updateSite({ phone: value })));
+  grid.appendChild(createField('formspree', content.site.formspree, (_, value) => updateSite({ formspree: value })));
+  const hint = document.createElement('p');
+  hint.className = 'hint';
+  hint.textContent = 'Email and phone appear in the site footer. Formspree is the endpoint for contact form submissions. Contact page phone numbers are edited under Content → Contact us.';
+  grid.appendChild(hint);
+  editor.appendChild(makeSection('Contact details', grid, false));
+}
+
+function renderSiteSectionEditor(editor, section) {
+  if (section === 'general') renderSiteGeneralSection(editor);
+  else if (section === 'contact') renderSiteContactSection(editor);
+  else if (section === 'navigation') {
+    renderSiteListSection(editor, section, 'nav', 'Menu links', 'Links shown in the top navigation bar.', '+ Add menu link');
+  } else if (section === 'social') {
+    renderSiteListSection(editor, section, 'social', 'Social links', 'Icons and links in the footer social row.', '+ Add social link');
+  } else if (section === 'footer') {
+    renderSiteListSection(editor, section, 'footerLinks', 'Footer links', 'Quick links in the footer navigation.', '+ Add footer link');
+  }
+}
+
+function renderSiteOverview(editor) {
+  const intro = document.createElement('div');
+  intro.className = 'dashboard__hero';
+  intro.innerHTML = `
+    <h2>Site settings</h2>
+    <p>Global settings used across every page — navigation, footer, contact info, and SEO.</p>
+  `;
+  editor.appendChild(intro);
+
+  const grid = document.createElement('div');
+  grid.className = 'page-cards';
+
+  Object.entries(SITE_SECTIONS).forEach(([key, meta]) => {
+    const card = document.createElement('button');
+    card.type = 'button';
+    card.className = 'page-card';
+    const listKey = SITE_LIST_KEYS[key];
+    const count = listKey ? getSiteList(listKey).length : null;
+
+    card.innerHTML = `
+      <div class="page-card__top">
+        <div class="page-card__icon" style="background:${meta.color}18;color:${meta.color}">${meta.icon}</div>
+        <svg class="page-card__arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+      </div>
+      <h3>${meta.label}</h3>
+      <p>${meta.desc}</p>
+      <div class="page-card__meta">${count !== null ? `${count} links · ` : ''}Click to edit</div>
+    `;
+    card.addEventListener('click', () => openSiteSection(key));
+    grid.appendChild(card);
+  });
+
+  editor.appendChild(grid);
+}
+
+function renderSiteEditor() {
+  const editor = $('#editor');
+  editor.innerHTML = '';
+
+  if (editingSiteList !== null && editingSiteIndex !== null) {
+    renderSiteItemDetail(editor, editingSiteList, editingSiteIndex);
+    return;
+  }
+
+  if (siteSection) {
+    renderSiteSectionEditor(editor, siteSection);
+    return;
+  }
+
+  renderSiteOverview(editor);
 }
 
 function isImageField(key, value) {
@@ -1075,6 +3507,41 @@ async function renderMediaLibrary() {
 }
 
 function renderEditor() {
+  if (currentPage === 'projects') {
+    renderProjectsEditor();
+    return;
+  }
+
+  if (currentPage === 'gallery') {
+    renderGalleryEditor();
+    return;
+  }
+
+  if (currentPage === 'home') {
+    renderHomeEditor();
+    return;
+  }
+
+  if (currentPage === 'about') {
+    renderAboutEditor();
+    return;
+  }
+
+  if (currentPage === 'services') {
+    renderServicesEditor();
+    return;
+  }
+
+  if (currentPage === 'site') {
+    renderSiteEditor();
+    return;
+  }
+
+  if (currentPage === 'contact') {
+    renderContactEditor();
+    return;
+  }
+
   const editor = $('#editor');
   editor.innerHTML = '';
 
@@ -1130,7 +3597,51 @@ function renderView() {
     renderMediaLibrary();
   } else {
     $('#breadcrumb').textContent = 'Content';
-    $('#page-title').textContent = PAGE_LABELS[currentPage] || currentPage;
+    if (currentPage === 'projects' && editingProjectIndex !== null) {
+      const project = content.projects?.projects?.[editingProjectIndex];
+      $('#page-title').textContent = project?.title || `Project ${editingProjectIndex + 1}`;
+    } else if (currentPage === 'gallery' && editingGalleryIndex !== null) {
+      const item = content.gallery?.items?.[editingGalleryIndex];
+      $('#page-title').textContent = item?.alt || `Image ${editingGalleryIndex + 1}`;
+    } else if (currentPage === 'home') {
+      if (editingHomeList !== null && editingHomeIndex !== null) {
+        const item = getHomeList(editingHomeList)[editingHomeIndex];
+        $('#page-title').textContent = item?.title || item?.name || item?.label || item?.number || `Item ${editingHomeIndex + 1}`;
+      } else if (homeSection) {
+        $('#page-title').textContent = HOME_SECTIONS[homeSection]?.label || 'Home';
+      } else {
+        $('#page-title').textContent = PAGE_LABELS.home || 'Home';
+      }
+    } else if (currentPage === 'about') {
+      if (editingAboutList !== null && editingAboutIndex !== null) {
+        const item = getAboutList(editingAboutList)[editingAboutIndex];
+        $('#page-title').textContent = item?.title || item?.name || item?.label || item?.number || `Item ${editingAboutIndex + 1}`;
+      } else if (aboutSection) {
+        $('#page-title').textContent = ABOUT_SECTIONS[aboutSection]?.label || 'About us';
+      } else {
+        $('#page-title').textContent = PAGE_LABELS.about || 'About us';
+      }
+    } else if (currentPage === 'services') {
+      if (editingServicesIndex !== null) {
+        const card = content.services?.cards?.[editingServicesIndex];
+        $('#page-title').textContent = card?.title || `Service ${editingServicesIndex + 1}`;
+      } else if (servicesSection) {
+        $('#page-title').textContent = SERVICES_SECTIONS[servicesSection]?.label || 'Services';
+      } else {
+        $('#page-title').textContent = PAGE_LABELS.services || 'Services';
+      }
+    } else if (currentPage === 'site') {
+      if (editingSiteList !== null && editingSiteIndex !== null) {
+        const item = getSiteList(editingSiteList)[editingSiteIndex];
+        $('#page-title').textContent = item?.label || `Link ${editingSiteIndex + 1}`;
+      } else if (siteSection) {
+        $('#page-title').textContent = SITE_SECTIONS[siteSection]?.label || 'Site settings';
+      } else {
+        $('#page-title').textContent = PAGE_LABELS.site || 'Site settings';
+      }
+    } else {
+      $('#page-title').textContent = PAGE_LABELS[currentPage] || currentPage;
+    }
     renderEditor();
   }
 
@@ -1226,10 +3737,10 @@ async function handleLogin(e) {
     renderView();
     setStatus('Welcome back.', 'success');
     setTimeout(() => setStatus(''), 2500);
-  } catch {
+  } catch (err) {
     clearSession();
     auth = null;
-    errEl.textContent = 'Could not load content. Please try again in a few minutes.';
+    errEl.textContent = err?.message || 'Could not load content. Please try again in a few minutes.';
     errEl.classList.remove('hidden');
   }
 }

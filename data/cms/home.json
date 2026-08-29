@@ -129,13 +129,13 @@
       {
         "id": "project-05",
         "title": "Property Management",
-        "image": "https:/images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&auto=format&fit=crop&q=80",
+        "image": "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&auto=format&fit=crop&q=80",
         "link": "/our-projects/#project-5"
       },
       {
         "id": "project-06",
         "title": "Renovation & Remodeling",
-        "image": "https:/images.unsplash.com/photo-1581578731548-c64695cc6952?w=600&auto=format&fit=crop&q=80",
+        "image": "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=600&auto=format&fit=crop&q=80",
         "link": "/our-projects/#project-6"
       }
     ]
@@ -144,7 +144,7 @@
     "heading": "What Our Clients Say",
     "subheading": "Real feedback from people we have worked with across Uganda.",
     "ctaText": "See All Reviews",
-    "ctaLink": "./testimonials/",
+    "ctaLink": "#testimonialsHeading",
     "reviews": [
       {
         "name": "John Mukasa",

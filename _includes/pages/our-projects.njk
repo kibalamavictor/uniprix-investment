@@ -12,7 +12,7 @@
     </div>
     <div id="projects-container">
       {% for project in p.projects %}
-      {{ projectBlock(project) }}
+      {{ projectBlock(project, loop.index) }}
       {% endfor %}
     </div>
   </div>

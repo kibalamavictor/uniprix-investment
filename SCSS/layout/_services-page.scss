@@ -105,26 +105,38 @@
   }
 
   .sc-track-outer {
-    overflow: hidden;
+    overflow-x: auto;
+    overflow-y: hidden;
     width: 100%;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+  }
+
+  .sc-track-outer::-webkit-scrollbar {
+    display: none;
   }
 
   .sc-track {
     display: flex;
     gap: 20px;
-    transition: transform 0.42s cubic-bezier(0.4, 0, 0.2, 1);
-    will-change: transform;
     padding: 8px 6vw 16px;
     box-sizing: border-box;
+    width: max-content;
+    min-width: 100%;
   }
 
   .sc-card {
     flex: 0 0 auto;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
     background: #ffffff;
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    transition: transform 0.25s ease;
   }
 
   .sc-card--br-right { border-radius: 18px 18px 90px 18px; }
@@ -132,7 +144,6 @@
 
   .sc-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 16px 40px rgba(30, 45, 61, 0.12);
   }
 
   .sc-card__img {

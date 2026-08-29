@@ -1,16 +1,25 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>{{ title }}</title>
-<meta name="description" content="{{ description }}" />
+<meta name="description" content="{{ description or site.defaultDescription }}" />
 <link rel="canonical" href="{{ site.url }}{{ permalink }}" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="{{ site.name }}" />
 <meta property="og:title" content="{{ title }}" />
-<meta property="og:description" content="{{ description }}" />
+<meta property="og:description" content="{{ description or site.defaultDescription }}" />
 <meta property="og:url" content="{{ site.url }}{{ permalink }}" />
 <meta property="og:image" content="{{ site.url }}{{ site.ogImage }}" />
+{%- if site.locale %}
+<meta property="og:locale" content="{{ site.locale }}" />
+{%- endif %}
 <meta name="twitter:card" content="summary_large_image" />
-<link rel="icon" type="image/svg+xml" href="/favicon.svg">
-<link rel="apple-touch-icon" sizes="180x180" href="/favicon.svg">
+{%- if site.twitterHandle %}
+<meta name="twitter:site" content="{{ site.twitterHandle }}" />
+{%- endif %}
+{%- if site.themeColor %}
+<meta name="theme-color" content="{{ site.themeColor }}" />
+{%- endif %}
+<link rel="icon" type="image/svg+xml" href="{{ site.favicon or '/favicon.svg' }}">
+<link rel="apple-touch-icon" sizes="180x180" href="{{ site.favicon or '/favicon.svg' }}">
 <link rel="stylesheet" href="/dist/style.css" />
 <script defer src="/script.js"></script>

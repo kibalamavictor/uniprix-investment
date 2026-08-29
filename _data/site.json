@@ -1,10 +1,16 @@
 {
   "url": "https://www.uniprixinvestment.com",
   "name": "Uniprix Investment",
+  "tagline": "Professional construction, project management, and interior design in Uganda.",
+  "defaultDescription": "Uniprix Investment offers professional construction, project management, interior design, and renovation services in Uganda.",
   "email": "info@uniprixinvestment.com",
   "phone": "+256 700 847399",
   "formspree": "https://formspree.io/f/xnjgrenn",
   "ogImage": "/hero-image-home-page.webp",
+  "locale": "en_UG",
+  "twitterHandle": "",
+  "favicon": "/favicon.svg",
+  "themeColor": "#1e2d3d",
   "nav": [
     { "label": "Home", "url": "/" },
     { "label": "About Us", "url": "/about-us/" },

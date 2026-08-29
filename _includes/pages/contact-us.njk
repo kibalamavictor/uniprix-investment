@@ -5,6 +5,16 @@
     <div class="upx-gallery__header">
       <h2 class="upx-gallery__heading">{{ p.heading }}</h2>
       <p class="upx-gallery__sub">{{ p.subtitle }}</p>
+      {% if p.phone or p.phoneSecondary %}
+      <div class="contact-page-phones">
+        {% if p.phone %}
+        <a href="tel:{{ p.phone | replace(' ', '') }}" class="contact-page-phones__link">{{ p.phone }}</a>
+        {% endif %}
+        {% if p.phoneSecondary %}
+        <a href="tel:{{ p.phoneSecondary | replace(' ', '') }}" class="contact-page-phones__link">{{ p.phoneSecondary }}</a>
+        {% endif %}
+      </div>
+      {% endif %}
     </div>
   </div>
 </section>

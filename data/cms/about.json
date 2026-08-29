@@ -40,18 +40,18 @@
     "text1": "To provide professional project planning, construction, interior design and Property Management services that deliver quality, and efficiency.",
     "text2": "We are committed to managing every project with accuracy, transparency, and attention to detail, ensuring our clients' ideas are transformed into well-executed and lasting developments.",
     "image": "/assets/images/mission.webp",
-    "icon": "/assets/icons/mission-icon.svg"
+    "icon": "/about-us/assets/icons/mission-icon.svg"
   },
   "vision": {
     "heading": "Our Vision",
     "text": "To be a trusted and respectable construction property Management partner, known for reliable project management, quality execution, and a client-focused approach that adds long-term value to every investment.",
     "image": "/assets/images/vision.webp",
-    "icon": "/assets/icons/vision-icon.svg"
+    "icon": "/about-us/assets/icons/vision-icon.svg"
   },
   "values": {
     "heading": "Our Core Values",
     "image": "/assets/images/values.webp",
-    "icon": "/assets/icons/values-icon.svg",
+    "icon": "/about-us/assets/icons/values-icon.svg",
     "items": [
       {
         "title": "Professionalism",
@@ -79,7 +79,7 @@
     "heading": "What Our Clients Say",
     "subheading": "Real feedback from people we have worked with across Uganda.",
     "ctaText": "See All Reviews",
-    "ctaLink": "./testimonials/",
+    "ctaLink": "#testimonialsHeading",
     "reviews": [
       {
         "name": "John Mukasa",

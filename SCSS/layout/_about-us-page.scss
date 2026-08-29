@@ -48,6 +48,8 @@ body {
   text-align: center;
   color: #1f2937;
   z-index: 50;
+  width: min(100%, 900px);
+  padding: 0 20px;
 
   h1 {
     color: white;
@@ -127,36 +129,43 @@ body {
 .stats-bar {
   background: #193548;
   border-radius: 90px 26px 26px 26px;
-  padding: 60px 144px;
-  margin: 0 144px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  padding: 60px 80px;
+  margin: 0 80px;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 32px 24px;
+  align-items: start;
 }
 
 .stat-item {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 12px;
+  min-width: 0;
 }
 
 .stat-icon {
   width: 48px;
   height: 48px;
+  flex-shrink: 0;
+}
+
+.stat-text {
+  min-width: 0;
 }
 
 .stat-text h3 {
   font-size: 30px;
   font-weight: 700;
   color: #FFFFFF;
-  line-height: 23px;
+  line-height: 1.2;
 }
 
 .stat-text p {
   font-size: 12px;
   font-weight: 500;
   color: #FFFFFF;
-  line-height: 23px;
+  line-height: 1.4;
   margin-top: 4px;
 }
 
@@ -197,6 +206,8 @@ body {
 
 .section-image-wrapper {
   position: relative;
+  width: fit-content;
+  max-width: 100%;
 }
 
 .section-image {
@@ -206,12 +217,12 @@ body {
   object-fit: cover;
 }
 
+.mission-icon-box,
+.values-icon-box,
 .vision-icon-box-1 {
- left: 80%;
+  margin-left: auto;
+  margin-right: 0;
 }
-
-
-
 
 .section-icon-box {
   position: relative;
@@ -224,22 +235,12 @@ body {
   align-items: center;
   justify-content: center;
   margin-top: -165px;
-  // margin-left: 70%;
 }
 
-.mission-icon-box {
-  // bottom: 0;
-  right: 70px;
-}
-
-// .vision-icon-box {
-//   top: 30px;
-//   left: -30px;
-// }
-
-.values-icon-box {
-  // bottom: -30px;
-  right: 60px;
+.section-icon-box img {
+  width: 128px;
+  height: 128px;
+  object-fit: contain;
 }
 
 .values-list {
@@ -935,8 +936,21 @@ body {
     width: 100%;
     height: auto;
   }
+}
 
-  
+@media (max-width: 1280px) {
+  .stats-bar {
+    margin: 0 40px;
+    padding: 48px 40px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 32px 40px;
+  }
+
+  .stat-item:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    justify-self: center;
+    max-width: calc(50% - 20px);
+  }
 }
 
 @media (max-width: 1024px) {
@@ -952,12 +966,18 @@ body {
   .stats-bar {
     margin: 0 40px;
     padding: 40px;
+    gap: 32px 40px;
   }
 
-  
+  .about-image-container {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 360px;
+  }
+
   .about-image {
     width: 100%;
-    max-width: 320px;
+    max-width: 360px;
     height: auto;
     aspect-ratio: 1;
     margin: 0 auto;
@@ -966,45 +986,59 @@ body {
   .icon-box {
     margin-left: auto;
     margin-right: 0;
+    margin-top: -120px;
   }
 
   .mission-grid,
   .vision-grid,
   .values-grid {
     grid-template-columns: 1fr;
-    gap: 60px; 
+    gap: 48px;
+    margin-bottom: 80px;
   }
 
-
   .vision-grid > .section-content {
-    order: 1; 
-    
+    order: 1;
   }
 
   .vision-grid > .section-image-wrapper {
     order: 2;
   }
 
+  .section-image-wrapper,
+  .image-wrapper-left {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
   .section-image {
     width: 100%;
-    max-width: 300px;
+    max-width: 360px;
     height: auto;
     aspect-ratio: 1;
-    margin: 0  0 auto 0; 
+    margin: 0 auto;
   }
 
-  // .section-image-wrapper {
-  //   max-width: 426px;
-  //   // margin: 0 auto 0 0;
-  // }
-
-  .image-wrapper-left {
-    margin: 0 0 auto 0;
-    display: flex;
-    align-items: end;
-    flex-direction: column;
+  .section-icon-box {
+    margin-top: -100px;
+    margin-bottom: 8px;
   }
 
+  .mission-icon-box,
+  .values-icon-box {
+    align-self: flex-end;
+    margin-left: auto;
+    margin-right: 8px;
+  }
+
+  .vision-icon-box,
+  .vision-icon-box-1 {
+    align-self: flex-start;
+    margin-left: 8px;
+    margin-right: auto;
+  }
 
   .contact-image-small {
     margin-right: 0;
@@ -1026,11 +1060,21 @@ body {
     height: 250px;
   }
 
-  .about-image-container {
-    margin: 0;
+  .hero-content {
+    width: 100%;
+    padding: 0 16px;
+
+    h1 {
+      white-space: normal;
+      font-size: clamp(1.35rem, 5vw, 1.75rem);
+      line-height: 1.25;
+    }
   }
 
-
+  .about-image-container {
+    margin: 0 auto;
+    max-width: 300px;
+  }
 
   .hero-title {
     font-size: 24px;
@@ -1044,16 +1088,24 @@ body {
     padding: 40px 20px;
   }
 
-  .stats-bar {
-    margin: 0 20px;
-    // padding: 30px 20px;
-    flex-direction: column;
-    gap: 60px;
-    border-radius: 26px;
-    align-items: flex-start;
+  .about-section {
+    padding-top: 64px;
+    gap: 40px;
   }
 
+  .stats-bar {
+    margin: 0 20px;
+    padding: 32px 24px;
+    grid-template-columns: 1fr;
+    gap: 28px;
+    border-radius: 26px;
+  }
 
+  .stat-item:last-child:nth-child(odd) {
+    grid-column: auto;
+    justify-self: stretch;
+    max-width: none;
+  }
 
   .about-content h2,
   .section-content h2,
@@ -1064,8 +1116,8 @@ body {
   .icon-box {
     width: 150px;
     height: 150px;
-    margin-right: -10px;
-    margin-top: -130px;
+    margin-right: 0;
+    margin-top: -110px;
   }
 
   .icon-box img {
@@ -1073,29 +1125,33 @@ body {
     height: 100px;
   }
 
+  .section-image {
+    max-width: 300px;
+  }
+
   .section-icon-box {
     width: 150px;
     height: 150px;
+    margin-top: -88px;
+  }
+
+  .section-icon-box img {
+    width: 100px;
+    height: 100px;
   }
 
   .mission-icon-box,
   .values-icon-box {
-    bottom: -40px;
-    right: 59%;
+    margin-right: 4px;
   }
 
-  .vision-icon-box {
-    // top: 20px;
-    // left: -20px;
-    width: 150px;
-    height: 150px;
-    margin-right: -10px;
-    margin-top: -130px;
-    margin-left: auto;
-  }
-
+  .vision-icon-box,
   .vision-icon-box-1 {
-    left: 0;
+    margin-left: 4px;
+  }
+
+  .value-item {
+    margin-bottom: 28px;
   }
 
   .testimonials h2 {
@@ -1174,21 +1230,19 @@ body {
 }
 
 @media (max-width: 480px) {
- 
-
   .hero-content h1 {
-      font-size: 1.2rem;
+    font-size: 1.2rem;
+  }
 
-    }
+  .hero-bg-image {
+    top: 60px;
+    min-height: 120px;
+  }
 
-    .hero-bg-image {
-      top: 60px;
-      min-height: 120px;
-    }
-
-   .about-image {
+  .about-image,
+  .section-image {
     width: 100%;
-    max-width: 300px;
+    max-width: 280px;
     height: auto;
     aspect-ratio: 1;
     margin: 0 auto;
@@ -1197,10 +1251,6 @@ body {
   .hero-title {
     font-size: 20px;
   }
-
-  // .newsletter-form {
-  //   width: 80%;
-  // }
 
   .newsletter-form input {
     width: 100%;

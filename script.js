@@ -136,6 +136,30 @@
 })();
 
 
+/* ── 3b. PROJECT PAGE – hash anchor scroll ─────────────── */
+(function () {
+  const container = document.getElementById('projects-container');
+  if (!container) return;
+
+  function scrollToProjectHash() {
+    const { hash } = window.location;
+    if (!hash) return;
+
+    const target = document.querySelector(hash);
+    if (!target) return;
+
+    const nav = document.querySelector('.navbar');
+    const offset = (nav?.offsetHeight || 80) + 32;
+    const top = target.getBoundingClientRect().top + window.scrollY - offset;
+
+    window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+  }
+
+  window.addEventListener('load', scrollToProjectHash);
+  window.addEventListener('hashchange', scrollToProjectHash);
+})();
+
+
 /* ── 4. TESTIMONIALS ────────────────────────────────────── */
 (function () {
   const section       = document.querySelector('.testimonials');
@@ -382,11 +406,12 @@
     cards.forEach(c => { c.style.width = cardW + 'px'; });
   }
 
-  function goTo(index) {
-    const vis      = visibleCount();
-    const maxIndex = Math.max(0, TOTAL - vis);
-    currentIndex   = Math.max(0, Math.min(index, maxIndex));
-    track.style.transform = `translateX(-${currentIndex * (cards[0].offsetWidth + GAP)}px)`;
+  function getMaxIndex() {
+    return Math.max(0, TOTAL - visibleCount());
+  }
+
+  function updateControls() {
+    const maxIndex = getMaxIndex();
     dots.forEach((d, i) => {
       const active = i === currentIndex;
       d.classList.toggle('sc-dot--active', active);
@@ -398,13 +423,47 @@
     nextBtn.setAttribute('aria-disabled', currentIndex >= maxIndex ? 'true' : 'false');
   }
 
+  function syncIndexFromScroll() {
+    const scrollLeft = trackOuter.scrollLeft;
+    let closest = 0;
+    let minDist = Infinity;
+
+    cards.forEach((card, i) => {
+      const dist = Math.abs(card.offsetLeft - scrollLeft);
+      if (dist < minDist) {
+        minDist = dist;
+        closest = i;
+      }
+    });
+
+    const maxIndex = getMaxIndex();
+    currentIndex = Math.min(closest, maxIndex);
+    updateControls();
+  }
+
+  function goTo(index) {
+    const maxIndex = getMaxIndex();
+    currentIndex = Math.max(0, Math.min(index, maxIndex));
+    trackOuter.scrollTo({
+      left: cards[currentIndex].offsetLeft,
+      behavior: 'smooth',
+    });
+    updateControls();
+  }
+
   prevBtn.addEventListener('click', () => goTo(currentIndex - 1));
   nextBtn.addEventListener('click', () => goTo(currentIndex + 1));
   dots.forEach(d => d.addEventListener('click', () => goTo(Number(d.dataset.index))));
 
+  let scrollTimer;
+  trackOuter.addEventListener('scroll', () => {
+    clearTimeout(scrollTimer);
+    scrollTimer = setTimeout(syncIndexFromScroll, 80);
+  }, { passive: true });
+
   let touchStartX = 0;
-  track.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
-  track.addEventListener('touchend',   e => {
+  trackOuter.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+  trackOuter.addEventListener('touchend', e => {
     const dx = e.changedTouches[0].clientX - touchStartX;
     if (Math.abs(dx) > 50) goTo(currentIndex + (dx < 0 ? 1 : -1));
   }, { passive: true });
@@ -412,7 +471,10 @@
   let resizeTimer;
   window.addEventListener('resize', () => {
     clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(() => { sizeCards(); goTo(currentIndex); }, 120);
+    resizeTimer = setTimeout(() => {
+      sizeCards();
+      goTo(currentIndex);
+    }, 120);
   });
 
   sizeCards();

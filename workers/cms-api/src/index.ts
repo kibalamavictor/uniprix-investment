@@ -145,6 +145,7 @@ async function githubFetch(env: Env, path: string, init: RequestInit = {}): Prom
       Accept: "application/vnd.github+json",
       Authorization: `Bearer ${env.CMS_GITHUB_TOKEN}`,
       "X-GitHub-Api-Version": "2022-11-28",
+      "User-Agent": "uniprix-cms-api",
       ...(init.headers || {}),
     },
   });
@@ -194,7 +195,11 @@ async function handleGetFile(request: Request, env: Env): Promise<Response> {
   const data = await gh.json().catch(() => ({}));
 
   if (!gh.ok) {
-    return json({ error: (data as { message?: string }).message || "GitHub error" }, gh.status);
+    const msg = (data as { message?: string }).message;
+    return json(
+      { error: msg || `GitHub API error (${gh.status})` },
+      gh.status,
+    );
   }
 
   return json(data, gh.status);
@@ -211,7 +216,8 @@ async function handleListDir(request: Request, env: Env): Promise<Response> {
   const data = await gh.json().catch(() => ({}));
 
   if (!gh.ok) {
-    return json({ error: (data as { message?: string }).message || "GitHub error" }, gh.status);
+    const msg = (data as { message?: string }).message;
+    return json({ error: msg || `GitHub API error (${gh.status})` }, gh.status);
   }
 
   return json(data, gh.status);

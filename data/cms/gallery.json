@@ -5,69 +5,64 @@
   "subtitle": "This gallery brings together highlights from our construction sites, interior design works, 3D visualizations, and completed projects captured across different locations and stages of execution.",
   "items": [
     {
-      "src": "/assets/images/gallery-1.png",
+      "src": "/gallery/assets/images/gallery-1.png",
       "alt": "Construction site progress",
       "mobileOnly": false
     },
     {
-      "src": "/assets/images/gallery-2.png",
+      "src": "/gallery/assets/images/gallery-2.png",
       "alt": "Completed residential exterior",
       "mobileOnly": false
     },
     {
-      "src": "/assets/images/gallery-3.png",
+      "src": "/gallery/assets/images/gallery-3.png",
       "alt": "Interior living room design",
       "mobileOnly": false
     },
     {
-      "src": "/assets/images/gallery-4.png",
+      "src": "/gallery/assets/images/gallery-4.png",
       "alt": "Kitchen finishing and fit-out",
       "mobileOnly": false
     },
     {
-      "src": "/assets/images/gallery-5.png",
+      "src": "/gallery/assets/images/gallery-5.png",
       "alt": "Architectural 3D render",
       "mobileOnly": false
     },
     {
-      "src": "/assets/images/gallery-6.png",
+      "src": "/gallery/assets/images/gallery-6.png",
       "alt": "Office renovation works",
       "mobileOnly": false
     },
     {
-      "src": "/assets/images/gallery-7.png",
+      "src": "/gallery/assets/images/gallery-7.png",
       "alt": "Roofing and structural work",
       "mobileOnly": false
     },
     {
-      "src": "/assets/images/gallery-8.png",
+      "src": "/gallery/assets/images/gallery-8.png",
       "alt": "Master bedroom interior",
       "mobileOnly": false
     },
     {
-      "src": "/assets/images/gallery-9.png",
+      "src": "/gallery/assets/images/gallery-9.png",
       "alt": "Commercial building exterior",
       "mobileOnly": false
     },
     {
-      "src": "/assets/images/gallery-10.png",
+      "src": "/gallery/assets/images/gallery-10.png",
       "alt": "Landscaped garden and outdoor space",
       "mobileOnly": false
     },
     {
-      "src": "/assets/images/gallery-11.png",
+      "src": "/gallery/assets/images/gallery-11.png",
       "alt": "Bathroom tiling and fixtures",
       "mobileOnly": false
     },
     {
-      "src": "/assets/images/gallery-12.png",
+      "src": "/gallery/assets/images/gallery-12.png",
       "alt": "Site survey and planning",
       "mobileOnly": true
-    },
-    {
-      "src": "/assets/images/gallery-video-thumb.jpg",
-      "alt": "Project walkthrough video",
-      "mobileOnly": false
     }
   ]
 }
