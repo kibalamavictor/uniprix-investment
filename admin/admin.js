@@ -1,6 +1,9 @@
-const STORAGE_KEY = 'uniprix-cms-auth';
+const SESSION_KEY = 'uniprix-cms-session';
+const LEGACY_AUTH_KEY = 'uniprix-cms-auth';
 const PUBLISH_KEY = 'uniprix-cms-last-publish';
 const PUBLISH_HISTORY_KEY = 'uniprix-cms-publish-history';
+const SESSION_LONG_MS = 7 * 24 * 60 * 60 * 1000;
+const SESSION_SHORT_MS = 8 * 60 * 60 * 1000;
 
 const PAGE_META = {
   site: {
@@ -80,20 +83,62 @@ function setStatus(message, type = 'info') {
   el.className = `toast toast--${type}`;
 }
 
-function loadAuth() {
+function loadSession() {
   try {
-    return JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null');
+    const session = JSON.parse(sessionStorage.getItem(SESSION_KEY) || 'null');
+    if (!session || session.expires < Date.now()) return null;
+    return session;
   } catch {
     return null;
   }
 }
 
-function saveAuth(data) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+function saveSession(user, remember, token) {
+  const expires = Date.now() + (remember ? SESSION_LONG_MS : SESSION_SHORT_MS);
+  sessionStorage.setItem(SESSION_KEY, JSON.stringify({ user, expires, token }));
 }
 
-function clearAuth() {
-  localStorage.removeItem(STORAGE_KEY);
+function clearSession() {
+  sessionStorage.removeItem(SESSION_KEY);
+  localStorage.removeItem(LEGACY_AUTH_KEY);
+  localStorage.removeItem('uniprix-cms-token');
+}
+
+function getSessionToken() {
+  const session = loadSession();
+  return session?.token || '';
+}
+
+function resolveApiUrl() {
+  if (config?.apiUrl) return config.apiUrl.replace(/\/$/, '');
+  if (['localhost', '127.0.0.1'].includes(location.hostname)) {
+    return 'http://localhost:8787';
+  }
+  return '';
+}
+
+async function apiFetch(path, options = {}) {
+  const base = resolveApiUrl();
+  if (!base) throw new Error('CMS API is not configured. Set apiUrl in admin/config.json.');
+
+  const headers = {
+    Authorization: `Bearer ${getSessionToken()}`,
+    ...(options.body ? { 'Content-Type': 'application/json' } : {}),
+    ...(options.headers || {}),
+  };
+
+  const res = await fetch(`${base}${path}`, { ...options, headers });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(data.error || `API error (${res.status})`);
+  return data;
+}
+
+function buildAuthContext(user) {
+  return {
+    user,
+    repo: config.repo,
+    branch: config.branch || 'main',
+  };
 }
 
 function getLastPublish() {
@@ -138,31 +183,16 @@ function formatRelativeTime(iso) {
 }
 
 async function loadConfig() {
-  const res = await fetch('/admin/config.json');
-  config = await res.json();
+  const configRes = await fetch('/admin/config.json');
+  config = await configRes.json();
 }
 
-async function githubRequest(path, options = {}) {
-  const url = `https://api.github.com/repos/${auth.repo}/contents/${path}?ref=${encodeURIComponent(auth.branch)}`;
-  const res = await fetch(url, {
-    ...options,
-    headers: {
-      Accept: 'application/vnd.github+json',
-      Authorization: `Bearer ${auth.token}`,
-      'X-GitHub-Api-Version': '2022-11-28',
-      ...(options.headers || {}),
-    },
-  });
-
-  if (!res.ok) {
-    const err = await res.json().catch(() => ({}));
-    throw new Error(err.message || `GitHub API error (${res.status})`);
-  }
-  return res.json();
+async function githubRequest(path) {
+  return apiFetch(`/api/file?path=${encodeURIComponent(path)}`);
 }
 
 async function githubListDir(path) {
-  const data = await githubRequest(path);
+  const data = await apiFetch(`/api/dir?path=${encodeURIComponent(path)}`);
   return Array.isArray(data) ? data : [];
 }
 
@@ -187,7 +217,7 @@ function fileToBase64(file) {
 }
 
 async function uploadMediaFile(file) {
-  if (!auth?.token) throw new Error('Sign in to upload images.');
+  if (!getSessionToken()) throw new Error('Sign in to upload images.');
 
   const maxMb = config.maxUploadMB || 10;
   if (file.size > maxMb * 1024 * 1024) {
@@ -204,25 +234,14 @@ async function uploadMediaFile(file) {
   const path = `${mediaPath}/${filename}`;
   const base64 = await fileToBase64(file);
 
-  const res = await fetch(`https://api.github.com/repos/${auth.repo}/contents/${path}`, {
+  await apiFetch('/api/file', {
     method: 'PUT',
-    headers: {
-      Accept: 'application/vnd.github+json',
-      Authorization: `Bearer ${auth.token}`,
-      'X-GitHub-Api-Version': '2022-11-28',
-      'Content-Type': 'application/json',
-    },
     body: JSON.stringify({
+      path,
       message: `CMS: upload ${filename}`,
       content: base64,
-      branch: auth.branch,
     }),
   });
-
-  if (!res.ok) {
-    const err = await res.json().catch(() => ({}));
-    throw new Error(err.message || `Upload failed (${res.status})`);
-  }
 
   return `/${path}`;
 }
@@ -265,34 +284,22 @@ async function saveFile(path, json) {
   const body = JSON.stringify(json, null, 2) + '\n';
   const encoded = btoa(unescape(encodeURIComponent(body)));
   const payload = {
+    path,
     message: `CMS: update ${path}`,
     content: encoded,
-    branch: auth.branch,
   };
   if (fileMeta[path]?.sha) payload.sha = fileMeta[path].sha;
 
-  const res = await fetch(`https://api.github.com/repos/${auth.repo}/contents/${path}`, {
+  const data = await apiFetch('/api/file', {
     method: 'PUT',
-    headers: {
-      Accept: 'application/vnd.github+json',
-      Authorization: `Bearer ${auth.token}`,
-      'X-GitHub-Api-Version': '2022-11-28',
-      'Content-Type': 'application/json',
-    },
     body: JSON.stringify(payload),
   });
 
-  if (!res.ok) {
-    const err = await res.json().catch(() => ({}));
-    throw new Error(err.message || `Save failed (${res.status})`);
-  }
-
-  const data = await res.json();
   fileMeta[path] = { sha: data.content.sha };
 }
 
 async function loadAllContent() {
-  setStatus('Loading content from GitHub…');
+  setStatus('Loading content…');
   content = {};
   for (const [key, path] of Object.entries(config.contentFiles)) {
     try {
@@ -1153,9 +1160,13 @@ function buildNav() {
 
 function updateConnectionBadge() {
   const label = $('#repo-label');
-  if (label && auth?.repo) {
-    label.textContent = `${auth.repo} · ${auth.branch || 'main'}`;
+  if (!label) return;
+  if (auth?.user) {
+    const host = config.siteUrl ? new URL(config.siteUrl).hostname : 'Connected';
+    label.textContent = `Signed in as ${auth.user} · ${host}`;
+    return;
   }
+  label.textContent = '—';
 }
 
 function showApp() {
@@ -1171,14 +1182,41 @@ function showLogin() {
 
 async function handleLogin(e) {
   e.preventDefault();
-  const repo = $('#repo').value.trim();
-  const branch = $('#branch').value.trim() || 'main';
-  const token = $('#token').value.trim();
+  const username = $('#username').value.trim();
+  const password = $('#password').value;
+  const remember = $('#remember').checked;
   const errEl = $('#login-error');
 
   errEl.classList.add('hidden');
-  auth = { repo, branch, token };
-  saveAuth(auth);
+
+  const base = resolveApiUrl();
+  if (!base) {
+    errEl.textContent = 'CMS API is not configured yet. Contact your site administrator.';
+    errEl.classList.remove('hidden');
+    return;
+  }
+
+  let data;
+  try {
+    const res = await fetch(`${base}/auth/login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, password, remember }),
+    });
+    data = await res.json().catch(() => ({}));
+    if (!res.ok) {
+      errEl.textContent = data.error || 'Invalid username or password.';
+      errEl.classList.remove('hidden');
+      return;
+    }
+  } catch {
+    errEl.textContent = 'Could not reach the CMS API. Please try again later.';
+    errEl.classList.remove('hidden');
+    return;
+  }
+
+  auth = buildAuthContext(data.user);
+  saveSession(data.user, remember, data.token);
 
   try {
     await loadAllContent();
@@ -1186,13 +1224,32 @@ async function handleLogin(e) {
     showApp();
     buildNav();
     renderView();
-    setStatus('Connected successfully.', 'success');
-    setTimeout(() => setStatus(''), 3000);
-  } catch (err) {
-    clearAuth();
+    setStatus('Welcome back.', 'success');
+    setTimeout(() => setStatus(''), 2500);
+  } catch {
+    clearSession();
     auth = null;
-    errEl.textContent = err.message;
+    errEl.textContent = 'Could not load content. Please try again in a few minutes.';
     errEl.classList.remove('hidden');
+  }
+}
+
+async function tryRestoreSession() {
+  const session = loadSession();
+  if (!session?.token) return false;
+
+  auth = buildAuthContext(session.user);
+  try {
+    await loadAllContent();
+    currentPage = 'dashboard';
+    showApp();
+    buildNav();
+    renderView();
+    return true;
+  } catch {
+    clearSession();
+    auth = null;
+    return false;
   }
 }
 
@@ -1227,11 +1284,6 @@ function handleDownload() {
 async function init() {
   await loadConfig();
 
-  if (config.repo) $('#repo').value = config.repo;
-  if (config.branch) $('#branch').value = config.branch;
-
-  auth = loadAuth();
-
   $('#login-form').addEventListener('submit', handleLogin);
   $('#save-btn').addEventListener('click', handleSave);
   $('#download-btn').addEventListener('click', handleDownload);
@@ -1246,7 +1298,7 @@ async function init() {
     }
   });
   $('#logout-btn').addEventListener('click', () => {
-    clearAuth();
+    clearSession();
     auth = null;
     showLogin();
   });
@@ -1259,20 +1311,9 @@ async function init() {
     $('#sidebar')?.classList.toggle('is-open');
   });
 
-  if (auth?.repo && auth?.token) {
-    $('#repo').value = auth.repo;
-    $('#branch').value = auth.branch || config.branch || 'main';
-    $('#token').value = auth.token;
-    try {
-      await loadAllContent();
-      currentPage = 'dashboard';
-      showApp();
-      buildNav();
-      renderView();
-    } catch {
-      showLogin();
-    }
-  }
+  localStorage.removeItem(LEGACY_AUTH_KEY);
+  const restored = await tryRestoreSession();
+  if (!restored) showLogin();
 }
 
 init();

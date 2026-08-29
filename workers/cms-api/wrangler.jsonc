@@ -1,0 +1,14 @@
+{
+  "name": "uniprix-cms-api",
+  "main": "src/index.ts",
+  "compatibility_date": "2025-08-28",
+  "observability": {
+    "enabled": true
+  },
+  "vars": {
+    "GITHUB_REPO": "kibalamavictor/uniprix-investment",
+    "GITHUB_BRANCH": "main",
+    "CMS_USERNAME": "admin",
+    "ALLOWED_ORIGINS": "https://www.uniprixinvestment.com,http://localhost:8080,http://127.0.0.1:8080"
+  }
+}

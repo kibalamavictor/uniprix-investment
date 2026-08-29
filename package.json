@@ -5,6 +5,9 @@
   "scripts": {
     "build:css": "sass SCSS/style.scss dist/style.css --style=compressed --no-source-map",
     "build:site": "npm run build:css && eleventy",
+    "hash:password": "node scripts/hash-admin-password.mjs",
+    "cms:dev": "npm run dev --prefix workers/cms-api",
+    "cms:deploy": "npm run deploy --prefix workers/cms-api",
     "dev": "npm run build:css && eleventy --serve",
     "watch:css": "sass SCSS/style.scss dist/style.css --watch --style=compressed --no-source-map"
   },

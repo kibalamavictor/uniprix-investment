@@ -2,6 +2,7 @@
   "repo": "kibalamavictor/uniprix-investment",
   "branch": "main",
   "siteUrl": "https://www.uniprixinvestment.com",
+  "apiUrl": "https://uniprix-cms-api.learnandlunch.workers.dev",
   "mediaPath": "media",
   "maxUploadMB": 10,
   "contentFiles": {

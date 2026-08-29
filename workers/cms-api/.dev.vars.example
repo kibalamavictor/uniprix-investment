@@ -1,0 +1,4 @@
+CMS_AUTH_SALT=uniprix-cms-v1
+CMS_PASSWORD_HASH=56e80daf17a4fe49149acd38ce41e77146eca67db6276a768283de69cad8fad8
+CMS_GITHUB_TOKEN=
+CMS_SESSION_SECRET=change-me-to-a-long-random-string

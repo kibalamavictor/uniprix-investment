@@ -163,6 +163,43 @@ body {
   font-size: 0.95rem;
 }
 
+.remember-row {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin: 0.75rem 0 0.25rem;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+.remember-row input {
+  width: auto;
+  accent-color: var(--accent);
+}
+
+.login-help {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.dev-login {
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.85rem;
+}
+
+.dev-login summary {
+  cursor: pointer;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.dev-login[open] summary {
+  margin-bottom: 0.75rem;
+}
+
 /* ── App shell ──────────────────────────────── */
 #app {
   display: grid;
